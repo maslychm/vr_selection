@@ -7,24 +7,13 @@ namespace Gestures
 {
     public class PerformingGestureAction : MonoBehaviour
     {
-        // TODO CONTINUE HERE => ADD TRACKING OF THIS HAPPENING
-        //if (flyInputAction_Right.action.IsPressed())
-        //{
-        //    AddFlyForceIfNotTooHigh();
-        //}
         [SerializeField] private InputActionReference performGestureInputAction;
 
         [Header("Tracking-Related Settings")]
         public Transform leftHand;
 
-        //[Tooltip("Assing the Right Hand under Player/SteamVRObjects")]
+        [Tooltip("Right hand controller from hierarcy")]
         public Transform rightHand;
-
-        //[Tooltip("Select Performing Gesture action from SteamVR action set - Listeners for Presses (Up and Down) are attached to this")]
-        //public SteamVR_Action_Boolean performingGestureActionBoolean;
-
-        //[Tooltip("Which input source? (Usually Any or right or left)")]
-        //public SteamVR_Input_Sources handType;
 
         [Header("Recognizer Settings")]
         [Tooltip("The Recognizer instance")]
@@ -61,13 +50,38 @@ namespace Gestures
 
         private void Start()
         {
-            //performingGestureActionBoolean.AddOnStateDownListener(TriggerDown, handType);
-            //performingGestureActionBoolean.AddOnStateUpListener(TriggerUp, handType);
             //Events.free_hands.AddListener(FreeBothHands);
 
             ResetGestureTrajectoryBufferValues();
 
             InitLineRenderers();
+        }
+
+        public void FixedUpdate()
+        {
+            if (performingNow)
+            {
+                UpdateControllerTrails();
+                UpdateGestureTrajectoryBuffer();
+            }
+        }
+
+        public void Update()
+        {
+            ProcessInput();
+        }
+
+        private void ProcessInput()
+        {
+            if (performGestureInputAction.action.WasPressedThisFrame())
+            {
+                GestureActionDown();
+            }
+
+            if (performGestureInputAction.action.WasReleasedThisFrame())
+            {
+                GestureActionUp();
+            }
         }
 
         private void InitLineRenderers()
@@ -88,34 +102,22 @@ namespace Gestures
         }
 
         // SteamVR sets this to ~71 per second, which is ~0.011
-        public void FixedUpdate()
+
+        public void GestureActionDown()
         {
-            if (performingNow)
-            {
-                UpdateControllerTrails();
-                UpdateGestureTrajectoryBuffer();
-                //FreeHand(leftHand);
-                //FreeHand(rightHand);
-            }
+            ClearHandTrajectories();
+            performingNow = true;
+            //playerHmdTransformAtGestureBegin // TODO ADD ROTATION INVARIANCE
+
+            playerHmdTransformAtGestureBegin = this.transform;
         }
 
-        //public void TriggerUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
-        //{
-        //    //Debug.Log("Finished Performing");
-        //    performingNow = false;
-        //    PassGestureTrajectoryBufferToRecognizer();
-        //    ResetGestureTrajectoryBufferValues();
-        //}
-
-        //public void TriggerDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
-        //{
-        //    //Debug.Log("Started Performing");
-        //    ClearHandTrajectories();
-        //    performingNow = true;
-        //    playerHmdTransformAtGestureBegin = Valve.VR.InteractionSystem.Player.instance.hmdTransform;
-        //    //FreeHand(leftHand);
-        //    //FreeHand(rightHand);
-        //}
+        public void GestureActionUp()
+        {
+            performingNow = false;
+            PassGestureTrajectoryBufferToRecognizer();
+            ResetGestureTrajectoryBufferValues();
+        }
 
         private void FreeBothHands()
         {

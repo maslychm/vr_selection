@@ -22,12 +22,12 @@ namespace Gestures
         private readonly Dictionary<string, int> GestureNameToGestureId = new Dictionary<string, int>()
         {
             // Must use dashes because of file name parsing
-            {"unset-1", 1 }, //
-            {"time-warp", 2 }, // right hand, start from top, counterclockwise spiral, 3rd time at bottom finish
-            {"energy-boost", 3 }, // hands up hands down motion synchronously
-            {"two-hands-forward", 4 }, // 2 hands start at chest level and push forward, finish
-            {"heal", 5 }, // cross: right hand, both left to right and right to left; bring two hands forward and up
-            {"unset-6", 6 }
+            {"sphere", 1 },
+            {"cylinder", 2 },
+            {"cube", 3 },
+            {"star", 4 },
+            {"pyramid", 5 },
+            {"infinity", 6 }
         };
 
         private Dictionary<int, string> GestureIdToGestureName;

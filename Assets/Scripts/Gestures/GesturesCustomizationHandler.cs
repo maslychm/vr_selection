@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Gestures
 {
     public class GesturesCustomizationHandler : MonoBehaviour
     {
+        [SerializeField] private InputActionReference performGestureInputAction;
+
         public List<Button> gestureButtons;
         public Button recordButton;
         public Button playButton;
@@ -45,33 +48,41 @@ namespace Gestures
         // Update is called once per frame
         private void Update()
         {
+            ProcessInputs();
         }
 
-        //private void SetExternalListenersForGestureActions()
-        //{
-        //    gestureAction.performingGestureActionBoolean.AddOnStateDownListener(TriggerDown, gestureAction.handType);
-        //    gestureAction.performingGestureActionBoolean.AddOnStateUpListener(TriggerUp, gestureAction.handType);
-        //}
+        private void ProcessInputs()
+        {
+            if (performGestureInputAction.action.WasPerformedThisFrame())
+            {
+                TriggerDown();
+            }
 
-        //public void TriggerUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
-        //{
-        //    // If we were in record state, move to possibly saving
-        //    if (state == RecordingState.Recording)
-        //    {
-        //        state = RecordingState.CanSave;
-        //        SwitchToAfterRecordingUI();
-        //        trajectoryToSave = gestureAction.GetPreviousGestureTrajectoryBuffer();
-        //    }
-        //}
+            if (performGestureInputAction.action.WasReleasedThisFrame())
+            {
+                TriggerUp();
+            }
+        }
 
-        //public void TriggerDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
-        //{
-        //    if (state == RecordingState.CanSave) // Same as the retry button
-        //    {
-        //        SwitchToRecordingUI();
-        //        state = RecordingState.Recording;
-        //    }
-        //}
+        public void TriggerUp()
+        {
+            // If we were in record state, move to possibly saving
+            if (state == RecordingState.Recording)
+            {
+                state = RecordingState.CanSave;
+                SwitchToAfterRecordingUI();
+                trajectoryToSave = gestureAction.GetPreviousGestureTrajectoryBuffer();
+            }
+        }
+
+        public void TriggerDown()
+        {
+            if (state == RecordingState.CanSave) // Same as the retry button
+            {
+                SwitchToRecordingUI();
+                state = RecordingState.Recording;
+            }
+        }
 
         #region UI
 
@@ -143,13 +154,15 @@ namespace Gestures
                 {
                     gestureCountDict.Add(i, 0);
                 }
-
+                //Debug.Log($"{i}");
                 SetGestureTextAndCount(i, gestureCountDict[i]);
             }
         }
 
         private void SwitchToRecordingUI()
         {
+            Debug.Log("Switched to recording UI");
+
             SetAllGestureButtonsTo(false);
             SetAllCustomizationButtonsTo(false);
 
@@ -164,6 +177,8 @@ namespace Gestures
             retryButton.gameObject.SetActive(true);
             deleteButton.gameObject.SetActive(true);
             saveButton.gameObject.SetActive(true);
+
+            Debug.Log("Switched to after recording UI");
         }
 
         private void SetAllCustomizationButtonsTo(bool val)
@@ -188,6 +203,7 @@ namespace Gestures
 
         private void SetGestureTextAndCount(int gid, int count)
         {
+            //Debug.Log($"{recognizer.GetGestureNameFromId(gid)}");
             string gname = recognizer.GetGestureNameFromId(gid);
             TMP_Text tpmText = gestureButtons[gid - 1].gameObject.GetComponentInChildren<TMP_Text>();
             tpmText.text = $"({count}) {gname}";

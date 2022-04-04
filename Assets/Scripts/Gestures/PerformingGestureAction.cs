@@ -8,9 +8,7 @@ namespace Gestures
     public class PerformingGestureAction : MonoBehaviour
     {
         [SerializeField] private InputActionReference performGestureInputAction;
-
-        [Header("Tracking-Related Settings")]
-        public Transform leftHand;
+        [SerializeField] private Transform rotationInvarianceTransform;
 
         [Tooltip("Right hand controller from hierarcy")]
         public Transform rightHand;
@@ -24,9 +22,6 @@ namespace Gestures
 
         [Tooltip("Rotate the recorded trajectory with HMD rotation at first recorded frame. This allows to face any direction in the world while inputing gestures.")]
         public bool rotateWithLook = true;
-
-        [Tooltip("From Child: Left Line")]
-        public LineRenderer leftHandInputLineRenderer;
 
         [Tooltip("From Child: Right Line")]
         public LineRenderer rightHandInputLineRenderer;
@@ -43,9 +38,7 @@ namespace Gestures
 
         private Transform playerHmdTransformAtGestureBegin;
 
-        private List<Vector3> leftHandTrajectory;
         private List<Vector3> rightHandTrajectory;
-        //private List<Quaternion> leftHandRotations;
         //private List<Quaternion> rightHandRotations;
 
         private void Start()
@@ -88,16 +81,12 @@ namespace Gestures
         {
             lastTrajectoryFrameIdx = 0;
 
-            leftHandTrajectory = new List<Vector3>();
             rightHandTrajectory = new List<Vector3>();
 
-            //leftHandRotations = new List<Quaternion>();
             //rightHandRotations = new List<Quaternion>();
 
-            leftHandInputLineRenderer.startWidth = trajectoryLineWidth;
             rightHandInputLineRenderer.startWidth = trajectoryLineWidth;
 
-            leftHandInputLineRenderer.endWidth = trajectoryLineWidth;
             rightHandInputLineRenderer.endWidth = trajectoryLineWidth;
         }
 
@@ -107,9 +96,8 @@ namespace Gestures
         {
             ClearHandTrajectories();
             performingNow = true;
-            //playerHmdTransformAtGestureBegin // TODO ADD ROTATION INVARIANCE
 
-            playerHmdTransformAtGestureBegin = this.transform;
+            playerHmdTransformAtGestureBegin = rotationInvarianceTransform;
         }
 
         public void GestureActionUp()
@@ -121,7 +109,6 @@ namespace Gestures
 
         private void FreeBothHands()
         {
-            //FreeHand(leftHand);
             //FreeHand(rightHand);
         }
 
@@ -134,10 +121,8 @@ namespace Gestures
         {
             lastTrajectoryFrameIdx = 0;
 
-            leftHandInputLineRenderer.positionCount = 0;
             rightHandInputLineRenderer.positionCount = 0;
 
-            leftHandTrajectory.Clear();
             rightHandTrajectory.Clear();
         }
 
@@ -167,24 +152,19 @@ namespace Gestures
 
         private void UpdateControllerTrails()
         {
-            if (leftHand == null || rightHand == null)
+            if (rightHand == null)
             {
                 Debug.Log("Hands missing in the Recognizer Script!");
             }
 
             // Get the current controller positions
-            var leftHandPosition = leftHand.transform.position;
             var rightHandPosition = rightHand.transform.position;
 
             // Call this on the hand positions w.r.t. hmd
             //rightHand.transform.InverseTransformDirection()
 
             // Save them to a list
-            leftHandTrajectory.Add(leftHandPosition);
             rightHandTrajectory.Add(rightHandPosition);
-
-            leftHandInputLineRenderer.positionCount++;
-            leftHandInputLineRenderer.SetPosition(lastTrajectoryFrameIdx, leftHandPosition);
 
             rightHandInputLineRenderer.positionCount++;
             rightHandInputLineRenderer.SetPosition(lastTrajectoryFrameIdx, rightHandPosition);
@@ -194,12 +174,11 @@ namespace Gestures
 
         private Vector GetCurrentControllersPositionAsJKVector()
         {
-            if (leftHand == null || rightHand == null)
+            if (rightHand == null)
             {
                 Debug.Log("Hands missing in the Recognizer Script!");
             }
 
-            var leftHandPosition = leftHand.transform.position;
             var rightHandPosition = rightHand.transform.position;
 
             //var leftHandRotation = leftHand.transform.rotation;
@@ -207,9 +186,9 @@ namespace Gestures
 
             return new Vector(new List<double>
             {
-                leftHandPosition.x,
-                leftHandPosition.y,
-                leftHandPosition.z,
+                //leftHandPosition.x,
+                //leftHandPosition.y,
+                //leftHandPosition.z,
 
                 //leftHandRotation.x,
                 //leftHandRotation.y,
@@ -229,19 +208,19 @@ namespace Gestures
 
         private Vector GetCurrentControllersPositionAsJKVectorInHMDCoords()
         {
-            Vector3 leftInHMD = playerHmdTransformAtGestureBegin.InverseTransformVector(leftHandTrajectory[lastTrajectoryFrameIdx - 1]);
+            //Vector3 leftInHMD = playerHmdTransformAtGestureBegin.InverseTransformVector(leftHandTrajectory[lastTrajectoryFrameIdx - 1]);
             Vector3 rightInHMD = playerHmdTransformAtGestureBegin.InverseTransformVector(rightHandTrajectory[lastTrajectoryFrameIdx - 1]);
 
-            if (leftHand == null || rightHand == null)
+            if (rightHand == null)
             {
                 Debug.Log("Hands missing in the Recognizer Script!");
             }
 
             return new Vector(new List<double>
             {
-                leftInHMD.x,
-                leftInHMD.y,
-                leftInHMD.z,
+                //leftInHMD.x,
+                //leftInHMD.y,
+                //leftInHMD.z,
 
                 rightInHMD.x,
                 rightInHMD.y,

@@ -2742,12 +2742,12 @@ MonoBehaviour:
       m_Name: Position
       m_Type: 0
       m_ExpectedControlType: Vector3
-      m_Id: 
+      m_Id: 850525d0-67b7-49e8-951b-cacbd94d1471
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 
+        m_Id: 30d695ab-f2a8-46b9-8435-b4cd8d7d5f67
         m_Path: <XRHMD>/centerEyePosition
         m_Interactions: 
         m_Processors: 
@@ -2762,12 +2762,12 @@ MonoBehaviour:
       m_Name: Rotation
       m_Type: 0
       m_ExpectedControlType: Quaternion
-      m_Id: 
+      m_Id: 3cb419c6-e14e-461c-8dea-11a60340f307
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 
+        m_Id: 86e699f3-067d-488b-89b8-c9cafe402270
         m_Path: <XRHMD>/centerEyeRotation
         m_Interactions: 
         m_Processors: 
@@ -3189,11 +3189,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   performGestureInputAction: {fileID: 3560761125969204472, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  leftHand: {fileID: 392935506}
+  rotationInvarianceTransform: {fileID: 974321304}
   rightHand: {fileID: 1182366889}
   recognizer: {fileID: 1098907033}
   rotateWithLook: 1
-  leftHandInputLineRenderer: {fileID: 1137944553}
   rightHandInputLineRenderer: {fileID: 747087695}
   trajectoryLineWidth: 0.03
 --- !u!1 &1137944551

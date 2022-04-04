@@ -12,6 +12,8 @@ namespace Gestures
          * Gesture filename format: gt_{GestureName}_{ExampleID}.gesture
          */
 
+        private const int NUM_COMPONENTS = 3;
+
         public static List<Sample> LoadSamples(string directory, Dictionary<string, int> GestureNameToID)
         {
             if (!Directory.Exists(directory))
@@ -79,6 +81,8 @@ namespace Gestures
          * ------------------------
          */
 
+        // THE ABOVE WAS CHANGED TO ONLY THE RIGHT HAND
+
         public static List<Vector> LoadTrajectoryFromFile(string fpath)
         {
             List<Vector> trajectory = new List<Vector>();
@@ -93,11 +97,11 @@ namespace Gestures
                 // Read each timestamp
                 string[] pieces = lines[i].Split(' ');
 
-                if (pieces.Length != 6)
+                if (pieces.Length != NUM_COMPONENTS)
                     throw new System.Exception($"Incorrect trajectory in {fpath}");
 
-                Vector v = new Vector(6);
-                for (int j = 0; j < 6; j++)
+                Vector v = new Vector(NUM_COMPONENTS);
+                for (int j = 0; j < NUM_COMPONENTS; j++)
                 {
                     v[j] = double.Parse(pieces[j]);
                 }
@@ -117,8 +121,17 @@ namespace Gestures
             using (StreamWriter outputFile = new StreamWriter(path))
             {
                 outputFile.WriteLine($"{trajectory.Count} {trajectory[0].Size}");
-                foreach (var vec in trajectory)
-                    outputFile.WriteLine($"{vec[0]} {vec[1]} {vec[2]} {vec[3]} {vec[4]} {vec[5]}");
+
+                if (NUM_COMPONENTS == 6)
+                {
+                    foreach (var vec in trajectory)
+                        outputFile.WriteLine($"{vec[0]} {vec[1]} {vec[2]} {vec[3]} {vec[4]} {vec[5]}");
+                }
+                else if (NUM_COMPONENTS == 3)
+                {
+                    foreach (var vec in trajectory)
+                        outputFile.WriteLine($"{vec[0]} {vec[1]} {vec[2]}");
+                }
             }
 
             return true;

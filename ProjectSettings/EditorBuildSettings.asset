@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SceneSelect.unity
+    guid: 55b626997e1ebfb4aaf1b599e23b6431
+  - enabled: 1
+    path: Assets/Scenes/Gesture Cutomization.unity
+    guid: 61dafcd79ecf06549891e54fdc57fccd
+  - enabled: 1
+    path: Assets/Scenes/Participiant_Testing_Scene.unity
+    guid: d180859c64888a24cae79f987db456f5
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d2ce1ea845b5214428f784e4acaaf917, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9cd1ba358062bda408937f04f2d9ebcd, type: 2}

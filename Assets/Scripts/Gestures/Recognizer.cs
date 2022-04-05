@@ -21,7 +21,7 @@ namespace Gestures
 
         private readonly Dictionary<string, int> GestureNameToGestureId = new Dictionary<string, int>()
         {
-            // Must use dashes because of file name parsing
+            // Must use dashes instead of spaces or underscores (because of file name parsing method)
             {"sphere", 1 },
             {"cylinder", 2 },
             {"cube", 3 },
@@ -34,8 +34,16 @@ namespace Gestures
 
         private void Start()
         {
-            gestureDirectoryPath = Application.dataPath + "/Dataset/";
-            Debug.Log("Gesture Dir:" + gestureDirectoryPath);
+            if (Application.isEditor)
+            {
+                gestureDirectoryPath = Application.dataPath + "/Dataset/";
+            }
+            else
+            {
+                gestureDirectoryPath = Application.persistentDataPath + "/Dataset/";
+            }
+
+            print("Gesture Dir:" + gestureDirectoryPath);
 
             CreateGestureIdToNameMapping();
             CreateGestureRecognizer();

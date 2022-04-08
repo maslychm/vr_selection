@@ -87,6 +87,9 @@ public class Logging_XR : MonoBehaviour
     bool collecting_path_left_hand = false; 
     bool collecting_path_right_hand = false; 
 
+    int object_pickups_successful = 0;
+    int object_pickups_fails = 0;
+
     public GameObject left_hand;
     public GameObject right_hand;
 
@@ -113,13 +116,21 @@ public class Logging_XR : MonoBehaviour
     public void start_task_timer()
     { 
         start_timer =Time.time;
+        object_pickups_successful++;
     }
-    public void end_task_timer() 
+    public void stop_task_timer() 
     { 
         float end_timer = Time.time;
         float total_task_time = end_timer - start_timer;
         task_times.Add(total_task_time);
     }
+
+    public void failed_task_timer()
+    { 
+        start_timer = 0.0f; 
+        object_pickups_fails++;
+    }
+
     public List<float> get_task_times()
     { 
         return task_times;

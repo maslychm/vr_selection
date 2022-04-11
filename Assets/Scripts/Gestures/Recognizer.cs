@@ -49,8 +49,6 @@ namespace Gestures
             CreateGestureRecognizer();
             SummarizeTraining();
             TestClassification();
-
-            SetActionCalls();
         }
 
         // Gets automatically called when the person releases the gesture performance button
@@ -72,15 +70,9 @@ namespace Gestures
                 return;
             }
 
-            CallGestureAction(classifiedGestureId);
-        }
+            SelectionEvents.FilterSelection.Invoke(classifiedGestureName);
 
-        private void SetActionCalls()
-        {
-            if (disableActionExecution)
-            {
-                return;
-            }
+            CallGestureAction(classifiedGestureId);
         }
 
         private void CallGestureAction(int gestureId)

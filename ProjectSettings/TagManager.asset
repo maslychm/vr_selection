@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
+  - GestureFilter
+  - cube
+  - sphere
+  - infinity
+  - star
+  - pyramid
+  - cylinder
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
@@ -8,23 +9,19 @@ public class XRGestureInteractable : MonoBehaviour
     [SerializeField] private Material hoverMaterial;
 
     private Material defaultMaterial;
-    private MeshRenderer meshRenderer;
+    private List<MeshRenderer> meshRenderers;
 
     public bool debug = false;
 
     private void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        defaultMaterial = meshRenderer.material;
+        meshRenderers = new List<MeshRenderer>(GetComponents<MeshRenderer>());
+        if (meshRenderers.Count == 0)
+            meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
+        defaultMaterial = meshRenderers[0].material;
 
         if (gestureInteractor == null)
-        {
             gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
-        }
-    }
-
-    private void Update()
-    {
     }
 
     public void OnTriggerEnter(Collider other)
@@ -47,14 +44,19 @@ public class XRGestureInteractable : MonoBehaviour
     private void StartHover()
     {
         dprint($"Start hover: {this.name}");
-        meshRenderer.material = hoverMaterial;
+
+        foreach (var mr in meshRenderers)
+            mr.material = hoverMaterial;
         gestureInteractor.AddtoHighlighted(gameObject);
     }
 
     private void EndHover()
     {
         dprint($"End hover: {this.name}");
-        meshRenderer.material = defaultMaterial;
+
+        foreach (var mr in meshRenderers)
+            mr.material = defaultMaterial;
+
         gestureInteractor.RemoveFromHighlighted(gameObject);
     }
 

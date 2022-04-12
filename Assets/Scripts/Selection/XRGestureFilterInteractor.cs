@@ -84,16 +84,12 @@ public class XRGestureFilterInteractor : MonoBehaviour
     {
         isHighlighting = true;
         flashlightHighlighter.transform.localScale = defaultFlashlightScale;
-        //extendableCollider.height = 4.9f;
-        //extendableCollider.radius = 0.65f;
     }
 
     private void ShrinkFlashlight()
     {
         isHighlighting = false;
         flashlightHighlighter.transform.localScale = new Vector3(0, 0, 0);
-        //extendableCollider.height = 0.0f;
-        //extendableCollider.radius = 0.0f;
 
         // Clear hovered list
         foreach (var kv in highlightedObjects)

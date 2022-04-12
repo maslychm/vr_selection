@@ -42,6 +42,13 @@ public class Object_collected : MonoBehaviour
         _rigidbody.isKinematic = true;
     }
 
+    public void StopCountdownAndFreeze()
+    { 
+        logger.stop_task_timer();
+        FreezeGameObject();
+    }
+
+
     //This assumes we put the gameobject inside a sphere with collision that triggers our tracking.
     void OnTriggerEnter(Collider collider)
     { 

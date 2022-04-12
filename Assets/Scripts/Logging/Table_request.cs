@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class Table_request : MonoBehaviour
 {
-    List<GameObject> objects; //Objects in the space.
-    List<Renderer> renderers;
+    List<GameObject> objects = new List<GameObject>(); //Objects in the space.
+    List<Renderer> renderers = new List<Renderer>();
     Renderer renderer; //Renderer
+    Mesh _mesh; 
     GameObject curr_object; 
     List<string> tags = new List<string>(){ "Cube", "Sphere", "Star", "Pyramid", "Cylinder"};
 
+    Logging_XR logger;
+
+    int objects_collected; 
     void AddObjectsToList(string name)
     { 
+        // Debug.Log(name);
         GameObject[] items = GameObject.FindGameObjectsWithTag(name);
-        objects.AddRange(items);
-        renderers.Add(items[0].GetComponent<Renderer>());
+        // string[4] tomato = new string[] {6,5,5,5};
+        // Debug.Log(items.Length);
+
+        // objects.AddRange(items);
+
+        for (int i = 0; i < items.Length; i++)
+        { 
+            objects.Add(items[i]);
+        }
+        // if (items.Length > 0)
+        //     renderers.Add(items[0].GetComponent<Renderer>());
     }
 
 
@@ -32,8 +46,9 @@ public class Table_request : MonoBehaviour
     }
     void Start()
     { 
-        renderer = GetComponent<Renderer>();
         StartExperiment();   
+        _mesh = GetComponent<MeshFilter>().mesh;
+        logger = GameObject.Find("XR_Logging_Obj").GetComponent<Logging_XR>();
     }
 
 
@@ -51,17 +66,23 @@ public class Table_request : MonoBehaviour
         { 
             objects[i].GetComponent<Object_collected>().ResetGameObject(); 
         }
+        objects_collected = 0;
+        SetOwnRenderer(curr_object);
+        logger.ResetStatistics();
     }
 
     void CheckExperiment()
     { 
-        if(objects.Count > 0)
+        Debug.Log("Amount of world objects " + objects.Count + " Collected items: " +objects_collected );
+        if(objects.Count != objects_collected)
         { 
             curr_object = GetObjectGetRandomGameObject();
+            SetOwnRenderer(curr_object);
         }
         else
         { 
-            Debug.Log("Experiment Over! All objects collected.");
+            logger.SaveToFile();
+            Debug.Log("Experiment Over! Statistics collected and saved.");
         }
     }
 
@@ -75,33 +96,21 @@ public class Table_request : MonoBehaviour
 //Sets the renderer of the object presented to the user. 
     void SetOwnRenderer(GameObject g)
     {
-        switch(g.tag)
-        {
-            case "Cube":
-                renderer = renderers[0];
-                break;
-            case "Sphere":
-                renderer = renderers[1];
-                break;
-            case "Star":
-                renderer = renderers[2];
-                break;
-            case "Pyramid":
-                renderer = renderers[3];
-                break;
-            case "Cylinder":
-                renderer = renderers[4];
-                break;
-        }
+        GetComponent<MeshFilter>().mesh = g.GetComponent<MeshFilter>().mesh;
+        GetComponent<Renderer>().material = g.GetComponent<Renderer>().material;
     }
 
 
     void OnTriggerEnter(Collider collider)
     { 
+        Debug.Log(collider.tag);
         //If we find the tag, just look it up in the array.
         if (tags.Contains(collider.tag))
         {
+            objects_collected++;
             CheckExperiment();
+            collider.gameObject.GetComponent<Object_collected>().StopCountdownAndFreeze();
+            
         }
     }
 }

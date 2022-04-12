@@ -1,7 +1,12 @@
 using System.Collections;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.IO;
 
 public class Logging_XR : MonoBehaviour
 {
@@ -34,8 +39,11 @@ public class Logging_XR : MonoBehaviour
         }
         else
         { 
-            collecting_path_left_hand = false;
-            distance_traveled_left_hand.Add(calculate_distance_collected_path(L_Hand_path));
+            if(collecting_path_left_hand)
+            {
+                collecting_path_left_hand = false;
+                distance_traveled_left_hand.Add(calculate_distance_collected_path(L_Hand_path));
+            }
         }
 
         //Right hand triggering 
@@ -45,15 +53,18 @@ public class Logging_XR : MonoBehaviour
         }
         else
         { 
-            collecting_path_right_hand = false;
-            distance_traveled_right_hand.Add(calculate_distance_collected_path(R_Hand_path));
+            if(collecting_path_right_hand)
+            {
+                collecting_path_right_hand = false;
+                distance_traveled_right_hand.Add(calculate_distance_collected_path(R_Hand_path));
+            }
         }
 
     }
 
 
-    List<Vector3> L_Hand_path;
-    List<Vector3> R_Hand_path;
+    List<Vector3> L_Hand_path = new List<Vector3>();
+    List<Vector3> R_Hand_path = new List<Vector3>();
 
     void FixedUpdate()
     {
@@ -73,17 +84,16 @@ public class Logging_XR : MonoBehaviour
     //Variables for the tracking
     int ticks = 0;
     int ticks_timer = 25; // Around 1/3 of a second?  
-    List<int> button_presses_L;
-    List<int> button_presses_R;
-
+    public List<int> button_presses_L = new List<int>();
+    public List<int> button_presses_R = new List<int>();
+    public List<float> task_times = new List<float>(); 
+    public List<float> distance_traveled_left_hand = new List<float>();
+    public List<float> distance_traveled_right_hand = new List<float>();
 
     //Not sure if we should store the entire path every time a user creates a gesture. I would prefer to make this as small as possible.
     //List<List<Vector3>> Path_created_Left_Hand; 
 
-    List<float> distance_traveled_left_hand;
-    List<float> distance_traveled_right_hand;
     float start_timer;
-    List<float> task_times; 
     bool collecting_path_left_hand = false; 
     bool collecting_path_right_hand = false; 
 
@@ -92,6 +102,8 @@ public class Logging_XR : MonoBehaviour
 
     public GameObject left_hand;
     public GameObject right_hand;
+
+    public string Username;
 
     //TriggerBump L
     [SerializeField] private InputActionReference trigger_one;
@@ -111,6 +123,60 @@ public class Logging_XR : MonoBehaviour
         return distance;
     }
 
+    public string ToCSV(string username)
+    {
+        var sb = new StringBuilder("Username,Time_Registered,Button_presses_L,Button_presses_R,Task_Times," +
+        "Distance_L_hand, Distance_R_hand");
+        sb.Append('\n').Append(username).Append(',').Append(Time.time.ToString()).Append(',').Append(button_presses_L.ToString()).Append(',').Append(button_presses_R.ToString()).Append(',').
+        Append(',').Append(task_times.ToString()).Append(',').Append(distance_traveled_left_hand.ToString()).Append(",").Append(distance_traveled_right_hand.ToString());
+        // foreach(var frame in keyFrames)
+        // {
+        //     sb.Append('\n').Append(frame.Time.ToString()).Append(',').Append(frame.Value.ToString());
+
+
+        // }
+        return sb.ToString();
+    }
+
+    public void SaveToFile ()
+    {
+        string fileName = Username + "_" + Time.time.ToString();
+
+
+        // Use the CSV generation from before
+        var content = ToCSV(Username);
+
+        // The target file path e.g.
+    #if UNITY_EDITOR
+        var folder = Application.streamingAssetsPath;
+
+        if(! Directory.Exists(folder)) Directory.CreateDirectory(folder);
+    #else
+        var folder = Application.persistentDataPath;
+    #endif
+
+        var filePath = Path.Combine(folder, fileName + ".csv");
+
+        using(var writer = new StreamWriter(filePath, false))
+        {
+            writer.Write(content);
+        }
+
+        // Or just
+        //File.WriteAllText(content);
+
+        Debug.Log($"CSV file written to \"{filePath}\"");
+
+    }
+
+    public void ResetStatistics()
+    { 
+        button_presses_R.Clear();
+        button_presses_L.Clear();
+        task_times.Clear();
+        distance_traveled_left_hand.Clear();
+        distance_traveled_right_hand.Clear();
+    }
     ///----------------------------------------------------------------
     //Functions for tracking the stuff around the world
     public void start_task_timer()

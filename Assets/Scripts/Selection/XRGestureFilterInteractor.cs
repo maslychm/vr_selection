@@ -2,16 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CapsuleCollider))]
 public class XRGestureFilterInteractor : MonoBehaviour
 {
     [SerializeField] private InputActionReference flaslightActionReference;
+
+    [Tooltip("This object must have a collider and be tagged as GestureFilter")]
+    [SerializeField] private GameObject flashlightHighlighter;
+
     [SerializeField] private Transform attachTransform;
 
     private Dictionary<string, List<GameObject>> highlightedObjects;
-    private CapsuleCollider extendableCollider;
     private bool isHighlighting = false;
     private GameObject selectedObject;
+    private Vector3 defaultFlashlightScale;
 
     private bool debug = true;
 
@@ -26,8 +29,16 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
         SelectionEvents.FilterSelection.AddListener(PickupObjectOfType);
 
-        extendableCollider = GetComponent<CapsuleCollider>();
-        ShrinkCollider();
+        if (flashlightHighlighter == null)
+        {
+            flashlightHighlighter = GameObject.Find("FlashlightCone");
+        }
+
+        defaultFlashlightScale = new Vector3(200, 200, 560);
+
+        print(defaultFlashlightScale);
+
+        ShrinkFlashlight();
     }
 
     private void Update()
@@ -39,12 +50,12 @@ public class XRGestureFilterInteractor : MonoBehaviour
     {
         if (flaslightActionReference.action.WasPressedThisFrame())
         {
-            ExtendCollider();
+            ExtendFlashlight();
         }
 
         if (flaslightActionReference.action.WasReleasedThisFrame())
         {
-            ShrinkCollider();
+            ShrinkFlashlight();
             ReleaseSelectedObject();
         }
     }
@@ -69,18 +80,20 @@ public class XRGestureFilterInteractor : MonoBehaviour
         o.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    private void ExtendCollider()
+    private void ExtendFlashlight()
     {
         isHighlighting = true;
-        extendableCollider.height = 4.9f;
-        extendableCollider.radius = 0.65f;
+        flashlightHighlighter.transform.localScale = defaultFlashlightScale;
+        //extendableCollider.height = 4.9f;
+        //extendableCollider.radius = 0.65f;
     }
 
-    private void ShrinkCollider()
+    private void ShrinkFlashlight()
     {
         isHighlighting = false;
-        extendableCollider.height = 0.0f;
-        extendableCollider.radius = 0.0f;
+        flashlightHighlighter.transform.localScale = new Vector3(0, 0, 0);
+        //extendableCollider.height = 0.0f;
+        //extendableCollider.radius = 0.0f;
 
         // Clear hovered list
         foreach (var kv in highlightedObjects)
@@ -102,7 +115,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
         }
         selectedObject = highlightedObjects[objectType][0];
 
-        ShrinkCollider();
+        ShrinkFlashlight();
 
         dprint($"selected {selectedObject.name}");
 

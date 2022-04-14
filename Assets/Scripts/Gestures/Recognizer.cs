@@ -17,6 +17,9 @@ namespace Gestures
         [Tooltip("Where do we print the classification result")]
         public TMP_Text debugText;
 
+        [Tooltip("Use to pass direction to the direction-based selection technique")]
+        [SerializeField] private bool useAsDirection;
+
         private Jackknife.Jackknife jackknife;
 
         private readonly Dictionary<string, int> GestureNameToGestureId = new Dictionary<string, int>()
@@ -54,25 +57,40 @@ namespace Gestures
         // Gets automatically called when the person releases the gesture performance button
         public void ProcessGestureBuffer(List<Vector> gestureBufferTrajectory)
         {
-            // If either not enough points, or path traveled is less than half a me
-            if (gestureBufferTrajectory.Count < 12 || Jackknife.Mathematics.PathLength(gestureBufferTrajectory) < .3)
+            if (useAsDirection)
             {
-                return;
+                RecognitionResult r = RecognizerUtils.constructRecognitionResult(
+                    -1,
+                    "unknown",
+                    gestureBufferTrajectory[0],
+                    gestureBufferTrajectory[gestureBufferTrajectory.Count - 1]);
+
+                //print($"{r.startPt}");
+
+                SelectionEvents.DirectionSelection.Invoke(r);
             }
-
-            int classifiedGestureId = ClassifyTrajectory(gestureBufferTrajectory);
-            string classifiedGestureName = GetGestureNameFromId(classifiedGestureId);
-
-            Debug.Log($"Classified as {classifiedGestureName}");
-
-            if (classifiedGestureId == -1)
+            else
             {
-                return;
+                // If either not enough points, or path traveled is less than half a me
+                if (gestureBufferTrajectory.Count < 12 || Jackknife.Mathematics.PathLength(gestureBufferTrajectory) < .3)
+                {
+                    return;
+                }
+
+                int classifiedGestureId = ClassifyTrajectory(gestureBufferTrajectory);
+                string classifiedGestureName = GetGestureNameFromId(classifiedGestureId);
+
+                Debug.Log($"Classified as {classifiedGestureName}");
+
+                if (classifiedGestureId == -1)
+                {
+                    return;
+                }
+
+                SelectionEvents.FilterSelection.Invoke(classifiedGestureName);
+
+                CallGestureAction(classifiedGestureId);
             }
-
-            SelectionEvents.FilterSelection.Invoke(classifiedGestureName);
-
-            CallGestureAction(classifiedGestureId);
         }
 
         private void CallGestureAction(int gestureId)

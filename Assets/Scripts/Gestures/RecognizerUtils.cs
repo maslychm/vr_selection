@@ -1,6 +1,7 @@
 using Jackknife;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 namespace Gestures
 {
@@ -135,6 +136,24 @@ namespace Gestures
             }
 
             return true;
+        }
+
+        public static RecognitionResult constructRecognitionResult(
+            int gestureId,
+            string gestureName,
+            Vector startPtJKVEC,
+            Vector endPtJKVEC)
+        {
+            return new RecognitionResult(
+                gestureId,
+                gestureName,
+                JKVector3toUnityVector3(startPtJKVEC),
+                JKVector3toUnityVector3(endPtJKVEC));
+        }
+
+        public static Vector3 JKVector3toUnityVector3(Vector jkVector)
+        {
+            return new Vector3((float)jkVector[0], (float)jkVector[1], (float)jkVector[2]);
         }
     }
 }

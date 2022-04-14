@@ -11,15 +11,25 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     [SerializeField] private Transform attachTransform;
 
+    [Header("Gesture Direction technique-related")]
+    [SerializeField] private GameObject handDebugPlane;
+
+    [SerializeField] private Vector3 debugPlaneOffset;
+    [SerializeField] private Transform hmdTransform;
+
     private Dictionary<string, List<GameObject>> highlightedObjects;
     private bool isHighlighting = false;
     private GameObject selectedObject;
     private Vector3 defaultFlashlightScale;
 
+    private GameObject otherHandDebug;
+
     private bool debug = true;
 
     public void Start()
     {
+        otherHandDebug = GameObject.Find("RightHand Controller");
+
         // Pre-populate for O(1) type access
         highlightedObjects = new Dictionary<string, List<GameObject>>();
         foreach (var s in SelectionConstants.objTypeNames)
@@ -28,6 +38,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
         }
 
         SelectionEvents.FilterSelection.AddListener(PickupObjectOfType);
+        SelectionEvents.DirectionSelection.AddListener(PickupObjectInDirection);
 
         if (flashlightHighlighter == null)
         {
@@ -44,6 +55,19 @@ public class XRGestureFilterInteractor : MonoBehaviour
     private void Update()
     {
         ProcessInput();
+        DrawDebugStuff();
+    }
+
+    private void DrawDebugStuff()
+    {
+        // Draw a vector from hmd to the controller
+        //Debug.DrawRay(hmdTransform.position, transform.position - hmdTransform.position, Color.red);
+        //Debug.DrawLine(otherHandDebug.transform.position, otherHandDebug.transform.position - hmdTransform.position, Color.red);
+        //Debug.DrawRay()
+        //print("anything???");
+
+        handDebugPlane.transform.position = otherHandDebug.transform.position + debugPlaneOffset;
+        handDebugPlane.transform.forward = otherHandDebug.transform.position - hmdTransform.position;
     }
 
     private void ProcessInput()
@@ -96,6 +120,31 @@ public class XRGestureFilterInteractor : MonoBehaviour
         {
             kv.Value.Clear();
         }
+    }
+
+    private void PickupObjectInDirection(RecognitionResult r)
+    {
+        if (!isHighlighting)
+            return;
+
+        //Vector3 centerPoint = (r.startPt + r.endPt) / 2f;
+
+        // TODO DISABLING "ROTATE WITH LOOK" FOR GESTURAL INPUT MAKES THIS NOT WORK
+        // (^^ turns out plane project does not flip the sign based on normal direction) 
+        // TODO UNPROJECTED WORKS BETTER THAN PROJECTED FOR SOME REASON. SINCE ALREADY ROTATED WITH LOOK?
+        // TODO NEXT: CALCULATE PER-OBJECT DIRECTIONS AND COMPARE THE ONE FROM HERE TO THE BEST ONE THERE
+
+        Vector3 unprojectedDirection = (r.endPt - r.startPt).normalized;
+        //Vector3 planeNormal = (otherHandDebug.transform.position - hmdTransform.position).normalized;
+        Vector3 planeNormal = (r.startPt - hmdTransform.position).normalized;
+        dprint($"projecting {unprojectedDirection} onto {planeNormal}");
+        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal);
+
+        dprint($"DIR: {projectedDirection}");
+
+        // DEBUG
+        Vector3 flippedPlaneProjectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, -planeNormal);
+        dprint($"FLIPPED DIR: {flippedPlaneProjectedDirection}");
     }
 
     private void PickupObjectOfType(string objectType)

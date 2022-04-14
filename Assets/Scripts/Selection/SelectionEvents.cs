@@ -4,7 +4,11 @@ using UnityEngine.Events;
 public class FilterSelectionEvent : UnityEvent<string>
 { }
 
+public class DirectionSelectionEvent : UnityEvent<RecognitionResult>
+{ }
+
 public class SelectionEvents : Singleton<SelectionEvents>
 {
     public static FilterSelectionEvent FilterSelection = new FilterSelectionEvent();
+    public static DirectionSelectionEvent DirectionSelection = new DirectionSelectionEvent();
 }

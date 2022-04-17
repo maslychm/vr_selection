@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,7 +18,12 @@ public class XRGestureFilterInteractor : MonoBehaviour
     [SerializeField] private Vector3 debugPlaneOffset;
     [SerializeField] private Transform hmdTransform;
 
-    private Dictionary<string, List<GameObject>> highlightedObjects;
+    [Header("Debugging and UI")]
+    [SerializeField] private TabletUI tabletUI;
+
+    private Dictionary<string, List<GameObject>> highlightedObjectsByType;
+    private List<GameObject> allHighlightedObjects;
+
     private bool isHighlighting = false;
     private GameObject selectedObject;
     private Vector3 defaultFlashlightScale;
@@ -31,13 +37,14 @@ public class XRGestureFilterInteractor : MonoBehaviour
         otherHandDebug = GameObject.Find("RightHand Controller");
 
         // Pre-populate for O(1) type access
-        highlightedObjects = new Dictionary<string, List<GameObject>>();
+        highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
+        allHighlightedObjects = new List<GameObject>();
         foreach (var s in SelectionConstants.objTypeNames)
         {
-            highlightedObjects.Add(s, new List<GameObject>());
+            highlightedObjectsByType.Add(s, new List<GameObject>());
         }
 
-        SelectionEvents.FilterSelection.AddListener(PickupObjectOfType);
+        SelectionEvents.FilterSelection.AddListener(SelectObjectOfType);
         SelectionEvents.DirectionSelection.AddListener(PickupObjectInDirection);
 
         if (flashlightHighlighter == null)
@@ -116,7 +123,8 @@ public class XRGestureFilterInteractor : MonoBehaviour
         flashlightHighlighter.transform.localScale = new Vector3(0, 0, 0);
 
         // Clear hovered list
-        foreach (var kv in highlightedObjects)
+        allHighlightedObjects.Clear();
+        foreach (var kv in highlightedObjectsByType)
         {
             kv.Value.Clear();
         }
@@ -124,41 +132,98 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private void PickupObjectInDirection(RecognitionResult r)
     {
-        if (!isHighlighting)
+        if (!isHighlighting || allHighlightedObjects.Count == 0)
             return;
 
-        //Vector3 centerPoint = (r.startPt + r.endPt) / 2f;
-
-        // TODO DISABLING "ROTATE WITH LOOK" FOR GESTURAL INPUT MAKES THIS NOT WORK
-        // (^^ turns out plane project does not flip the sign based on normal direction) 
-        // TODO UNPROJECTED WORKS BETTER THAN PROJECTED FOR SOME REASON. SINCE ALREADY ROTATED WITH LOOK?
-        // TODO NEXT: CALCULATE PER-OBJECT DIRECTIONS AND COMPARE THE ONE FROM HERE TO THE BEST ONE THERE
+        /**
+        * TODO DISABLING "ROTATE WITH LOOK" FOR GESTURAL INPUT MAKES THIS NOT WORK
+        * (^^ turns out plane project does not flip the sign based on normal direction) 
+        * TODO UNPROJECTED WORKS BETTER THAN PROJECTED FOR SOME REASON. SINCE ALREADY ROTATED WITH LOOK?
+        * TODO NEXT: CALCULATE PER-OBJECT DIRECTIONS AND COMPARE THE ONE FROM HERE TO THE BEST ONE THERE
+        * I came back the next day, changed only that instead of first or last point, the center pt
+        * is used to pick the normal, and now it works really well with simply "rotate with look" enabled
+        */
 
         Vector3 unprojectedDirection = (r.endPt - r.startPt).normalized;
-        //Vector3 planeNormal = (otherHandDebug.transform.position - hmdTransform.position).normalized;
-        Vector3 planeNormal = (r.startPt - hmdTransform.position).normalized;
-        dprint($"projecting {unprojectedDirection} onto {planeNormal}");
-        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal);
+        Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
+        Vector3 planeNormal = (gestureCenterPoint - hmdTransform.position).normalized;
+        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal).normalized;
 
-        dprint($"DIR: {projectedDirection}");
+        //dprint($"projecting {unprojectedDirection} onto {planeNormal}");
+        //dprint($"DIR: {projectedDirection.normalized}");
+        //tabletUI.UpdateText($"gesture DIR: {projectedDirection}");
 
-        // DEBUG
-        Vector3 flippedPlaneProjectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, -planeNormal);
-        dprint($"FLIPPED DIR: {flippedPlaneProjectedDirection}");
+        selectedObject = FindObjectWithMostProjectionOverlap(projectedDirection);
+
+        ShrinkFlashlight();
+
+        dprint($"selected {selectedObject.name}");
+
+        PickupObject(selectedObject);
     }
 
-    private void PickupObjectOfType(string objectType)
+    private GameObject FindObjectWithMostProjectionOverlap(Vector3 direction)
     {
-        if (!isHighlighting)
-            return;
+        // pre-process direction to only leave X and Y data
+        direction.z = 0f;
+        direction.Normalize();
 
-        dprint($"FILTERING FOR {objectType}");
-        if (highlightedObjects[objectType].Count == 0)
+        // For each object in the highlighted objects list, compute their projections onto flashlight forward plane
+        // and compute the difference between target direction and their directions to find the most likely one
+        (GameObject obj, float score) bestObject = (null, -2f);
+
+        foreach (var o in allHighlightedObjects)
         {
-            dprint($"No objects of {objectType}");
+            // highlighted object in flashlight's corrdinate system
+            var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
+            objectPositionInFlashlightCoords.z = 0f;
+            objectPositionInFlashlightCoords.Normalize();
+
+            // flashlight's position in it's own coords (for computing direction)
+            var flashlightPositionInFlashlightCoords = transform.localPosition;
+
+            // final direction towards the object in flashlight's coordinate system
+            var uprojectedDirection = objectPositionInFlashlightCoords - flashlightPositionInFlashlightCoords;
+            uprojectedDirection.z = 0f;
+            uprojectedDirection.Normalize();
+
+            // Normal to project the direction onto (flashlight's forward)
+            var planeNormal = transform.forward;
+
+            // object's direction projected onto flashlight's plane defined by normal
+            var projectedDirection = Vector3.ProjectOnPlane(uprojectedDirection, planeNormal);
+            projectedDirection.z = 0f;
+            projectedDirection.Normalize();
+
+            // Dot product to measure alignment between passed direction and object's projected direction
+            var dot = Vector3.Dot(direction, projectedDirection);
+            if (dot > bestObject.score)
+            {
+                bestObject.obj = o;
+                bestObject.score = dot;
+            }
+            //tabletUI.WriteLine($"{o.tag} dir: {projectedDirection}, target: {direction}, dot: {dot}");
+            //directionDifferences.Add((o, dot));
+            //tabletUI.WriteLine($"{o.tag}, {dot}");
+            //dprint($"{o.tag}, {dot}");
+        }
+
+        //tabletUI.WriteLine($"best: {bestObject.obj.tag}, {bestObject.score}");
+
+        return bestObject.obj;
+    }
+
+    private void SelectObjectOfType(string objectType)
+    {
+        if (!isHighlighting || highlightedObjectsByType[objectType].Count == 0)
+        {
+            dprint($"Not highlighting any {objectType}");
             return;
         }
-        selectedObject = highlightedObjects[objectType][0];
+
+        dprint($"FILTERING FOR {objectType}");
+
+        selectedObject = highlightedObjectsByType[objectType][0];
 
         ShrinkFlashlight();
 
@@ -171,12 +236,14 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     public void AddtoHighlighted(GameObject o)
     {
-        highlightedObjects[o.tag].Add(o);
+        highlightedObjectsByType[o.tag].Add(o);
+        allHighlightedObjects.Add(o);
     }
 
     public void RemoveFromHighlighted(GameObject o)
     {
-        highlightedObjects[o.tag].Remove(o);
+        highlightedObjectsByType[o.tag].Remove(o);
+        allHighlightedObjects.Remove(o);
     }
 
     #endregion CALLABLE BY INTERACTABLES

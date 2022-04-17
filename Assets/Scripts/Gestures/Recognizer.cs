@@ -18,7 +18,7 @@ namespace Gestures
         public TMP_Text debugText;
 
         [Tooltip("Use to pass direction to the direction-based selection technique")]
-        [SerializeField] private bool useAsDirection;
+        public bool useAsDirection;
 
         private Jackknife.Jackknife jackknife;
 

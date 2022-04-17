@@ -474,7 +474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110744, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.524
+      value: -2.672
       objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110744, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_LocalPosition.y
@@ -482,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110744, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.365
+      value: -1.415
       objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110744, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4683,7 +4683,7 @@ MonoBehaviour:
   gestureDirectoryPath: 
   disableActionExecution: 1
   debugText: {fileID: 0}
-  useAsDirection: 1
+  useAsDirection: 0
 --- !u!4 &1951528104
 Transform:
   m_ObjectHideFlags: 0
@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1868ec0470d0f254897d389bbc61c4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useGestureDirection: 0
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   flashlightHighlighter: {fileID: 1369095097}
   attachTransform: {fileID: 1786383498}

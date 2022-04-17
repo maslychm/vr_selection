@@ -1,10 +1,16 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/**
+ * This script must be attached to the hand which will be holding the flashlight
+ */
+
 public class XRGestureFilterInteractor : MonoBehaviour
 {
+    [Header("Use gesture shape, or direction")]
+    public bool useGestureDirection = false;
+
     [SerializeField] private InputActionReference flaslightActionReference;
 
     [Tooltip("This object must have a collider and be tagged as GestureFilter")]
@@ -28,53 +34,31 @@ public class XRGestureFilterInteractor : MonoBehaviour
     private GameObject selectedObject;
     private Vector3 defaultFlashlightScale;
 
-    private GameObject otherHandDebug;
-
     private bool debug = true;
 
     public void Start()
     {
-        otherHandDebug = GameObject.Find("RightHand Controller");
-
-        // Pre-populate for O(1) type access
         highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
         allHighlightedObjects = new List<GameObject>();
+        // Pre-populate for O(1) type access
         foreach (var s in SelectionConstants.objTypeNames)
-        {
             highlightedObjectsByType.Add(s, new List<GameObject>());
-        }
-
-        SelectionEvents.FilterSelection.AddListener(SelectObjectOfType);
-        SelectionEvents.DirectionSelection.AddListener(PickupObjectInDirection);
 
         if (flashlightHighlighter == null)
-        {
             flashlightHighlighter = GameObject.Find("FlashlightCone");
-        }
 
         defaultFlashlightScale = new Vector3(200, 200, 560);
 
-        print(defaultFlashlightScale);
-
         ShrinkFlashlight();
+        SetRecognizerMode();
+
+        SelectionEvents.FilterSelection.AddListener(SelectObjectOfType);
+        SelectionEvents.DirectionSelection.AddListener(SelectObjectInDirection);
     }
 
     private void Update()
     {
         ProcessInput();
-        DrawDebugStuff();
-    }
-
-    private void DrawDebugStuff()
-    {
-        // Draw a vector from hmd to the controller
-        //Debug.DrawRay(hmdTransform.position, transform.position - hmdTransform.position, Color.red);
-        //Debug.DrawLine(otherHandDebug.transform.position, otherHandDebug.transform.position - hmdTransform.position, Color.red);
-        //Debug.DrawRay()
-        //print("anything???");
-
-        handDebugPlane.transform.position = otherHandDebug.transform.position + debugPlaneOffset;
-        handDebugPlane.transform.forward = otherHandDebug.transform.position - hmdTransform.position;
     }
 
     private void ProcessInput()
@@ -91,6 +75,12 @@ public class XRGestureFilterInteractor : MonoBehaviour
         }
     }
 
+    private void SetRecognizerMode()
+    {
+        Gestures.Recognizer recognizer = FindObjectOfType<Gestures.Recognizer>();
+        recognizer.useAsDirection = useGestureDirection;
+    }
+
     private void ReleaseSelectedObject()
     {
         if (selectedObject == null)
@@ -104,8 +94,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private void PickupObject(GameObject o)
     {
-        o.transform.position = attachTransform.position;
-        o.transform.rotation = attachTransform.rotation;
+        o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
         o.transform.parent = attachTransform;
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
@@ -130,89 +119,6 @@ public class XRGestureFilterInteractor : MonoBehaviour
         }
     }
 
-    private void PickupObjectInDirection(RecognitionResult r)
-    {
-        if (!isHighlighting || allHighlightedObjects.Count == 0)
-            return;
-
-        /**
-        * TODO DISABLING "ROTATE WITH LOOK" FOR GESTURAL INPUT MAKES THIS NOT WORK
-        * (^^ turns out plane project does not flip the sign based on normal direction) 
-        * TODO UNPROJECTED WORKS BETTER THAN PROJECTED FOR SOME REASON. SINCE ALREADY ROTATED WITH LOOK?
-        * TODO NEXT: CALCULATE PER-OBJECT DIRECTIONS AND COMPARE THE ONE FROM HERE TO THE BEST ONE THERE
-        * I came back the next day, changed only that instead of first or last point, the center pt
-        * is used to pick the normal, and now it works really well with simply "rotate with look" enabled
-        */
-
-        Vector3 unprojectedDirection = (r.endPt - r.startPt).normalized;
-        Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
-        Vector3 planeNormal = (gestureCenterPoint - hmdTransform.position).normalized;
-        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal).normalized;
-
-        //dprint($"projecting {unprojectedDirection} onto {planeNormal}");
-        //dprint($"DIR: {projectedDirection.normalized}");
-        //tabletUI.UpdateText($"gesture DIR: {projectedDirection}");
-
-        selectedObject = FindObjectWithMostProjectionOverlap(projectedDirection);
-
-        ShrinkFlashlight();
-
-        dprint($"selected {selectedObject.name}");
-
-        PickupObject(selectedObject);
-    }
-
-    private GameObject FindObjectWithMostProjectionOverlap(Vector3 direction)
-    {
-        // pre-process direction to only leave X and Y data
-        direction.z = 0f;
-        direction.Normalize();
-
-        // For each object in the highlighted objects list, compute their projections onto flashlight forward plane
-        // and compute the difference between target direction and their directions to find the most likely one
-        (GameObject obj, float score) bestObject = (null, -2f);
-
-        foreach (var o in allHighlightedObjects)
-        {
-            // highlighted object in flashlight's corrdinate system
-            var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
-            objectPositionInFlashlightCoords.z = 0f;
-            objectPositionInFlashlightCoords.Normalize();
-
-            // flashlight's position in it's own coords (for computing direction)
-            var flashlightPositionInFlashlightCoords = transform.localPosition;
-
-            // final direction towards the object in flashlight's coordinate system
-            var uprojectedDirection = objectPositionInFlashlightCoords - flashlightPositionInFlashlightCoords;
-            uprojectedDirection.z = 0f;
-            uprojectedDirection.Normalize();
-
-            // Normal to project the direction onto (flashlight's forward)
-            var planeNormal = transform.forward;
-
-            // object's direction projected onto flashlight's plane defined by normal
-            var projectedDirection = Vector3.ProjectOnPlane(uprojectedDirection, planeNormal);
-            projectedDirection.z = 0f;
-            projectedDirection.Normalize();
-
-            // Dot product to measure alignment between passed direction and object's projected direction
-            var dot = Vector3.Dot(direction, projectedDirection);
-            if (dot > bestObject.score)
-            {
-                bestObject.obj = o;
-                bestObject.score = dot;
-            }
-            //tabletUI.WriteLine($"{o.tag} dir: {projectedDirection}, target: {direction}, dot: {dot}");
-            //directionDifferences.Add((o, dot));
-            //tabletUI.WriteLine($"{o.tag}, {dot}");
-            //dprint($"{o.tag}, {dot}");
-        }
-
-        //tabletUI.WriteLine($"best: {bestObject.obj.tag}, {bestObject.score}");
-
-        return bestObject.obj;
-    }
-
     private void SelectObjectOfType(string objectType)
     {
         if (!isHighlighting || highlightedObjectsByType[objectType].Count == 0)
@@ -230,6 +136,59 @@ public class XRGestureFilterInteractor : MonoBehaviour
         dprint($"selected {selectedObject.name}");
 
         PickupObject(selectedObject);
+    }
+
+    private void SelectObjectInDirection(RecognitionResult r)
+    {
+        if (!isHighlighting || allHighlightedObjects.Count == 0)
+            return;
+
+        Vector3 unprojectedDirection = (r.endPt - r.startPt).normalized;
+        Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
+        Vector3 planeNormal = (gestureCenterPoint - hmdTransform.position).normalized;
+        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal).normalized;
+
+        selectedObject = FindObjectWithMostProjectionOverlap(projectedDirection);
+        ShrinkFlashlight();
+        PickupObject(selectedObject);
+        dprint($"selected {selectedObject.name}");
+    }
+
+    private GameObject FindObjectWithMostProjectionOverlap(Vector3 direction)
+    {
+        // pre-process direction to only leave X and Y data
+        direction.z = 0f;
+        direction.Normalize();
+
+        // For each object in the highlighted objects list, compute dot product between it's XY direction
+        // vector in the flashlight's coordinate system with the drawn direction
+        (GameObject obj, float score) bestObject = (null, -2f);
+
+        foreach (var o in allHighlightedObjects)
+        {
+            // highlighted object in flashlight's corrdinate system
+            var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
+            objectPositionInFlashlightCoords.z = 0f;
+            objectPositionInFlashlightCoords.Normalize();
+
+            // Dot product to measure alignment between passed direction and object's projected direction
+            var dot = Vector3.Dot(direction, objectPositionInFlashlightCoords);
+            if (dot > bestObject.score)
+            {
+                bestObject.obj = o;
+                bestObject.score = dot;
+            }
+
+            // debug
+            //tabletUI.WriteLine($"{o.tag} dir: {objectPositionInFlashlightCoords}, target: {direction}, dot: {dot}");
+            //directionDifferences.Add((o, dot));
+            //tabletUI.WriteLine($"{o.tag}, {dot}");
+            //dprint($"{o.tag}, {dot}");
+        }
+
+        //tabletUI.WriteLine($"best: {bestObject.obj.tag}, {bestObject.score}");
+
+        return bestObject.obj;
     }
 
     #region CALLABLE BY INTERACTABLES

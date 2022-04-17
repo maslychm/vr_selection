@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class TabletUI : MonoBehaviour
 {
@@ -31,6 +30,6 @@ public class TabletUI : MonoBehaviour
         }
         lines.Add(str);
 
-        UpdateText(string.Join("\n",lines));
+        UpdateText(string.Join("\n", lines));
     }
 }

@@ -105,12 +105,15 @@ public class Table_request : MonoBehaviour
     { 
         Debug.Log(collider.tag);
         //If we find the tag, just look it up in the array.
-        if (tags.Contains(collider.tag))
+        if (tags.Contains(collider.tag) && curr_object.tag == collider.tag)
         {
             objects_collected++;
             CheckExperiment();
             collider.gameObject.GetComponent<Object_collected>().StopCountdownAndFreeze();
-            
+        }
+        else{
+            //Send the gameobject back to the map. 
+            collider.gameObject.GetComponent<Object_collected>().ResetGameObject();
         }
     }
 }

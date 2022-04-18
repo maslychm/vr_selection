@@ -33,6 +33,7 @@ public class Object_collected : MonoBehaviour
         _rigidbody.isKinematic = false;
         _transform.position = _home_pos;
         _transform.rotation = _home_rot;
+        logger.stop_task_timer();
     }
 
     void FreezeGameObject()
@@ -46,6 +47,12 @@ public class Object_collected : MonoBehaviour
     { 
         logger.stop_task_timer();
         FreezeGameObject();
+    }
+
+    //Use this function when starting to pick up an object. 
+    public void StartCountdown() 
+    {
+        logger.start_task_timer();
     }
 
 

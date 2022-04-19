@@ -3,6 +3,8 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
+
 
 public class Logging_XR : MonoBehaviour
 {
@@ -13,6 +15,20 @@ public class Logging_XR : MonoBehaviour
         button_presses_R = new List<int>() { 0, 0, 0, 0, 0, 0 };
         left_hand = GameObject.Find("LeftHand Controller");
         right_hand = GameObject.Find("RightHand Controller");
+
+        DateTime localDate = DateTime.Now;
+        DateTime utcDate = DateTime.UtcNow;
+
+        string time_utc = utcDate.ToString();
+        time_utc = time_utc.Replace('/','-');
+        time_utc = time_utc.Replace(':','-');
+        string localDate_str = localDate.ToString();
+        localDate_str = localDate_str.Replace('/',' ');
+        localDate_str = localDate_str.Replace(':',' ');
+
+        // Debug.Log(time_utc);
+        file_output_filename += "Output_CSV_";
+        file_output_filename += localDate_str +"_" + time_utc;
     }
 
     private void Update()
@@ -96,6 +112,7 @@ public class Logging_XR : MonoBehaviour
     public GameObject left_hand;
     public GameObject right_hand;
 
+    public string file_output_filename = "";
     public string Username;
 
     //TriggerBump L
@@ -105,6 +122,10 @@ public class Logging_XR : MonoBehaviour
     [SerializeField] private InputActionReference trigger_two;
 
     ///----------------------------------------------------------------
+ 
+
+
+
     //Utilities methods
     private float calculate_distance_collected_path(List<Vector3> path)
     {
@@ -116,26 +137,46 @@ public class Logging_XR : MonoBehaviour
         return distance;
     }
 
-    public string ToCSV(string username)
-    {
-        var sb = new StringBuilder("Username,Time_Registered,Button_presses_L,Button_presses_R,Task_Times," +
-        "Distance_L_hand, Distance_R_hand");
-        sb.Append('\n').Append(username).Append(',').Append(Time.time.ToString()).Append(',').Append(button_presses_L.ToString()).Append(',').Append(button_presses_R.ToString()).Append(',').
-        Append(',').Append(task_times.ToString()).Append(',').Append(distance_traveled_left_hand.ToString()).Append(",").Append(distance_traveled_right_hand.ToString());
-        // foreach(var frame in keyFrames)
-        // {
-        //     sb.Append('\n').Append(frame.Time.ToString()).Append(',').Append(frame.Value.ToString());
+    string ConvertArrayToString <T> (List<T> array)
+    { 
+        string output = "";
+        if (array.Count >= 0)
+        {
+            //Phraser paranthesis.
+            output += "(";
+            for (int i = 0; i < array.Count; i++)
+            {
+                output += array[i].ToString();
+                if(i < array.Count - 1)
+                    output += ",";
+            }
+            output += ")";
+        }
+        return output;
+    }
 
-        // }
+    public string ToCSV(string username, bool print_header)
+    {
+        var sb = new StringBuilder();
+        if (print_header)
+        {
+            sb.Append("Username,Time_Registered,Button_presses_L,Button_presses_R,Task_Times," +
+            "Distance_L_hand, Distance_R_hand");
+        }
+        sb.Append('\n').Append(username).Append(',').Append(Time.time.ToString()).Append(',').Append( ConvertArrayToString(button_presses_L)).Append(',').Append(ConvertArrayToString(button_presses_R)).Append(',')
+        .Append(ConvertArrayToString(task_times)).Append(',').Append(ConvertArrayToString(distance_traveled_left_hand)).Append(",").Append(ConvertArrayToString(distance_traveled_right_hand));
         return sb.ToString();
     }
 
+
+
+    bool print_header = true;
     public void SaveToFile()
     {
-        string fileName = Username + "_" + Time.time.ToString();
+        string fileName = file_output_filename;//Username + "_" + Time.time.ToString();
 
         // Use the CSV generation from before
-        var content = ToCSV(Username);
+        var content = ToCSV(Username,print_header);
 
         // The target file path e.g.
 #if UNITY_EDITOR
@@ -148,10 +189,13 @@ public class Logging_XR : MonoBehaviour
 
         var filePath = Path.Combine(folder, fileName + ".csv");
 
-        using (var writer = new StreamWriter(filePath, false))
+        using (var writer = new StreamWriter(filePath, true))
         {
             writer.Write(content);
         }
+
+        print_header = false;
+
 
         // Or just
         //File.WriteAllText(content);

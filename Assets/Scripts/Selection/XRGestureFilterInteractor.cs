@@ -47,7 +47,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
         if (flashlightHighlighter == null)
             flashlightHighlighter = GameObject.Find("FlashlightCone");
 
-        defaultFlashlightScale = new Vector3(200, 200, 560);
+        defaultFlashlightScale = new Vector3(150, 150, 560);
 
         ShrinkFlashlight();
         SetRecognizerMode();

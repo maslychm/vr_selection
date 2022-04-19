@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Table_request : MonoBehaviour
 {
-    private List<GameObject> objects = new List<GameObject>(); //Objects in the space.
+    public List<GameObject> objects = new List<GameObject>(); //Objects in the space.
     private List<Renderer> renderers = new List<Renderer>();
     private Renderer renderer; //Renderer
     private Mesh _mesh;
-    private GameObject expectedObject;
+    public GameObject expectedObject;
     private GameObject expectedObjectCopy;
     private List<string> interactableTags = new List<string>() { "cube", "sphere", "star", "pyramid", "cylinder", "infinity" };
 
@@ -48,13 +48,13 @@ public class Table_request : MonoBehaviour
         interactableTags.ForEach(item => AddTaggesObjectsToList(item));
 
         objects = Shuffle(objects); //Creates a different ordering to collect objects.
-        expectedObject = SelectRandomExpectedObject();
 
         //Reset all objects and their positions.
         foreach (var o in objects)
             o.GetComponent<Object_collected>().ResetGameObject();
 
         objects_collected = 0;
+        expectedObject = objects[objects_collected]; //SelectRandomExpectedObject();
         SetOwnRenderer(expectedObject);
         logger.ResetStatistics();
     }
@@ -64,7 +64,7 @@ public class Table_request : MonoBehaviour
         Debug.Log("Num. of world objects " + objects.Count + " Collected items: " + objects_collected);
         if (objects.Count != objects_collected)
         {
-            expectedObject = SelectRandomExpectedObject();
+            expectedObject = objects[objects_collected]; // SelectRandomExpectedObject();
             SetOwnRenderer(expectedObject);
         }
         else

@@ -7,6 +7,7 @@ public class Object_collected : MonoBehaviour
     //private Transform _transform;
     private Vector3 _home_pos;
 
+    private Vector3 _dumpster_location = new Vector3(12,1,-3);
     private Quaternion _home_rot;
     private Renderer _renderer;
     private Collider _collider;
@@ -41,6 +42,8 @@ public class Object_collected : MonoBehaviour
         //_renderer.enabled = false;
         //_collider.enabled = false;
         //_rigidbody.isKinematic = true;
+        transform.position = _dumpster_location + new Vector3(2 * UnityEngine.Random.Range(0,10)*0.1f,0,2* UnityEngine.Random.Range(0,1)*0.1f);
+        logger.stop_task_timer();
     }
 
     public void StopCountdownAndFreeze()

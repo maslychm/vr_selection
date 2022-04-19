@@ -96,9 +96,13 @@ public class Table_request : MonoBehaviour
     {
         Debug.Log($"Table triggered by: {collider.tag}");
 
+        Debug.Log(interactableTags.Contains(collider.tag));
+        Debug.Log(expectedObject.CompareTag(collider.tag));
+
         // If tag is among possible and is expected for selection - record success
         if (interactableTags.Contains(collider.tag) && expectedObject.CompareTag(collider.tag))
         {
+            Debug.Log("Collected Object");
             objects_collected++;
             CheckExperiment();
             collider.gameObject.GetComponent<Object_collected>().StopCountdownAndFreeze();

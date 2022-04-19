@@ -43,7 +43,7 @@ public class Object_collected : MonoBehaviour
         //_collider.enabled = false;
         //_rigidbody.isKinematic = true;
         transform.position = _dumpster_location + new Vector3(2 * UnityEngine.Random.Range(0,10)*0.1f,0,2* UnityEngine.Random.Range(0,1)*0.1f);
-        logger.stop_task_timer();
+        // logger.stop_task_timer();
     }
 
     public void StopCountdownAndFreeze()
@@ -51,8 +51,8 @@ public class Object_collected : MonoBehaviour
         logger.stop_task_timer();
         FreezeGameObject();
 
-        // TODO FIXME: decide what to do with correctly picked object
-        ResetGameObject();
+        // // TODO FIXME: decide what to do with correctly picked object
+        // ResetGameObject();
     }
 
     //Use this function when starting to pick up an object.

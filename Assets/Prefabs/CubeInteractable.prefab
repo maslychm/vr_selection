@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6241610088319110747}
   - component: {fileID: 6241610088319110750}
   - component: {fileID: 6241610088319110751}
+  - component: {fileID: 5491281407755431678}
   m_Layer: 0
   m_Name: CubeInteractable
   m_TagString: cube
@@ -127,3 +128,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverMaterial: {fileID: 2100000, guid: 3a897574bb5f2b942906b3f8bb6032ea, type: 2}
   debug: 1
+--- !u!114 &5491281407755431678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241610088319110756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc43102b083e9746b079f7fe3252234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

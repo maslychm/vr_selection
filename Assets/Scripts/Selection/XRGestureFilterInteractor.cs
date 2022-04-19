@@ -34,7 +34,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
     private GameObject selectedObject;
     private Vector3 defaultFlashlightScale;
 
-    private bool debug = true;
+    private bool debug = false;
 
     public void Start()
     {

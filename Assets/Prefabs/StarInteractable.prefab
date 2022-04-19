@@ -126,3 +126,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverMaterial: {fileID: 2100000, guid: 9971e896ec1e8c2439397d12278e1375, type: 2}
   debug: 0
+--- !u!114 &267441962553339784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818570555804882673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bc43102b083e9746b079f7fe3252234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

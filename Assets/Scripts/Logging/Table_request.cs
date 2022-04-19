@@ -1,118 +1,111 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Table_request : MonoBehaviour
 {
-    List<GameObject> objects = new List<GameObject>(); //Objects in the space.
-    List<Renderer> renderers = new List<Renderer>();
-    Renderer renderer; //Renderer
-    Mesh _mesh; 
-    GameObject curr_object; 
-    List<string> tags = new List<string>(){ "Cube", "Sphere", "Star", "Pyramid", "Cylinder"};
+    private List<GameObject> objects = new List<GameObject>(); //Objects in the space.
+    private List<Renderer> renderers = new List<Renderer>();
+    private Renderer renderer; //Renderer
+    private Mesh _mesh;
+    private GameObject expectedObject;
+    private GameObject expectedObjectCopy;
+    private List<string> interactableTags = new List<string>() { "cube", "sphere", "star", "pyramid", "cylinder", "infinity" };
 
-    Logging_XR logger;
+    private Logging_XR logger;
 
-    int objects_collected; 
-    void AddObjectsToList(string name)
-    { 
-        // Debug.Log(name);
+    private int objects_collected;
+
+    private void AddTaggesObjectsToList(string name)
+    {
         GameObject[] items = GameObject.FindGameObjectsWithTag(name);
-        // string[4] tomato = new string[] {6,5,5,5};
-        // Debug.Log(items.Length);
+        items.ToList().ForEach(item => objects.Add(item));
+    }
 
-        // objects.AddRange(items);
-
-        for (int i = 0; i < items.Length; i++)
-        { 
-            objects.Add(items[i]);
+    public List<T> Shuffle<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
-        // if (items.Length > 0)
-        //     renderers.Add(items[0].GetComponent<Renderer>());
+        return list;
     }
 
-
-    public List<T> Shuffle<T>(List<T> list)  
-    {  
-        int n = list.Count;  
-        while (n > 1) {  
-            n--;  
-            int k = UnityEngine.Random.Range(0,n + 1);  
-            T value = list[k];  
-            list[k] = list[n];  
-            list[n] = value;  
-        }  
-        return list; 
-    }
-    void Start()
-    { 
-        StartExperiment();   
+    private void Start()
+    {
         _mesh = GetComponent<MeshFilter>().mesh;
         logger = GameObject.Find("XR_Logging_Obj").GetComponent<Logging_XR>();
+        StartExperiment();
     }
 
-
     public void StartExperiment()
-    { 
-        AddObjectsToList("Cube");
-        AddObjectsToList("Sphere");
-        AddObjectsToList("Star");
-        AddObjectsToList("Pyramid");
-        AddObjectsToList("Cylinder");
+    {
+        interactableTags.ForEach(item => AddTaggesObjectsToList(item));
+
         objects = Shuffle(objects); //Creates a different ordering to collect objects.
-        curr_object = GetObjectGetRandomGameObject();
+        expectedObject = SelectRandomExpectedObject();
+
         //Reset all objects and their positions.
-        for(int i = 0; i < objects.Count; i++)
-        { 
-            objects[i].GetComponent<Object_collected>().ResetGameObject(); 
-        }
+        foreach (var o in objects)
+            o.GetComponent<Object_collected>().ResetGameObject();
+
         objects_collected = 0;
-        SetOwnRenderer(curr_object);
+        SetOwnRenderer(expectedObject);
         logger.ResetStatistics();
     }
 
-    void CheckExperiment()
-    { 
-        Debug.Log("Amount of world objects " + objects.Count + " Collected items: " +objects_collected );
-        if(objects.Count != objects_collected)
-        { 
-            curr_object = GetObjectGetRandomGameObject();
-            SetOwnRenderer(curr_object);
+    private void CheckExperiment()
+    {
+        Debug.Log("Num. of world objects " + objects.Count + " Collected items: " + objects_collected);
+        if (objects.Count != objects_collected)
+        {
+            expectedObject = SelectRandomExpectedObject();
+            SetOwnRenderer(expectedObject);
         }
         else
-        { 
+        {
             logger.SaveToFile();
             Debug.Log("Experiment Over! Statistics collected and saved.");
         }
     }
 
-
-    GameObject GetObjectGetRandomGameObject()
-    { 
-      return objects[UnityEngine.Random.Range(0,objects.Count)];
-    }
-
-
-//Sets the renderer of the object presented to the user. 
-    void SetOwnRenderer(GameObject g)
+    private GameObject SelectRandomExpectedObject()
     {
-        GetComponent<MeshFilter>().mesh = g.GetComponent<MeshFilter>().mesh;
-        GetComponent<Renderer>().material = g.GetComponent<Renderer>().material;
+        return objects[UnityEngine.Random.Range(0, objects.Count)];
     }
 
+    //Sets the renderer of the object presented to the user.
+    private void SetOwnRenderer(GameObject g)
+    {
+        if (expectedObjectCopy != null)
+            Destroy(expectedObjectCopy);
 
-    void OnTriggerEnter(Collider collider)
-    { 
-        Debug.Log(collider.tag);
-        //If we find the tag, just look it up in the array.
-        if (tags.Contains(collider.tag) && curr_object.tag == collider.tag)
+        expectedObjectCopy = Instantiate(g, transform.position, transform.rotation);
+        expectedObjectCopy.tag = "Untagged";
+
+        Destroy(expectedObjectCopy.GetComponent<Object_collected>());
+        Destroy(expectedObjectCopy.GetComponent<XRGestureInteractable>());
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        Debug.Log($"Table triggered by: {collider.tag}");
+
+        // If tag is among possible and is expected for selection - record success
+        if (interactableTags.Contains(collider.tag) && expectedObject.CompareTag(collider.tag))
         {
             objects_collected++;
             CheckExperiment();
             collider.gameObject.GetComponent<Object_collected>().StopCountdownAndFreeze();
         }
-        else{
-            //Send the gameobject back to the map. 
+        else
+        {
+            //Send the gameobject back to the map.
             collider.gameObject.GetComponent<Object_collected>().ResetGameObject();
         }
     }

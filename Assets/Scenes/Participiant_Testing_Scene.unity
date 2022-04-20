@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 256233762}
-  m_IndirectSpecularColor: {r: 0.13935643, g: 0.11260852, b: 0.1602621, a: 1}
+  m_IndirectSpecularColor: {r: 0.32016882, g: 0.25871137, b: 0.36819202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4712,9 +4712,9 @@ MonoBehaviour:
   left_hand: {fileID: 1128222406}
   right_hand: {fileID: 1070462512}
   file_output_filename: 
-  Username: 
-  trigger_one: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  trigger_two: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  Username: empty
+  trigger_left: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  trigger_right: {fileID: 3560761125969204472, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &1898919922
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
-
 
 public class Logging_XR : MonoBehaviour
 {
@@ -20,30 +18,30 @@ public class Logging_XR : MonoBehaviour
         DateTime utcDate = DateTime.UtcNow;
 
         string time_utc = utcDate.ToString();
-        time_utc = time_utc.Replace('/','-');
-        time_utc = time_utc.Replace(':','-');
+        time_utc = time_utc.Replace('/', '-');
+        time_utc = time_utc.Replace(':', '-');
         string localDate_str = localDate.ToString();
-        localDate_str = localDate_str.Replace('/',' ');
-        localDate_str = localDate_str.Replace(':',' ');
+        localDate_str = localDate_str.Replace('/', ' ');
+        localDate_str = localDate_str.Replace(':', ' ');
 
         // Debug.Log(time_utc);
         file_output_filename += "Output_CSV_";
-        file_output_filename += localDate_str +"_" + time_utc;
+        file_output_filename += localDate_str + "_" + time_utc;
     }
 
     private void Update()
     {
-        if (trigger_one.action.WasPressedThisFrame())
+        if (trigger_left.action.WasPressedThisFrame())
         {
             button_presses_L[0]++;
         }
-        if (trigger_two.action.WasPressedThisFrame())
+        if (trigger_right.action.WasPressedThisFrame())
         {
             button_presses_R[0]++;
         }
 
         //While the trigger is being pressed collect this value
-        if (trigger_one.action.IsPressed())
+        if (trigger_left.action.IsPressed())
         {
             collecting_path_left_hand = true;
         }
@@ -57,7 +55,7 @@ public class Logging_XR : MonoBehaviour
         }
 
         //Right hand triggering
-        if (trigger_two.action.IsPressed())
+        if (trigger_right.action.IsPressed())
         {
             collecting_path_right_hand = true;
         }
@@ -113,18 +111,15 @@ public class Logging_XR : MonoBehaviour
     public GameObject right_hand;
 
     public string file_output_filename = "";
-    public string Username;
+    public string Username = "empty";
 
     //TriggerBump L
-    [SerializeField] private InputActionReference trigger_one;
+    [SerializeField] private InputActionReference trigger_left;
 
     //TriggerBump R
-    [SerializeField] private InputActionReference trigger_two;
+    [SerializeField] private InputActionReference trigger_right;
 
     ///----------------------------------------------------------------
- 
-
-
 
     //Utilities methods
     private float calculate_distance_collected_path(List<Vector3> path)
@@ -137,46 +132,37 @@ public class Logging_XR : MonoBehaviour
         return distance;
     }
 
-    string ConvertArrayToString <T> (List<T> array)
-    { 
-        string output = "";
-        if (array.Count >= 0)
-        {
-            //Phraser paranthesis.
-            output += "(";
-            for (int i = 0; i < array.Count; i++)
-            {
-                output += array[i].ToString();
-                if(i < array.Count - 1)
-                    output += ",";
-            }
-            output += ")";
-        }
-        return output;
+    private string ConvertArrayToString<T>(List<T> array)
+    {
+        return $"[{string.Join(",", array)}]";
     }
 
     public string ToCSV(string username, bool print_header)
     {
-        var sb = new StringBuilder();
+        var headers = new List<string> { "Username", "Time_Registered", "Button_presses_L", "Button_presses_R", "Task_Times", "Distance_L_hand", "Distance_R_hand" };
+
+        var values = new List<string> {
+            username.ToString(), Time.time.ToString(), ConvertArrayToString(button_presses_L), ConvertArrayToString(button_presses_R),
+            ConvertArrayToString(task_times), ConvertArrayToString(distance_traveled_left_hand), ConvertArrayToString(distance_traveled_right_hand)
+        };
+
+        var ret = "";
         if (print_header)
-        {
-            sb.Append("Username,Time_Registered,Button_presses_L,Button_presses_R,Task_Times," +
-            "Distance_L_hand, Distance_R_hand");
-        }
-        sb.Append('\n').Append(username).Append(',').Append(Time.time.ToString()).Append(',').Append( ConvertArrayToString(button_presses_L)).Append(',').Append(ConvertArrayToString(button_presses_R)).Append(',')
-        .Append(ConvertArrayToString(task_times)).Append(',').Append(ConvertArrayToString(distance_traveled_left_hand)).Append(",").Append(ConvertArrayToString(distance_traveled_right_hand));
-        return sb.ToString();
+            ret += string.Join(";", headers);
+        ret += "\n";
+        ret += string.Join(";", values);
+
+        return ret;
     }
 
+    private bool print_header = true;
 
-
-    bool print_header = true;
     public void SaveToFile()
     {
         string fileName = file_output_filename;//Username + "_" + Time.time.ToString();
 
         // Use the CSV generation from before
-        var content = ToCSV(Username,print_header);
+        var content = ToCSV(Username, print_header);
 
         // The target file path e.g.
 #if UNITY_EDITOR
@@ -195,7 +181,6 @@ public class Logging_XR : MonoBehaviour
         }
 
         print_header = false;
-
 
         // Or just
         //File.WriteAllText(content);

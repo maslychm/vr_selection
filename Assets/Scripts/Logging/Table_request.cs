@@ -99,8 +99,7 @@ public class Table_request : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log($"Table triggered by: {collider.tag}");
-
+        //Debug.Log($"Table triggered by: {collider.tag}");
         //Debug.Log(interactableTags.Contains(collider.tag));
         //Debug.Log(expectedObject.CompareTag(collider.tag));
 

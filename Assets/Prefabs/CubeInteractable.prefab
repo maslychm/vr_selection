@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMaterial: {fileID: 2100000, guid: 3a897574bb5f2b942906b3f8bb6032ea, type: 2}
-  debug: 1
+  debug: 0
 --- !u!114 &5491281407755431678
 MonoBehaviour:
   m_ObjectHideFlags: 0

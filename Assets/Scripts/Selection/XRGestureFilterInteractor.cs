@@ -21,6 +21,8 @@ public class XRGestureFilterInteractor : MonoBehaviour
     [Header("Gesture Direction technique-related")]
     [SerializeField] private GameObject handDebugPlane;
 
+    [SerializeField] private GameObject flashlightCenterCone;
+
     [SerializeField] private Vector3 debugPlaneOffset;
     [SerializeField] private Transform hmdTransform;
 
@@ -104,12 +106,16 @@ public class XRGestureFilterInteractor : MonoBehaviour
     {
         isHighlighting = true;
         flashlightHighlighter.transform.localScale = defaultFlashlightScale;
+
+        if (useGestureDirection)
+            flashlightCenterCone.SetActive(true);
     }
 
     private void ShrinkFlashlight()
     {
         isHighlighting = false;
         flashlightHighlighter.transform.localScale = new Vector3(0, 0, 0);
+        flashlightCenterCone.SetActive(false);
 
         // Clear hovered list
         allHighlightedObjects.Clear();

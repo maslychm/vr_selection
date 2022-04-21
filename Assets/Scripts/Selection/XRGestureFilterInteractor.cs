@@ -18,6 +18,8 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     [SerializeField] private Transform attachTransform;
 
+    [SerializeField] private GameObject dirRefCylinder;
+
     [Header("Gesture Direction technique-related")]
     [SerializeField] private GameObject handDebugPlane;
 
@@ -107,8 +109,8 @@ public class XRGestureFilterInteractor : MonoBehaviour
         isHighlighting = true;
         flashlightHighlighter.transform.localScale = defaultFlashlightScale;
 
-        if (useGestureDirection)
-            flashlightCenterCone.SetActive(true);
+        //if (useGestureDirection) flashlightCenterCone.SetActive(true);
+        flashlightCenterCone.SetActive(true);
     }
 
     private void ShrinkFlashlight()
@@ -125,17 +127,31 @@ public class XRGestureFilterInteractor : MonoBehaviour
         }
     }
 
-    private void SelectObjectOfType(string objectType)
+    private void SelectObjectOfType(RecognitionResult r)
     {
-        if (!isHighlighting || highlightedObjectsByType[objectType].Count == 0)
+        if (!isHighlighting || highlightedObjectsByType[r.gestureName].Count == 0)
         {
-            dprint($"Not highlighting any {objectType}");
+            dprint($"Not highlighting any {r.gestureName}");
             return;
         }
 
-        dprint($"FILTERING FOR {objectType}");
+        dprint($"FILTERING FOR {r.gestureName}");
 
-        selectedObject = highlightedObjectsByType[objectType][0];
+        Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
+        Vector3 cylinderInHMD = hmdTransform.InverseTransformPoint(dirRefCylinder.transform.position);
+        Vector3 uproj = gestureCenterPoint - cylinderInHMD;
+
+        var targetX = uproj.x;
+        var targetY = uproj.y - 1;
+
+        targetX = Mathf.Sign(targetX) * .7f;
+        targetY = Mathf.Sign(targetY) * .7f;
+
+        var vec = new Vector3(targetX, targetY, 0);
+        vec.Normalize();
+
+        selectedObject = FindObjectWithMostProjectionOverlap(vec, highlightedObjectsByType[r.gestureName]);
+        dprint($"dir{vec}");
 
         ShrinkFlashlight();
 
@@ -152,15 +168,16 @@ public class XRGestureFilterInteractor : MonoBehaviour
         Vector3 unprojectedDirection = (r.endPt - r.startPt).normalized;
         Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
         Vector3 planeNormal = (gestureCenterPoint - hmdTransform.position).normalized;
-        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal).normalized;
+        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal);
+        //projectedDirection.Normalize();
 
-        selectedObject = FindObjectWithMostProjectionOverlap(projectedDirection);
+        selectedObject = FindObjectWithMostProjectionOverlap(projectedDirection, allHighlightedObjects);
         ShrinkFlashlight();
         PickupObject(selectedObject);
         dprint($"selected {selectedObject.name}");
     }
 
-    private GameObject FindObjectWithMostProjectionOverlap(Vector3 direction)
+    private GameObject FindObjectWithMostProjectionOverlap(Vector3 direction, List<GameObject> selectFrom)
     {
         // pre-process direction to only leave X and Y data
         direction.z = 0f;
@@ -170,7 +187,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
         // vector in the flashlight's coordinate system with the drawn direction
         (GameObject obj, float score) bestObject = (null, -2f);
 
-        foreach (var o in allHighlightedObjects)
+        foreach (var o in selectFrom)
         {
             // highlighted object in flashlight's corrdinate system
             var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);

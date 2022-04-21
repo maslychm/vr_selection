@@ -87,7 +87,15 @@ namespace Gestures
                     return;
                 }
 
-                SelectionEvents.FilterSelection.Invoke(classifiedGestureName);
+                //SelectionEvents.FilterSelection.Invoke(classifiedGestureName);
+
+                RecognitionResult r = RecognizerUtils.constructRecognitionResult(
+                    classifiedGestureId,
+                    classifiedGestureName,
+                    gestureBufferTrajectory[0],
+                    gestureBufferTrajectory[gestureBufferTrajectory.Count - 1]);
+
+                SelectionEvents.FilterSelection.Invoke(r);
 
                 CallGestureAction(classifiedGestureId);
             }

@@ -1,7 +1,7 @@
 using UnityEngine.Events;
 
 // Enables passing a string through an event
-public class FilterSelectionEvent : UnityEvent<string>
+public class FilterSelectionEvent : UnityEvent<RecognitionResult>
 { }
 
 public class DirectionSelectionEvent : UnityEvent<RecognitionResult>

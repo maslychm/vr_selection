@@ -23,7 +23,7 @@ public class Object_collected : MonoBehaviour
         _home_rot = transform.rotation;
         //_renderer = GetComponent<Renderer>();
         //_collider = GetComponent<Collider>();
-        //_rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     //Reset to original position
@@ -32,6 +32,7 @@ public class Object_collected : MonoBehaviour
         //_renderer.enabled = true;
         //_collider.enabled = true;
         //_rigidbody.isKinematic = false;
+        _rigidbody.velocity = Vector3.zero;
         transform.position = _home_pos;
         transform.rotation = _home_rot;
         logger.stop_task_timer();

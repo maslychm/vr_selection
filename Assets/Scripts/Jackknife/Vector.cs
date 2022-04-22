@@ -1,19 +1,19 @@
 /**
  * Copyright 2017 the University of Central Florida Research Foundation, Inc.
  * All rights reserved.
- * 
+ *
  *     Eugene M. Taranta II <etaranta@gmail.com>
  *     Amirreza Samiei <samiei@knights.ucf.edu>
  *     Mehran Maghoumi <mehran@cs.ucf.edu>
  *     Pooya Khaloo <pooya@cs.ucf.edu>
  *     Corey R. Pittman <cpittman@knights.ucf.edu>
  *     Joseph J. LaViola Jr. <jjl@cs.ucf.edu>
- * 
+ *
  * Subject to the terms and conditions of the Florida Public Educational
- * Institution non-exclusive software license, this software is distributed 
- * under a non-exclusive, royalty-free, non-sublicensable, non-commercial, 
+ * Institution non-exclusive software license, this software is distributed
+ * under a non-exclusive, royalty-free, non-sublicensable, non-commercial,
  * non-exclusive, academic research license, and is distributed without warranty
- * of any kind express or implied. 
+ * of any kind express or implied.
  *
  * The Florida Public Educational Institution non-exclusive software license
  * is located at <https://github.com/ISUE/Jackknife/blob/master/LICENSE>.
@@ -21,8 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Jackknife
 {
@@ -30,6 +28,7 @@ namespace Jackknife
      * This class is a wrapper around the std::vector class that
      * provides some mathematics support for points and vectors.
      */
+
     public class Vector : IEquatable<Vector>, ICloneable
     {
         public List<double> Data { get; set; }
@@ -37,6 +36,7 @@ namespace Jackknife
         /**
          * Return component count.
          */
+
         public int Size
         {
             get
@@ -48,12 +48,16 @@ namespace Jackknife
         /**
         * Create an uninitialized m-component vector.
         */
-        public Vector(int m) : this(0, m) { }
+
+        public Vector(int m) : this(0, m)
+        {
+        }
 
         /**
          * Initialize an m-component vector, setting each
          * component to a constant value.
          */
+
         public Vector(double constant, int m)
         {
             Data = new List<double>();
@@ -65,6 +69,7 @@ namespace Jackknife
         /**
          * Initialize a new component as a copy of another vector.
          */
+
         public Vector(List<double> other)
         {
             int m = other.Count;
@@ -79,6 +84,7 @@ namespace Jackknife
          * Interpolate between two vectors, where 0 <= t <= 1,
          * t = 0 = a, and t = 1 = b.
          */
+
         public Vector(Vector a, Vector b, double t)
         {
             int m = a.Data.Count;
@@ -99,6 +105,7 @@ namespace Jackknife
         /**
          * Make the vector easily indexable.
          */
+
         public double this[int index]
         {
             get
@@ -115,6 +122,7 @@ namespace Jackknife
         /**
          * Assign each component to a constant.
          */
+
         public void Set(double rhs)
         {
             for (int i = 0; i < Size; i++)
@@ -204,6 +212,7 @@ namespace Jackknife
         /**
          * Euclidean distance squared.
          */
+
         public double L2Norm2(Vector other)
         {
             double ret = 0;
@@ -220,6 +229,7 @@ namespace Jackknife
         /**
          * Euclidean distance.
          */
+
         public double L2Norm(Vector other)
         {
             return Math.Sqrt(L2Norm2(other));
@@ -299,6 +309,40 @@ namespace Jackknife
         public object Clone()
         {
             return new Vector(this.Data);
+        }
+
+        /**
+         * Store component-wise minimum of the two
+         */
+
+        public void Minimum(Vector other)
+        {
+            for (int ii = 0;
+                ii < this.Size;
+                ii++)
+            {
+                if (other.Data[ii] < this.Data[ii])
+                {
+                    this.Data[ii] = other.Data[ii];
+                }
+            }
+        }
+
+        /**
+         * Store the component-wise maximum of the two
+         */
+
+        public void Maximum(Vector other)
+        {
+            for (int ii = 0;
+                ii < this.Size;
+                ii++)
+            {
+                if (other.Data[ii] > this.Data[ii])
+                {
+                    this.Data[ii] = other.Data[ii];
+                }
+            }
         }
     }
 }

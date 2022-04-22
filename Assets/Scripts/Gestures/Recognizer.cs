@@ -65,8 +65,6 @@ namespace Gestures
                     gestureBufferTrajectory[0],
                     gestureBufferTrajectory[gestureBufferTrajectory.Count - 1]);
 
-                //print($"{r.startPt}");
-
                 SelectionEvents.DirectionSelection.Invoke(r);
             }
             else
@@ -89,11 +87,13 @@ namespace Gestures
 
                 //SelectionEvents.FilterSelection.Invoke(classifiedGestureName);
 
+                Mathematics.BoundingBox(gestureBufferTrajectory, out Vector minPoint, out Vector maxPoint);
+
                 RecognitionResult r = RecognizerUtils.constructRecognitionResult(
                     classifiedGestureId,
                     classifiedGestureName,
-                    gestureBufferTrajectory[0],
-                    gestureBufferTrajectory[gestureBufferTrajectory.Count - 1]);
+                    minPoint,
+                    maxPoint);
 
                 SelectionEvents.FilterSelection.Invoke(r);
 

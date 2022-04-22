@@ -1,19 +1,19 @@
 /**
  * Copyright 2017 the University of Central Florida Research Foundation, Inc.
  * All rights reserved.
- * 
+ *
  *     Eugene M. Taranta II <etaranta@gmail.com>
  *     Amirreza Samiei <samiei@knights.ucf.edu>
  *     Mehran Maghoumi <mehran@cs.ucf.edu>
  *     Pooya Khaloo <pooya@cs.ucf.edu>
  *     Corey R. Pittman <cpittman@knights.ucf.edu>
  *     Joseph J. LaViola Jr. <jjl@cs.ucf.edu>
- * 
+ *
  * Subject to the terms and conditions of the Florida Public Educational
- * Institution non-exclusive software license, this software is distributed 
- * under a non-exclusive, royalty-free, non-sublicensable, non-commercial, 
+ * Institution non-exclusive software license, this software is distributed
+ * under a non-exclusive, royalty-free, non-sublicensable, non-commercial,
  * non-exclusive, academic research license, and is distributed without warranty
- * of any kind express or implied. 
+ * of any kind express or implied.
  *
  * The Florida Public Educational Institution non-exclusive software license
  * is located at <https://github.com/ISUE/Jackknife/blob/master/LICENSE>.
@@ -21,16 +21,31 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Jackknife
 {
     public class Mathematics
     {
+        public static void BoundingBox(
+            List<Vector> trajectory,
+            out Vector min_point,
+            out Vector max_point
+            )
+        {
+            min_point = (Vector)trajectory[0].Clone();
+            max_point = (Vector)trajectory[0].Clone();
+
+            for (int ii = 1; ii < trajectory.Count; ii++)
+            {
+                min_point.Minimum(trajectory[ii]);
+                max_point.Maximum(trajectory[ii]);
+            }
+        }
+
         /**
          * Component-wise z-score normalize each point of a time series.
          */
+
         public static void ZNormalize(List<Vector> points)
         {
             int n = points.Count;
@@ -71,6 +86,7 @@ namespace Jackknife
          * through the m-dimensional space, where m is the number of
          * components per point.
          */
+
         public static double PathLength(List<Vector> points)
         {
             double ret = 0;
@@ -86,6 +102,7 @@ namespace Jackknife
          * resampling, set variance to zero. To perform stochastic resampling, set
          * variance greater than zero.
          */
+
         public static List<Vector> Resample(List<Vector> points, int n, double variance = 0)
         {
             Random rnd = new Random();
@@ -190,6 +207,7 @@ namespace Jackknife
          * Proceedings of the 29th Annual Symposium on User Interface Software and Technology
          * 2016
          */
+
         public static List<Vector> GPSR(List<Vector> points, int n, double variance, int removeCnt)
         {
             List<Vector> resampled = Resample(points, n + removeCnt, variance);

@@ -48,6 +48,8 @@ namespace Gestures
             ResetGestureTrajectoryBufferValues();
 
             InitLineRenderers();
+
+            playerHmdTransformAtGestureBegin = rotationInvarianceTransform;
         }
 
         public void FixedUpdate()
@@ -209,7 +211,7 @@ namespace Gestures
         private Vector GetCurrentControllersPositionAsJKVectorInHMDCoords()
         {
             //Vector3 leftInHMD = playerHmdTransformAtGestureBegin.InverseTransformVector(leftHandTrajectory[lastTrajectoryFrameIdx - 1]);
-            Vector3 rightInHMD = playerHmdTransformAtGestureBegin.InverseTransformVector(rightHandTrajectory[lastTrajectoryFrameIdx - 1]);
+            Vector3 rightInHMD = playerHmdTransformAtGestureBegin.InverseTransformPoint(rightHandTrajectory[lastTrajectoryFrameIdx - 1]);
 
             if (rightHand == null)
             {

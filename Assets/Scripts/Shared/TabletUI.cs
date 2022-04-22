@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TabletUI : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer tabletBodyMesh;
     [SerializeField] private TMP_Text tabletText;
     [SerializeField] private int maxLines = 5;
 
@@ -15,6 +16,14 @@ public class TabletUI : MonoBehaviour
 
         if (tabletText == null)
             tabletText = GetComponentInChildren<TMP_Text>();
+        if (tabletBodyMesh == null)
+            tabletBodyMesh = GetComponentInChildren<MeshRenderer>();
+    }
+
+    public void SetTabletActive(bool state)
+    {
+        tabletBodyMesh.enabled = state;
+        tabletText.enabled = state;
     }
 
     public void UpdateText(string str)

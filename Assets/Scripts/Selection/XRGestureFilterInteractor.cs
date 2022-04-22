@@ -18,7 +18,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     [SerializeField] private Transform attachTransform;
 
-    [SerializeField] private GameObject dirRefCylinder;
+    [SerializeField] private GameObject reticle;
 
     [Header("Gesture Direction technique-related")]
     [SerializeField] private GameObject handDebugPlane;
@@ -38,7 +38,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
     private GameObject selectedObject;
     private Vector3 defaultFlashlightScale;
 
-    private bool debug = false;
+    public bool debug = false;
 
     public void Start()
     {
@@ -58,6 +58,9 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
         SelectionEvents.FilterSelection.AddListener(SelectObjectOfType);
         SelectionEvents.DirectionSelection.AddListener(SelectObjectInDirection);
+
+        if (tabletUI)
+            tabletUI.SetTabletActive(debug);
     }
 
     private void Update()
@@ -136,22 +139,32 @@ public class XRGestureFilterInteractor : MonoBehaviour
         }
 
         dprint($"FILTERING FOR {r.gestureName}");
+        dprint($"BB {r.startPt}, {r.endPt}");
 
         Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
-        Vector3 cylinderInHMD = hmdTransform.InverseTransformPoint(dirRefCylinder.transform.position);
-        Vector3 uproj = gestureCenterPoint - cylinderInHMD;
+        Vector3 reticleInHMD = hmdTransform.InverseTransformPoint(reticle.transform.position);
+        Vector3 uproj = gestureCenterPoint - reticleInHMD;
 
-        var targetX = uproj.x;
-        var targetY = uproj.y - 1;
+        dprint($"center: {gestureCenterPoint}");
+        dprint($"reticle in HMD: {reticleInHMD}");
+        dprint($"uproj: {uproj}");
 
-        targetX = Mathf.Sign(targetX) * .7f;
-        targetY = Mathf.Sign(targetY) * .7f;
-
+        /* Four quadrants
+         *
+        var targetX = Mathf.Sign(uproj.x);
+        var targetY = Mathf.Sign(uproj.y);
         var vec = new Vector3(targetX, targetY, 0);
+        */
+
+        var vec = new Vector3(uproj.x, uproj.y, 0);
+
         vec.Normalize();
+        dprint($"dir {vec}");
+
+        if (!isHighlighting || highlightedObjectsByType[r.gestureName].Count == 0)
+            return;
 
         selectedObject = FindObjectWithMostProjectionOverlap(vec, highlightedObjectsByType[r.gestureName]);
-        dprint($"dir{vec}");
 
         ShrinkFlashlight();
 
@@ -165,13 +178,14 @@ public class XRGestureFilterInteractor : MonoBehaviour
         if (!isHighlighting || allHighlightedObjects.Count == 0)
             return;
 
-        Vector3 unprojectedDirection = (r.endPt - r.startPt).normalized;
-        Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
-        Vector3 planeNormal = (gestureCenterPoint - hmdTransform.position).normalized;
-        Vector3 projectedDirection = Vector3.ProjectOnPlane(unprojectedDirection, planeNormal);
-        //projectedDirection.Normalize();
+        Vector3 unprojectedDirection = r.endPt - r.startPt;
+        unprojectedDirection.z = 0f;
+        unprojectedDirection.Normalize();
 
-        selectedObject = FindObjectWithMostProjectionOverlap(projectedDirection, allHighlightedObjects);
+        tabletUI.WriteLine($"st: {r.startPt}, en: {r.endPt}");
+        tabletUI.WriteLine($"unproj: {unprojectedDirection}");
+
+        selectedObject = FindObjectWithMostProjectionOverlap(unprojectedDirection, allHighlightedObjects);
         ShrinkFlashlight();
         PickupObject(selectedObject);
         dprint($"selected {selectedObject.name}");
@@ -201,16 +215,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
                 bestObject.obj = o;
                 bestObject.score = dot;
             }
-
-            // debug
-            //tabletUI.WriteLine($"{o.tag} dir: {objectPositionInFlashlightCoords}, target: {direction}, dot: {dot}");
-            //directionDifferences.Add((o, dot));
-            //tabletUI.WriteLine($"{o.tag}, {dot}");
-            //dprint($"{o.tag}, {dot}");
         }
-
-        //tabletUI.WriteLine($"best: {bestObject.obj.tag}, {bestObject.score}");
-
         return bestObject.obj;
     }
 

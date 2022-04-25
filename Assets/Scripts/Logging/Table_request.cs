@@ -5,9 +5,6 @@ using UnityEngine;
 public class Table_request : MonoBehaviour
 {
     public List<GameObject> objects = new List<GameObject>(); //Objects in the space.
-    private List<Renderer> renderers = new List<Renderer>();
-    private Renderer renderer; //Renderer
-    private Mesh _mesh;
     public GameObject expectedObject;
     private GameObject expectedObjectCopy;
     private List<string> interactableTags = new List<string>() { "cube", "sphere", "star", "pyramid", "cylinder", "infinity" };
@@ -38,7 +35,6 @@ public class Table_request : MonoBehaviour
 
     private void Start()
     {
-        _mesh = GetComponent<MeshFilter>().mesh;
         logger = GameObject.Find("XR_Logging_Obj").GetComponent<Logging_XR>();
         StartExperiment();
     }
@@ -53,19 +49,21 @@ public class Table_request : MonoBehaviour
         foreach (var o in objects)
             o.GetComponent<Object_collected>().ResetGameObject();
 
+        logger.ResetLogger();
+
         objects_collected = 0;
-        expectedObject = objects[objects_collected]; //SelectRandomExpectedObject();
+        expectedObject = objects[objects_collected];
         SetOwnRenderer(expectedObject);
-        logger.ResetStatistics();
+        logger.StartObjectTrackingTimer();
     }
 
-    private void CheckExperiment()
+    private void AdvanceRequiredObject()
     {
         Debug.Log("Num. of world objects " + objects.Count + " Collected items: " + objects_collected);
 
         if (objects.Count != objects_collected)
         {
-            expectedObject = objects[objects_collected]; // SelectRandomExpectedObject();
+            expectedObject = objects[objects_collected];
             SetOwnRenderer(expectedObject);
         }
         else
@@ -74,11 +72,6 @@ public class Table_request : MonoBehaviour
             logger.SaveToFile();
             Debug.Log("Experiment Over! Statistics collected and saved.");
         }
-    }
-
-    private GameObject SelectRandomExpectedObject()
-    {
-        return objects[UnityEngine.Random.Range(0, objects.Count)];
     }
 
     //Sets the renderer of the object presented to the user.
@@ -99,17 +92,16 @@ public class Table_request : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        //Debug.Log($"Table triggered by: {collider.tag}");
-        //Debug.Log(interactableTags.Contains(collider.tag));
-        //Debug.Log(expectedObject.CompareTag(collider.tag));
-
         // If tag is among possible and is expected for selection - record success
         if (interactableTags.Contains(collider.tag) && expectedObject.CompareTag(collider.tag))
         {
-            //Debug.Log("Collected Object");
             objects_collected++;
-            CheckExperiment();
-            collider.gameObject.GetComponent<Object_collected>().StopCountdownAndFreeze();
+            AdvanceRequiredObject();
+            collider.gameObject.GetComponent<Object_collected>().MoveOutsideReach();
+            
+            // Save obj completion time, reset time tracker
+            logger.StopTaskTimer();
+            logger.StartObjectTrackingTimer();
         }
         else
         {

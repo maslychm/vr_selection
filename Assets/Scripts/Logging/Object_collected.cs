@@ -13,9 +13,12 @@ public class Object_collected : MonoBehaviour
 
     private void Start()
     {
-        logger = GameObject.Find("XR_Logging_Obj").GetComponent<Logging_XR>();
+        var logObj = GameObject.Find("XR_Logging_Obj");
+        if (logObj != null)
+            logger = logObj.GetComponent<Logging_XR>();
         if (logger == null)
             Debug.LogWarning("No Logger found.");
+
         _home_pos = transform.position;
         _home_rot = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();

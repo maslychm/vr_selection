@@ -4334,7 +4334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1868ec0470d0f254897d389bbc61c4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useGestureDirection: 1
+  useGestureDirection: 0
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   flashlightHighlighter: {fileID: 2028889912}
   attachTransform: {fileID: 1038723866}
@@ -6394,8 +6394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e427b0422d978b44ebe28534a75aa577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Username: ryan
-  techName: directions
+  Username: jake
+  techName: shapes
   leftTriggerAction: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   rightTriggerAction: {fileID: 3560761125969204472, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &1875503794

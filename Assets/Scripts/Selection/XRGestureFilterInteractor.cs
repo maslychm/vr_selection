@@ -26,6 +26,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
     [SerializeField] private GameObject flashlightCenterCone;
 
     [SerializeField] private Vector3 debugPlaneOffset;
+    // Head hmd
     [SerializeField] private Transform hmdTransform;
 
     [Header("Debugging and UI")]
@@ -37,6 +38,8 @@ public class XRGestureFilterInteractor : MonoBehaviour
     private bool isHighlighting = false;
     private GameObject selectedObject;
     private Vector3 defaultFlashlightScale;
+
+    public Vector3 maxFlashlightScale;
 
     public bool debug = false;
 
@@ -128,6 +131,16 @@ public class XRGestureFilterInteractor : MonoBehaviour
         {
             kv.Value.Clear();
         }
+    }
+
+    private void UpdateObjectScale()
+    {
+        // transform.position 
+        // maxFlashlightScale 
+        
+        float distHand = Vector3.Distance(hmdTransform.position, transform.position);
+        flashlightHighlighter.transform.localScale = Mathf.Abs(distHand) * maxFlashlightScale;
+
     }
 
     private void SelectObjectOfType(RecognitionResult r)

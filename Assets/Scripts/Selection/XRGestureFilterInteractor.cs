@@ -41,6 +41,8 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     public Vector3 maxFlashlightScale;
 
+    // Define Vector3 of shoulder offset
+
     public bool debug = false;
 
     public void Start()
@@ -76,6 +78,11 @@ public class XRGestureFilterInteractor : MonoBehaviour
         if (flaslightActionReference.action.WasPressedThisFrame())
         {
             ExtendFlashlight();
+        }
+    
+        if (flaslightActionReference.action.IsPressed())
+        {
+            UpdateObjectScale();
         }
 
         if (flaslightActionReference.action.WasReleasedThisFrame())
@@ -137,7 +144,9 @@ public class XRGestureFilterInteractor : MonoBehaviour
     {
         // transform.position 
         // maxFlashlightScale 
+        // Make sure not enable when button is not pressed
         
+        // Add shoulder offset to hmdTransform  v
         float distHand = Vector3.Distance(hmdTransform.position, transform.position);
         flashlightHighlighter.transform.localScale = Mathf.Abs(distHand) * maxFlashlightScale;
 

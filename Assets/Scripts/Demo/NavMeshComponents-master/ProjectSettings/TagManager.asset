@@ -3,24 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Floor
-  - GestureFilter
-  - cube
-  - sphere
-  - infinity
-  - star
-  - pyramid
-  - cylinder
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - Player
-  - Enemy
+  - 
+  - 
   - 
   - 
   - 

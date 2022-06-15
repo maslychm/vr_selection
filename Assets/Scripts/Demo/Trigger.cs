@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Trigger : MonoBehaviour
@@ -7,22 +5,22 @@ public class Trigger : MonoBehaviour
     public int health = 3;
     public bool isDead = false;
 
-    void Update()
+    private void Update()
     {
         if (health == 0 && !isDead)
         {
             // End screen or something, player loses
-            print("end");
+            print("GAME END");
             isDead = true;
+
+            // TODO actually end game here
         }
     }
 
     public void OnTriggerEnter(Collider enemy)
     {
-        print(enemy.name);
-
         switch (enemy.tag)
-        { 
+        {
             case "enemy":
                 HealthDamage();
                 break;

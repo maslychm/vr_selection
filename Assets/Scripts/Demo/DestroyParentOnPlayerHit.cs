@@ -32,48 +32,20 @@ public class DestroyParentOnPlayerHit : MonoBehaviour
                 break;
 
             case "star":
-                SameStar();
+                if (gameObject.tag.Contains("star"))
+                    DestroyEnemyParent();
                 break;
+
             case "pyramid":
-                SamePyramid();
+                if (gameObject.tag.Contains("pyramid"))
+                    DestroyEnemyParent();
                 break;
+
             case "sphere":
-                SameSphere();
+                if (gameObject.tag.Contains("shpere"))
+                    DestroyEnemyParent();
                 break;
             
-            
-        }
-    }
-
-    public void SameCube()
-    {
-        if (gameObject.tag.Contains("cube"))
-        {
-            DestroyEnemyParent();
-        }
-    }
-
-    public void SameStar()
-    {
-        if (gameObject.tag.Contains("star"))
-        {
-            DestroyEnemyParent();
-        }
-    }
-
-    public void SameSphere()
-    {
-        if (gameObject.tag.Contains("sphere"))
-        {
-            DestroyEnemyParent();
-        }
-    }
-
-    public void SamePyramid()
-    {
-        if (gameObject.tag.Contains("pyramid"))
-        {
-            DestroyEnemyParent();
         }
     }
 

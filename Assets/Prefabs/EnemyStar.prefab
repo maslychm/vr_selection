@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3552705471902252347}
   m_Layer: 0
   m_Name: Star
-  m_TagString: enemy
+  m_TagString: enemystar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

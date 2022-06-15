@@ -27,6 +27,7 @@ public class Object_collected : MonoBehaviour
     //Reset to original position
     public void ResetGameObject()
     {
+        print($"{_rigidbody.velocity}");
         _rigidbody.velocity = Vector3.zero;
         transform.position = _home_pos;
         transform.rotation = _home_rot;

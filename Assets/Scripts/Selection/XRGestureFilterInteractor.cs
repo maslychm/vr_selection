@@ -26,6 +26,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
     [SerializeField] private GameObject flashlightCenterCone;
 
     [SerializeField] private Vector3 debugPlaneOffset;
+
     // Head hmd
     [SerializeField] private Transform hmdTransform;
 
@@ -79,7 +80,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
         {
             ExtendFlashlight();
         }
-    
+
         if (flaslightActionReference.action.IsPressed())
         {
             UpdateObjectScale();
@@ -142,17 +143,16 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private void UpdateObjectScale()
     {
-        // transform.position 
-        // maxFlashlightScale 
+        // transform.position
+        // maxFlashlightScale
         // Make sure not enable when button is not pressed
-        
+
         // Shoulder offset to hmdTransform
         // These values are most likely wrong. Change after testing
-        shoulderOffset = new Vector3(.4, .6, .2);
+        shoulderOffset = new Vector3(.4f, .6f, .2f);
 
         float distHand = Vector3.Distance((hmdTransform.position - shoulderOffset), transform.position);
-        flashlightHighlighter.transform.localScale = (1 - Mathf.Abs(distHand) * 1.66667) * maxFlashlightScale;
-
+        flashlightHighlighter.transform.localScale = (1 - Mathf.Abs(distHand) * 1.66667f) * maxFlashlightScale;
     }
 
     private void SelectObjectOfType(RecognitionResult r)

@@ -38,12 +38,18 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private bool isHighlighting = false;
     private GameObject selectedObject;
-    private Vector3 defaultFlashlightScale;
 
-    public Vector3 maxFlashlightScale;
+    [Header("Flashlight Scaling")]
+    [SerializeField] private Vector3 defaultFlashlightScale;
+
+    [Header("Dynamic Scaling")]
+    [SerializeField] private bool scaleWithDistance;
 
     public Vector3 shoulderOffset;
 
+    public Vector3 maxFlashlightScale;
+
+    [Header("Other")]
     public bool debug = false;
 
     public void Start()
@@ -143,16 +149,17 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private void UpdateObjectScale()
     {
-        // transform.position
-        // maxFlashlightScale
-        // Make sure not enable when button is not pressed
+        if (!scaleWithDistance)
+            return;
 
-        // Shoulder offset to hmdTransform
-        // These values are most likely wrong. Change after testing
-        shoulderOffset = new Vector3(.4f, .6f, .2f);
+        var shoulderInWorld = hmdTransform.TransformPoint(shoulderOffset);
 
-        float distHand = Vector3.Distance((hmdTransform.position - shoulderOffset), transform.position);
+        print($"head: {hmdTransform.position} shoulder: {shoulderInWorld}");
+
+        float distHand = Vector3.Distance((hmdTransform.position - shoulderInWorld), transform.position);
         flashlightHighlighter.transform.localScale = (1 - Mathf.Abs(distHand) * 1.66667f) * maxFlashlightScale;
+
+        print($"distHand: {distHand}");
     }
 
     private void SelectObjectOfType(RecognitionResult r)

@@ -48,7 +48,6 @@ public class Table_request : MonoBehaviour
         //Reset all objects and their positions.
         foreach (var o in objects)
         {
-            print($"{o.name}");
             o.GetComponent<Object_collected>().ResetGameObject();
         }
 

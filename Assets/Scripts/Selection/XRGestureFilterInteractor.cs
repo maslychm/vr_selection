@@ -52,6 +52,9 @@ public class XRGestureFilterInteractor : MonoBehaviour
     [Header("Other")]
     public bool debug = false;
 
+    public bool addForceOnObjectDetach = false;
+    public float objPushForce = 20.0f;
+
     public void Start()
     {
         highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
@@ -113,7 +116,14 @@ public class XRGestureFilterInteractor : MonoBehaviour
         selectedObject.transform.parent = null;
         selectedObject.GetComponent<Rigidbody>().useGravity = true;
         selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-        selectedObject = null;
+
+        if (addForceOnObjectDetach)
+        {
+            Vector3 applyForce = selectedObject.transform.forward * objPushForce;
+            selectedObject.GetComponent<Rigidbody>().AddForce(applyForce, ForceMode.Impulse);
+        }
+
+        selectedObject = null;        
     }
 
     private void PickupObject(GameObject o)

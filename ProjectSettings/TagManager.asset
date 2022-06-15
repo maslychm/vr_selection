@@ -12,6 +12,11 @@ TagManager:
   - star
   - pyramid
   - cylinder
+  - enemy
+  - enemycube
+  - enemyshpere
+  - enemypyramid
+  - enemystar
   layers:
   - Default
   - TransparentFX

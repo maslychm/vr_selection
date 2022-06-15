@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
@@ -95,7 +96,7 @@ public class EnemyAI : MonoBehaviour
             // Attack code here
             
 
-            DestroyEnemy();
+            // DestroyEnemy();
 
             // alreadyAttacked = true;
             // Invoke(nameof(ResetAttack));
@@ -111,17 +112,16 @@ public class EnemyAI : MonoBehaviour
     {
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        // if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
 
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-    }
+    // private void DestroyEnemyParent()
+    // {
+    //     Destroy(gameObject.transform.parent.gameObject);
+    // }
 
     private void Temp()
     {
         
     }
-
 }

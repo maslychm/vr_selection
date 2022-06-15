@@ -17,16 +17,20 @@ public class DestroyParentOnPlayerHit : MonoBehaviour
         // string otherTag = "as";
         // if (otherTag.Lower().Contains())
 
+        print($"collided with: {other.tag}");
+
         switch (other.tag)
         { 
             case "Player":
                 DestroyEnemyParent();
                 break;
+
             case "cube":
                 print("RUN");
                 if (gameObject.tag.Contains("cube"))
                     DestroyEnemyParent();
                 break;
+
             case "star":
                 SameStar();
                 break;

@@ -11,14 +11,16 @@ public class EnemyAI : MonoBehaviour
 
     public float health;
 
-    // Patrolling
-    //public Vector3 walkPoint;
+    /*
+    Patrolling
+    public Vector3 walkPoint;
 
-    // private bool walkPointSet;
-    // public float walkPointRange;
+    private bool walkPointSet;
+    public float walkPointRange;
 
-    // Attacking
-    // public float timeBetweenAttacks;
+    Attacking
+    public float timeBetweenAttacks;
+    */
 
     private bool alreadyAttacked;
 
@@ -41,38 +43,40 @@ public class EnemyAI : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         // if (!playerInSightRange && !playerInAttackRange) Patrolling();
-        // if (playerInSightRange && !playerInAttackRange) 
+        // if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         ChasePlayer();
         if (playerInAttackRange) AttackPlayer();
     }
 
-    // private void Patrolling()
-    // {
-    //     if (!walkPointSet) SearchWalkPoint();
+    /*
+    private void Patrolling()
+    {
+        if (!walkPointSet) SearchWalkPoint();
 
-    //     if (walkPointSet)
-    //         agent.SetDestination(walkPoint);
+        if (walkPointSet)
+            agent.SetDestination(walkPoint);
 
-    //     Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-    //     // Walkpoint reached
-    //     if (distanceToWalkPoint.magnitude < 1f)
-    //         walkPointSet = false;
-    // }
+        // Walkpoint reached
+        if (distanceToWalkPoint.magnitude < 1f)
+            walkPointSet = false;
+    }
 
-    // private void SearchWalkPoint()
-    // {
-    //     // Calculate random point in range
-    //     float randomZ = Random.Range(-walkPointRange, walkPointRange);
-    //     float randomX = Random.Range(-walkPointRange, walkPointRange);
+    private void SearchWalkPoint()
+    {
+        // Calculate random point in range
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-    //     walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-    //     if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-    //     {
-    //         //walkPoint = true;
-    //     }
-    // }
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        {
+            //walkPoint = true;
+        }
+    }
+    */
 
     private void ChasePlayer()
     {

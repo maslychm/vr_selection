@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Object_collected : MonoBehaviour
 {
@@ -13,21 +14,28 @@ public class Object_collected : MonoBehaviour
 
     private void Start()
     {
-        var logObj = GameObject.Find("XR_Logging_Obj");
-        if (logObj != null)
-            logger = logObj.GetComponent<Logging_XR>();
-        if (logger == null)
-            Debug.LogWarning("No Logger found.");
-
         _home_pos = transform.position;
         _home_rot = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
+
+        // Don't need the object collection stuff if we're in demo
+        // Workaround for bypassing making new prefabs
+
+        if (SceneManager.GetActiveScene().name.Contains("Demo"))
+            return;
+
+        var logObj = GameObject.Find("XR_Logging_Obj");
+
+        if (logObj != null)
+            logger = logObj.GetComponent<Logging_XR>();
+
+        if (logger == null)
+            Debug.LogWarning("No Logger found.");
     }
 
     //Reset to original position
     public void ResetGameObject()
     {
-        print($"{_rigidbody.velocity}");
         _rigidbody.velocity = Vector3.zero;
         transform.position = _home_pos;
         transform.rotation = _home_rot;

@@ -46,7 +46,9 @@ public class Trigger : MonoBehaviour
     {
         while (!isDead)
         {
-            yield return new WaitForSeconds(spawnEverySeconds / 1.01f);
+            yield return new WaitForSeconds(spawnEverySeconds);
+
+            spawnEverySeconds /= 1.03f;
 
             try
             {
@@ -64,7 +66,7 @@ public class Trigger : MonoBehaviour
 
     private void SpawnRandomEnemy()
     {
-        var randomEnemy = enemies[Random.Range(0, enemies.Count - 1)];
+        var randomEnemy = enemies[Random.Range(0, enemies.Count)];
 
         // extents:
         // x (-12, 12)

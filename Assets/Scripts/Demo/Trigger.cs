@@ -17,13 +17,12 @@ public class Trigger : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider enemy)
+    public void OnTriggerEnter(Collider other)
     {
-        switch (enemy.tag)
+        if (other.tag.Contains("enemy"))
         {
-            case "enemy":
-                HealthDamage();
-                break;
+            //print($"{other.tag} hit PLAYER");
+            HealthDamage();
         }
     }
 

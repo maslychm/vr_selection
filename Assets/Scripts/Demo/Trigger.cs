@@ -10,7 +10,7 @@ public class Trigger : MonoBehaviour
     [Header("Enemy spawning")]
     public List<GameObject> enemies;
 
-    public float spawnEverySeconds = 2;
+    public float spawnEverySeconds = 2f;
 
     public GameObject endScreen;
 
@@ -46,7 +46,7 @@ public class Trigger : MonoBehaviour
     {
         while (!isDead)
         {
-            yield return new WaitForSeconds(spawnEverySeconds);
+            yield return new WaitForSeconds(spawnEverySeconds / 1.01f);
 
             try
             {

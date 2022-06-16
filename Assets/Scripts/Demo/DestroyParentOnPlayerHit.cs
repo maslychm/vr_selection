@@ -8,6 +8,13 @@ public class DestroyParentOnPlayerHit : MonoBehaviour
         Destroy(gameObject.transform.parent.gameObject);
     }
 
+    public void EndGameDeathAfterDelay()
+    {
+        //print("want to die");
+        float delay = Random.Range(2, 4);
+        Invoke(nameof(DestroyParentObject), delay);
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         //print($"{tag} hit by {other.tag}");
@@ -18,7 +25,7 @@ public class DestroyParentOnPlayerHit : MonoBehaviour
             return;
         }
 
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             DestroyParentObject();
             return;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5189405285082119193}
   m_Layer: 0
   m_Name: EnemyPyramid
-  m_TagString: enemy
+  m_TagString: enemypyramid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

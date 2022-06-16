@@ -14,9 +14,9 @@ TagManager:
   - cylinder
   - enemy
   - enemycube
-  - enemyshpere
   - enemypyramid
   - enemystar
+  - enemysphere
   layers:
   - Default
   - TransparentFX

@@ -560,7 +560,7 @@ MonoBehaviour:
   - {fileID: 6342020465923099068, guid: 22ea0b529958b974e8927e4748764362, type: 3}
   - {fileID: 6342020465923099068, guid: 5d62cfa7d08c8f74d907e012ca255af4, type: 3}
   - {fileID: 6342020465923099068, guid: 93053f50470acb5488b8ccef8d11ecd7, type: 3}
-  spawnEverySeconds: 5
+  spawnEverySeconds: 10
   endScreen: {fileID: 2099137220}
 --- !u!54 &116715843
 Rigidbody:

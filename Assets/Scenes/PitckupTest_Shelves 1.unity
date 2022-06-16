@@ -4511,10 +4511,12 @@ MonoBehaviour:
   hmdTransform: {fileID: 52258776}
   tabletUI: {fileID: 1422534499}
   defaultFlashlightScale: {x: 150, y: 150, z: 560}
-  scaleWithDistance: 0
+  scaleWithDistance: 1
   shoulderOffset: {x: -0.2, y: -0.2, z: -0.05}
   maxFlashlightScale: {x: 150, y: 150, z: 560}
   debug: 0
+  addForceOnObjectDetach: 0
+  objPushForce: 20
 --- !u!1 &1293807992
 GameObject:
   m_ObjectHideFlags: 0

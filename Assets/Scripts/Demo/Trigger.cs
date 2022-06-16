@@ -12,6 +12,8 @@ public class Trigger : MonoBehaviour
 
     public float spawnEverySeconds = 2;
 
+    public GameObject endScreen;
+
     private void Start()
     {
         StartCoroutine(KeepSpawningEnemies());
@@ -25,6 +27,10 @@ public class Trigger : MonoBehaviour
             isDead = true;
             print("GAME END");
             KillAllEnemies();
+
+            // Ending Game
+            endScreen.SetActive(true);
+            Invoke(nameof(ExitGame), 10);
         }
     }
 
@@ -83,5 +89,10 @@ public class Trigger : MonoBehaviour
     {
         // Add possible health damage affect
         health--;
+    }
+
+    private void ExitGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }

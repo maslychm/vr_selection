@@ -53,8 +53,13 @@ public class XRGestureFilterInteractor : MonoBehaviour
     public bool addForceOnObjectDetach = false;
     public float objPushForce = 20.0f;
 
+   
+    public MINIMAPInitial temp;
     public void Start()
     {
+
+        // temp = new MINIMAPInitial();
+
         highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
         allHighlightedObjects = new List<GameObject>();
         // Pre-populate for O(1) type access
@@ -80,7 +85,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private void ProcessInput()
     {
-        MINIMAPInitial temp = new MINIMAPInitial();
+        
         if (flaslightActionReference.action.WasPressedThisFrame())
         {
             ExtendFlashlight();
@@ -91,6 +96,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
         if (flaslightActionReference.action.IsPressed())
         {
             UpdateObjectScale();
+            temp.showMiniMap(true);
         }
 
         if (flaslightActionReference.action.WasReleasedThisFrame())

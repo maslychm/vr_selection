@@ -167,7 +167,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
         print($"head: {hmdTransform.position} shoulder: {shoulderInWorld}");
 
         float distHand = Vector3.Distance((hmdTransform.position - shoulderInWorld), transform.position);
-        flashlightHighlighter.transform.localScale = (1 - Mathf.Abs(distHand) * 1.66667f) * maxFlashlightScale;
+        flashlightHighlighter.transform.localScale = (Mathf.Abs(1 - Mathf.Abs(distHand)) * 1.66667f) * maxFlashlightScale;
 
         print($"distHand: {distHand}");
     }

@@ -18,8 +18,6 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     [SerializeField] private Transform attachTransform;
 
-    [SerializeField] private GameObject reticle;
-
     [Header("Gesture Direction technique-related")]
     [SerializeField] private GameObject handDebugPlane;
 
@@ -36,7 +34,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
     private Dictionary<string, List<GameObject>> highlightedObjectsByType;
     private List<GameObject> allHighlightedObjects;
 
-    private bool isHighlighting = false;
+    private static bool isHighlighting = false;
     private GameObject selectedObject;
 
     [Header("Flashlight Scaling")]
@@ -71,9 +69,6 @@ public class XRGestureFilterInteractor : MonoBehaviour
         ShrinkFlashlight();
         SetRecognizerMode();
 
-        SelectionEvents.FilterSelection.AddListener(SelectObjectOfType);
-        SelectionEvents.DirectionSelection.AddListener(SelectObjectInDirection);
-
         if (tabletUI)
             tabletUI.SetTabletActive(debug);
     }
@@ -85,9 +80,12 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private void ProcessInput()
     {
+        MINIMAPInitial temp = new MINIMAPInitial();
         if (flaslightActionReference.action.WasPressedThisFrame())
         {
             ExtendFlashlight();
+            temp.showMiniMap(true);
+            
         }
 
         if (flaslightActionReference.action.IsPressed())
@@ -97,6 +95,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
         if (flaslightActionReference.action.WasReleasedThisFrame())
         {
+            temp.closeMiniMap(true);
             ShrinkFlashlight();
             ReleaseSelectedObject();
         }
@@ -170,95 +169,6 @@ public class XRGestureFilterInteractor : MonoBehaviour
         flashlightHighlighter.transform.localScale = (1 - Mathf.Abs(distHand) * 1.66667f) * maxFlashlightScale;
 
         print($"distHand: {distHand}");
-    }
-
-    private void SelectObjectOfType(RecognitionResult r)
-    {
-        if (!isHighlighting || highlightedObjectsByType[r.gestureName].Count == 0)
-        {
-            dprint($"Not highlighting any {r.gestureName}");
-            return;
-        }
-
-        dprint($"FILTERING FOR {r.gestureName}");
-        dprint($"BB {r.startPt}, {r.endPt}");
-
-        Vector3 gestureCenterPoint = (r.startPt + r.endPt) / 2f;
-        Vector3 reticleInHMD = hmdTransform.InverseTransformPoint(reticle.transform.position);
-        Vector3 uproj = gestureCenterPoint - reticleInHMD;
-
-        dprint($"center: {gestureCenterPoint}");
-        dprint($"reticle in HMD: {reticleInHMD}");
-        dprint($"uproj: {uproj}");
-
-        /* Four quadrants
-         *
-        var targetX = Mathf.Sign(uproj.x);
-        var targetY = Mathf.Sign(uproj.y);
-        var vec = new Vector3(targetX, targetY, 0);
-        */
-
-        var vec = new Vector3(uproj.x, uproj.y, 0);
-
-        vec.Normalize();
-        dprint($"dir {vec}");
-
-        if (!isHighlighting || highlightedObjectsByType[r.gestureName].Count == 0)
-            return;
-
-        selectedObject = FindObjectWithMostProjectionOverlap(vec, highlightedObjectsByType[r.gestureName]);
-
-        ShrinkFlashlight();
-
-        dprint($"selected {selectedObject.name}");
-
-        PickupObject(selectedObject);
-    }
-
-    private void SelectObjectInDirection(RecognitionResult r)
-    {
-        if (!isHighlighting || allHighlightedObjects.Count == 0)
-            return;
-
-        Vector3 unprojectedDirection = r.endPt - r.startPt;
-        unprojectedDirection.z = 0f;
-        unprojectedDirection.Normalize();
-
-        tabletUI.WriteLine($"st: {r.startPt}, en: {r.endPt}");
-        tabletUI.WriteLine($"unproj: {unprojectedDirection}");
-
-        selectedObject = FindObjectWithMostProjectionOverlap(unprojectedDirection, allHighlightedObjects);
-        ShrinkFlashlight();
-        PickupObject(selectedObject);
-        dprint($"selected {selectedObject.name}");
-    }
-
-    private GameObject FindObjectWithMostProjectionOverlap(Vector3 direction, List<GameObject> selectFrom)
-    {
-        // pre-process direction to only leave X and Y data
-        direction.z = 0f;
-        direction.Normalize();
-
-        // For each object in the highlighted objects list, compute dot product between it's XY direction
-        // vector in the flashlight's coordinate system with the drawn direction
-        (GameObject obj, float score) bestObject = (null, -2f);
-
-        foreach (var o in selectFrom)
-        {
-            // highlighted object in flashlight's corrdinate system
-            var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
-            objectPositionInFlashlightCoords.z = 0f;
-            objectPositionInFlashlightCoords.Normalize();
-
-            // Dot product to measure alignment between passed direction and object's projected direction
-            var dot = Vector3.Dot(direction, objectPositionInFlashlightCoords);
-            if (dot > bestObject.score)
-            {
-                bestObject.obj = o;
-                bestObject.score = dot;
-            }
-        }
-        return bestObject.obj;
     }
 
     #region CALLABLE BY INTERACTABLES

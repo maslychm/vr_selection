@@ -123,7 +123,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
             selectedObject.GetComponent<Rigidbody>().AddForce(applyForce, ForceMode.Impulse);
         }
 
-        selectedObject = null;        
+        selectedObject = null;
     }
 
     private void PickupObject(GameObject o)
@@ -159,17 +159,24 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private void UpdateObjectScale()
     {
-        if (!scaleWithDistance)
+        if (!scaleWithDistance || selectedObject)
             return;
 
         var shoulderInWorld = hmdTransform.TransformPoint(shoulderOffset);
+        //print($"head: {hmdTransform.position} shoulder: {shoulderInWorld}");
 
-        print($"head: {hmdTransform.position} shoulder: {shoulderInWorld}");
+        float distHand = Vector3.Distance(shoulderInWorld, transform.position);
+        //print($"distHand={distHand}");
 
-        float distHand = Vector3.Distance((hmdTransform.position - shoulderInWorld), transform.position);
-        flashlightHighlighter.transform.localScale = (Mathf.Abs(1 - Mathf.Abs(distHand)) * 1.66667f) * maxFlashlightScale;
+        // Mykola: this distance ranges from .2 to .7 for me so adjusting the values below
+        // to bring (.2, .7) range into (0,1) range
+        distHand -= .2f;
+        distHand = Mathf.Clamp(distHand, 0f, 1f);
+        distHand *= 2;
 
-        print($"distHand: {distHand}");
+        var newFlashlightScale = Mathf.Abs(1 - distHand) * maxFlashlightScale;
+        newFlashlightScale.z = maxFlashlightScale.z;
+        flashlightHighlighter.transform.localScale = newFlashlightScale;
     }
 
     private void SelectObjectOfType(RecognitionResult r)

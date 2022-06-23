@@ -5588,22 +5588,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1247322971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1868ec0470d0f254897d389bbc61c4c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 69cab64587d18fa46b2faf93cad85845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   useGestureDirection: 0
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   flashlightHighlighter: {fileID: 1890717221}
   attachTransform: {fileID: 1769696372}
-  handDebugPlane: {fileID: 1854350242}
+  handDebugPlane: {fileID: 0}
   flashlightCenterCone: {fileID: 620979198}
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 52258776}
   tabletUI: {fileID: 1422534499}
-  defaultFlashlightScale: {x: 150, y: 150, z: 560}
+  defaultFlashlightScale: {x: 0, y: 0, z: 0}
   scaleWithDistance: 0
-  shoulderOffset: {x: -0.2, y: -0.2, z: -0.05}
-  maxFlashlightScale: {x: 150, y: 150, z: 560}
+  shoulderOffset: {x: 0, y: 0, z: 0}
+  maxFlashlightScale: {x: 0, y: 0, z: 0}
   debug: 0
   addForceOnObjectDetach: 0
   objPushForce: 20

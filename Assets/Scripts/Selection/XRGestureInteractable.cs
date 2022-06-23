@@ -5,7 +5,7 @@ using UnityEngine;
 public class XRGestureInteractable : MonoBehaviour
 {
     private XRGestureFilterInteractor gestureInteractor;
-
+    // grid selector inst
     [SerializeField] private Material hoverMaterial;
 
     private Material defaultMaterial;

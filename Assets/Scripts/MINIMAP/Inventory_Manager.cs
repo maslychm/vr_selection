@@ -26,15 +26,29 @@ public class Inventory_Manager : MonoBehaviour
         isFull = false;
         isEmpty = true;
         theStack = new Stack<GameObject>();
+
+        for (int i = 0; i < theInventory.transform.childCount; i++)
+        {
+            if (theInventory.transform.GetChild(i).GetComponent<Zone>() == null)
+                continue;
+
+            theStack.Push(theInventory.transform.GetChild(i).gameObject);
+
+
+        }
+
     }
+
+    // update with the function from the zone 
 
     // Update is called once per frame
     void Update()
     {
 
-        
-        for(int i = 0; i < theInventory.transform.GetChildCount(); i++)
+        for(int i = 0; i < theInventory.transform.childCount; i++)
         {
+            if (theInventory.transform.GetChild(i).GetComponent<Zone>() == null)
+                continue;
 
             if (theInventory.transform.GetChild(i).GetComponent<Zone>().ItemInZone == null)
             {
@@ -70,9 +84,14 @@ public class Inventory_Manager : MonoBehaviour
         return isEmpty;
     }
 
-    public Stack<GameObject> getAvailablePositions()
+
+    // get the next available position  
+    public GameObject getAvailablePositions()
     {
-        return this.theStack;
+        if(theStack.Count != 0)
+            return this.theStack.Pop();
+
+        return null;
     }
 
 }

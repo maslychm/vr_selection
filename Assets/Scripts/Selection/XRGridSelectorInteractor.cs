@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
  * This script must be attached to the hand which will be holding the flashlight
  */
 
+/// add the update here 
+
 public class XRGridSelectorInteractor : MonoBehaviour
 {
     [Header("Use gesture shape, or direction")]
@@ -33,7 +35,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
     [Header("Debugging and UI")]
     [SerializeField] private TabletUI tabletUI;
 
-    private Dictionary<string, List<GameObject>> highlightedObjectsByType;
+    //private Dictionary<string, List<GameObject>> highlightedObjectsByType;
     private List<GameObject> allHighlightedObjects;
 
     private static bool isHighlighting = false;
@@ -63,12 +65,19 @@ public class XRGridSelectorInteractor : MonoBehaviour
     // the second one (value) will be the game object that has the shape item component 
     Dictionary<GameObject, GameObject> origin_and_duplicate_registery;
 
+    // declare an extra dictionary to hold the item and its zone-that holds it 
+    // item is the key
+    Dictionary<GameObject, GameObject> zone_plus_its_item;
+
     public MINIMAPInitial temp;
     public void Start()
     {
 
         // initialize the dictionary 
         origin_and_duplicate_registery = new Dictionary<GameObject, GameObject>();
+
+        // initialize the dictionary for the zone and its items 
+        zone_plus_its_item = new Dictionary<GameObject, GameObject>();
 
         // duplicates and remove interactable 
         // plus adding the shapeItem component
@@ -87,14 +96,14 @@ public class XRGridSelectorInteractor : MonoBehaviour
         // linear time 
         // space efficient 
 
-        _DuplicationMethod2();
+        //_DuplicationMethod2();
 
         //---------------------------
-        highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
+        //highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
         allHighlightedObjects = new List<GameObject>();
         // Pre-populate for O(1) type access
-        foreach (var s in SelectionConstants.objTypeNames)
-            highlightedObjectsByType.Add(s, new List<GameObject>());
+        //foreach (var s in SelectionConstants.objTypeNames)
+           // highlightedObjectsByType.Add(s, new List<GameObject>());
 
         if (flashlightHighlighter == null)
             flashlightHighlighter = GameObject.Find("FlashlightCone");
@@ -233,9 +242,9 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
         // Clear hovered list
         allHighlightedObjects.Clear();
-        foreach (var kv in highlightedObjectsByType)
+        //foreach (var kv in highlightedObjectsByType)
         {
-            kv.Value.Clear();
+        //    kv.Value.Clear();
         }
     }
 
@@ -258,14 +267,41 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
     public void AddtoHighlighted(GameObject o)
     {
-        highlightedObjectsByType[o.tag].Add(o);
+      
         allHighlightedObjects.Add(o);
+
+        // get the corresponding game object from the dictionary (shape item)
+        GameObject tobeInserted = origin_and_duplicate_registery[o];
+
+        Inventory_Manager helper = FindObjectOfType<Inventory_Manager>();
+
+        // get the next available zone for insertion 
+        GameObject _availableZone = helper.getAvailablePositions();
+
+
+        // assign both the zone and shape to dictionary 
+        zone_plus_its_item.Add(tobeInserted, _availableZone);
+
+
+        // insert  
+        _availableZone.GetComponent<Zone>().InsertItem(tobeInserted);
+        
     }
 
     public void RemoveFromHighlighted(GameObject o)
     {
-        highlightedObjectsByType[o.tag].Remove(o);
+
         allHighlightedObjects.Remove(o);
+
+        GameObject toberemoved = origin_and_duplicate_registery[o];
+
+        GameObject zoneHoldingIt = zone_plus_its_item[toberemoved];
+
+        zoneHoldingIt.GetComponent<Zone>().removeFromZone(toberemoved);
+
+        //remove the itemn from the dict
+
+
     }
 
     #endregion CALLABLE BY INTERACTABLES

@@ -23,12 +23,12 @@ public class XRGestureInteractable : MonoBehaviour
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
 
-        if (gestureInteractor == null)
+        if (secondInteractorHelper == null)
             gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
 
         // added to override the inability to access components through the gesture Interactor 
-        if (secondInteractorHelper == null)
-            secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
+            if (gestureInteractor == null)
+                secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
     }
 
     // add a getter for the meshrenderer list 

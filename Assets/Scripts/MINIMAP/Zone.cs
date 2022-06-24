@@ -24,6 +24,7 @@ public class Zone : MonoBehaviour
     {
         ZoneImage = GetComponentInChildren<Image>();
         originalColor = ZoneImage.color;
+        ItemInZone = null;
         
     }
 
@@ -60,10 +61,12 @@ public class Zone : MonoBehaviour
     }
 
     // takes care of clearing the zone 
-    void removeFromZone(GameObject _currentInZone)
+    public void removeFromZone(GameObject _currentInZone)
     {
 
         _currentInZone.GetComponent<Rigidbody>().isKinematic = false;
+
+        // to be false?
 
         _currentInZone.transform.SetParent(gameObject.transform, true);
 
@@ -99,7 +102,7 @@ public class Zone : MonoBehaviour
         temp5.transform.eulerAngles = _originalEulerAngles;
     }
 
-    void InsertItem(GameObject temp)
+    public void InsertItem(GameObject temp)
     {
 
         /* NOTE----
@@ -117,10 +120,12 @@ public class Zone : MonoBehaviour
         temp.GetComponent<Rigidbody>().isKinematic = true;
         temp.transform.SetParent(gameObject.transform, true);
         temp.transform.localPosition = Vector3.zero;
-        temp.transform.localEulerAngles = temp.GetComponent<shapeItem>().zoneRotation;
-        temp.GetComponent<shapeItem>().inZone = true;
-        temp.GetComponent<shapeItem>().currentZone= this;
+
+        temp.transform.rotation = this.transform.rotation;
+        temp.GetComponent<shapeItem>().currentZone = this;
         ItemInZone = temp;
+        
+        
         ZoneImage.color = Color.blue;
     }
 

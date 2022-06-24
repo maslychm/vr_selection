@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// this shoulkd beb merged with inventory manager 
+/// </summary>
+
 public class MINIMAPInitial : MonoBehaviour
 {
 
@@ -46,3 +50,7 @@ public class MINIMAPInitial : MonoBehaviour
 
     }
 }
+
+// chapter for disseration
+
+// zotero

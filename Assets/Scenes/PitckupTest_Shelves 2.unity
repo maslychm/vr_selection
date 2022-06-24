@@ -1288,6 +1288,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+--- !u!1 &227035942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+  m_PrefabInstance: {fileID: 18604448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &227035943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227035942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d773a0455ca5fc4783f99acae4440c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inZone: 0
+  zoneRotation: {x: 0, y: 0, z: 0}
+  currentZone: {fileID: 0}
 --- !u!1001 &234900491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2084,7 +2104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemInZone: {fileID: 0}
-  ZoneImage: {fileID: 0}
+  ZoneImage: {fileID: 772365387}
 --- !u!4 &377284093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -5592,7 +5612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useGestureDirection: 0
-  currentShapeParent: {fileID: 0}
+  currentShapeParent: {fileID: 833780749}
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   flashlightHighlighter: {fileID: 1890717221}
   attachTransform: {fileID: 1769696372}

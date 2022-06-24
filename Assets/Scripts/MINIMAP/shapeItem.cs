@@ -8,8 +8,13 @@ using UnityEngine;
 /// </summary>
 public class shapeItem : MonoBehaviour
 {
-    public bool inZone;
+    public bool inZone = false;
     public Vector3 zoneRotation = Vector3.zero;
-    public Zone currentZone; 
+    public Zone currentZone;
+
+    public void Start()
+    {
+
+    }
 
 }

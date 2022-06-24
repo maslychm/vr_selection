@@ -5592,6 +5592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useGestureDirection: 0
+  currentShapeParent: {fileID: 0}
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   flashlightHighlighter: {fileID: 1890717221}
   attachTransform: {fileID: 1769696372}
@@ -5607,6 +5608,7 @@ MonoBehaviour:
   debug: 0
   addForceOnObjectDetach: 0
   objPushForce: 20
+  ListOfMeshRenderers_Getter: {fileID: 0}
   temp: {fileID: 1818538203}
 --- !u!1 &1293807992
 GameObject:
@@ -6982,6 +6984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1566601735}
+  - component: {fileID: 1566601736}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -7010,6 +7013,19 @@ Transform:
   m_Father: {fileID: 1194041204}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1566601736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566601734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9019ac1d7554d92499992b23af58f1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theInventory: {fileID: 1566601734}
 --- !u!1001 &1582700329
 PrefabInstance:
   m_ObjectHideFlags: 0

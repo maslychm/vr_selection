@@ -11,6 +11,8 @@ public class XRGridSelectorInteractor : MonoBehaviour
     [Header("Use gesture shape, or direction")]
     public bool useGestureDirection = false;
 
+    public GameObject currentShapeParent;
+
     [SerializeField] private InputActionReference flaslightActionReference;
 
     [Tooltip("This object must have a collider and be tagged as GestureFilter")]
@@ -53,15 +55,41 @@ public class XRGridSelectorInteractor : MonoBehaviour
     public bool addForceOnObjectDetach = false;
     public float objPushForce = 20.0f;
 
-   
+    // add a helper 
+    public XRGestureInteractable ListOfMeshRenderers_Getter;
+
+    // declare the dictionary 
+    // initial one (key) will be a game object that contains the gesture interactable compoenent 
+    // the second one (value) will be the game object that has the shape item component 
+    Dictionary<GameObject, GameObject> origin_and_duplicate_registery;
+
     public MINIMAPInitial temp;
     public void Start()
     {
 
+        // initialize the dictionary 
+        origin_and_duplicate_registery = new Dictionary<GameObject, GameObject>();
+
         // duplicates and remove interactable 
+        // plus adding the shapeItem component
 
-        // temp = new MINIMAPInitial();
+        // two methods found ->
 
+        // Method 1 --------------------
+        // uses a parent and works by accessing children and so on 
+        // linear time 
+        // space efficient 
+
+        _DuplicationMethod1();
+
+        // Method 2 --------------------
+        // uses list of meshrenderers from gesture interactable 
+        // linear time 
+        // space efficient 
+
+        _DuplicationMethod2();
+
+        //---------------------------
         highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
         allHighlightedObjects = new List<GameObject>();
         // Pre-populate for O(1) type access
@@ -79,6 +107,53 @@ public class XRGridSelectorInteractor : MonoBehaviour
         if (tabletUI)
             tabletUI.SetTabletActive(debug);
     }
+
+    // refer to start function for explanation 
+    // ----------------------------------------------------------------------------------------------------------
+    public void _DuplicationMethod1 ()
+    {
+        // first we need to get the number of shapes that can be duplicaed 
+        int children = currentShapeParent.transform.childCount;
+
+        // --- duplicate---
+        // and destroy the extra script coponent 
+        for (int i = 0; i < children; i++)
+        {
+            GameObject _original = currentShapeParent.transform.GetChild(i).gameObject;
+            GameObject temp = Instantiate(_original);
+            Component scriptToBeDestroyed = temp.GetComponent<XRGestureInteractable>();
+            Destroy(scriptToBeDestroyed);
+
+            // add item shape script componet 
+            temp.AddComponent<shapeItem>();
+
+            // add to dictionary (still need to figure out how this is clearly making the items distinguishable later!!! )
+            origin_and_duplicate_registery.Add(_original, temp);
+
+        }
+    }
+
+    public void _DuplicationMethod2 ()
+    {
+        List<MeshRenderer> temp2 = ListOfMeshRenderers_Getter.getListOfAllObjects();
+
+        for(int i = 0; i < temp2.Count; i++)
+        {
+
+            GameObject _original2 = temp2[i].gameObject;
+            GameObject _temp = Instantiate(_original2);
+            Component _scriptToBeDestroyed = _temp.GetComponent<XRGestureInteractable>();
+            Destroy(_scriptToBeDestroyed);
+
+            // add the item shape compoenent 
+            _temp.AddComponent<shapeItem>();
+
+            // add to dictionary (still need to figure out how this is clearly making the items distinguishable later!!! )
+            origin_and_duplicate_registery.Add(_original2, _temp);
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------------------------
 
     private void Update()
     {

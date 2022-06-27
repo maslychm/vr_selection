@@ -28,18 +28,6 @@ public class Zone : MonoBehaviour
         
     }
 
-    // need help on this one !!!!!!!!!!
-    private void OnTriggerStay(Collider other)
-    {
-        if (!ItemInZone)
-            return;
-
-        GameObject temp = other.gameObject;
-        if (!checkItemThere(temp))
-            return;
-
-    }
-
     bool checkItemThere(GameObject temp)
     {
         return temp.GetComponent<shapeItem>();
@@ -57,7 +45,24 @@ public class Zone : MonoBehaviour
         _originalEulerAngles = temp2.transform.eulerAngles;
         _originalPosition = temp2.transform.position;
         _originalScale = new Vector3(temp2.transform.localScale.x, temp2.transform.localScale.y, temp2.transform.localScale.z);
-        temp2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+        if (temp2.tag == "star")
+        {
+
+            // try to update and reverse star and pyramid
+
+            temp2.transform.localScale = new Vector3(25, 25, 25);
+
+            temp2.transform.rotation = Quaternion.Euler(0, 0, 180);
+            return;
+        }
+        if (temp2.tag == "pyramid")
+        {
+            temp2.transform.localScale = new Vector3(20, 20, 20);
+            temp2.transform.rotation = Quaternion.Euler(0, 0, 180);
+            return;
+        }
+        temp2.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
     }
 
     // takes care of clearing the zone 

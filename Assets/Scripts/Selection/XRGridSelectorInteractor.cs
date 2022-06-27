@@ -270,12 +270,18 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
         // mention to Mykola: -> another simple way to iedntify a duplicate is to use a UUID or GUID
         //                      without having to check for the component presence 
-        
-      
+
+
         allHighlightedObjects.Add(o);
 
         // get the corresponding game object from the dictionary (shape item)
         GameObject tobeInserted = origin_and_duplicate_registery[o];
+
+        //if (tobeInserted == null)
+        //{
+        //    print("this is null");
+        //    return;
+        //}
 
         Inventory_Manager helper = FindObjectOfType<Inventory_Manager>();
 
@@ -289,6 +295,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
         // if there is actually a zone to insert to 
         if (_availableZone != null)
         {
+
             zone_plus_its_item.Add(tobeInserted, _availableZone);
 
 
@@ -310,7 +317,8 @@ public class XRGridSelectorInteractor : MonoBehaviour
         zoneHoldingIt.GetComponent<Zone>().removeFromZone(toberemoved);
 
         //remove the itemn from the dict
-        zone_plus_its_item[toberemoved] = null;
+        //zone_plus_its_item[toberemoved] = null;
+        zone_plus_its_item.Remove(toberemoved);
 
 
     }

@@ -85,7 +85,7 @@ public class XRGestureInteractable : MonoBehaviour
 
         else
 
-            secondInteractorHelper?.RemoveFromHighlighted(gameObject);
+            secondInteractorHelper.RemoveFromHighlighted(gameObject);
     }
 
     private void dprint(string msg)

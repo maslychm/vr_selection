@@ -133,6 +133,35 @@ public class XRGridSelectorInteractor : MonoBehaviour
             Component scriptToBeDestroyed = temp.GetComponent<XRGestureInteractable>();
             Destroy(scriptToBeDestroyed);
 
+            // extra items for deletion
+            //temp.GetComponent<Rigidbody>().isKinematic = false;
+            if (temp.tag == "star")
+            {
+
+                temp.transform.localScale = new Vector3(20, 20, 20);
+              
+            }
+            if (temp.tag == "pyramid")
+            {
+                temp.transform.localScale = new Vector3(5, 5, 5);
+
+               
+            }
+            if (temp.tag != "star" && temp.tag != "pyramid")
+            {
+                if (temp.tag == "infinity")
+                {
+                    temp.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+
+                }
+                else
+                    temp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            }
+
+            Destroy(temp.GetComponent<Rigidbody>());
+            Destroy(temp.GetComponent<Collider>());
+            Destroy(temp.GetComponent<Object_collected>());
+
             // add item shape script componet 
             temp.AddComponent<shapeItem>();
 
@@ -295,31 +324,35 @@ public class XRGridSelectorInteractor : MonoBehaviour
         // if there is actually a zone to insert to 
         if (_availableZone != null)
         {
+            if (!zone_plus_its_item.ContainsKey(tobeInserted))
+            {
+                zone_plus_its_item.Add(tobeInserted, _availableZone);
 
-            zone_plus_its_item.Add(tobeInserted, _availableZone);
 
-
-            // insert  
-            _availableZone.GetComponent<Zone>().InsertItem(tobeInserted);
+                // insert  
+                _availableZone.GetComponent<Zone>().InsertItem(tobeInserted);
+            }
+            
         }
         
     }
 
     public void RemoveFromHighlighted(GameObject o)
     {
-
+        Debug.Log(o.tag + " " + o.name );
         allHighlightedObjects.Remove(o);
 
         GameObject toberemoved = origin_and_duplicate_registery[o];
+        if (zone_plus_its_item.ContainsKey(toberemoved))
+        {
+            GameObject zoneHoldingIt = zone_plus_its_item[toberemoved];
 
-        GameObject zoneHoldingIt = zone_plus_its_item[toberemoved];
+            zoneHoldingIt.GetComponent<Zone>().removeFromZone(toberemoved);
 
-        zoneHoldingIt.GetComponent<Zone>().removeFromZone(toberemoved);
-
-        //remove the itemn from the dict
-        //zone_plus_its_item[toberemoved] = null;
-        zone_plus_its_item.Remove(toberemoved);
-
+            //remove the itemn from the dict
+            //zone_plus_its_item[toberemoved] = null;
+            zone_plus_its_item.Remove(toberemoved);
+        }
 
     }
 

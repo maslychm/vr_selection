@@ -44,32 +44,16 @@ public class Zone : MonoBehaviour
         // and store its original scale and position/eulerAngles
         _originalEulerAngles = temp2.transform.eulerAngles;
         _originalPosition = temp2.transform.position;
-        _originalScale = new Vector3(temp2.transform.localScale.x, temp2.transform.localScale.y, temp2.transform.localScale.z);
+        //_originalScale = new Vector3(temp2.transform.localScale.x, temp2.transform.localScale.y, temp2.transform.localScale.z);
 
-        if (temp2.tag == "star")
-        {
 
-            // try to update and reverse star and pyramid
-
-            temp2.transform.localScale = new Vector3(25, 25, 25);
-
-            temp2.transform.rotation = Quaternion.Euler(0, 0, 180);
-            return;
-        }
-        if (temp2.tag == "pyramid")
-        {
-            temp2.transform.localScale = new Vector3(20, 20, 20);
-            temp2.transform.rotation = Quaternion.Euler(0, 0, 180);
-            return;
-        }
-        temp2.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
     }
 
     // takes care of clearing the zone 
     public void removeFromZone(GameObject _currentInZone)
     {
 
-        _currentInZone.GetComponent<Rigidbody>().isKinematic = false;
+       // _currentInZone.GetComponent<Rigidbody>().isKinematic = false;
 
         // to be false?
 
@@ -79,7 +63,7 @@ public class Zone : MonoBehaviour
 
         _setToOriginalEulerAngles(_currentInZone);
 
-        _setToOriginalScale(_currentInZone);
+       // _setToOriginalScale(_currentInZone);
 
         _currentInZone.GetComponent<shapeItem>().inZone = false;
 
@@ -91,11 +75,11 @@ public class Zone : MonoBehaviour
 
        
     }
-
+    /*
     void _setToOriginalScale(GameObject temp3)
     {
         temp3.transform.localScale = _originalScale;
-    }
+    }*/
 
     void _setToOriginalPosition(GameObject temp4)
     {
@@ -121,16 +105,30 @@ public class Zone : MonoBehaviour
 
         // first call the resizer 
         _autoResizerInZone(temp);
+        if (temp.tag == "star")
+        {
+            this.transform.localEulerAngles = new Vector3(180.0f, 0.0f, 0.0f);
+        }
+        if (temp.tag == "pyramid")
+        {
+            this.transform.localEulerAngles = new Vector3(180.0f, 0.0f, 0.0f);
 
-        temp.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        //temp.GetComponent<Rigidbody>().isKinematic = true;
         temp.transform.SetParent(gameObject.transform, true);
         temp.transform.localPosition = Vector3.zero;
 
         temp.transform.rotation = this.transform.rotation;
         temp.GetComponent<shapeItem>().currentZone = this;
         ItemInZone = temp;
-        
-        
+
+        if (temp.tag == "infinity")
+        {
+            temp.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
+
+        }
+
         ZoneImage.color = Color.blue;
     }
 

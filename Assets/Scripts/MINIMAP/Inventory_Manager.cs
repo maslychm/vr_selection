@@ -53,6 +53,8 @@ public class Inventory_Manager : MonoBehaviour
             if (theInventory.transform.GetChild(i).GetComponent<Zone>().ItemInZone == null)
             {
                 emptycount_Helper++;
+
+                // original line 
                 theStack.Push(theInventory.transform.GetChild(i).gameObject);
             }
             else

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 145584628470803562}
   - component: {fileID: 145584628470803563}
   - component: {fileID: 3041950925296200394}
+  - component: {fileID: 1147838555592407144}
   m_Layer: 0
   m_Name: SphereInteractable
   m_TagString: sphere
@@ -140,3 +141,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc43102b083e9746b079f7fe3252234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &1147838555592407144
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145584628470803556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

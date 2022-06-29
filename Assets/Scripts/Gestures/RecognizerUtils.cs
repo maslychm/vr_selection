@@ -123,12 +123,14 @@ namespace Gestures
             {
                 outputFile.WriteLine($"{trajectory.Count} {trajectory[0].Size}");
 
-                if (NUM_COMPONENTS == 6)
+                int local_NUM_COMPONENTS = NUM_COMPONENTS;
+
+                if (local_NUM_COMPONENTS == 6)
                 {
                     foreach (var vec in trajectory)
                         outputFile.WriteLine($"{vec[0]} {vec[1]} {vec[2]} {vec[3]} {vec[4]} {vec[5]}");
                 }
-                else if (NUM_COMPONENTS == 3)
+                else if (local_NUM_COMPONENTS == 3)
                 {
                     foreach (var vec in trajectory)
                         outputFile.WriteLine($"{vec[0]} {vec[1]} {vec[2]}");

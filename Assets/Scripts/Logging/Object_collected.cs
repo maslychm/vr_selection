@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Object_collected : MonoBehaviour
 {
-    private Logging_XR logger;
-
     //private Transform _transform;
     private Vector3 _home_pos;
 
@@ -13,12 +11,6 @@ public class Object_collected : MonoBehaviour
 
     private void Start()
     {
-        var logObj = GameObject.Find("XR_Logging_Obj");
-        if (logObj != null)
-            logger = logObj.GetComponent<Logging_XR>();
-        if (logger == null)
-            Debug.LogWarning("No Logger found.");
-
         _home_pos = transform.position;
         _home_rot = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
@@ -41,26 +33,15 @@ public class Object_collected : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (logger != null)
+        switch (collider.tag)
         {
-            switch (collider.tag)
-            {
-                case "end_manipulator":
-                    break;
+            case "end_manipulator":
+                break;
 
-                //case "desk_goal":
-                //    //We reached the goal now explode.
-                //    logger.StopTaskTimer();
-                //    //GameObject.Destroy(this);
-                //    MoveOutsideReach();
-                //    break;
-
-                case "failure":
-                    //Return this object back to the hell it came from.
-                    transform.position = _home_pos;
-                    transform.rotation = _home_rot;
-                    break;
-            }
+            case "failure":
+                transform.position = _home_pos;
+                transform.rotation = _home_rot;
+                break;
         }
     }
 }

@@ -12,15 +12,20 @@ TagManager:
   - star
   - pyramid
   - cylinder
+  - enemy
+  - enemycube
+  - enemypyramid
+  - enemystar
+  - enemysphere
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 

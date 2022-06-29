@@ -26,6 +26,8 @@ public class XRGestureFilterInteractor : MonoBehaviour
     [SerializeField] private GameObject flashlightCenterCone;
 
     [SerializeField] private Vector3 debugPlaneOffset;
+
+    // Head hmd
     [SerializeField] private Transform hmdTransform;
 
     [Header("Debugging and UI")]
@@ -36,9 +38,22 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     private bool isHighlighting = false;
     private GameObject selectedObject;
-    private Vector3 defaultFlashlightScale;
 
+    [Header("Flashlight Scaling")]
+    [SerializeField] private Vector3 defaultFlashlightScale;
+
+    [Header("Dynamic Scaling")]
+    [SerializeField] private bool scaleWithDistance;
+
+    public Vector3 shoulderOffset;
+
+    public Vector3 maxFlashlightScale;
+
+    [Header("Other")]
     public bool debug = false;
+
+    public bool addForceOnObjectDetach = false;
+    public float objPushForce = 20.0f;
 
     public void Start()
     {
@@ -75,6 +90,11 @@ public class XRGestureFilterInteractor : MonoBehaviour
             ExtendFlashlight();
         }
 
+        if (flaslightActionReference.action.IsPressed())
+        {
+            UpdateObjectScale();
+        }
+
         if (flaslightActionReference.action.WasReleasedThisFrame())
         {
             ShrinkFlashlight();
@@ -96,6 +116,13 @@ public class XRGestureFilterInteractor : MonoBehaviour
         selectedObject.transform.parent = null;
         selectedObject.GetComponent<Rigidbody>().useGravity = true;
         selectedObject.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (addForceOnObjectDetach)
+        {
+            Vector3 applyForce = selectedObject.transform.forward * objPushForce;
+            selectedObject.GetComponent<Rigidbody>().AddForce(applyForce, ForceMode.Impulse);
+        }
+
         selectedObject = null;
     }
 
@@ -128,6 +155,28 @@ public class XRGestureFilterInteractor : MonoBehaviour
         {
             kv.Value.Clear();
         }
+    }
+
+    private void UpdateObjectScale()
+    {
+        if (!scaleWithDistance || selectedObject)
+            return;
+
+        var shoulderInWorld = hmdTransform.TransformPoint(shoulderOffset);
+        //print($"head: {hmdTransform.position} shoulder: {shoulderInWorld}");
+
+        float distHand = Vector3.Distance(shoulderInWorld, transform.position);
+        //print($"distHand={distHand}");
+
+        // Mykola: this distance ranges from .2 to .7 for me so adjusting the values below
+        // to bring (.2, .7) range into (0,1) range
+        distHand -= .2f;
+        distHand = Mathf.Clamp(distHand, 0f, 1f);
+        distHand *= 2;
+
+        var newFlashlightScale = Mathf.Abs(1 - distHand) * maxFlashlightScale;
+        newFlashlightScale.z = maxFlashlightScale.z;
+        flashlightHighlighter.transform.localScale = newFlashlightScale;
     }
 
     private void SelectObjectOfType(RecognitionResult r)

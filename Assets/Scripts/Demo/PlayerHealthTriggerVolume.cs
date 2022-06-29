@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour
+public class PlayerHealthTriggerVolume : MonoBehaviour
 {
     public int health = 3;
     public bool isDead = false;

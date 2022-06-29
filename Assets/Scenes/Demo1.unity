@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 116715842}
   - component: {fileID: 116715843}
   m_Layer: 0
-  m_Name: Trigger
+  m_Name: PlayerHealthTriggerVolume
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,7 +560,7 @@ MonoBehaviour:
   - {fileID: 6342020465923099068, guid: 22ea0b529958b974e8927e4748764362, type: 3}
   - {fileID: 6342020465923099068, guid: 5d62cfa7d08c8f74d907e012ca255af4, type: 3}
   - {fileID: 6342020465923099068, guid: 93053f50470acb5488b8ccef8d11ecd7, type: 3}
-  spawnEverySeconds: 10
+  spawnEverySeconds: 5
   endScreen: {fileID: 2099137220}
 --- !u!54 &116715843
 Rigidbody:
@@ -3184,9 +3184,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5195358866499055116, guid: 33504d3c7c2ef2947bf94f9dacb93764, type: 3}
+      propertyPath: m_ActionAssets.Array.data[0]
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: da2b439d1a2de5c46a4f428f8cf4fe19, type: 3}
     - target: {fileID: 5736731664260473426, guid: 33504d3c7c2ef2947bf94f9dacb93764, type: 3}
       propertyPath: m_Name
       value: Mock HMD
+      objectReference: {fileID: 0}
+    - target: {fileID: 5736731664260473426, guid: 33504d3c7c2ef2947bf94f9dacb93764, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33504d3c7c2ef2947bf94f9dacb93764, type: 3}
@@ -9486,7 +9494,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1198687588326085133, guid: 074c819ce8e7bbb4e9a661160505950d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 074c819ce8e7bbb4e9a661160505950d, type: 3}
 --- !u!1 &2099137220 stripped
 GameObject:

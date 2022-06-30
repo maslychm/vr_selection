@@ -54,7 +54,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
     public float objPushForce = 20.0f;
 
    
-    public MINIMAPInitial temp;
+    public GridSelection_Initial temp;
     public void Start()
     {
 

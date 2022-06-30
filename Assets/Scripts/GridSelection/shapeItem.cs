@@ -10,7 +10,7 @@ public class shapeItem : MonoBehaviour
 {
     public bool inZone;
     public Vector3 zoneRotation = Vector3.zero;
-    public Zone currentZone;
+    public Grid_Zone currentZone;
 
     void start()
     {

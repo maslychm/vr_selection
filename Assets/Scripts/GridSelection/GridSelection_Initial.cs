@@ -6,7 +6,7 @@ using UnityEngine;
 /// this shoulkd beb merged with inventory manager 
 /// </summary>
 
-public class MINIMAPInitial : MonoBehaviour
+public class GridSelection_Initial : MonoBehaviour
 {
 
     public static bool isActive = false;

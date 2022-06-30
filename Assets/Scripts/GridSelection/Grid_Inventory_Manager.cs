@@ -7,7 +7,7 @@ using UnityEngine;
 /// the full ones, along with the next availbale zone idnex where we can insert 
 /// </summary>
 
-public class Inventory_Manager : MonoBehaviour
+public class Grid_Inventory_Manager : MonoBehaviour
 {
     public GameObject theInventory;
 
@@ -29,7 +29,7 @@ public class Inventory_Manager : MonoBehaviour
 
         for (int i = 0; i < theInventory.transform.childCount; i++)
         {
-            if (theInventory.transform.GetChild(i).GetComponent<Zone>() == null)
+            if (theInventory.transform.GetChild(i).GetComponent<Grid_Zone>() == null)
                 continue;
 
             theStack.Push(theInventory.transform.GetChild(i).gameObject);
@@ -47,10 +47,10 @@ public class Inventory_Manager : MonoBehaviour
 
         for(int i = 0; i < theInventory.transform.childCount; i++)
         {
-            if (theInventory.transform.GetChild(i).GetComponent<Zone>() == null)
+            if (theInventory.transform.GetChild(i).GetComponent<Grid_Zone>() == null)
                 continue;
 
-            if (theInventory.transform.GetChild(i).GetComponent<Zone>().ItemInZone == null)
+            if (theInventory.transform.GetChild(i).GetComponent<Grid_Zone>().ItemInZone == null)
             {
                 emptycount_Helper++;
 

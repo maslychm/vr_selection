@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Zone : MonoBehaviour
+public class Grid_Zone : MonoBehaviour
 {
     /*
      *

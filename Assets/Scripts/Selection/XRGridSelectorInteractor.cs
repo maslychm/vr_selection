@@ -69,7 +69,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
     // item is the key
     Dictionary<GameObject, GameObject> zone_plus_its_item;
 
-    public MINIMAPInitial temp;
+    public GridSelection_Initial temp;
     public void Start()
     {
 
@@ -312,7 +312,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
         //    return;
         //}
 
-        Inventory_Manager helper = FindObjectOfType<Inventory_Manager>();
+        Grid_Inventory_Manager helper = FindObjectOfType<Grid_Inventory_Manager>();
 
         // get the next available zone for insertion 
         GameObject _availableZone = helper.getAvailablePositions();
@@ -330,7 +330,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
 
                 // insert  
-                _availableZone.GetComponent<Zone>().InsertItem(tobeInserted);
+                _availableZone.GetComponent<Grid_Zone>().InsertItem(tobeInserted);
             }
             
         }
@@ -347,7 +347,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
         {
             GameObject zoneHoldingIt = zone_plus_its_item[toberemoved];
 
-            zoneHoldingIt.GetComponent<Zone>().removeFromZone(toberemoved);
+            zoneHoldingIt.GetComponent<Grid_Zone>().removeFromZone(toberemoved);
 
             //remove the itemn from the dict
             //zone_plus_its_item[toberemoved] = null;

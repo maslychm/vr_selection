@@ -6,6 +6,9 @@ public class XRGestureInteractable : MonoBehaviour
 {
     private XRGestureFilterInteractor gestureInteractor;
 
+    // grid selector var to be used instead of gesture interactor when needed
+    private XRGridSelectorInteractor secondInteractorHelper; 
+    
     [SerializeField] private Material hoverMaterial;
 
     private Material defaultMaterial;
@@ -20,8 +23,18 @@ public class XRGestureInteractable : MonoBehaviour
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
 
-        if (gestureInteractor == null)
+        if (secondInteractorHelper == null)
             gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
+
+        // added to override the inability to access components through the gesture Interactor 
+            if (gestureInteractor == null)
+                secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
+    }
+
+    // add a getter for the meshrenderer list 
+    public List<MeshRenderer> getListOfAllObjects()
+    {
+        return meshRenderers;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -47,7 +60,15 @@ public class XRGestureInteractable : MonoBehaviour
 
         foreach (var mr in meshRenderers)
             mr.material = hoverMaterial;
-        gestureInteractor.AddtoHighlighted(gameObject);
+
+        // check which one is ready to be used 
+        if (gestureInteractor != null)
+
+            gestureInteractor.AddtoHighlighted(gameObject);
+
+        else
+
+            secondInteractorHelper.AddtoHighlighted(gameObject);
     }
 
     private void EndHover()
@@ -57,7 +78,14 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = defaultMaterial;
 
-        gestureInteractor.RemoveFromHighlighted(gameObject);
+        // check which one is ready to be used 
+        if(gestureInteractor != null)
+
+            gestureInteractor.RemoveFromHighlighted(gameObject);
+
+        else
+
+            secondInteractorHelper.RemoveFromHighlighted(gameObject);
     }
 
     private void dprint(string msg)

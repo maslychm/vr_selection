@@ -12,4 +12,5 @@ public class shapeItem_2 : MonoBehaviour
         currentMap = null;
     }
 
+
 }

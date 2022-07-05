@@ -37,7 +37,7 @@ public class XRGestureInteractable : MonoBehaviour
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
 
-        if (secondInteractorHelper == null && thirdInteractorHelper == null)
+       /* if (secondInteractorHelper == null && thirdInteractorHelper == null)
             gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
 
         // added to override the inability to access components through the gesture Interactor 
@@ -45,7 +45,7 @@ public class XRGestureInteractable : MonoBehaviour
             secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
 
         // new
-        if (thirdInteractorHelper != null)
+        if (thirdInteractorHelper != null)*/
             thirdInteractorHelper  =  FindObjectOfType<MiniMapInteractor>();
 
 
@@ -112,15 +112,17 @@ public class XRGestureInteractable : MonoBehaviour
                  listOfFiles_Components_ToBe_Used[i].AddtoHighlighted(gameObject);
 
          */
-        if (secondInteractorHelper == null && thirdInteractorHelper == null)
+       // if (thirdInteractorHelper != null)
+        {
+            thirdInteractorHelper.AddtoHighlighted(gameObject);
+            return;
+        }
+       /* if (secondInteractorHelper == null && thirdInteractorHelper == null)
             gestureInteractor.AddtoHighlighted(gameObject);
 
         if (gestureInteractor == null && thirdInteractorHelper == null)
             secondInteractorHelper.AddtoHighlighted(gameObject);
-
-        if (thirdInteractorHelper != null)
-            thirdInteractorHelper.AddtoHighlighted(gameObject);
-
+       */
     }
 
     private void EndHover()
@@ -130,16 +132,17 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = defaultMaterial;
 
-
-        if (secondInteractorHelper == null && thirdInteractorHelper == null)
+        //if (thirdInteractorHelper != null)
+        {
+            thirdInteractorHelper.RemoveFromHighlighted(gameObject);
+            return;
+        }
+       /* if (secondInteractorHelper == null && thirdInteractorHelper == null)
             gestureInteractor.RemoveFromHighlighted(gameObject);
 
         if (gestureInteractor == null && thirdInteractorHelper == null)
             secondInteractorHelper.RemoveFromHighlighted(gameObject);
-
-        if (thirdInteractorHelper != null)
-            thirdInteractorHelper.RemoveFromHighlighted(gameObject);
-
+       */
 
     }
 

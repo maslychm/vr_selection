@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MiniMap : MonoBehaviour
 {
-
+    
     // first let's set a variable to store the duplicates and their distance for every update 
-    private Dictionary<GameObject, Vector3> m_Map;
+    private List<(GameObject, Vector3)> m_Map;
 
     private Dictionary<GameObject, Transform> duplicates_and_originalPosition;
 
-    MiniMapInteractor m_Interactor; 
+   
 
     private GameObject center_Circular_Minimap;
 
@@ -18,12 +18,12 @@ public class MiniMap : MonoBehaviour
 
     public static bool isActive = false;
 
-    // store the parent of the circular mini map and its anchor
-    private GameObject MiniMap_Original;
+    // store the parent of the circular mini map and store its anchor
+    public GameObject MiniMap_Original;
     public GameObject Anchor_MiniMaporiginal;
 
     // make a radius variable that is public and can be change in the unity editor 
-    [SerializeField] public float radius;
+    [SerializeField] public float radius = 1.0f;
 
     // this variable will change accordingly as the code gets executed
     private Vector3 newOffset_for_current_ObjToBeInCircle;
@@ -33,98 +33,58 @@ public class MiniMap : MonoBehaviour
     private float adjusted_position_Y;
     private float adjusted_position_Z;
 
+    private List<shapeItem_2> listInCircle;
+
     // Start is called before the first frame update
     void Start()
     {
-        m_Map = new Dictionary<GameObject, Vector3>();
+        m_Map = new List<(GameObject, Vector3)>();
+
+        listInCircle = new List<shapeItem_2>();
 
         MiniMap_Original = this.gameObject;
-        isActive = false;
+        //isActive = false;
 
         // get the center of the circle 
-
-        // method 1:
-        // center_Circular_Minimap = this.GetComponentInChildren<GameObject>();
-
-        // method 2:
         center_Circular_Minimap = MiniMap_Original.transform.GetChild(0).gameObject;
 
         // get the position of the center;
         centreOFminiMap = center_Circular_Minimap.transform;
 
-        // initially doesn't need to appear
-        MiniMap_Original.SetActive(false);
-
-        // let's set the radius initially to 1.00
-        radius = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        foreach(shapeItem_2 o in listInCircle)
+        {
 
+            o.gameObject.transform.SetParent(MiniMap_Original.transform, false);
+
+            o.inCircle = false;
+
+            o.currentMap = null;
+
+            o.gameObject.SetActive(false);
+        }
+
+        listInCircle.Clear();
         // update the dictionary every frame
-        m_Map = m_Interactor.get_Duplicate_and_Direction();
+        m_Map = MiniMapInteractor.get_Duplicate_and_Direction();
 
-        // get the duplicates and their original positoon 
-        duplicates_and_originalPosition = m_Interactor.get_Duplictae_and_originalPosition();
-
-        foreach (var temp in duplicates_and_originalPosition)
+        foreach (var temp in m_Map)
         {
-            if (m_Map.ContainsKey(temp.Key))
-            {
-                addToCircleMiniMap(temp.Key);
-            }
-            else
-                removeFromCircle(temp.Key);
+            addToCircleMiniMap(temp);
+            listInCircle.Add(temp.Item1.GetComponent<shapeItem_2>());
+    
         }
     }
 
-    public void showCircularMap(bool t)
-    {
-        if (t == true)
-        {
-            isActive = true;
-            MiniMap_Original.SetActive(true);
-        }
-
-        if (isActive == true)
-        {
-            MiniMap_Original.transform.position = Anchor_MiniMaporiginal.transform.position;
-
-            MiniMap_Original.transform.eulerAngles = new Vector3(Anchor_MiniMaporiginal.transform.eulerAngles.x + 15, Anchor_MiniMaporiginal.transform.eulerAngles.y, 0);
-
-        }
-    }
-
-    public void closeCircularMap(bool t)
-    {
-        if(t == true)
-        {
-            isActive = false;
-            MiniMap_Original.SetActive(false);
-        }
-    }
-
-    public void removeFromCircle(GameObject _CurrentInCircle)
+    public void addToCircleMiniMap((GameObject, Vector3) _objToBeInCircle2)
     {
 
-        _CurrentInCircle.transform.SetParent(MiniMap_Original.transform, false);
-
-        _CurrentInCircle.transform.position = duplicates_and_originalPosition[_CurrentInCircle].position;
-        _CurrentInCircle.transform.eulerAngles = duplicates_and_originalPosition[_CurrentInCircle].eulerAngles;
-        _CurrentInCircle.transform.rotation = duplicates_and_originalPosition[_CurrentInCircle].rotation;
-
-
-        _CurrentInCircle.GetComponent<shapeItem_2>().inCircle = false;
-
-        _CurrentInCircle.GetComponent<shapeItem_2>().currentMap = null;
-
-
-    }
-
-    public void addToCircleMiniMap(GameObject _objToBeInCircle)
-    {
+        GameObject _objToBeInCircle = _objToBeInCircle2.Item1;
+        _objToBeInCircle.gameObject.SetActive(true);
         if (_objToBeInCircle.tag == "star")
         {
             _objToBeInCircle.transform.localEulerAngles = new Vector3(180.0f, 0.0f, 0.0f);
@@ -135,6 +95,7 @@ public class MiniMap : MonoBehaviour
 
         }
 
+   
         _objToBeInCircle.transform.SetParent(MiniMap_Original.transform, true);
         _objToBeInCircle.transform.localPosition = Vector3.zero;
 
@@ -144,10 +105,13 @@ public class MiniMap : MonoBehaviour
         {
             // now we can safely add more changes to the distance:
 
-            newOffset_for_current_ObjToBeInCircle = m_Map[_objToBeInCircle].normalized;
-
+            //newOffset_for_current_ObjToBeInCircle = m_Map[_objToBeInCircle].normalized;
+            newOffset_for_current_ObjToBeInCircle = _objToBeInCircle2.Item2;
+            print("newOffset_for_current_ObjToBeInCircle + " + newOffset_for_current_ObjToBeInCircle);
+            //print("newOffsetFor the current object in circle:" + newOffset_for_current_ObjToBeInCircle);
             // this should take care of multiplying with the radius
             newOffset_for_current_ObjToBeInCircle *= radius;
+            //print("After ->newOffsetFor the current object in circle:" + newOffset_for_current_ObjToBeInCircle);
 
             // set the position variables for ease of use / to be on the circular mini_map
             // this is just for easy access later when debugging : D
@@ -156,7 +120,9 @@ public class MiniMap : MonoBehaviour
             adjusted_position_Z = newOffset_for_current_ObjToBeInCircle.z;
 
             // real positon setting process 
-            _objToBeInCircle.transform.position = center_Circular_Minimap.transform.position + newOffset_for_current_ObjToBeInCircle;
+            //_objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition + newOffset_for_current_ObjToBeInCircle;
+            _objToBeInCircle.transform.localPosition +=  newOffset_for_current_ObjToBeInCircle;
+            print("here : _objToBeInCircle.transform.localPosition " + _objToBeInCircle.transform.localPosition);
 
         }
         // end of the core change for the current selection method

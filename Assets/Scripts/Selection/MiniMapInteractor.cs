@@ -7,8 +7,6 @@ using UnityEngine.InputSystem;
  * This script represents the Mini Map (circular) selector Interactor
  */
 
-/// add the update here 
-
 public class MiniMapInteractor : MonoBehaviour
 {
     [Header("Use gesture shape, or direction")]
@@ -38,7 +36,6 @@ public class MiniMapInteractor : MonoBehaviour
 
     private List<GameObject> allHighlightedObjects;
 
-    private static bool isHighlighting = false;
     private GameObject selectedObject;
 
     [Header("Flashlight Scaling")]
@@ -67,13 +64,6 @@ public class MiniMapInteractor : MonoBehaviour
     // the second one (value) will be the game object that has the shape item component 
     Dictionary<GameObject, GameObject> origin_and_duplicate_registery;
 
-    // declare an extra dictionary to hold the item and its zone-that holds it 
-    // item is the key
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>This one might not be needed >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    // Dictionary<GameObject, GameObject> zone_plus_its_item;
-    // public GridSelection_Initial temp;
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
     // declare a dictionary to hold the duplicates and their distances
     // set it to private for now 
     private static List<(GameObject, Vector3)> duplicateObject_and_distance_registery;
@@ -92,9 +82,6 @@ public class MiniMapInteractor : MonoBehaviour
 
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
 
-        // initialize the dictionary for the zone and its items 
-        // zone_plus_its_item = new Dictionary<GameObject, GameObject>();
-
         // duplicates and remove interactable 
         // plus adding the shapeItem component
 
@@ -102,16 +89,10 @@ public class MiniMapInteractor : MonoBehaviour
         // uses a parent and works by accessing children and so on 
         // linear time 
         // space efficient 
-
         _DuplicationMethod1();
 
-
-        //---------------------------
-        //highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
         allHighlightedObjects = new List<GameObject>();
-        // Pre-populate for O(1) type access
-        //foreach (var s in SelectionConstants.objTypeNames)
-           // highlightedObjectsByType.Add(s, new List<GameObject>());
+
 
         if (flashlightHighlighter == null)
             flashlightHighlighter = GameObject.Find("FlashlightCone");
@@ -184,26 +165,6 @@ public class MiniMapInteractor : MonoBehaviour
 
         }
     }
-    /*
-    public void _DuplicationMethod2 ()
-    {
-        List<MeshRenderer> temp2 = ListOfMeshRenderers_Getter.getListOfAllObjects();
-
-        for(int i = 0; i < temp2.Count; i++)
-        {
-
-            GameObject _original2 = temp2[i].gameObject;
-            GameObject _temp = Instantiate(_original2);
-            Component _scriptToBeDestroyed = _temp.GetComponent<XRGestureInteractable>();
-            Destroy(_scriptToBeDestroyed);
-
-            // add the item shape compoenent 
-            _temp.AddComponent<shapeItem>();
-
-            // add to dictionary (still need to figure out how this is clearly making the items distinguishable later!!! )
-            origin_and_duplicate_registery.Add(_original2, _temp);
-        }
-    }*/
 
     // -----------------------------------------------------------------------------------------------------------
 
@@ -275,16 +236,12 @@ public class MiniMapInteractor : MonoBehaviour
 
     private void ExtendFlashlight()
     {
-        isHighlighting = true;
         flashlightHighlighter.transform.localScale = defaultFlashlightScale;
-
-        //if (useGestureDirection) flashlightCenterCone.SetActive(true);
         flashlightCenterCone.SetActive(true);
     }
 
     private void ShrinkFlashlight()
     {
-        isHighlighting = false;
         flashlightHighlighter.transform.localScale = new Vector3(0, 0, 0);
         flashlightCenterCone.SetActive(false);
 
@@ -352,46 +309,9 @@ public class MiniMapInteractor : MonoBehaviour
     public void AddtoHighlighted(GameObject o)
     {
 
-
         allHighlightedObjects.Add(o);
-
         updateList(allHighlightedObjects);
-
-        // -----------------------Get the Distance here and then store it in the dictionary--------------------------
-       /* GameObject tobeInserted_Duplicate = origin_and_duplicate_registery[o];
-
-        //(GameObject obj, float score) bestObject = (null, -2f);
-
-        // work with one single object at a time as they are added 
-        if(tobeInserted_Duplicate != null && o != null)
-        {
-            // highlighted object in flashlight's corrdinate system
-            var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
-            objectPositionInFlashlightCoords.z = 0f;
-            objectPositionInFlashlightCoords.Normalize();
-
-            // add a temp helper
-            temp = objectPositionInFlashlightCoords;
-
-            // Dot product to measure alignment between passed direction and object's projected direction
-           /* var dot = Vector3.Dot(direction, objectPositionInFlashlightCoords);
-            if (dot > bestObject.score)
-            {
-                bestObject.obj = o;
-                bestObject.score = dot;
-            }*/
-        
-
-        // store the duplicate and the distance to be used
-       /* if (!duplicateObject_and_distance_registery.ContainsKey(tobeInserted_Duplicate))
-
-            duplicateObject_and_distance_registery.Add(tobeInserted_Duplicate, temp);
-        */
-        // ----------------------------------------------------------------------------------------------------------
-
-         //_availableCircle.addToCircleMiniMap(tobeInserted_Duplicate);
-        
-        
+              
     }
 
     public void RemoveFromHighlighted(GameObject o)
@@ -400,10 +320,6 @@ public class MiniMapInteractor : MonoBehaviour
         allHighlightedObjects.Remove(o);
 
         GameObject toberemoved = origin_and_duplicate_registery[o];
-
-        //duplicateObject_and_distance_registery.Remove(toberemoved);
-
-        //_availableCircle.removeFromCircle(toberemoved);
 
     }
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class XRGestureInteractable : MonoBehaviour
@@ -19,62 +20,32 @@ public class XRGestureInteractable : MonoBehaviour
 
     public bool debug = false;
 
-    private List<Component> listOfFiles_Components_ToBe_Used;
-
     private Component chosenComponentToBeUsedNow;
 
-    private void Awake()
+    Scene m_Scene2;
+    string m_Scene;
+    private void Start()
     {
-        // store the whole components in one list for ease of use and dynamic access/switch 
-        listOfFiles_Components_ToBe_Used = new List<Component>();
-        listOfFiles_Components_ToBe_Used.Add(gestureInteractor);
-        listOfFiles_Components_ToBe_Used.Add(secondInteractorHelper);
-        listOfFiles_Components_ToBe_Used.Add(thirdInteractorHelper);
+        m_Scene2 = SceneManager.GetActiveScene();
+        m_Scene = m_Scene2.name;
+    }
 
-
-        meshRenderers = new List<MeshRenderer>(GetComponents<MeshRenderer>());
+    private void Awake()
+    { 
+       meshRenderers = new List<MeshRenderer>(GetComponents<MeshRenderer>());
         if (meshRenderers.Count == 0)
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
 
-       /* if (secondInteractorHelper == null && thirdInteractorHelper == null)
-            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
-
-        // added to override the inability to access components through the gesture Interactor 
-        if (gestureInteractor == null && thirdInteractorHelper == null)
+        if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
 
-        // new
-        if (thirdInteractorHelper != null)*/
+        else if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
             thirdInteractorHelper  =  FindObjectOfType<MiniMapInteractor>();
+        else
+            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
 
 
-        // iterate through all the possible options to call the functions later 
-        // Suggestion ---------------------------------------------TO BE CHECKED---------------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------
-            /* for(int i = 0; i < listOfFiles_Components_ToBe_Used.Count; i++)
-             {
-                 if (listOfFiles_Components_ToBe_Used[i] == gestureInteractor && listOfFiles_Components_ToBe_Used[i] != null)
-                 {
-                     gestureInteractor =  FindObjectOfType<XRGestureFilterInteractor>();
-                     listOfFiles_Components_ToBe_Used[i] =  FindObjectOfType<XRGestureFilterInteractor>();
-                     chosenComponentToBeUsedNow = gestureInteractor;
-                 }
-                 else if (listOfFiles_Components_ToBe_Used[i] == secondInteractorHelper && listOfFiles_Components_ToBe_Used[i] != null)
-                 {
-                     secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
-                     listOfFiles_Components_ToBe_Used[i] =  FindObjectOfType<XRGridSelectorInteractor>();
-                     chosenComponentToBeUsedNow = secondInteractorHelper;
-                 }
-                 else if (listOfFiles_Components_ToBe_Used[i] == thirdInteractorHelper && listOfFiles_Components_ToBe_Used[i] != null)
-                 {
-                     thirdInteractorHelper = FindObjectOfType<MiniMapInteractor>();
-                     listOfFiles_Components_ToBe_Used[i] =  FindObjectOfType<MiniMapInteractor>();
-                     chosenComponentToBeUsedNow = thirdInteractorHelper;
-                 }
-             }*/
     }
 
     // add a getter for the meshrenderer list 
@@ -107,22 +78,13 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = hoverMaterial;
 
-        /* for(int i = 0; i < listOfFiles_Components_ToBe_Used.Count; i++)
-             if (listOfFiles_Components_ToBe_Used[i] != null)
-                 listOfFiles_Components_ToBe_Used[i].AddtoHighlighted(gameObject);
-
-         */
-       // if (thirdInteractorHelper != null)
-        {
-            thirdInteractorHelper.AddtoHighlighted(gameObject);
-            return;
-        }
-       /* if (secondInteractorHelper == null && thirdInteractorHelper == null)
-            gestureInteractor.AddtoHighlighted(gameObject);
-
-        if (gestureInteractor == null && thirdInteractorHelper == null)
+        if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper.AddtoHighlighted(gameObject);
-       */
+
+        else if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+            thirdInteractorHelper.AddtoHighlighted(gameObject);
+        else
+            gestureInteractor.AddtoHighlighted(gameObject);
     }
 
     private void EndHover()
@@ -132,17 +94,13 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = defaultMaterial;
 
-        //if (thirdInteractorHelper != null)
-        {
-            thirdInteractorHelper.RemoveFromHighlighted(gameObject);
-            return;
-        }
-       /* if (secondInteractorHelper == null && thirdInteractorHelper == null)
-            gestureInteractor.RemoveFromHighlighted(gameObject);
-
-        if (gestureInteractor == null && thirdInteractorHelper == null)
+        if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper.RemoveFromHighlighted(gameObject);
-       */
+
+        else if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+            thirdInteractorHelper.RemoveFromHighlighted(gameObject);
+        else
+            gestureInteractor.RemoveFromHighlighted(gameObject);
 
     }
 

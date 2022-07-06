@@ -35,10 +35,8 @@ public class XRGridSelectorInteractor : MonoBehaviour
     [Header("Debugging and UI")]
     [SerializeField] private TabletUI tabletUI;
 
-    //private Dictionary<string, List<GameObject>> highlightedObjectsByType;
     private List<GameObject> allHighlightedObjects;
 
-    private static bool isHighlighting = false;
     private GameObject selectedObject;
 
     [Header("Flashlight Scaling")]
@@ -82,8 +80,6 @@ public class XRGridSelectorInteractor : MonoBehaviour
         // duplicates and remove interactable 
         // plus adding the shapeItem component
 
-        // two methods found ->
-
         // Method 1 --------------------
         // uses a parent and works by accessing children and so on 
         // linear time 
@@ -91,19 +87,9 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
         _DuplicationMethod1();
 
-        // Method 2 --------------------
-        // uses list of meshrenderers from gesture interactable 
-        // linear time 
-        // space efficient 
-
-        //_DuplicationMethod2();
-
         //---------------------------
         //highlightedObjectsByType = new Dictionary<string, List<GameObject>>();
         allHighlightedObjects = new List<GameObject>();
-        // Pre-populate for O(1) type access
-        //foreach (var s in SelectionConstants.objTypeNames)
-           // highlightedObjectsByType.Add(s, new List<GameObject>());
 
         if (flashlightHighlighter == null)
             flashlightHighlighter = GameObject.Find("FlashlightCone");
@@ -256,25 +242,20 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
     private void ExtendFlashlight()
     {
-        isHighlighting = true;
+
         flashlightHighlighter.transform.localScale = defaultFlashlightScale;
 
-        //if (useGestureDirection) flashlightCenterCone.SetActive(true);
         flashlightCenterCone.SetActive(true);
     }
 
     private void ShrinkFlashlight()
     {
-        isHighlighting = false;
+
         flashlightHighlighter.transform.localScale = new Vector3(0, 0, 0);
         flashlightCenterCone.SetActive(false);
 
         // Clear hovered list
         allHighlightedObjects.Clear();
-        //foreach (var kv in highlightedObjectsByType)
-        {
-        //    kv.Value.Clear();
-        }
     }
 
     private void UpdateObjectScale()
@@ -306,19 +287,10 @@ public class XRGridSelectorInteractor : MonoBehaviour
         // get the corresponding game object from the dictionary (shape item)
         GameObject tobeInserted = origin_and_duplicate_registery[o];
 
-        //if (tobeInserted == null)
-        //{
-        //    print("this is null");
-        //    return;
-        //}
-
         Grid_Inventory_Manager helper = FindObjectOfType<Grid_Inventory_Manager>();
 
         // get the next available zone for insertion 
         GameObject _availableZone = helper.getAvailablePositions();
-
-
-        // worked till now miraculously : D 
 
         // assign both the zone and shape to dictionary 
         // if there is actually a zone to insert to 
@@ -327,9 +299,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
             if (!zone_plus_its_item.ContainsKey(tobeInserted))
             {
                 zone_plus_its_item.Add(tobeInserted, _availableZone);
-
-
-                // insert  
+ 
                 _availableZone.GetComponent<Grid_Zone>().InsertItem(tobeInserted);
             }
             

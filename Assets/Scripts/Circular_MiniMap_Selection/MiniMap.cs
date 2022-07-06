@@ -107,11 +107,12 @@ public class MiniMap : MonoBehaviour
 
             //newOffset_for_current_ObjToBeInCircle = m_Map[_objToBeInCircle].normalized;
             newOffset_for_current_ObjToBeInCircle = _objToBeInCircle2.Item2;
+
+            //debug ----------------------------
             print("newOffset_for_current_ObjToBeInCircle + " + newOffset_for_current_ObjToBeInCircle);
-            //print("newOffsetFor the current object in circle:" + newOffset_for_current_ObjToBeInCircle);
+
             // this should take care of multiplying with the radius
             newOffset_for_current_ObjToBeInCircle *= radius;
-            //print("After ->newOffsetFor the current object in circle:" + newOffset_for_current_ObjToBeInCircle);
 
             // set the position variables for ease of use / to be on the circular mini_map
             // this is just for easy access later when debugging : D
@@ -122,6 +123,8 @@ public class MiniMap : MonoBehaviour
             // real positon setting process 
             //_objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition + newOffset_for_current_ObjToBeInCircle;
             _objToBeInCircle.transform.localPosition +=  newOffset_for_current_ObjToBeInCircle;
+
+            //debug-------------------------------
             print("here : _objToBeInCircle.transform.localPosition " + _objToBeInCircle.transform.localPosition);
 
         }

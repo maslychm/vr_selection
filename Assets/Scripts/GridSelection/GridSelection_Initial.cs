@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// this shoulkd beb merged with inventory manager 
-/// </summary>
-
 public class GridSelection_Initial : MonoBehaviour
 {
 
@@ -51,6 +47,3 @@ public class GridSelection_Initial : MonoBehaviour
     }
 }
 
-// chapter for disseration
-
-// zotero

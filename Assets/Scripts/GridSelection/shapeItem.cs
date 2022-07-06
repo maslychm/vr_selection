@@ -1,9 +1,6 @@
 
 using UnityEngine;
 
-
-/// <summary>
-/// </summary>
 public class shapeItem : MonoBehaviour
 {
     public bool inZone;

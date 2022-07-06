@@ -6,10 +6,9 @@ public class shapeItem_2 : MonoBehaviour
     public Vector3 rotation = Vector3.zero;
     public MiniMap currentMap;
 
-    void start()
+    private void Start()
     {
         inCircle = false;
         currentMap = null;
     }
-
 }

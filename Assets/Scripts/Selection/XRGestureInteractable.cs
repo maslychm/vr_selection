@@ -10,9 +10,9 @@ public class XRGestureInteractable : MonoBehaviour
     // grid selector var to be used instead of gesture interactor when needed
     private XRGridSelectorInteractor secondInteractorHelper;
 
-    // add a third access helper from the MiniMap Interactor 
+    // add a third access helper from the MiniMap Interactor
     private MiniMapInteractor thirdInteractorHelper;
-    
+
     [SerializeField] private Material hoverMaterial;
 
     private Material defaultMaterial;
@@ -20,10 +20,9 @@ public class XRGestureInteractable : MonoBehaviour
 
     public bool debug = false;
 
-    private Component chosenComponentToBeUsedNow;
+    private Scene m_Scene2;
+    private string m_Scene;
 
-    Scene m_Scene2;
-    string m_Scene;
     private void Start()
     {
         m_Scene2 = SceneManager.GetActiveScene();
@@ -35,20 +34,17 @@ public class XRGestureInteractable : MonoBehaviour
             secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
         else
             gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
-
     }
 
     private void Awake()
-    { 
-       meshRenderers = new List<MeshRenderer>(GetComponents<MeshRenderer>());
+    {
+        meshRenderers = new List<MeshRenderer>(GetComponents<MeshRenderer>());
         if (meshRenderers.Count == 0)
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
-
- 
     }
 
-    // add a getter for the meshrenderer list 
+    // add a getter for the meshrenderer list
     public List<MeshRenderer> getListOfAllObjects()
     {
         return meshRenderers;
@@ -99,7 +95,6 @@ public class XRGestureInteractable : MonoBehaviour
             secondInteractorHelper.RemoveFromHighlighted(gameObject);
         else
             gestureInteractor.RemoveFromHighlighted(gameObject);
-
     }
 
     private void dprint(string msg)

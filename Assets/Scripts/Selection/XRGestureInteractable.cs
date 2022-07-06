@@ -28,6 +28,14 @@ public class XRGestureInteractable : MonoBehaviour
     {
         m_Scene2 = SceneManager.GetActiveScene();
         m_Scene = m_Scene2.name;
+
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+            thirdInteractorHelper = FindObjectOfType<MiniMapInteractor>();
+        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
+            secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
+        else
+            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
+
     }
 
     private void Awake()
@@ -37,15 +45,7 @@ public class XRGestureInteractable : MonoBehaviour
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
 
-        if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
-            secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
-
-        else if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
-            thirdInteractorHelper  =  FindObjectOfType<MiniMapInteractor>();
-        else
-            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
-
-
+ 
     }
 
     // add a getter for the meshrenderer list 
@@ -78,11 +78,10 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = hoverMaterial;
 
-        if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
-            secondInteractorHelper.AddtoHighlighted(gameObject);
-
-        else if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
             thirdInteractorHelper.AddtoHighlighted(gameObject);
+        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
+            secondInteractorHelper.AddtoHighlighted(gameObject);
         else
             gestureInteractor.AddtoHighlighted(gameObject);
     }
@@ -94,11 +93,10 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = defaultMaterial;
 
-        if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
-            secondInteractorHelper.RemoveFromHighlighted(gameObject);
-
-        else if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
             thirdInteractorHelper.RemoveFromHighlighted(gameObject);
+        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
+            secondInteractorHelper.RemoveFromHighlighted(gameObject);
         else
             gestureInteractor.RemoveFromHighlighted(gameObject);
 

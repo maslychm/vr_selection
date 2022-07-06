@@ -10,8 +10,6 @@ public class MiniMap : MonoBehaviour
 
     private Dictionary<GameObject, Transform> duplicates_and_originalPosition;
 
-   
-
     private GameObject center_Circular_Minimap;
 
     Transform centreOFminiMap; // to store the position of the centre
@@ -43,10 +41,11 @@ public class MiniMap : MonoBehaviour
         listInCircle = new List<shapeItem_2>();
 
         MiniMap_Original = this.gameObject;
-        //isActive = false;
 
         // get the center of the circle 
-        center_Circular_Minimap = MiniMap_Original.transform.GetChild(0).gameObject;
+        center_Circular_Minimap = transform.GetChild(0).gameObject;
+        //center_Circular_Minimap = MiniMap_Original.transform.parent.transform.GetChild(1).gameObject;
+
 
         // get the position of the center;
         centreOFminiMap = center_Circular_Minimap.transform;
@@ -59,7 +58,7 @@ public class MiniMap : MonoBehaviour
         foreach(shapeItem_2 o in listInCircle)
         {
 
-            o.gameObject.transform.SetParent(MiniMap_Original.transform, false);
+           // o.gameObject.transform.SetParent(MiniMap_Original.transform, false);
 
             o.inCircle = false;
 
@@ -85,19 +84,19 @@ public class MiniMap : MonoBehaviour
 
         GameObject _objToBeInCircle = _objToBeInCircle2.Item1;
         _objToBeInCircle.gameObject.SetActive(true);
-        if (_objToBeInCircle.tag == "star")
-        {
-            _objToBeInCircle.transform.localEulerAngles = new Vector3(180.0f, 0.0f, 0.0f);
-        }
-        if (_objToBeInCircle.tag == "pyramid")
-        {
-            _objToBeInCircle.transform.localEulerAngles = new Vector3(180.0f, 0.0f, 0.0f);
 
-        }
+        // maybe for the rotation these should be adjusted and removed 
 
    
-        _objToBeInCircle.transform.SetParent(MiniMap_Original.transform, true);
-        _objToBeInCircle.transform.localPosition = Vector3.zero;
+        //_objToBeInCircle.transform.SetParent(MiniMap_Original.transform, true);
+/*
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Adjustment 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        // instead of using 0 as a standard position adjuster we can directly spawn the object at the center of the circle
+        _objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition;
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> end of adj 1   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+*/
+
+       // _objToBeInCircle.transform.localPosition = Vector3.zero;
 
         // new additions here: 
         // in this process I will detail the variable usage and have helper variables to store the info 
@@ -122,7 +121,12 @@ public class MiniMap : MonoBehaviour
 
             // real positon setting process 
             //_objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition + newOffset_for_current_ObjToBeInCircle;
-            _objToBeInCircle.transform.localPosition +=  newOffset_for_current_ObjToBeInCircle;
+            _objToBeInCircle.transform.position = centreOFminiMap.transform.position;
+
+            //_objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition + newOffset_for_current_ObjToBeInCircle;
+
+           // _objToBeInCircle.transform.position += centreOFminiMap.transform.TransformPoint(newOffset_for_current_ObjToBeInCircle);
+            _objToBeInCircle.transform.localPosition += (newOffset_for_current_ObjToBeInCircle);
 
             //debug-------------------------------
             print("here : _objToBeInCircle.transform.localPosition " + _objToBeInCircle.transform.localPosition);
@@ -142,5 +146,20 @@ public class MiniMap : MonoBehaviour
         }
 
     }
+
+
+    // other potential scenario to be implemented 
+    /*
+        The object you want to change the axis on I'll call ObjectX:
+
+        create an empty GameObject
+        make the empty GameObject the child of ObjectX
+        reset the Transform of the empty GameObject (it should now center ObjectX)
+        unparent the empty GameObject
+        rotate the empty GameObject so that it's axis are the way you'd like them to be on ObjectX
+        make the empty GameObject the parent of ObjectX
+
+  
+     * */
 
 }

@@ -69,6 +69,9 @@ public class MiniMapInteractor : MonoBehaviour
 
     private static Dictionary<GameObject, Transform> duplicate_and_originalPosition;
 
+    private List<string> interactableTags = new List<string>() { "cube", "sphere", "star", "pyramid", "cylinder", "infinity" };
+
+
     public void Start()
     {
         originalToDuplicate = new Dictionary<GameObject, GameObject>();
@@ -127,12 +130,17 @@ public class MiniMapInteractor : MonoBehaviour
             Destroy(temp.GetComponent<Object_collected>());
 
             temp.AddComponent<shapeItem_2>();
-            temp.GetComponent<Rigidbody>().isKinematic = false;
+            temp.GetComponent<shapeItem_2>().original = interactable.gameObject;
+            temp.GetComponent<Rigidbody>().isKinematic = true;
+            temp.GetComponent<Rigidbody>().useGravity = false;
+
 
             originalToDuplicate.Add(original, temp);
             duplicate_and_originalPosition.Add(temp, original.transform);
 
             temp.SetActive(false);
+
+            temp.name += "subject208";
         }
     }
 
@@ -235,6 +243,24 @@ public class MiniMapInteractor : MonoBehaviour
         Gestures.Recognizer recognizer = FindObjectOfType<Gestures.Recognizer>();
         recognizer.useAsDirection = useGestureDirection;
     }
+
+
+    // ----------------------------Grab behaviour ----------------------
+
+    /*public GameObject giveOriginalFromDuplicate(GameObject temp)
+    {
+        if (interactableTags.Contains(temp.name))
+        {
+            GameObject value = temp;
+
+            GameObject original = originalToDuplicate.FirstOrDefault(searchTool => searchTool.Value == value).Key;
+
+            return original;
+        }
+
+        return null;
+    }*/
+
 
     private void ReleaseSelectedObject()
     {

@@ -34,6 +34,12 @@ public class MiniMap : MonoBehaviour
         CloseMiniMap();
     }
 
+    public void removeFromMinimapUponGrab(GameObject toBeRemoved)
+    {
+
+        toBeRemoved.SetActive(false);
+    }
+
     // Update is called once per frame
     private void Update()
     {

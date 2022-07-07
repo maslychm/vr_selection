@@ -217,6 +217,9 @@ public class MiniMapInteractor : MonoBehaviour
         if (flaslightActionReference.action.IsPressed())
         {
             UpdateObjectScale();
+
+            // fixed the first on trigger fail with this 
+            miniMap.ShowMiniMap();
         }
 
         if (flaslightActionReference.action.WasReleasedThisFrame())

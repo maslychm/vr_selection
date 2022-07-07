@@ -43,6 +43,7 @@ public class MiniMapInteractor : MonoBehaviour
     [Header("Dynamic Scaling")]
     [SerializeField] private bool scaleWithDistance;
 
+
     public Vector3 shoulderOffset;
 
     public Vector3 maxFlashlightScale;
@@ -55,6 +56,8 @@ public class MiniMapInteractor : MonoBehaviour
 
     [Header("MiniMap Selector variables")]
     public MiniMap miniMap;
+
+    [SerializeField] private bool normalizeOffsets = false;
 
     private Vector3 temp; // simple helper to store the distance later in our dictionary
 
@@ -321,9 +324,11 @@ public class MiniMapInteractor : MonoBehaviour
     public void CalculateDuplicateDirections(List<GameObject> objects)
     {
         duplicateDirections.Clear();
-
+        Vector3 max = new Vector3(-1, -1, -1);
         foreach (GameObject o in objects)
         {
+
+
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
             GameObject tobeInserted_Duplicate = originalToDuplicate[o];
 
@@ -333,14 +338,37 @@ public class MiniMapInteractor : MonoBehaviour
                 // highlighted object in flashlight's corrdinate system
                 var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
                 objectPositionInFlashlightCoords.z = 0f;
-                objectPositionInFlashlightCoords.Normalize();
+
+                if (normalizeOffsets == true)
+                    objectPositionInFlashlightCoords.Normalize();
 
                 // add a temp helper
                 temp = objectPositionInFlashlightCoords;
             }
 
+            max = Vector3.Max(max, temp);
+
             duplicateDirections.Add((tobeInserted_Duplicate, temp));
         }
+
+        // ----------------------------------
+       if (normalizeOffsets == false)
+        {
+
+            for(int i = 0; i < duplicateDirections.Count; i++)
+            {
+                Vector3 temp = duplicateDirections[i].Item2 / Vector3.Magnitude(max);
+                duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
+            }
+
+            
+    
+
+        }
+
+        // fancy way ;)
+        // yet idt it will work as its still a looping process read only hmmm
+        //  duplicateDirections.AsParallel().ForAll(entry => (entry.Value /= max));
     }
 
     public static List<(GameObject, Vector3)> GetDuplicatesAndDirections()

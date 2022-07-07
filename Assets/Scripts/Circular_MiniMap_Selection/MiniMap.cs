@@ -9,7 +9,7 @@ public class MiniMap : MonoBehaviour
     private List<(GameObject, Vector3)> m_Map;
 
     // make a radius variable that is public and can be change in the unity editor
-    [SerializeField] public float radius = 1.0f;
+    [SerializeField] public float radius = 0.2f;
 
     // this variable will change accordingly as the code gets executed
     private Vector3 newOffset_for_current_ObjToBeInCircle;
@@ -74,6 +74,7 @@ public class MiniMap : MonoBehaviour
     public void RenderObjectInDirectionOnMinimap((GameObject o, Vector3 dir) _objToBeInCircle2)
     {
         GameObject _objToBeInCircle = _objToBeInCircle2.o;
+
         newOffset_for_current_ObjToBeInCircle = _objToBeInCircle2.dir;
 
         _objToBeInCircle.gameObject.SetActive(true);

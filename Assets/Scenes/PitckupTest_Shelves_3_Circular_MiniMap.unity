@@ -4696,6 +4696,7 @@ MonoBehaviour:
   addForceOnObjectDetach: 0
   objPushForce: 20
   miniMap: {fileID: 465328142}
+  normalizeOffsets: 0
 --- !u!1 &1293807992
 GameObject:
   m_ObjectHideFlags: 0

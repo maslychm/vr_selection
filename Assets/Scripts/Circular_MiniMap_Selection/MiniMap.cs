@@ -30,13 +30,14 @@ public class MiniMap : MonoBehaviour
         // get the position of the center;
         if (!centerOfMiniMap)
             centerOfMiniMap = transform.GetChild(0).gameObject.transform;
+
+        CloseMiniMap();
     }
 
     // Update is called once per frame
     private void Update()
     {
         ClearObjectCopies();
-
         DisplayObjectCopies();
     }
 
@@ -47,7 +48,7 @@ public class MiniMap : MonoBehaviour
 
         foreach (var temp in m_Map)
         {
-            addToCircleMiniMap(temp);
+            RenderObjectInDirectionOnMinimap(temp);
             listInCircle.Add(temp.Item1.GetComponent<shapeItem_2>());
         }
     }
@@ -64,75 +65,38 @@ public class MiniMap : MonoBehaviour
         listInCircle.Clear();
     }
 
-    public void addToCircleMiniMap((GameObject, Vector3) _objToBeInCircle2)
+    public void RenderObjectInDirectionOnMinimap((GameObject o, Vector3 dir) _objToBeInCircle2)
     {
-        GameObject _objToBeInCircle = _objToBeInCircle2.Item1;
+        GameObject _objToBeInCircle = _objToBeInCircle2.o;
+        newOffset_for_current_ObjToBeInCircle = _objToBeInCircle2.dir;
+
         _objToBeInCircle.gameObject.SetActive(true);
 
-        //_objToBeInCircle.transform.SetParent(MiniMap_Original.transform, true);
-        /*
-                // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Adjustment 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                // instead of using 0 as a standard position adjuster we can directly spawn the object at the center of the circle
-                _objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition;
-                // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> end of adj 1   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        */
+        newOffset_for_current_ObjToBeInCircle *= radius;
 
-        // new additions here:
-        // in this process I will detail the variable usage and have helper variables to store the info
-        // just for usability later when we try and make this process dynamic :D
-        {
-            // now we can safely add more changes to the distance:
+        // set the position variables for ease of use / to be on the circular mini_map
+        // this is just for easy access later when debugging : D
+        adjusted_position_X = newOffset_for_current_ObjToBeInCircle.x;
+        adjusted_position_Y = newOffset_for_current_ObjToBeInCircle.y;
+        adjusted_position_Z = newOffset_for_current_ObjToBeInCircle.z;
 
-            //newOffset_for_current_ObjToBeInCircle = m_Map[_objToBeInCircle].normalized;
-            newOffset_for_current_ObjToBeInCircle = _objToBeInCircle2.Item2;
+        _objToBeInCircle.transform.position = centerOfMiniMap.transform.position;
+        _objToBeInCircle.transform.position += transform.TransformDirection(newOffset_for_current_ObjToBeInCircle);
 
-            //debug ----------------------------
-            //print("newOffset_for_current_ObjToBeInCircle + " + newOffset_for_current_ObjToBeInCircle);
-
-            // this should take care of multiplying with the radius
-            newOffset_for_current_ObjToBeInCircle *= radius;
-
-            // set the position variables for ease of use / to be on the circular mini_map
-            // this is just for easy access later when debugging : D
-            adjusted_position_X = newOffset_for_current_ObjToBeInCircle.x;
-            adjusted_position_Y = newOffset_for_current_ObjToBeInCircle.y;
-            adjusted_position_Z = newOffset_for_current_ObjToBeInCircle.z;
-
-            // real positon setting process
-            //_objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition + newOffset_for_current_ObjToBeInCircle;
-            _objToBeInCircle.transform.position = centerOfMiniMap.transform.position;
-
-            //_objToBeInCircle.transform.localPosition = center_Circular_Minimap.transform.localPosition + newOffset_for_current_ObjToBeInCircle;
-
-            // _objToBeInCircle.transform.position += centreOFminiMap.transform.TransformPoint(newOffset_for_current_ObjToBeInCircle);
-            _objToBeInCircle.transform.localPosition += (newOffset_for_current_ObjToBeInCircle);
-
-            //debug-------------------------------
-            //print("here : _objToBeInCircle.transform.localPosition " + _objToBeInCircle.transform.localPosition);
-        }
-        // end of the core change for the current selection method
+        _objToBeInCircle.GetComponent<shapeItem_2>().currentMap = this;
 
         _objToBeInCircle.transform.rotation = transform.rotation;
-        _objToBeInCircle.GetComponent<shapeItem_2>().currentMap = this;
 
         if (_objToBeInCircle.tag == "infinity")
         {
-            _objToBeInCircle.transform.localEulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
+            _objToBeInCircle.transform.Rotate(Vector3.right, 90f);
+        }
+
+        if (_objToBeInCircle.tag == "pyramid")
+        {
+            _objToBeInCircle.transform.Rotate(Vector3.right, -90f);
         }
     }
-
-    // other potential scenario to be implemented
-    /*
-        The object you want to change the axis on I'll call ObjectX:
-
-        create an empty GameObject
-        make the empty GameObject the child of ObjectX
-        reset the Transform of the empty GameObject (it should now center ObjectX)
-        unparent the empty GameObject
-        rotate the empty GameObject so that it's axis are the way you'd like them to be on ObjectX
-        make the empty GameObject the parent of ObjectX
-
-     * */
 
     public void ShowMiniMap()
     {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,39 +56,26 @@ public class MiniMapInteractor : MonoBehaviour
     [Header("MiniMap Selector variables")]
     public MiniMap miniMap;
 
-    public GameObject currentShapeParent;
-
     private Vector3 temp; // simple helper to store the distance later in our dictionary
 
     // declare the dictionary
     // initial one (key) will be a game object that contains the gesture interactable compoenent
     // the second one (value) will be the game object that has the shape item component
-    private Dictionary<GameObject, GameObject> origin_and_duplicate_registery;
+    private Dictionary<GameObject, GameObject> originalToDuplicate;
 
     // declare a dictionary to hold the duplicates and their distances
     // set it to private for now
-    private static List<(GameObject, Vector3)> duplicateObject_and_distance_registery;
+    private static List<(GameObject, Vector3)> duplicateDirections;
 
     private static Dictionary<GameObject, Transform> duplicate_and_originalPosition;
 
     public void Start()
     {
-        // initialize the dictionary
-        origin_and_duplicate_registery = new Dictionary<GameObject, GameObject>();
-
-        // initilizer the object and distance dictionary
-        duplicateObject_and_distance_registery = new List<(GameObject, Vector3)>();
-
+        originalToDuplicate = new Dictionary<GameObject, GameObject>();
+        duplicateDirections = new List<(GameObject, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
 
-        // duplicates and remove interactable
-        // plus adding the shapeItem component
-
-        // Method 1 --------------------
-        // uses a parent and works by accessing children and so on
-        // linear time
-        // space efficient
-        _DuplicationMethod1();
+        CreateDuplicatesForMiniMap();
 
         allHighlightedObjects = new List<GameObject>();
 
@@ -103,10 +91,62 @@ public class MiniMapInteractor : MonoBehaviour
             tabletUI.SetTabletActive(debug);
     }
 
-    // refer to start function for explanation
-    // ----------------------------------------------------------------------------------------------------------
+    private void CreateDuplicatesForMiniMap()
+    {
+        List<XRGestureInteractable> originalInteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
+        foreach (var interactable in originalInteractables)
+        {
+            GameObject original = interactable.gameObject;
+            GameObject temp = Instantiate(original);
+            Destroy(temp.GetComponent<XRGestureInteractable>());
+
+            if (temp.CompareTag("star"))
+            {
+                temp.transform.localScale = new Vector3(20, 20, 20);
+            }
+            if (temp.CompareTag("pyramid"))
+            {
+                temp.transform.localScale = new Vector3(5, 5, 5);
+            }
+            if (temp.CompareTag("infinity"))
+            {
+                temp.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            }
+            if (temp.CompareTag("cube") || temp.CompareTag("sphere") || temp.CompareTag("cylinder"))
+            {
+                temp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            }
+
+            // Destroy only the collider not intended for selection
+            foreach (var c in temp.GetComponents<Collider>())
+            {
+                if (!c.isTrigger)
+                    Destroy(c);
+            }
+
+            Destroy(temp.GetComponent<Object_collected>());
+
+            temp.AddComponent<shapeItem_2>();
+            temp.GetComponent<Rigidbody>().isKinematic = false;
+
+            originalToDuplicate.Add(original, temp);
+            duplicate_and_originalPosition.Add(temp, original.transform);
+
+            temp.SetActive(false);
+        }
+    }
+
+    /*
     public void _DuplicationMethod1()
     {
+        // duplicates and remove interactable
+        // plus adding the shapeItem component
+
+        // Method 1 --------------------
+        // uses a parent and works by accessing children and so on
+        // linear time
+        // space efficient
+
         // first we need to get the number of shapes that can be duplicaed
         int children = currentShapeParent.transform.childCount;
 
@@ -129,14 +169,13 @@ public class MiniMapInteractor : MonoBehaviour
             {
                 temp.transform.localScale = new Vector3(5, 5, 5);
             }
-            if (temp.tag != "star" && temp.tag != "pyramid")
+            if (temp.tag == "infinity")
             {
-                if (temp.tag == "infinity")
-                {
-                    temp.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-                }
-                else
-                    temp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                temp.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            }
+            if (temp.tag == "cube" || temp.tag == "sphere" || temp.tag == "cylinder")
+            {
+                temp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             }
 
             Destroy(temp.GetComponent<Rigidbody>());
@@ -155,6 +194,7 @@ public class MiniMapInteractor : MonoBehaviour
             duplicate_and_originalPosition.Add(temp, _original.transform);
         }
     }
+    */
 
     // -----------------------------------------------------------------------------------------------------------
 
@@ -251,12 +291,12 @@ public class MiniMapInteractor : MonoBehaviour
 
     public void CalculateDuplicateDirections(List<GameObject> objects)
     {
-        duplicateObject_and_distance_registery.Clear();
+        duplicateDirections.Clear();
 
         foreach (GameObject o in objects)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
-            GameObject tobeInserted_Duplicate = origin_and_duplicate_registery[o];
+            GameObject tobeInserted_Duplicate = originalToDuplicate[o];
 
             // work with one single object at a time as they are added
             if (tobeInserted_Duplicate != null && o != null)
@@ -270,13 +310,13 @@ public class MiniMapInteractor : MonoBehaviour
                 temp = objectPositionInFlashlightCoords;
             }
 
-            duplicateObject_and_distance_registery.Add((tobeInserted_Duplicate, temp));
+            duplicateDirections.Add((tobeInserted_Duplicate, temp));
         }
     }
 
     public static List<(GameObject, Vector3)> GetDuplicatesAndDirections()
     {
-        return duplicateObject_and_distance_registery;
+        return duplicateDirections;
     }
 
     public static Dictionary<GameObject, Transform> GetDuplicatesAndOriginalPositions()
@@ -285,8 +325,6 @@ public class MiniMapInteractor : MonoBehaviour
     }
 
     #region CALLABLE BY INTERACTABLES
-
-    
 
     public void AddtoHighlighted(GameObject o)
     {

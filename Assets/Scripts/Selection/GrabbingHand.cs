@@ -33,7 +33,7 @@ public class GrabbingHand : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if (interactableTags.Contains(col.tag) && objectInHand == null && grabActionReference.action.WasPressedThisFrame())
+        if (col.gameObject.GetComponent<shapeItem_2>() && objectInHand == null && grabActionReference.action.WasPressedThisFrame())
         {
             GameObject original = col.gameObject.GetComponent<shapeItem_2>().original;
             GameObject duplicate = col.gameObject;
@@ -59,8 +59,8 @@ public class GrabbingHand : MonoBehaviour
             return;
 
         objectInHand.transform.parent = null;
-        objectInHand.GetComponent<Rigidbody>().useGravity = true;
-        objectInHand.GetComponent<Rigidbody>().isKinematic = false;
+        //objectInHand.GetComponent<Rigidbody>().useGravity = true;
+        //objectInHand.GetComponent<Rigidbody>().isKinematic = false;
 
         if (addForceOnObjectDetach)
         {

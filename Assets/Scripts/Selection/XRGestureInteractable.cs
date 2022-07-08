@@ -28,7 +28,7 @@ public class XRGestureInteractable : MonoBehaviour
         m_Scene2 = SceneManager.GetActiveScene();
         m_Scene = m_Scene2.name;
 
-        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2")
             thirdInteractorHelper = FindObjectOfType<MiniMapInteractor>();
         else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
@@ -74,7 +74,7 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = hoverMaterial;
 
-        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2")
             thirdInteractorHelper.AddtoHighlighted(gameObject);
         else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper.AddtoHighlighted(gameObject);
@@ -89,7 +89,7 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = defaultMaterial;
 
-        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap")
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2")
             thirdInteractorHelper.RemoveFromHighlighted(gameObject);
         else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper.RemoveFromHighlighted(gameObject);

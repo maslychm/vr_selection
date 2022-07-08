@@ -43,16 +43,12 @@ public class MiniMapInteractor : MonoBehaviour
     [Header("Dynamic Scaling")]
     [SerializeField] private bool scaleWithDistance;
 
-
     public Vector3 shoulderOffset;
 
     public Vector3 maxFlashlightScale;
 
     [Header("Other")]
     public bool debug = false;
-
-    public bool addForceOnObjectDetach = false;
-    public float objPushForce = 20.0f;
 
     [Header("MiniMap Selector variables")]
     public MiniMap miniMap;
@@ -73,7 +69,6 @@ public class MiniMapInteractor : MonoBehaviour
     private static Dictionary<GameObject, Transform> duplicate_and_originalPosition;
 
     private List<string> interactableTags = new List<string>() { "cube", "sphere", "star", "pyramid", "cylinder", "infinity" };
-
 
     public void Start()
     {
@@ -137,7 +132,6 @@ public class MiniMapInteractor : MonoBehaviour
             temp.GetComponent<Rigidbody>().isKinematic = true;
             temp.GetComponent<Rigidbody>().useGravity = false;
 
-
             originalToDuplicate.Add(original, temp);
             duplicate_and_originalPosition.Add(temp, original.transform);
 
@@ -147,68 +141,6 @@ public class MiniMapInteractor : MonoBehaviour
         }
     }
 
-    /*
-    public void _DuplicationMethod1()
-    {
-        // duplicates and remove interactable
-        // plus adding the shapeItem component
-
-        // Method 1 --------------------
-        // uses a parent and works by accessing children and so on
-        // linear time
-        // space efficient
-
-        // first we need to get the number of shapes that can be duplicaed
-        int children = currentShapeParent.transform.childCount;
-
-        // --- duplicate---
-        // and destroy the extra script coponent
-        for (int i = 0; i < children; i++)
-        {
-            GameObject _original = currentShapeParent.transform.GetChild(i).gameObject;
-            GameObject temp = Instantiate(_original);
-            Component scriptToBeDestroyed = temp.GetComponent<XRGestureInteractable>();
-            Destroy(scriptToBeDestroyed);
-
-            // extra items for deletion
-            //temp.GetComponent<Rigidbody>().isKinematic = false;
-            if (temp.tag == "star")
-            {
-                temp.transform.localScale = new Vector3(20, 20, 20);
-            }
-            if (temp.tag == "pyramid")
-            {
-                temp.transform.localScale = new Vector3(5, 5, 5);
-            }
-            if (temp.tag == "infinity")
-            {
-                temp.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-            }
-            if (temp.tag == "cube" || temp.tag == "sphere" || temp.tag == "cylinder")
-            {
-                temp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            }
-
-            Destroy(temp.GetComponent<Rigidbody>());
-            Destroy(temp.GetComponent<Collider>());
-            Destroy(temp.GetComponent<Object_collected>());
-
-            // add item shape script component
-            // modified this....................
-            // to differentiate from the GridSelection Process
-            temp.AddComponent<shapeItem_2>();
-
-            // add to dictionary (still need to figure out how this is clearly making the items distinguishable later!!! )
-            origin_and_duplicate_registery.Add(_original, temp);
-
-            //store the duplicate and its original position
-            duplicate_and_originalPosition.Add(temp, _original.transform);
-        }
-    }
-    */
-
-    // -----------------------------------------------------------------------------------------------------------
-
     private void Update()
     {
         ProcessInput();
@@ -217,8 +149,6 @@ public class MiniMapInteractor : MonoBehaviour
 
     private void ProcessInput()
     {
-        // make changes to allow the presend and abscense of the circular mini map in a
-        // controlled way
         if (flaslightActionReference.action.WasPressedThisFrame())
         {
             ExtendFlashlight();
@@ -227,17 +157,13 @@ public class MiniMapInteractor : MonoBehaviour
 
         if (flaslightActionReference.action.IsPressed())
         {
-            UpdateObjectScale();
-
-            // fixed the first on trigger fail with this 
-            miniMap.ShowMiniMap();
+            UpdateFlashlightScale();
         }
 
         if (flaslightActionReference.action.WasReleasedThisFrame())
         {
             ShrinkFlashlight();
             miniMap.CloseMiniMap();
-            ReleaseSelectedObject();
         }
     }
 
@@ -245,50 +171,6 @@ public class MiniMapInteractor : MonoBehaviour
     {
         Gestures.Recognizer recognizer = FindObjectOfType<Gestures.Recognizer>();
         recognizer.useAsDirection = useGestureDirection;
-    }
-
-
-    // ----------------------------Grab behaviour ----------------------
-
-    /*public GameObject giveOriginalFromDuplicate(GameObject temp)
-    {
-        if (interactableTags.Contains(temp.name))
-        {
-            GameObject value = temp;
-
-            GameObject original = originalToDuplicate.FirstOrDefault(searchTool => searchTool.Value == value).Key;
-
-            return original;
-        }
-
-        return null;
-    }*/
-
-
-    private void ReleaseSelectedObject()
-    {
-        if (selectedObject == null)
-            return;
-
-        selectedObject.transform.parent = null;
-        selectedObject.GetComponent<Rigidbody>().useGravity = true;
-        selectedObject.GetComponent<Rigidbody>().isKinematic = false;
-
-        if (addForceOnObjectDetach)
-        {
-            Vector3 applyForce = selectedObject.transform.forward * objPushForce;
-            selectedObject.GetComponent<Rigidbody>().AddForce(applyForce, ForceMode.Impulse);
-        }
-
-        selectedObject = null;
-    }
-
-    private void PickupObject(GameObject o)
-    {
-        o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
-        o.transform.parent = attachTransform;
-        o.GetComponent<Rigidbody>().useGravity = false;
-        o.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     private void ExtendFlashlight()
@@ -299,14 +181,14 @@ public class MiniMapInteractor : MonoBehaviour
 
     private void ShrinkFlashlight()
     {
-        flashlightHighlighter.transform.localScale = new Vector3(0, 0, 0);
+        flashlightHighlighter.transform.localScale = Vector3.zero;
         flashlightCenterCone.SetActive(false);
 
         // Clear hovered list
         allHighlightedObjects.Clear();
     }
 
-    private void UpdateObjectScale()
+    private void UpdateFlashlightScale()
     {
         if (!scaleWithDistance)
             return;
@@ -327,8 +209,6 @@ public class MiniMapInteractor : MonoBehaviour
         Vector3 max = new Vector3(-1, -1, -1);
         foreach (GameObject o in objects)
         {
-
-
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
             GameObject tobeInserted_Duplicate = originalToDuplicate[o];
 
@@ -351,24 +231,16 @@ public class MiniMapInteractor : MonoBehaviour
             duplicateDirections.Add((tobeInserted_Duplicate, temp));
         }
 
-        // ----------------------------------
-       if (normalizeOffsets == false)
+        if (normalizeOffsets == false)
         {
-
-            for(int i = 0; i < duplicateDirections.Count; i++)
+            for (int i = 0; i < duplicateDirections.Count; i++)
             {
                 Vector3 temp = duplicateDirections[i].Item2 / Vector3.Magnitude(max);
                 duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
+
+                // TODO try dividing by current flashlight scale times some factor
             }
-
-            
-    
-
         }
-
-        // fancy way ;)
-        // yet idt it will work as its still a looping process read only hmmm
-        //  duplicateDirections.AsParallel().ForAll(entry => (entry.Value /= max));
     }
 
     public static List<(GameObject, Vector3)> GetDuplicatesAndDirections()

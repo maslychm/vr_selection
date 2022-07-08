@@ -1,89 +1,50 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GrabbingHand : MonoBehaviour
 {
-
     [SerializeField] private InputActionReference grabActionReference;
     [SerializeField] private Transform attachTransform;
     private List<string> interactableTags = new List<string>() { "cube", "sphere", "star", "pyramid", "cylinder", "infinity" };
-    public  bool isOnHand;
+
     public MiniMap temp;
     public MiniMapInteractor temp2;
 
     public bool addForceOnObjectDetach = true;
     public float objPushForce = 20.0f;
 
-    public GameObject onHand;
-    // Start is called before the first frame update
-    void Start()
-    {
+    public GameObject objectInHand;
 
-        isOnHand = false;
-        onHand = null;
+    private void Start()
+    {
+        objectInHand = null;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        if (grabActionReference.action.WasPressedThisFrame())
-        {
-            print("clickedTriggerButton*********************");
-        }
+        if (grabActionReference.action.WasPressedThisFrame()) { }
 
         if (grabActionReference.action.WasReleasedThisFrame())
         {
-            releaseCurrentlyHeldObject();
+            ReleaseCurrentlyHeldObject();
         }
     }
 
     private void OnTriggerStay(Collider col)
     {
-
-        print("This was reached >>>>>>>>>>>>>");
-        if (onHand == null && grabActionReference.action.WasPressedThisFrame() && isOnHand == false)
+        if (interactableTags.Contains(col.tag) && objectInHand == null && grabActionReference.action.WasPressedThisFrame())
         {
-
-            print("Grabbed Object currently*******");
             GameObject original = col.gameObject.GetComponent<shapeItem_2>().original;
             GameObject duplicate = col.gameObject;
-            temp.removeFromMinimapUponGrab(duplicate);
+            temp.RemoveFromMinimapUponGrab(duplicate);
 
             PickupObject(original);
 
-            onHand = original;
-            isOnHand = true;
-
+            objectInHand = original;
         }
     }
-/*
-    private void OnTriggerEnter(Collider col)
-    {
 
-        if (onHand == null && grabActionReference.action.WasPressedThisFrame() && isOnHand == false)
-        {
-
-            print("Grabbed Object currently*******");
-            GameObject original = col.gameObject.GetComponent<shapeItem_2>().original;
-            GameObject duplicate = col.gameObject;
-            temp.removeFromMinimapUponGrab(duplicate);
-
-            PickupObject(original);
-
-            onHand = original;
-            isOnHand = true;
-
-        }
-    }*/
-    private void OnTriggerExit(Collider col)
-    {
-
-
-            print("Exited the pyramid");
-    }
     private void PickupObject(GameObject o)
     {
         o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
@@ -92,25 +53,21 @@ public class GrabbingHand : MonoBehaviour
         o.GetComponent<Rigidbody>().isKinematic = true;
     }
 
-    private void releaseCurrentlyHeldObject()
+    private void ReleaseCurrentlyHeldObject()
     {
-
-        
-        if (onHand == null && isOnHand == false)
+        if (objectInHand == null)
             return;
 
-        print("Being released now *****");
-        onHand.transform.parent = null;
-        onHand.GetComponent<Rigidbody>().useGravity = true;
-        onHand.GetComponent<Rigidbody>().isKinematic = false;
+        objectInHand.transform.parent = null;
+        objectInHand.GetComponent<Rigidbody>().useGravity = true;
+        objectInHand.GetComponent<Rigidbody>().isKinematic = false;
 
         if (addForceOnObjectDetach)
         {
-            Vector3 applyForce = onHand.transform.forward * objPushForce;
-            onHand.GetComponent<Rigidbody>().AddForce(applyForce, ForceMode.Impulse);
+            Vector3 applyForce = objectInHand.transform.forward * objPushForce;
+            objectInHand.GetComponent<Rigidbody>().AddForce(applyForce, ForceMode.Impulse);
         }
 
-        onHand = null;
-        isOnHand = false;
+        objectInHand = null;
     }
 }

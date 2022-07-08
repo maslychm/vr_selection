@@ -20,6 +20,8 @@ public class MiniMap : MonoBehaviour
 
     private List<shapeItem_2> listInCircle;
 
+    private Vector3 trashLocation = new Vector3(1000, 1000, 1000);
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -30,14 +32,11 @@ public class MiniMap : MonoBehaviour
         // get the position of the center;
         if (!centerOfMiniMap)
             centerOfMiniMap = transform.GetChild(0).gameObject.transform;
-
-        CloseMiniMap();
     }
 
-    public void removeFromMinimapUponGrab(GameObject toBeRemoved)
+    public void RemoveFromMinimapUponGrab(GameObject toBeRemoved)
     {
-
-        toBeRemoved.SetActive(false);
+        MoveToTrash(toBeRemoved);
     }
 
     // Update is called once per frame
@@ -65,7 +64,9 @@ public class MiniMap : MonoBehaviour
         {
             o.inCircle = false;
             o.currentMap = null;
-            o.gameObject.SetActive(false);
+
+            // Deactivating causes multiple triggers, so move far away instead
+            MoveToTrash(o.gameObject);
         }
 
         listInCircle.Clear();
@@ -103,6 +104,11 @@ public class MiniMap : MonoBehaviour
         {
             _objToBeInCircle.transform.Rotate(Vector3.right, -90f);
         }
+    }
+
+    private void MoveToTrash(GameObject o)
+    {
+        o.transform.position = trashLocation;
     }
 
     public void ShowMiniMap()

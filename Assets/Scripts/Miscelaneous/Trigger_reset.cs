@@ -7,19 +7,8 @@ public class Trigger_reset : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (interactableTags.Contains(collider.tag))
+        if (interactableTags.Contains(collider.tag) && !collider.name.Contains("subject208"))
         {
-            if (collider.name.Contains("subject208"))
-                return;
-            // in case for some reason it gets deleted from the original object
-            // add the component and then reset the object then return
-         /*   if (collider.gameObject.GetComponent<Object_collected>() == null)
-            {
-                collider.gameObject.AddComponent<Object_collected>();
-                collider.gameObject.GetComponent<Object_collected>().ResetGameObject();
-                return;
-            }*/
-
             // if the component exists then in that case simply reset the game object
             collider.gameObject.GetComponent<Object_collected>().ResetGameObject();
         }

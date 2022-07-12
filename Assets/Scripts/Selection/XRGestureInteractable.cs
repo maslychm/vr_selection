@@ -13,6 +13,8 @@ public class XRGestureInteractable : MonoBehaviour
     // add a third access helper from the MiniMap Interactor
     private MiniMapInteractor thirdInteractorHelper;
 
+    private LenSelectInteractor LenSelectInteractorHelper;
+
     [SerializeField] private Material hoverMaterial;
 
     private Material defaultMaterial;
@@ -32,6 +34,8 @@ public class XRGestureInteractable : MonoBehaviour
             thirdInteractorHelper = FindObjectOfType<MiniMapInteractor>();
         else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
+        else if (m_Scene == "LenSelect_Implementation")
+            LenSelectInteractorHelper = FindObjectOfType<LenSelectInteractor>();
         else
             gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
     }
@@ -69,6 +73,10 @@ public class XRGestureInteractable : MonoBehaviour
 
     private void StartHover()
     {
+
+
+
+
         dprint($"Start hover: {this.name}");
 
         foreach (var mr in meshRenderers)
@@ -78,6 +86,11 @@ public class XRGestureInteractable : MonoBehaviour
             thirdInteractorHelper.AddtoHighlighted(gameObject);
         else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper.AddtoHighlighted(gameObject);
+        else if (m_Scene == "LenSelect_Implementation")
+        {
+            LenSelectInteractorHelper.AddtoHighlighted(gameObject);
+
+        }
         else
             gestureInteractor.AddtoHighlighted(gameObject);
     }
@@ -93,6 +106,8 @@ public class XRGestureInteractable : MonoBehaviour
             thirdInteractorHelper.RemoveFromHighlighted(gameObject);
         else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
             secondInteractorHelper.RemoveFromHighlighted(gameObject);
+        else if (m_Scene == "LenSelect_Implementation")
+            LenSelectInteractorHelper.RemoveFromHighlighted(gameObject);
         else
             gestureInteractor.RemoveFromHighlighted(gameObject);
     }

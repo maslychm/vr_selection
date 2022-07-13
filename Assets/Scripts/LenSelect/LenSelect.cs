@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// -> Implements lenselect based on Combined Scaling approach mentioned in their paper
-/// -> Implements lenselect based on Linear Scaling too (using a checkbox)
+/// -> Implements lenselect based on Linear Scaling too
 /// </summary>
 public class LenSelect : MonoBehaviour
 {
@@ -71,69 +70,39 @@ public class LenSelect : MonoBehaviour
         LinearScaling = true;
         allHighlightedObjects = LenSelectInteractor.getAllHighlighted();
         ObjectsToBeSetBackToOriginalSize = LenSelectInteractor.getAllObjectsExitedTheCone();
-       if (LinearScaling == false)
-            automaticResizerInCone();
-        else
-            automaticResizerInCone_LinearScaling();
-
-
-        OriginalPositionResetter();
     }
 
     public void OriginalPositionResetter()
     {
         if(ObjectsToBeSetBackToOriginalSize.Count > 0)
         {
-            Vector3 originalPosition;
 
-            for(int i = 0; i < ObjectsToBeSetBackToOriginalSize.Count; i++)
+            Vector3 originalScale;
+            for (int i = 0; i < allHighlightedObjects.Count; i++)
             {
-                GameObject temp = ObjectsToBeSetBackToOriginalSize[i];
-                originalPosition = OriginalTransform[temp];
-               
-                temp.transform.position = originalPosition;
 
-                temp.transform.localScale = originalPosition;
+
+                if (ObjectsToBeSetBackToOriginalSize.Contains(allHighlightedObjects[i]))
+                {
+                    allHighlightedObjects.Remove(allHighlightedObjects[i]);
+                }
+
+            }
+
+            for (int i = 0; i < ObjectsToBeSetBackToOriginalSize.Count; i++)
+            {
+
+
+                print("resizing process reached and resiwing : " + ObjectsToBeSetBackToOriginalSize[i]);
+                GameObject temp = ObjectsToBeSetBackToOriginalSize[i];
+
+                originalScale = OriginalTransform[temp];
+
+                temp.transform.localScale = originalScale;
             }
         }
     }
-    // create a function to resiwe our shapes as they are in the cone
-    public void automaticResizerInCone()
-    {
 
-     /*   // this will get the distances of each object and store it 
-        // distance from the object to the centre ray
-        CalculateDistanceHelper();
-
-        for(int i = 0; i<allHighlightedObjects.Count; i++)
-        {
-            if(transformPointReference[allHighlightedObjects[i]].magnitude < n.magnitude)
-            {
-                continue;
-            }
-            getConeRadius(allHighlightedObjects[i]);
-
-            // normalize the distance based on the suggested normalization
-            float t1, t2, t3;
-           /* t1 = directionReference[allHighlightedObjects[i]].x / ConeRadius.x;
-            t2 = directionReference[allHighlightedObjects[i]].y / ConeRadius.y;
-            t3 = directionReference[allHighlightedObjects[i]].z / ConeRadius.z;
-           */
-         /*   dn = new Vector3(t1, t2, t3);
-
-            float Sx = 1 + (1 - Mathf.Pow(dn.x, 1.0f / 4)) * (Ss.x - 1);
-            float Sy = 1 + (1 - Mathf.Pow(dn.y, 1.0f / 4)) * (Ss.y - 1);
-            float Sz = 1 + (1 - Mathf.Pow(dn.z, 1.0f / 4)) * (Ss.z - 1);
-
-            // after updating this we store the values in the appropriate vector3
-            S = new Vector3(Sx, Sy, Sz);
-
-            OriginalTransform.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform);
-
-            allHighlightedObjects[i].transform.localScale = S;
-        }*/
-
-    }
     /// <summary>        
     /// need to get fu -> the extent of the frustum at the distance of the object to the camera 
     /// need to get fn -> consider the ratio between the extents of the view frustum at the focus depth
@@ -151,20 +120,10 @@ public class LenSelect : MonoBehaviour
     }
     public void getConeRadius(GameObject o)
     {
-        Vector3 temp, helper_1, helper_2, d, u_squared;
+        Vector3 temp;
         temp = directionReference[o];
-        /*helper_1 = Vector3.Scale(temp, temp);
-        d = directionReference[o];
-        helper_2 = Vector3.Scale(d, d);
-        u_squared = helper_1 - helper_2;
-
-        Vector3 u = new Vector3(Mathf.Sqrt(u_squared.x), Mathf.Sqrt(u_squared.y), Mathf.Sqrt(u_squared.z));*/
 
         ConeRadius = temp.z  * Mathf.Tan(openingAngle);
-    }
-    public void getConeRadiusv2(GameObject o)
-    {
-
     }
     public void  CalculateDistanceHelper()
     {
@@ -212,15 +171,14 @@ public class LenSelect : MonoBehaviour
         CalculateDistanceHelper();
         for (int i = 0; i < allHighlightedObjects.Count; i++)
         {
-           // if (transformPointReference[allHighlightedObjects[i]].magnitude < n.magnitude)
-           // {
-            //    continue;
-          //  }
+            if (transformPointReference[allHighlightedObjects[i]].magnitude < n.magnitude)
+            {
+                continue;
+            }
             getConeRadius(allHighlightedObjects[i]);
-            //getConeRadiusv2(allHighlightedObjects[i]);
 
             // normalize the distance based on the suggested normalization
-            float t1, t2, t3;
+            float t1;
             t1 = magnitudes[allHighlightedObjects[i]];
             print("radius : " + ConeRadius + "magnitude t1 : " + t1);
             dn = t1 / ConeRadius;
@@ -237,21 +195,10 @@ public class LenSelect : MonoBehaviour
 
             float S_v1 = 1 + (1 - dn) * (2 - 1);
 
-
-            //  float Sx = 1 + (1 - dn.x) * (Sm.x - 1);
-            //   float Sy = 1 + (1 - dn.y) * (Sm.y - 1);
-            // float Sz = 1 + (1 - dn.z) * (Sm.z - 1);
-
-            // after updating this we store the values in the appropriate vector3
-            //S = new Vector3(Sx, Sy, Sz);
-
             //Vector3 S_V2 = new Vector3(Sx1, Sy1, Sz1);
             if (!OriginalTransform.ContainsKey(allHighlightedObjects[i]))
                 OriginalTransform.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform.localScale);
-           // else
-             //   OriginalTransform[allHighlightedObjects[i]] = allHighlightedObjects[i].transform.localScale;
 
-            //allHighlightedObjects[i].transform.localScale = S;
             print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
             print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);
             allHighlightedObjects[i].transform.localScale = OriginalTransform[allHighlightedObjects[i]] * S_v1 ;

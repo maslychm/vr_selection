@@ -247,7 +247,6 @@ public class LenSelectInteractor : MonoBehaviour
                 Vector3 temp = duplicateDirections[i].Item2 / Vector3.Magnitude(max);
                 duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
 
-                // TODO try dividing by current flashlight scale times some factor
             }
         }
     }
@@ -263,14 +262,26 @@ public class LenSelectInteractor : MonoBehaviour
     }
 
     #region CALLABLE BY INTERACTABLES
+    System.Collections.IEnumerator CoroutineHelper()
+    {
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
+        //yield on a new YieldInstruction that waits for 2 second.
+        yield return new WaitForSeconds(3);
+
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    }
     public void AddtoHighlighted(GameObject o)
     {
         allHighlightedObjects.Add(o);
         addtoHighlightedV2.Add(o);
-        // increase their size here 
 
-        // add a yield return 
+
+        StartCoroutine(CoroutineHelper());
+        // increase their size here 
+        LenSelect.automaticResizerInCone_LinearScaling();
+
+      
         if (ObjectsToBeSetBackToOriginalSize.Contains(o))
             ObjectsToBeSetBackToOriginalSize.Remove(o);
     }
@@ -282,7 +293,10 @@ public class LenSelectInteractor : MonoBehaviour
 
         // call the resize function in reverse 
         // add a yield returnb 
-        // 1s
+
+        StartCoroutine(CoroutineHelper());
+
+        LenSelect.OriginalPositionResetter();
     }
 
     public static List<GameObject> getAllHighlighted()

@@ -95,10 +95,12 @@ public class LenSelect : MonoBehaviour
 
                 print("resizing process reached and resiwing : " + ObjectsToBeSetBackToOriginalSize[i]);
                 GameObject temp = ObjectsToBeSetBackToOriginalSize[i];
+                if (OriginalTransform.ContainsKey(temp))
+                {
+                    originalScale = OriginalTransform[temp];
 
-                originalScale = OriginalTransform[temp];
-
-                temp.transform.localScale = originalScale;
+                    temp.transform.localScale = originalScale;
+                }
             }
         }
     }
@@ -153,9 +155,6 @@ public class LenSelect : MonoBehaviour
                 else
                     magnitudes[o] = t1;
 
-                Vector3 temp = objectPositionInFlashlightCoords;
-                max = Vector3.Max(max, temp);
-
                 if (!directionReference.ContainsKey(o))
                     directionReference.Add(o, objectPositionInFlashlightCoords);
                 else
@@ -163,7 +162,7 @@ public class LenSelect : MonoBehaviour
             }
             
         }
-        getMaximumScale(max);
+
     }
 
     public void automaticResizerInCone_LinearScaling()
@@ -171,39 +170,39 @@ public class LenSelect : MonoBehaviour
         CalculateDistanceHelper();
         for (int i = 0; i < allHighlightedObjects.Count; i++)
         {
-            if (transformPointReference[allHighlightedObjects[i]].magnitude < n.magnitude)
+            if (transformPointReference.ContainsKey(allHighlightedObjects[i]) && transformPointReference[allHighlightedObjects[i]].magnitude > n.magnitude)
             {
-                continue;
+
+
+                getConeRadius(allHighlightedObjects[i]);
+
+                // normalize the distance based on the suggested normalization
+                float t1;
+                t1 = magnitudes[allHighlightedObjects[i]];
+                print("radius : " + ConeRadius + "magnitude t1 : " + t1);
+                dn = t1 / ConeRadius;
+
+                Vector3 dnV2Helper = (directionReference[allHighlightedObjects[i]]);
+                // s, depends linearly on a user-defined maximum scaling factor sm>1.
+                // Where 1−dn describes how much of sm is applied to the final scale.
+                Sm = new Vector3(2, 2, 2);
+
+                // without dividing by radius 
+                float Sx1 = 1 + (1 - dnV2Helper.x) * (Sm.x - 1);
+                float Sy1 = 1 + (1 - dnV2Helper.y) * (Sm.y - 1);
+                float Sz1 = 1 + (1 - dnV2Helper.z) * (Sm.z - 1);
+
+                float S_v1 = 1 + (1 - dn) * (2 - 1);
+
+                //Vector3 S_V2 = new Vector3(Sx1, Sy1, Sz1);
+                if (!OriginalTransform.ContainsKey(allHighlightedObjects[i]))
+                    OriginalTransform.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform.localScale);
+
+                print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
+                print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);
+                allHighlightedObjects[i].transform.localScale = OriginalTransform[allHighlightedObjects[i]] * S_v1;
+
             }
-            getConeRadius(allHighlightedObjects[i]);
-
-            // normalize the distance based on the suggested normalization
-            float t1;
-            t1 = magnitudes[allHighlightedObjects[i]];
-            print("radius : " + ConeRadius + "magnitude t1 : " + t1);
-            dn = t1 / ConeRadius;
-
-            Vector3 dnV2Helper = (directionReference[allHighlightedObjects[i]]);
-            // s, depends linearly on a user-defined maximum scaling factor sm>1.
-            // Where 1−dn describes how much of sm is applied to the final scale.
-            Sm = new Vector3(2, 2, 2);
-
-            // without dividing by radius 
-            float Sx1 = 1 + (1 - dnV2Helper.x) * (Sm.x - 1);
-            float Sy1 = 1 + (1 - dnV2Helper.y) * (Sm.y - 1);
-            float Sz1 = 1 + (1 - dnV2Helper.z) * (Sm.z - 1);
-
-            float S_v1 = 1 + (1 - dn) * (2 - 1);
-
-            //Vector3 S_V2 = new Vector3(Sx1, Sy1, Sz1);
-            if (!OriginalTransform.ContainsKey(allHighlightedObjects[i]))
-                OriginalTransform.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform.localScale);
-
-            print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
-            print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);
-            allHighlightedObjects[i].transform.localScale = OriginalTransform[allHighlightedObjects[i]] * S_v1 ;
-            
-
 
         }
     }

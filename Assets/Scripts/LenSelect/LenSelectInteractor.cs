@@ -267,7 +267,7 @@ public class LenSelectInteractor : MonoBehaviour
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
         //yield on a new YieldInstruction that waits for 2 second.
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
     }

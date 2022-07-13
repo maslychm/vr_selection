@@ -103,6 +103,13 @@ public class LenSelectInteractor : MonoBehaviour
         if (tabletUI)
             tabletUI.SetTabletActive(debug);
     }
+    private void setInteractablesToAppropriateLayer()
+    {
+
+            List<XRGestureInteractable> parentinteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
+            
+        // iterate and set layer
+    }
 
     private void CreateDuplicatesForMiniMap()
     {
@@ -279,7 +286,7 @@ public class LenSelectInteractor : MonoBehaviour
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
         //yield on a new YieldInstruction that waits for 2 second.
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
 
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
     }
@@ -289,7 +296,7 @@ public class LenSelectInteractor : MonoBehaviour
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
         //yield on a new YieldInstruction that waits for 2 second.
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(3);
 
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
     }
@@ -316,7 +323,7 @@ public class LenSelectInteractor : MonoBehaviour
         // call the resize function in reverse 
         // add a yield returnb 
 
-        StartCoroutine(CoroutineHelper());
+        StartCoroutine(CoroutineHelper2());
 
         LenSelect.OriginalPositionResetter();
     }

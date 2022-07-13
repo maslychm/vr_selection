@@ -44,6 +44,9 @@ public class LenSelect : MonoBehaviour
     // n is a user defined value, that describes the distance at which the object keeps its original scale.
     [SerializeField]public Vector3 n; // maybe no need to worry about the frustum if we can just check that the distance (transform point is bigger than n)
 
+    public Vector3 startingScale;
+    public Vector3 endingScale;
+
 
     // list to store the original transforms combined 
     private Dictionary<GameObject, Vector3> OriginalTransform;
@@ -100,21 +103,31 @@ public class LenSelect : MonoBehaviour
             for (int i = 0; i < ObjectsToBeSetBackToOriginalSize.Count; i++)
             {
                 GameObject temp = ObjectsToBeSetBackToOriginalSize[i];
-                if (holdTheYOriginalValue.ContainsKey(temp))
+               /* if (holdTheYOriginalValue.ContainsKey(temp))
                 {
                     Transform temp2 = holdTheYOriginalValue[temp];
                     Vector3 t = temp2.position;
                     temp.transform.position = t;
-                    temp.GetComponent<Rigidbody>().AddForce(Physics.gravity * 5f, ForceMode.Acceleration);
+                    temp.GetComponent<Rigidbody>().AddForce(Physics.gravity * 1f, ForceMode.Acceleration);
                 }
-
+           */
                 print("resizing process reached and resiwing : " + ObjectsToBeSetBackToOriginalSize[i]);
 
                 if (OriginalTransform.ContainsKey(temp))
                 {
                     originalScale = OriginalTransform[temp];
+                    endingScale = originalScale;
+                    startingScale = temp.transform.localScale;
 
+                    if (temp.GetComponent<Rigidbody>().useGravity == true)
+                    temp.GetComponent<Rigidbody>().AddForce(Physics.gravity * 5f, ForceMode.Acceleration);
                     temp.transform.localScale = originalScale;
+                    temp.transform.position = holdTheYOriginalValue[temp].position;
+                    temp.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    
+
+   
+                    
                 }
 
 
@@ -194,7 +207,7 @@ public class LenSelect : MonoBehaviour
 
                 // addd some code to stop the interaction between objects same as vidio
               //  allHighlightedObjects[i].GetComponent<Rigidbody>().isKinematic = false;
-              //  allHighlightedObjects[i].GetComponent<Rigidbody>().useGravity = false;
+                //allHighlightedObjects[i].GetComponent<Rigidbody>().useGravity = false;
                 // --------------------------------------------------------------------
 
                 getConeRadius(allHighlightedObjects[i]);
@@ -226,9 +239,11 @@ public class LenSelect : MonoBehaviour
                 print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
                 print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);
                 allHighlightedObjects[i].transform.localScale = OriginalTransform[allHighlightedObjects[i]] * S_v1;
+                allHighlightedObjects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
 
             }
 
         }
     }
 }
+

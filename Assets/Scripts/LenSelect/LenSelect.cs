@@ -49,6 +49,8 @@ public class LenSelect : MonoBehaviour
     private Dictionary<GameObject, Vector3> OriginalTransform;
     private Dictionary<GameObject, float> magnitudes;
 
+    private Dictionary<GameObject, Transform> holdTheYOriginalValue;
+
     // dn is representing the normaliwed distance based on the equation of 
     // distance from the object to the ray / radius of the cone
     private float dn;
@@ -61,6 +63,7 @@ public class LenSelect : MonoBehaviour
         magnitudes = new Dictionary<GameObject, float>();
         transformPointReference = new Dictionary<GameObject, Vector3>();
         OriginalTransform = new Dictionary<GameObject, Vector3>();
+        holdTheYOriginalValue = new Dictionary<GameObject, Transform>();
 
         n = new Vector3(1, 1, 1);
     }
@@ -81,27 +84,43 @@ public class LenSelect : MonoBehaviour
             for (int i = 0; i < allHighlightedObjects.Count; i++)
             {
 
+               // allHighlightedObjects[i].GetComponent<Rigidbody>().isKinematic = true; ;
+               // allHighlightedObjects[i].GetComponent<Rigidbody>().useGravity = true;
 
                 if (ObjectsToBeSetBackToOriginalSize.Contains(allHighlightedObjects[i]))
                 {
                     allHighlightedObjects.Remove(allHighlightedObjects[i]);
                 }
 
+                // reset back isKinematic 
+                //allHighlightedObjects[i].GetComponent<Rigidbody>().isKinematic = true;
+
             }
 
             for (int i = 0; i < ObjectsToBeSetBackToOriginalSize.Count; i++)
             {
-
+                GameObject temp = ObjectsToBeSetBackToOriginalSize[i];
+                if (holdTheYOriginalValue.ContainsKey(temp))
+                {
+                    Transform temp2 = holdTheYOriginalValue[temp];
+                    Vector3 t = temp2.position;
+                    temp.transform.position = t;
+                    temp.GetComponent<Rigidbody>().AddForce(Physics.gravity * 5f, ForceMode.Acceleration);
+                }
 
                 print("resizing process reached and resiwing : " + ObjectsToBeSetBackToOriginalSize[i]);
-                GameObject temp = ObjectsToBeSetBackToOriginalSize[i];
+
                 if (OriginalTransform.ContainsKey(temp))
                 {
                     originalScale = OriginalTransform[temp];
 
                     temp.transform.localScale = originalScale;
                 }
+
+
+
             }
+
         }
     }
 
@@ -173,6 +192,10 @@ public class LenSelect : MonoBehaviour
             if (transformPointReference.ContainsKey(allHighlightedObjects[i]) && transformPointReference[allHighlightedObjects[i]].magnitude > n.magnitude)
             {
 
+                // addd some code to stop the interaction between objects same as vidio
+              //  allHighlightedObjects[i].GetComponent<Rigidbody>().isKinematic = false;
+              //  allHighlightedObjects[i].GetComponent<Rigidbody>().useGravity = false;
+                // --------------------------------------------------------------------
 
                 getConeRadius(allHighlightedObjects[i]);
 
@@ -197,6 +220,8 @@ public class LenSelect : MonoBehaviour
                 //Vector3 S_V2 = new Vector3(Sx1, Sy1, Sz1);
                 if (!OriginalTransform.ContainsKey(allHighlightedObjects[i]))
                     OriginalTransform.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform.localScale);
+                if (!holdTheYOriginalValue.ContainsKey(allHighlightedObjects[i]))
+                    holdTheYOriginalValue.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform);
 
                 print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
                 print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);

@@ -82,6 +82,10 @@ public class LenSelectInteractor : MonoBehaviour
         duplicateDirections = new List<(GameObject, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
 
+        // added this line just for a matter to add a component to stop the objects 
+        // from interacting with each other 
+        LenSelect_CollisionStopper_Adder();
+
         CreateDuplicatesForMiniMap();
 
         allHighlightedObjects = new List<GameObject>();
@@ -149,6 +153,14 @@ public class LenSelectInteractor : MonoBehaviour
         }
     }
 
+    void LenSelect_CollisionStopper_Adder()
+    {
+        List<XRGestureInteractable> originalInteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
+        foreach (var interactable in originalInteractables)
+        {
+            interactable.gameObject.AddComponent<CollisionStopper>();
+        }
+    }
     private void Update()
     {
         ProcessInput();
@@ -268,6 +280,16 @@ public class LenSelectInteractor : MonoBehaviour
 
         //yield on a new YieldInstruction that waits for 2 second.
         yield return new WaitForSeconds(5);
+
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    }
+
+    System.Collections.IEnumerator CoroutineHelper2()
+    {
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 2 second.
+        yield return new WaitForSeconds(0);
 
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
     }

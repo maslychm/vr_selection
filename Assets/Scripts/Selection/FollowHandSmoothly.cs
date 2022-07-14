@@ -11,6 +11,14 @@ public class FollowHandSmoothly : MonoBehaviour
 
     [SerializeField] private bool applyFilter = true;
 
+    private void Start()
+    {
+        if (handToFollow.gameObject.activeInHierarchy == false)
+        {
+            handToFollow = GameObject.Find("LeftHand Controller -YES").transform;
+        }
+    }
+
     private void Update()
     {
         if (!applyFilter)

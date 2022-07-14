@@ -118,12 +118,12 @@ public class MiniMapInteractor : MonoBehaviour
                 temp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             }
 
-            // Destroy only the collider not intended for selection
+            // Interactable prefabs used to have 2 colliders: trigger and non-trigger
+            // Flashlight also had a trigger collider
+            // This was causing both of the Interactable colliders to call OnTriggerEnter, causing double addition to the hihlighted list
+            // I removed the trigger collider on Interactables and the issue was resolved
             foreach (var c in temp.GetComponents<Collider>())
-            {
-                if (!c.isTrigger)
-                    Destroy(c);
-            }
+                c.isTrigger = true;
 
             Destroy(temp.GetComponent<Object_collected>());
 
@@ -136,8 +136,6 @@ public class MiniMapInteractor : MonoBehaviour
             duplicate_and_originalPosition.Add(temp, original.transform);
 
             temp.SetActive(false);
-
-            temp.name += "subject208";
         }
     }
 
@@ -149,6 +147,12 @@ public class MiniMapInteractor : MonoBehaviour
 
     private void ProcessInput()
     {
+        if (Input.GetKeyDown("space"))
+        {
+            ExtendFlashlight();
+            miniMap.ShowMiniMap();
+        }
+
         if (flaslightActionReference.action.WasPressedThisFrame())
         {
             ExtendFlashlight();
@@ -206,41 +210,37 @@ public class MiniMapInteractor : MonoBehaviour
     public void CalculateDuplicateDirections(List<GameObject> objects)
     {
         duplicateDirections.Clear();
-        Vector3 max = new Vector3(-1, -1, -1);
+        Vector3 max = Vector3.zero;
         foreach (GameObject o in objects)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
-            GameObject tobeInserted_Duplicate = originalToDuplicate[o];
+            GameObject duplicate = originalToDuplicate[o];
+            if (duplicate == null)
+                continue;
 
-            // work with one single object at a time as they are added
-            if (tobeInserted_Duplicate != null && o != null)
-            {
-                // highlighted object in flashlight's corrdinate system
-                var objectPositionInFlashlightCoords = flashlightHighlighter.transform.InverseTransformPoint(o.transform.position);
-                objectPositionInFlashlightCoords.z = 0f;
+            // highlighted object in flashlight's corrdinate system
+            var objectPositionInFlashlightCoords = flashlightHighlighter.transform.InverseTransformPoint(o.transform.position);
+            objectPositionInFlashlightCoords.z = 0f;
 
-                if (normalizeOffsets == true)
-                    objectPositionInFlashlightCoords.Normalize();
+            if (normalizeOffsets)
+                objectPositionInFlashlightCoords.Normalize();
 
-                // add a temp helper
-                temp = objectPositionInFlashlightCoords;
-            }
+            //print($"in calculation: {objectPositionInFlashlightCoords.magnitude} - {objectPositionInFlashlightCoords}");
 
-            max = Vector3.Max(max, temp);
+            if (objectPositionInFlashlightCoords.magnitude > max.magnitude)
+                max = objectPositionInFlashlightCoords;
 
-            duplicateDirections.Add((tobeInserted_Duplicate, temp));
+            duplicateDirections.Add((duplicate, objectPositionInFlashlightCoords));
         }
 
         if (normalizeOffsets == false)
         {
             for (int i = 0; i < duplicateDirections.Count; i++)
             {
-                if (duplicateDirections.Count < 2) break; // <- Yes?
+                //if (duplicateDirections.Count == 1) break; // <- Yes?
+                // TODO need to find a fix here! When there is only 1 element, normalization happens. When more, they sometimes go outside the boundaries
 
-                //print($"yes yes? {duplicateDirections.Count}");
-                //print($"hi, my name is {duplicateDirections[i].Item1.name}");
-
-                Vector3 temp = duplicateDirections[i].Item2 / Vector3.Magnitude(max);
+                Vector3 temp = duplicateDirections[i].Item2 / max.magnitude;
                 duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
 
                 // TODO try dividing by current flashlight scale times some factor

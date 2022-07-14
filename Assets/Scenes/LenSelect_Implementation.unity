@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 52258777}
   - component: {fileID: 52258775}
   - component: {fileID: 52258774}
+  - component: {fileID: 52258778}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -536,6 +537,39 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &52258778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52258773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78da3f00f3328541b4526c0b0b5ec5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineThickness: 2.08
+  lineIntensity: 0.84
+  fillAmount: 0.033
+  lineColor0: {r: 1, g: 1, b: 1, a: 1}
+  lineColor1: {r: 1, g: 1, b: 1, a: 1}
+  lineColor2: {r: 1, g: 1, b: 1, a: 1}
+  additiveRendering: 0
+  backfaceCulling: 1
+  fillColor: {r: 1, g: 1, b: 1, a: 1}
+  useFillColor: 0
+  cornerOutlines: 0
+  addLinesBetweenColors: 0
+  scaleWithScreenSize: 1
+  alphaCutoff: 0.5
+  flipY: 0
+  sourceCamera: {fileID: 0}
+  autoEnableOutlines: 0
+  outlineCamera: {fileID: 0}
+  outlineShaderMaterial: {fileID: 0}
+  renderTexture: {fileID: 0}
+  extraRenderTexture: {fileID: 0}
 --- !u!4 &52538123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5366485117096516052, guid: 37347ed209024304fbae309c1861b76e, type: 3}
@@ -4426,6 +4460,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+--- !u!1 &1121380604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+  m_PrefabInstance: {fileID: 1121380603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1121380605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121380604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &1134072721
 GameObject:
   m_ObjectHideFlags: 0
@@ -5236,6 +5289,7 @@ MonoBehaviour:
   circle: {fileID: 1050932592}
   leftHandController: {fileID: 1247322971}
   confirmSelectionButton: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  temp5: {fileID: 52258778}
 --- !u!114 &1247322977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5248,7 +5302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e988983f96fe1dd48800bcdfc82f23e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LineWidth: 0.02
+  m_LineWidth: 0.0086
   m_OverrideInteractorLineLength: 1
   m_LineLength: 10
   m_WidthCurve:
@@ -5306,9 +5360,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   m_InvalidColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 0, b: 0, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 1}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
@@ -5324,7 +5378,7 @@ MonoBehaviour:
     ctime7: 0
     atime0: 0
     atime1: 65535
-    atime2: 0
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0

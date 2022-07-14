@@ -1,3 +1,4 @@
+using cakeslice;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,16 @@ public class RayManager : MonoBehaviour
     public GameObject leftHandController;
     GameObject Destination;
 
+    GameObject helperT;
 
     bool wasSelectedBefore = false;
+    bool debug = false;
 
     [SerializeField] private InputActionReference confirmSelectionButton;
 
     GameObject Prior;
 
-
+    public OutlineEffect temp5;
     public static GameObject currentGameObjectHighlighted;
     // Start is called before the first frame update
     void Start()
@@ -64,20 +67,35 @@ public class RayManager : MonoBehaviour
 
             // add an if
 
-            print("ok we reached this after raycasting ->>>>>>>" + hit.transform.gameObject.name);
-            //Debug.DrawRay(leftHandController.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            
+            print("ok we reached this after raycasting ->>>>>>>" + hit.transform.gameObject.name);            
             GameObject other = hit.transform.gameObject;
             if (other.name == "FlashLightCone")
                 return;
 
-
+            if (wasSelectedBefore == false)
+            {
+                
+                other.AddComponent<Outline>();
+            }
             currentGameObjectHighlighted = other;
+
+            if (debug == true && wasSelectedBefore == true)
+            {
+                wasSelectedBefore = false;
+                debug = false;
+
+                //temp5.RemoveOutline(currentGameObjectHighlighted.GetComponent<Outline>());
+                //Destroy(currentGameObjectHighlighted.GetComponent<Outline>());
+            }
 
             if (confirmSelectionButton.action.WasPressedThisFrame() && wasSelectedBefore == true && Prior != null && Prior.name != "FlashLightCone")
             {
-                wasSelectedBefore = false;
+                //Destroy(currentGameObjectHighlighted.GetComponent<Outline>());
+                
                 circle.ConfirmSelection();
+
+                
+                debug = true;
             }
 
             //LenSelectRay.transform.position = new Vector3(LenSelectRay.transform.position.x, LenSelectRay.transform.position.y, other.transform.position.z);
@@ -89,6 +107,7 @@ public class RayManager : MonoBehaviour
                 circle.Inraycastmodification(other);
                 Prior = other;
             }
+
 
         }
         NothittingAnymore();

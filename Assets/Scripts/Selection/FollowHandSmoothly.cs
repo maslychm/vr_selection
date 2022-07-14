@@ -10,6 +10,10 @@ public class FollowHandSmoothly : MonoBehaviour
     [SerializeField] private float newValConfidence = .3f;
 
     [SerializeField] private bool applyFilter = true;
+    [SerializeField] private bool isChildOfTracked = true;
+
+    private Vector3 lastFilteredPosition;
+    private Quaternion lastFilteredQuaternion;
 
     private void Start()
     {
@@ -28,44 +32,26 @@ public class FollowHandSmoothly : MonoBehaviour
             return;
         }
 
-        transform.position = handToFollow.position * newValConfidence + transform.position * (1 - newValConfidence);
+        if (isChildOfTracked)
+            SmoothingStepMethodAsChildOfTracked();
+        else
+            SmoothingStepMethodAsChildOfNotTracked();
+    }
 
-        // Problem happens when we go around the 0, because then Unity automatically mods by 360
-        // If the difference between old value and new value along any of the dimensions is > 180, we need to set the old value into the "opposite" rotation
-        // before applying the filter
+    private void SmoothingStepMethodAsChildOfTracked()
+    {
+        transform.position = Vector3.Lerp(lastFilteredPosition, handToFollow.position, newValConfidence);
+        lastFilteredPosition = transform.position;
 
-        // TODO This can probably be resolved easier using quaternions and Lerp
+        transform.rotation = Quaternion.Lerp(lastFilteredQuaternion, handToFollow.rotation, newValConfidence);
+        lastFilteredQuaternion = transform.rotation;
+    }
 
-        Vector3 diff = transform.eulerAngles - handToFollow.eulerAngles;
-        Vector3 oldNewEulerAngles = transform.eulerAngles;
-
-        if (diff.x < -180)
-        {
-            oldNewEulerAngles.x += 360;
-        }
-        else if (diff.x > 180)
-        {
-            oldNewEulerAngles.x -= 360;
-        }
-
-        if (diff.y < -180)
-        {
-            oldNewEulerAngles.y += 360;
-        }
-        else if (diff.y > 180)
-        {
-            oldNewEulerAngles.y -= 360;
-        }
-
-        if (diff.z < -180)
-        {
-            oldNewEulerAngles.z += 360;
-        }
-        else if (diff.z > 180)
-        {
-            oldNewEulerAngles.z -= 360;
-        }
-
-        transform.eulerAngles = handToFollow.eulerAngles * newValConfidence + oldNewEulerAngles * (1 - newValConfidence);
+    private void SmoothingStepMethodAsChildOfNotTracked()
+    {
+        transform.SetPositionAndRotation(
+            Vector3.Lerp(transform.position, handToFollow.position, newValConfidence),
+            Quaternion.Lerp(transform.rotation, handToFollow.rotation, newValConfidence)
+            );
     }
 }

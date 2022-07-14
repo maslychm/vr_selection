@@ -109,4 +109,9 @@ public class XRGestureInteractable : MonoBehaviour
     {
         if (debug) print(msg);
     }
+
+    public void SetHoverMaterial(Material mat)
+    {
+        hoverMaterial = mat;
+    }
 }

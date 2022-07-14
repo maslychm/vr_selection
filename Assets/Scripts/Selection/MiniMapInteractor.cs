@@ -216,7 +216,7 @@ public class MiniMapInteractor : MonoBehaviour
             if (tobeInserted_Duplicate != null && o != null)
             {
                 // highlighted object in flashlight's corrdinate system
-                var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
+                var objectPositionInFlashlightCoords = flashlightHighlighter.transform.InverseTransformPoint(o.transform.position);
                 objectPositionInFlashlightCoords.z = 0f;
 
                 if (normalizeOffsets == true)
@@ -235,10 +235,16 @@ public class MiniMapInteractor : MonoBehaviour
         {
             for (int i = 0; i < duplicateDirections.Count; i++)
             {
+                if (duplicateDirections.Count < 2) break; // <- Yes?
+
+                //print($"yes yes? {duplicateDirections.Count}");
+                //print($"hi, my name is {duplicateDirections[i].Item1.name}");
+
                 Vector3 temp = duplicateDirections[i].Item2 / Vector3.Magnitude(max);
                 duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
 
                 // TODO try dividing by current flashlight scale times some factor
+                // ^^^ Yes, this is correct, because as of right now, if there's only 1 element highlighted, the above code acts as normalization. Added length check.
             }
         }
     }
@@ -257,6 +263,7 @@ public class MiniMapInteractor : MonoBehaviour
 
     public void AddtoHighlighted(GameObject o)
     {
+        //print($"{o.name}");
         allHighlightedObjects.Add(o);
     }
 

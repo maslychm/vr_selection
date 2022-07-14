@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,11 @@ public class XRGestureInteractable : MonoBehaviour
 
     // grid selector var to be used instead of gesture interactor when needed
     private XRGridSelectorInteractor gridInteractor;
+
+    internal List<GameObject> ToList()
+    {
+        throw new NotImplementedException();
+    }
 
     // add a third access helper from the MiniMap Interactor
     private MiniMapInteractor miniMapInteractor;

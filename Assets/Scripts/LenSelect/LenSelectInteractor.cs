@@ -84,7 +84,7 @@ public class LenSelectInteractor : MonoBehaviour
 
         // added this line just for a matter to add a component to stop the objects 
         // from interacting with each other 
-        LenSelect_CollisionStopper_Adder();
+        //LenSelect_CollisionStopper_Adder();
 
         CreateDuplicatesForMiniMap();
 
@@ -160,14 +160,14 @@ public class LenSelectInteractor : MonoBehaviour
         }
     }
 
-    void LenSelect_CollisionStopper_Adder()
+   /* void LenSelect_CollisionStopper_Adder()
     {
         List<XRGestureInteractable> originalInteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
         foreach (var interactable in originalInteractables)
         {
             interactable.gameObject.AddComponent<CollisionStopper>();
         }
-    }
+    }*/
     private void Update()
     {
         ProcessInput();
@@ -177,13 +177,13 @@ public class LenSelectInteractor : MonoBehaviour
 
     private void ProcessInput()
     {
-        if (flaslightActionReference.action.WasPressedThisFrame())
+       // if (flaslightActionReference.action.WasPressedThisFrame())
         {
             ExtendFlashlight();
             
         }
 
-        if (flaslightActionReference.action.IsPressed())
+      /*  if (flaslightActionReference.action.IsPressed())
         {
             UpdateFlashlightScale();
         }
@@ -192,7 +192,7 @@ public class LenSelectInteractor : MonoBehaviour
         {
             ShrinkFlashlight();
 
-        }
+        }*/
     }
 
     private void SetRecognizerMode()
@@ -204,13 +204,13 @@ public class LenSelectInteractor : MonoBehaviour
     private void ExtendFlashlight()
     {
         flashlightHighlighter.transform.localScale = defaultFlashlightScale;
-        flashlightCenterCone.SetActive(true);
+        //flashlightCenterCone.SetActive(true);
     }
 
     private void ShrinkFlashlight()
     {
         flashlightHighlighter.transform.localScale = Vector3.zero;
-        flashlightCenterCone.SetActive(false);
+        //flashlightCenterCone.SetActive(false);
 
         // Clear hovered list
         allHighlightedObjects.Clear();
@@ -283,22 +283,22 @@ public class LenSelectInteractor : MonoBehaviour
     #region CALLABLE BY INTERACTABLES
     System.Collections.IEnumerator CoroutineHelper()
     {
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+        //Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
         //yield on a new YieldInstruction that waits for 2 second.
         yield return new WaitForSeconds(10);
 
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+       // Debug.Log("Finished Coroutine at timestamp : " + Time.time);
     }
 
     System.Collections.IEnumerator CoroutineHelper2()
     {
-        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+       // Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
         //yield on a new YieldInstruction that waits for 2 second.
         yield return new WaitForSeconds(3);
 
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+       // Debug.Log("Finished Coroutine at timestamp : " + Time.time);
     }
     public void AddtoHighlighted(GameObject o)
     {

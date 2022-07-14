@@ -47,6 +47,8 @@ public class LenSelect : MonoBehaviour
     public Vector3 startingScale;
     public Vector3 endingScale;
 
+    public static float ConeRadius_v2;
+
 
     // list to store the original transforms combined 
     private Dictionary<GameObject, Vector3> OriginalTransform;
@@ -111,7 +113,7 @@ public class LenSelect : MonoBehaviour
                     temp.GetComponent<Rigidbody>().AddForce(Physics.gravity * 1f, ForceMode.Acceleration);
                 }
            */
-                print("resizing process reached and resiwing : " + ObjectsToBeSetBackToOriginalSize[i]);
+               // print("resizing process reached and resiwing : " + ObjectsToBeSetBackToOriginalSize[i]);
 
                 if (OriginalTransform.ContainsKey(temp))
                 {
@@ -151,6 +153,21 @@ public class LenSelect : MonoBehaviour
         t2 = max.y / n.y;
         t3 = max.z / n.z;
         Ss = new Vector3(t1, t2, t3);
+    }
+
+    public float getConeRadiusHelper(GameObject o)
+    {
+        getRadiusHelper(o);
+
+        return ConeRadius_v2;
+    }
+    public void getRadiusHelper(GameObject o)
+    {
+        Vector3 temp;
+        temp = directionReference[o];
+
+        ConeRadius_v2 = temp.z * Mathf.Tan(openingAngle);
+
     }
     public void getConeRadius(GameObject o)
     {
@@ -215,7 +232,7 @@ public class LenSelect : MonoBehaviour
                 // normalize the distance based on the suggested normalization
                 float t1;
                 t1 = magnitudes[allHighlightedObjects[i]];
-                print("radius : " + ConeRadius + "magnitude t1 : " + t1);
+                //print("radius : " + ConeRadius + "magnitude t1 : " + t1);
                 dn = t1 / ConeRadius;
 
                 Vector3 dnV2Helper = (directionReference[allHighlightedObjects[i]]);
@@ -236,8 +253,8 @@ public class LenSelect : MonoBehaviour
                 if (!holdTheYOriginalValue.ContainsKey(allHighlightedObjects[i]))
                     holdTheYOriginalValue.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform);
 
-                print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
-                print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);
+               // print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
+               // print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);
                 allHighlightedObjects[i].transform.localScale = OriginalTransform[allHighlightedObjects[i]] * S_v1;
                 allHighlightedObjects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
 

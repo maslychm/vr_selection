@@ -49,17 +49,9 @@ public class RayManager : MonoBehaviour
     private void Update()
     {
 
-        //ray = new Ray(leftHandController.transform.position, transform.forward);
 
         Detecthis();
-        //if (selectActionButton.action.WasPressedThisFrame())
-        //{
-        //    selectWasClicked = true;
-        //    print("YESYEYESYSEYESYESYESYESESYESYESYSEYSEYESYSEYESYESY");
-        //}
-        //    if (selectActionButton.action.WasReleasedThisFrame())
-        //        selectWasClicked = false;
-        //}
+
     }
 
     private void Detecthis()

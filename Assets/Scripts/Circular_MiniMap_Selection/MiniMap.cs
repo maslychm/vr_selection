@@ -3,33 +3,22 @@ using UnityEngine;
 
 public class MiniMap : MonoBehaviour
 {
-    [SerializeField] private Transform centerOfMiniMap; // to store the position of the centre
-
-    // first let's set a variable to store the duplicates and their distance for every update
-    private List<(GameObject, Vector3)> m_Map;
+    [SerializeField] private Transform centerOfMiniMap;
 
     // make a radius variable that is public and can be change in the unity editor
-    [SerializeField] public float radius = 0.2f;
-
-    // this variable will change accordingly as the code gets executed
-    private Vector3 newOffset_for_current_ObjToBeInCircle;
-
-    private float adjusted_position_X;
-    private float adjusted_position_Y;
-    private float adjusted_position_Z;
+    [SerializeField] private float radius = 0.2f;
 
     private List<shapeItem_2> listInCircle;
 
     private Vector3 trashLocation = new Vector3(1000, 1000, 1000);
 
+    private bool isFrozen = false;
+
     // Start is called before the first frame update
     private void Start()
     {
-        m_Map = new List<(GameObject, Vector3)>();
-
         listInCircle = new List<shapeItem_2>();
 
-        // get the position of the center;
         if (!centerOfMiniMap)
             centerOfMiniMap = transform.GetChild(0).gameObject.transform;
     }
@@ -42,19 +31,21 @@ public class MiniMap : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (isFrozen)
+            return;
+
         ClearObjectCopies();
         DisplayObjectCopies();
     }
 
     private void DisplayObjectCopies()
     {
-        // update the dictionary every frame
-        m_Map = MiniMapInteractor.GetDuplicatesAndDirections();
+        List<(shapeItem_2 s, Vector3 dir)> ShapeItems_Directions = MiniMapInteractor.GetDuplicatesAndDirections();
 
-        foreach (var temp in m_Map)
+        foreach (var shapeItem_Dir in ShapeItems_Directions)
         {
-            RenderObjectInDirectionOnMinimap(temp);
-            listInCircle.Add(temp.Item1.GetComponent<shapeItem_2>());
+            RenderObjectInDirectionOnMinimap(shapeItem_Dir);
+            listInCircle.Add(shapeItem_Dir.s.GetComponent<shapeItem_2>());
         }
     }
 
@@ -72,38 +63,33 @@ public class MiniMap : MonoBehaviour
         listInCircle.Clear();
     }
 
-    public void RenderObjectInDirectionOnMinimap((GameObject o, Vector3 dir) _objToBeInCircle2)
+    public void RenderObjectInDirectionOnMinimap((shapeItem_2 si, Vector3 dir) shapeItem_Dir)
     {
-        GameObject _objToBeInCircle = _objToBeInCircle2.o;
+        GameObject shapeItemObject = shapeItem_Dir.si.gameObject;
+        Vector3 dir = shapeItem_Dir.dir;
 
-        newOffset_for_current_ObjToBeInCircle = _objToBeInCircle2.dir;
+        shapeItemObject.SetActive(true);
 
-        _objToBeInCircle.gameObject.SetActive(true);
+        dir *= radius;
 
-        newOffset_for_current_ObjToBeInCircle *= radius;
+        shapeItemObject.transform.position = centerOfMiniMap.transform.position;
+        shapeItemObject.transform.position += transform.TransformDirection(dir);
 
-        // set the position variables for ease of use / to be on the circular mini_map
-        // this is just for easy access later when debugging : D
-        adjusted_position_X = newOffset_for_current_ObjToBeInCircle.x;
-        adjusted_position_Y = newOffset_for_current_ObjToBeInCircle.y;
-        adjusted_position_Z = newOffset_for_current_ObjToBeInCircle.z;
+        shapeItemObject.GetComponent<shapeItem_2>().currentMap = this;
 
-        _objToBeInCircle.transform.position = centerOfMiniMap.transform.position;
-        _objToBeInCircle.transform.position += transform.TransformDirection(newOffset_for_current_ObjToBeInCircle);
+        shapeItemObject.transform.rotation = transform.rotation;
 
-        _objToBeInCircle.GetComponent<shapeItem_2>().currentMap = this;
-
-        _objToBeInCircle.transform.rotation = transform.rotation;
-
-        if (_objToBeInCircle.tag == "infinity")
+        if (shapeItemObject.tag == "infinity")
         {
-            _objToBeInCircle.transform.Rotate(Vector3.right, 90f);
+            shapeItemObject.transform.Rotate(Vector3.right, 90f);
         }
 
-        if (_objToBeInCircle.tag == "pyramid")
+        if (shapeItemObject.tag == "pyramid")
         {
-            _objToBeInCircle.transform.Rotate(Vector3.right, -90f);
+            shapeItemObject.transform.Rotate(Vector3.right, -90f);
         }
+
+        shapeItemObject.transform.parent = centerOfMiniMap.transform;
     }
 
     private void MoveToTrash(GameObject o)
@@ -113,11 +99,18 @@ public class MiniMap : MonoBehaviour
 
     public void ShowMiniMap()
     {
+        isFrozen = false;
         gameObject.SetActive(true);
+    }
+
+    public void FreezeMiniMap()
+    {
+        isFrozen = true;
     }
 
     public void CloseMiniMap()
     {
+        isFrozen = false;
         ClearObjectCopies();
         gameObject.SetActive(false);
     }

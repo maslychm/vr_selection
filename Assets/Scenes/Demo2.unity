@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handToFollow: {fileID: 992347895}
-  newValConfidence: 0.15
+  newValConfidence: 0.5
   applyFilter: 1
   isChildOfTracked: 1
 --- !u!1001 &153800337
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handToFollow: {fileID: 992347895}
-  newValConfidence: 0.15
+  newValConfidence: 0.5
   applyFilter: 1
   isChildOfTracked: 1
 --- !u!4 &172924629 stripped

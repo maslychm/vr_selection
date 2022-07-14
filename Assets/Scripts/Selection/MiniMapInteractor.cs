@@ -57,14 +57,9 @@ public class MiniMapInteractor : MonoBehaviour
 
     private Vector3 temp; // simple helper to store the distance later in our dictionary
 
-    // declare the dictionary
-    // initial one (key) will be a game object that contains the gesture interactable compoenent
-    // the second one (value) will be the game object that has the shape item component
-    private Dictionary<GameObject, GameObject> originalToDuplicate;
+    private Dictionary<XRGestureInteractable, shapeItem_2> originalToDuplicate;
 
-    // declare a dictionary to hold the duplicates and their distances
-    // set it to private for now
-    private static List<(GameObject, Vector3)> duplicateDirections;
+    private static List<(shapeItem_2, Vector3)> duplicateDirections;
 
     private static Dictionary<GameObject, Transform> duplicate_and_originalPosition;
 
@@ -72,13 +67,12 @@ public class MiniMapInteractor : MonoBehaviour
 
     public void Start()
     {
-        originalToDuplicate = new Dictionary<GameObject, GameObject>();
-        duplicateDirections = new List<(GameObject, Vector3)>();
+        originalToDuplicate = new Dictionary<XRGestureInteractable, shapeItem_2>();
+        duplicateDirections = new List<(shapeItem_2, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
+        allHighlightedObjects = new List<GameObject>();
 
         CreateDuplicatesForMiniMap();
-
-        allHighlightedObjects = new List<GameObject>();
 
         if (flashlightHighlighter == null)
             flashlightHighlighter = GameObject.Find("FlashlightCone");
@@ -98,44 +92,44 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;
-            GameObject temp = Instantiate(original);
-            Destroy(temp.GetComponent<XRGestureInteractable>());
+            GameObject duplicate = Instantiate(original);
 
-            if (temp.CompareTag("star"))
+            if (duplicate.CompareTag("star"))
             {
-                temp.transform.localScale = new Vector3(20, 20, 20);
+                duplicate.transform.localScale = new Vector3(20, 20, 20);
             }
-            if (temp.CompareTag("pyramid"))
+            if (duplicate.CompareTag("pyramid"))
             {
-                temp.transform.localScale = new Vector3(5, 5, 5);
+                duplicate.transform.localScale = new Vector3(5, 5, 5);
             }
-            if (temp.CompareTag("infinity"))
+            if (duplicate.CompareTag("infinity"))
             {
-                temp.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                duplicate.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
             }
-            if (temp.CompareTag("cube") || temp.CompareTag("sphere") || temp.CompareTag("cylinder"))
+            if (duplicate.CompareTag("cube") || duplicate.CompareTag("sphere") || duplicate.CompareTag("cylinder"))
             {
-                temp.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                duplicate.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             }
 
             // Interactable prefabs used to have 2 colliders: trigger and non-trigger
             // Flashlight also had a trigger collider
             // This was causing both of the Interactable colliders to call OnTriggerEnter, causing double addition to the hihlighted list
             // I removed the trigger collider on Interactables and the issue was resolved
-            foreach (var c in temp.GetComponents<Collider>())
+            foreach (var c in duplicate.GetComponents<Collider>())
                 c.isTrigger = true;
 
-            Destroy(temp.GetComponent<Object_collected>());
+            Destroy(duplicate.GetComponent<XRGestureInteractable>());
+            Destroy(duplicate.GetComponent<Object_collected>());
 
-            temp.AddComponent<shapeItem_2>();
-            temp.GetComponent<shapeItem_2>().original = interactable.gameObject;
-            temp.GetComponent<Rigidbody>().isKinematic = true;
-            temp.GetComponent<Rigidbody>().useGravity = false;
+            duplicate.AddComponent<shapeItem_2>();
+            duplicate.GetComponent<shapeItem_2>().original = interactable.gameObject;
+            duplicate.GetComponent<Rigidbody>().isKinematic = true;
+            duplicate.GetComponent<Rigidbody>().useGravity = false;
 
-            originalToDuplicate.Add(original, temp);
-            duplicate_and_originalPosition.Add(temp, original.transform);
+            originalToDuplicate.Add(interactable, duplicate.GetComponent<shapeItem_2>());
+            duplicate_and_originalPosition.Add(duplicate, original.transform);
 
-            temp.SetActive(false);
+            duplicate.SetActive(false);
         }
     }
 
@@ -167,7 +161,8 @@ public class MiniMapInteractor : MonoBehaviour
         if (flaslightActionReference.action.WasReleasedThisFrame())
         {
             ShrinkFlashlight();
-            miniMap.CloseMiniMap();
+            //miniMap.CloseMiniMap();
+            miniMap.FreezeMiniMap();
         }
     }
 
@@ -214,7 +209,7 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (GameObject o in objects)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
-            GameObject duplicate = originalToDuplicate[o];
+            shapeItem_2 duplicate = originalToDuplicate[o.GetComponent<XRGestureInteractable>()];
             if (duplicate == null)
                 continue;
 
@@ -249,7 +244,7 @@ public class MiniMapInteractor : MonoBehaviour
         }
     }
 
-    public static List<(GameObject, Vector3)> GetDuplicatesAndDirections()
+    public static List<(shapeItem_2, Vector3)> GetDuplicatesAndDirections()
     {
         return duplicateDirections;
     }

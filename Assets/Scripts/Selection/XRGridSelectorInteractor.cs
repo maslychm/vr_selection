@@ -309,7 +309,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
     public void RemoveFromHighlighted(GameObject o)
     {
-        Debug.Log(o.tag + " " + o.name );
+        //Debug.Log(o.tag + " " + o.name );
         allHighlightedObjects.Remove(o);
 
         GameObject toberemoved = origin_and_duplicate_registery[o];

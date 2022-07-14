@@ -10,6 +10,9 @@ public class FollowHandSmoothly : MonoBehaviour
     [SerializeField] private float newValConfidence = .3f;
 
     [SerializeField] private bool applyFilter = true;
+    [SerializeField] private bool isChildOfTracked = true;
+
+    private Vector3 lastFilteredPosition, lastFilteredRotation;
 
     private void Start()
     {
@@ -28,13 +31,61 @@ public class FollowHandSmoothly : MonoBehaviour
             return;
         }
 
-        transform.position = handToFollow.position * newValConfidence + transform.position * (1 - newValConfidence);
+        if (isChildOfTracked)
+            SmoothingStepMethodAsChildOfTracked();
+        else
+            SmoothingStepMethodAsChildOfNotTracked();
+    }
+
+    private void SmoothingStepMethodAsChildOfTracked()
+    {
+        // Saves vectors for positions externally instead of relying on own transform.position for getting last position
+        // The suspicion is that Unity updates the transforms and positions of children before the update is called -> this is true
+
+        transform.position = handToFollow.position * newValConfidence + lastFilteredPosition * (1 - newValConfidence);
+        lastFilteredPosition = transform.position;
 
         // Problem happens when we go around the 0, because then Unity automatically mods by 360
         // If the difference between old value and new value along any of the dimensions is > 180, we need to set the old value into the "opposite" rotation
         // before applying the filter
 
-        // TODO This can probably be resolved easier using quaternions and Lerp
+        Vector3 diff = lastFilteredRotation - handToFollow.eulerAngles;
+        Vector3 oldFixedEulerAngles = lastFilteredRotation;
+
+        if (diff.x < -180)
+        {
+            oldFixedEulerAngles.x += 360;
+        }
+        else if (diff.x > 180)
+        {
+            oldFixedEulerAngles.x -= 360;
+        }
+
+        if (diff.y < -180)
+        {
+            oldFixedEulerAngles.y += 360;
+        }
+        else if (diff.y > 180)
+        {
+            oldFixedEulerAngles.y -= 360;
+        }
+
+        if (diff.z < -180)
+        {
+            oldFixedEulerAngles.z += 360;
+        }
+        else if (diff.z > 180)
+        {
+            oldFixedEulerAngles.z -= 360;
+        }
+
+        transform.eulerAngles = handToFollow.eulerAngles * newValConfidence + oldFixedEulerAngles * (1 - newValConfidence);
+        lastFilteredRotation = transform.eulerAngles;
+    }
+
+    private void SmoothingStepMethodAsChildOfNotTracked()
+    {
+        transform.position = handToFollow.position * newValConfidence + transform.position * (1 - newValConfidence);
 
         Vector3 diff = transform.eulerAngles - handToFollow.eulerAngles;
         Vector3 oldNewEulerAngles = transform.eulerAngles;

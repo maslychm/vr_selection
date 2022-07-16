@@ -10,10 +10,9 @@ public class FollowHandSmoothly : MonoBehaviour
     [SerializeField] private float newValConfidence = .3f;
 
     [SerializeField] private bool applyFilter = true;
-    [SerializeField] private bool isChildOfTracked = true;
 
-    private Vector3 lastFilteredPosition;
-    private Quaternion lastFilteredQuaternion;
+    private Vector3 localOffsetInTracked, lastFilteredPosition;
+    private Quaternion localQuatInTracked, lastFilteredQuaternion;
 
     private void Start()
     {
@@ -21,37 +20,25 @@ public class FollowHandSmoothly : MonoBehaviour
         {
             handToFollow = GameObject.Find("LeftHand Controller -YES").transform;
         }
+
+        // Calculate local offsets
+        localOffsetInTracked = handToFollow.InverseTransformVector(transform.position - handToFollow.position);
+        localQuatInTracked = transform.rotation;
     }
 
     private void Update()
     {
         if (!applyFilter)
-        {
-            transform.position = handToFollow.position;
-            transform.eulerAngles = handToFollow.eulerAngles;
             return;
-        }
-
-        if (isChildOfTracked)
-            SmoothingStepMethodAsChildOfTracked();
-        else
-            SmoothingStepMethodAsChildOfNotTracked();
+        ApplySmoother();
     }
 
-    private void SmoothingStepMethodAsChildOfTracked()
+    private void ApplySmoother()
     {
-        transform.position = Vector3.Lerp(lastFilteredPosition, handToFollow.position, newValConfidence);
+        transform.position = Vector3.Lerp(lastFilteredPosition, handToFollow.TransformPoint(localOffsetInTracked), newValConfidence);
         lastFilteredPosition = transform.position;
 
-        transform.rotation = Quaternion.Lerp(lastFilteredQuaternion, handToFollow.rotation, newValConfidence);
+        transform.rotation = Quaternion.Lerp(lastFilteredQuaternion, handToFollow.rotation * localQuatInTracked, newValConfidence);
         lastFilteredQuaternion = transform.rotation;
-    }
-
-    private void SmoothingStepMethodAsChildOfNotTracked()
-    {
-        transform.SetPositionAndRotation(
-            Vector3.Lerp(transform.position, handToFollow.position, newValConfidence),
-            Quaternion.Lerp(transform.rotation, handToFollow.rotation, newValConfidence)
-            );
     }
 }

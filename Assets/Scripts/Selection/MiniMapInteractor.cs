@@ -92,6 +92,8 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;
+            original.AddComponent<cakeslice.Outline>().enabled = false;
+
             GameObject duplicate = Instantiate(original);
 
             if (duplicate.CompareTag("star"))
@@ -108,7 +110,7 @@ public class MiniMapInteractor : MonoBehaviour
             }
             if (duplicate.CompareTag("cube") || duplicate.CompareTag("sphere") || duplicate.CompareTag("cylinder"))
             {
-                duplicate.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                duplicate.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
             }
 
             // Interactable prefabs used to have 2 colliders: trigger and non-trigger

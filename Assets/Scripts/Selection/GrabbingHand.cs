@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +5,6 @@ public class GrabbingHand : MonoBehaviour
 {
     [SerializeField] private InputActionReference grabActionReference;
     [SerializeField] private Transform attachTransform;
-    private List<string> interactableTags = new List<string>() { "cube", "sphere", "star", "pyramid", "cylinder", "infinity" };
 
     public MiniMap temp;
     public MiniMapInteractor temp2;
@@ -33,7 +31,7 @@ public class GrabbingHand : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.GetComponent<shapeItem_2>() && objectInHand == null && grabActionReference.action.WasPressedThisFrame())
+        if (objectInHand == null && grabActionReference.action.WasPressedThisFrame() && col.gameObject.GetComponent<shapeItem_2>())
         {
             GameObject original = col.gameObject.GetComponent<shapeItem_2>().original;
             GameObject duplicate = col.gameObject;

@@ -27,7 +27,6 @@ public class MiniMapInteractor : MonoBehaviour
 
     [SerializeField] private Vector3 debugPlaneOffset;
 
-    // Head hmd
     [SerializeField] private Transform hmdTransform;
 
     [Header("Debugging and UI")]
@@ -35,17 +34,17 @@ public class MiniMapInteractor : MonoBehaviour
 
     private List<GameObject> allHighlightedObjects;
 
-    private GameObject selectedObject;
-
     [Header("Flashlight Scaling")]
-    [SerializeField] private Vector3 defaultFlashlightScale;
+    [SerializeField] private Vector3 defaultFlashlightScale = Vector3.zero;
 
-    [Header("Dynamic Scaling")]
+    [Header("Dynamic Scaling.")]
+    [Tooltip("Enabling this will ignore the default flashlight scale.")]
     [SerializeField] private bool scaleWithDistance;
 
-    public Vector3 shoulderOffset;
-
+    [Tooltip("Max size of the flashlight. Ignores the default scale.")]
     public Vector3 maxFlashlightScale;
+
+    public Vector3 shoulderOffset;
 
     [Header("Other")]
     public bool debug = false;
@@ -77,7 +76,8 @@ public class MiniMapInteractor : MonoBehaviour
         if (flashlightHighlighter == null)
             flashlightHighlighter = GameObject.Find("FlashlightCone");
 
-        defaultFlashlightScale = new Vector3(150, 150, 560);
+        if (defaultFlashlightScale == Vector3.zero)
+            defaultFlashlightScale = new Vector3(150, 150, 560);
 
         ShrinkFlashlight();
         SetRecognizerMode();
@@ -196,12 +196,14 @@ public class MiniMapInteractor : MonoBehaviour
 
         var shoulderInWorld = hmdTransform.TransformPoint(shoulderOffset);
 
-        print($"head: {hmdTransform.position} shoulder: {shoulderInWorld}");
+        float distHand = Mathf.Abs(Vector3.Distance(shoulderInWorld, transform.position));
+        float factor = 1f - Mathf.Clamp(distHand * 3f / 2f, 0, .98f);
 
-        float distHand = Vector3.Distance((hmdTransform.position - shoulderInWorld), transform.position);
-        flashlightHighlighter.transform.localScale = (1 - Mathf.Abs(distHand) * 1.66667f) * maxFlashlightScale;
-
-        print($"distHand: {distHand}");
+        var newScale = factor * maxFlashlightScale;
+        newScale.z = 600;
+        flashlightHighlighter.transform.localScale = newScale;
+        //print(factor);
+        //print($"distHand: {distHand}");
     }
 
     public void CalculateDuplicateDirections(List<GameObject> objects)
@@ -270,13 +272,4 @@ public class MiniMapInteractor : MonoBehaviour
     }
 
     #endregion CALLABLE BY INTERACTABLES
-
-    #region DEBUG
-
-    private void dprint(string msg)
-    {
-        if (debug) print(msg);
-    }
-
-    #endregion DEBUG
 }

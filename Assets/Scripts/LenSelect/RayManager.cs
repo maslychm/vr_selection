@@ -79,8 +79,8 @@ public class RayManager : MonoBehaviour
 
             // add an if
 
-            //if (helper56 != null && hit.transform.gameObject == null)
-            //    helper56.gameObject.GetComponent<Outline>().eraseRenderer = true;
+            //if (helper56 != null && hit.transform.gameObject != helper56 && helper56.name != "FlashLightCone" && helper56.name != "ConfirmationSphere")
+            //   helper56.gameObject.GetComponent<Outline>().eraseRenderer = true;
 
             print("ok we reached this after raycasting ->>>>>>>" + hit.transform.gameObject.name);            
             GameObject other = hit.transform.gameObject;
@@ -97,9 +97,14 @@ public class RayManager : MonoBehaviour
 
             if (debug == true && wasSelectedBefore == true)
             {
+                if (other != Prior)
+                    return;
+
                 wasSelectedBefore = false;
                 debug = false;
-                StartCoroutine(waiter(Prior));
+                
+                if (other == Prior)
+                    StartCoroutine(waiter(Prior));
    
                 return;
 
@@ -123,7 +128,7 @@ public class RayManager : MonoBehaviour
                 Prior = other;
                 return;
             }
-
+            else 
             helper56 = other;
 
         }

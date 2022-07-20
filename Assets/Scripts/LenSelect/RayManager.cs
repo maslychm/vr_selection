@@ -110,7 +110,7 @@ public class RayManager : MonoBehaviour
 
             }
 
-            if (confirmSelectionButton.action.WasPressedThisFrame() && wasSelectedBefore == true && Prior != null && Prior.name != "FlashLightCone")
+            if (confirmSelectionButton.action.WasPressedThisFrame()&& other.name == "ConfirmationSphere" && wasSelectedBefore == true && Prior != null && Prior.name != "FlashLightCone")
             {
                 
                 circle.ConfirmSelection();

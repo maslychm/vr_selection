@@ -87,12 +87,7 @@ public class RayManager : MonoBehaviour
             if (other.name == "FlashLightCone")
                 return;
 
-            if (wasSelectedBefore == false)
-            {
-                if (other.GetComponent<Outline>() == null)
-                     other.AddComponent<Outline>();
 
-            }
             currentGameObjectHighlighted = other;
 
             if (debug == true && wasSelectedBefore == true)
@@ -120,11 +115,12 @@ public class RayManager : MonoBehaviour
             }
 
             //LenSelectRay.transform.position = new Vector3(LenSelectRay.transform.position.x, LenSelectRay.transform.position.y, other.transform.position.z);
-            else if (selectActionButton.action.WasPressedThisFrame() && wasSelectedBefore == false)
+            else if (selectActionButton.action.WasPressedThisFrame() && wasSelectedBefore == false && other != null)
             {
                 selectWasClicked = true;
                 wasSelectedBefore = true;
                 circle.Inraycastmodification(other);
+                other.AddComponent<Outline>();
                 Prior = other;
                 return;
             }

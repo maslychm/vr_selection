@@ -13,6 +13,8 @@ public class RayManager : MonoBehaviour
 
     public CircleConfirmationSpawner circle;
 
+    private GameObject helper56;
+
     RaycastHit hit;
     private List<XRGestureInteractable> allObjectsInteractables;
     public static bool selectWasClicked = false;
@@ -47,6 +49,8 @@ public class RayManager : MonoBehaviour
         //Ray  ray = new Ray(leftHandController.transform.position, transform.forward);
 
         LenSelectRay = this.gameObject.GetComponent<LineRenderer>();
+
+        helper56 = null;
     }
 
     private void Update()
@@ -75,6 +79,9 @@ public class RayManager : MonoBehaviour
 
             // add an if
 
+            //if (helper56 != null && hit.transform.gameObject == null)
+            //    helper56.gameObject.GetComponent<Outline>().eraseRenderer = true;
+
             print("ok we reached this after raycasting ->>>>>>>" + hit.transform.gameObject.name);            
             GameObject other = hit.transform.gameObject;
             if (other.name == "FlashLightCone")
@@ -92,10 +99,8 @@ public class RayManager : MonoBehaviour
             {
                 wasSelectedBefore = false;
                 debug = false;
-                StartCoroutine(waiter(other));
-                
-
-                
+                StartCoroutine(waiter(Prior));
+   
                 return;
 
             }
@@ -116,8 +121,10 @@ public class RayManager : MonoBehaviour
                 wasSelectedBefore = true;
                 circle.Inraycastmodification(other);
                 Prior = other;
+                return;
             }
 
+            helper56 = other;
 
         }
         NothittingAnymore();

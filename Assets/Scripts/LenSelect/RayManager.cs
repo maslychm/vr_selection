@@ -34,6 +34,8 @@ public class RayManager : MonoBehaviour
 
     GameObject Prior;
 
+    GameObject off;
+
     public OutlineEffect temp5;
     public static GameObject currentGameObjectHighlighted;
     // Start is called before the first frame update
@@ -64,9 +66,10 @@ public class RayManager : MonoBehaviour
     {
         print("we reached the coroutine roger that }}}}}}}}}}}}}}}}??????????????????");
         //Wait for 2 seconds
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         other.GetComponent<Outline>().eraseRenderer = true;
         other.SetActive(false);
+        off = other;
     }
 
     private void Detecthis()
@@ -113,9 +116,18 @@ public class RayManager : MonoBehaviour
                 
                 debug = true;
             }
+            else if (confirmSelectionButton.action.WasPressedThisFrame() && other.name != "ConfirmationSphere" && wasSelectedBefore == true && Prior != null && Prior.name != "FlashLightCone")
+            {
+
+                circle.ConfirmSelection();
+                Destroy(other.GetComponent<Outline>());
+                selectWasClicked = false;
+                wasSelectedBefore = false;
+                debug = false;
+            }
 
             //LenSelectRay.transform.position = new Vector3(LenSelectRay.transform.position.x, LenSelectRay.transform.position.y, other.transform.position.z);
-            else if (selectActionButton.action.WasPressedThisFrame() && wasSelectedBefore == false && other != null)
+            else if (selectActionButton.action.WasPressedThisFrame() && (other != off) && wasSelectedBefore == false && other != null)
             {
                 selectWasClicked = true;
                 wasSelectedBefore = true;

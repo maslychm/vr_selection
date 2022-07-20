@@ -564,7 +564,7 @@ MonoBehaviour:
   scaleWithScreenSize: 1
   alphaCutoff: 0.5
   flipY: 0
-  sourceCamera: {fileID: 0}
+  sourceCamera: {fileID: 52258777}
   autoEnableOutlines: 0
   outlineCamera: {fileID: 0}
   outlineShaderMaterial: {fileID: 0}

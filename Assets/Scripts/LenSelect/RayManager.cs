@@ -74,8 +74,9 @@ public class RayManager : MonoBehaviour
 
             if (wasSelectedBefore == false)
             {
-                
-                other.AddComponent<Outline>();
+                if (other.GetComponent<Outline>() == null)
+                     other.AddComponent<Outline>();
+
             }
             currentGameObjectHighlighted = other;
 
@@ -83,7 +84,8 @@ public class RayManager : MonoBehaviour
             {
                 wasSelectedBefore = false;
                 debug = false;
-
+                other.GetComponent<Outline>().eraseRenderer = true;
+                
                 //temp5.RemoveOutline(currentGameObjectHighlighted.GetComponent<Outline>());
                 //Destroy(currentGameObjectHighlighted.GetComponent<Outline>());
             }

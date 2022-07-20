@@ -89,31 +89,17 @@ public class LenSelect : MonoBehaviour
             for (int i = 0; i < allHighlightedObjects.Count; i++)
             {
 
-               // allHighlightedObjects[i].GetComponent<Rigidbody>().isKinematic = true; ;
-               // allHighlightedObjects[i].GetComponent<Rigidbody>().useGravity = true;
-
                 if (ObjectsToBeSetBackToOriginalSize.Contains(allHighlightedObjects[i]))
                 {
                     allHighlightedObjects.Remove(allHighlightedObjects[i]);
                 }
-
-                // reset back isKinematic 
-                //allHighlightedObjects[i].GetComponent<Rigidbody>().isKinematic = true;
 
             }
 
             for (int i = 0; i < ObjectsToBeSetBackToOriginalSize.Count; i++)
             {
                 GameObject temp = ObjectsToBeSetBackToOriginalSize[i];
-               /* if (holdTheYOriginalValue.ContainsKey(temp))
-                {
-                    Transform temp2 = holdTheYOriginalValue[temp];
-                    Vector3 t = temp2.position;
-                    temp.transform.position = t;
-                    temp.GetComponent<Rigidbody>().AddForce(Physics.gravity * 1f, ForceMode.Acceleration);
-                }
-           */
-               // print("resizing process reached and resiwing : " + ObjectsToBeSetBackToOriginalSize[i]);
+
 
                 if (OriginalTransform.ContainsKey(temp))
                 {
@@ -126,10 +112,7 @@ public class LenSelect : MonoBehaviour
                     temp.transform.localScale = originalScale;
                     temp.transform.position = holdTheYOriginalValue[temp].position;
                     temp.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    
-
-   
-                    
+                         
                 }
 
 
@@ -223,8 +206,7 @@ public class LenSelect : MonoBehaviour
             {
 
                 // addd some code to stop the interaction between objects same as vidio
-              //  allHighlightedObjects[i].GetComponent<Rigidbody>().isKinematic = false;
-                //allHighlightedObjects[i].GetComponent<Rigidbody>().useGravity = false;
+
                 // --------------------------------------------------------------------
 
                 getConeRadius(allHighlightedObjects[i]);
@@ -253,8 +235,6 @@ public class LenSelect : MonoBehaviour
                 if (!holdTheYOriginalValue.ContainsKey(allHighlightedObjects[i]))
                     holdTheYOriginalValue.Add(allHighlightedObjects[i], allHighlightedObjects[i].transform);
 
-               // print("gameObject: " + allHighlightedObjects[i] + " localScale [original] : " + OriginalTransform[allHighlightedObjects[i]]);
-               // print("gameObject: " + allHighlightedObjects[i] + " localScale [updated] : " + OriginalTransform[allHighlightedObjects[i]] * S_v1);
                 allHighlightedObjects[i].transform.localScale = OriginalTransform[allHighlightedObjects[i]] * S_v1;
                 allHighlightedObjects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
 

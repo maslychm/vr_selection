@@ -56,6 +56,14 @@ public class RayManager : MonoBehaviour
         Detecthis();
 
     }
+    IEnumerator waiter(GameObject other)
+    {
+        print("we reached the coroutine roger that }}}}}}}}}}}}}}}}??????????????????");
+        //Wait for 2 seconds
+        yield return new WaitForSeconds(0.5f);
+        other.GetComponent<Outline>().eraseRenderer = true;
+        other.SetActive(false);
+    }
 
     private void Detecthis()
     {
@@ -84,15 +92,16 @@ public class RayManager : MonoBehaviour
             {
                 wasSelectedBefore = false;
                 debug = false;
-                other.GetComponent<Outline>().eraseRenderer = true;
+                StartCoroutine(waiter(other));
                 
-                //temp5.RemoveOutline(currentGameObjectHighlighted.GetComponent<Outline>());
-                //Destroy(currentGameObjectHighlighted.GetComponent<Outline>());
+
+                
+                return;
+
             }
 
             if (confirmSelectionButton.action.WasPressedThisFrame() && wasSelectedBefore == true && Prior != null && Prior.name != "FlashLightCone")
             {
-                //Destroy(currentGameObjectHighlighted.GetComponent<Outline>());
                 
                 circle.ConfirmSelection();
 
@@ -105,7 +114,6 @@ public class RayManager : MonoBehaviour
             {
                 selectWasClicked = true;
                 wasSelectedBefore = true;
-                print("we pressed the select/grip button ///*/*/*/*/*/*/*/*/*/*" + other.name);
                 circle.Inraycastmodification(other);
                 Prior = other;
             }

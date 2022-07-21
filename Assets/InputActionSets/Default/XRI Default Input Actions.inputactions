@@ -834,6 +834,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "debug_write_B",
+                    "type": "Button",
+                    "id": "c4bc4d02-f77f-4868-9cd1-c30b5b26a8cf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1032,6 +1041,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "PerformGesture",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12d0cfbe-642b-4c74-bf9a-cfec2926f628",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "debug_write_B",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

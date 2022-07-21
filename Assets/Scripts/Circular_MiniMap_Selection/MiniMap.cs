@@ -1,9 +1,15 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MiniMap : MonoBehaviour
 {
     [SerializeField] private Transform centerOfMiniMap;
+
+    [SerializeField] private InputActionReference writeFileActionReference;
 
     // make a radius variable that is public and can be change in the unity editor
     [SerializeField] private float radius = 0.2f;
@@ -36,6 +42,11 @@ public class MiniMap : MonoBehaviour
 
         ClearObjectCopies();
         DisplayObjectCopies();
+
+        if (writeFileActionReference.action.WasPressedThisFrame())
+        {
+            StartCoroutine(WriteShapesAndDirectionsToFile(MiniMapInteractor.GetDuplicatesAndDirections()));
+        }
     }
 
     private void DisplayObjectCopies()
@@ -45,8 +56,32 @@ public class MiniMap : MonoBehaviour
         foreach (var shapeItem_Dir in ShapeItems_Directions)
         {
             RenderObjectInDirectionOnMinimap(shapeItem_Dir);
-            listInCircle.Add(shapeItem_Dir.s.GetComponent<shapeItem_2>());
+            listInCircle.Add(shapeItem_Dir.s);
         }
+    }
+
+    private IEnumerator WriteShapesAndDirectionsToFile(List<(shapeItem_2 s, Vector3 dir)> ShapeItems_Directions)
+    {
+        var folder = Application.streamingAssetsPath;
+        if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+
+        var dateStr = DateTime.Now.ToString("d").Replace("/", "-");
+        var timeStr = DateTime.Now.ToString("T").Replace(" ", "");
+        var secondStr = DateTime.Now.ToString("ss").Replace(" ", "");
+        var fileName = $"shape_directions_{dateStr}_{timeStr}".Replace(":", "-");
+        var filePath = Path.Combine(folder, fileName + ".txt");
+
+        using (var writer = new StreamWriter(filePath, true))
+        {
+            foreach (var (s, dir) in ShapeItems_Directions)
+            {
+                writer.WriteLineAsync($"{s.name.Replace(" ", "_")}, {dir.x}, {dir.y}, {dir.z}");
+            }
+
+            print($"Wrote TXT to: {filePath}");
+        }
+
+        return null;
     }
 
     private void ClearObjectCopies()

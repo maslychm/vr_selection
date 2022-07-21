@@ -30,7 +30,7 @@ public class SemiClutteredSceneManager : MonoBehaviour
         sphereGroups = new List<GameObject>();
 
         // store all the sphere groups in a list 
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < AllItemsManager.transform.childCount;i++)
         {
             sphereGroups.Add(AllItemsManager.transform.GetChild(i).gameObject);
         }
@@ -97,13 +97,13 @@ public class SemiClutteredSceneManager : MonoBehaviour
     void expandAllSphere()
     {
         Vector3 temp = AllItemsManager.transform.localScale;
-        AllItemsManager.transform.localScale = new Vector3(temp.x + positionexpandconstant, temp.y + positionexpandconstant , temp.z);
+        AllItemsManager.transform.localScale = new Vector3(temp.x + positionexpandconstant, temp.y + positionexpandconstant, temp.z + positionexpandconstant);
     }
 
     void shrinkAllSphere()
     {
         Vector3 temp = AllItemsManager.transform.localScale;
-        AllItemsManager.transform.localScale = new Vector3(temp.x - positionshrinkconstant, temp.y - positionshrinkconstant , temp.z);
+        AllItemsManager.transform.localScale = new Vector3(temp.x - positionshrinkconstant, temp.y - positionshrinkconstant, temp.z - positionshrinkconstant);
     }
     void expandCurrentGroup(GameObject ItemGroupChosen)
     {

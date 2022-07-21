@@ -86,6 +86,13 @@ public class MiniMapInteractor : MonoBehaviour
             tabletUI.SetTabletActive(debug);
     }
 
+    public void helperForLevelsUpdate()
+    {
+        originalToDuplicate.Clear();
+        duplicate_and_originalPosition.Clear();
+        CreateDuplicatesForMiniMap();
+    }
+
     private void CreateDuplicatesForMiniMap()
     {
         List<XRGestureInteractable> originalInteractables = FindObjectsOfType<XRGestureInteractable>().ToList();

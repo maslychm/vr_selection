@@ -10,22 +10,19 @@ public class DestroyParentOnPlayerHit : MonoBehaviour
 
     public void EndGameDeathAfterDelay()
     {
-        //print("want to die");
         float delay = Random.Range(2, 4);
         Invoke(nameof(DestroyParentObject), delay);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision collision)
     {
-        //print($"{tag} hit by {other.tag}");
-
-        if (gameObject.tag.Contains(other.tag))
+        if (gameObject.tag.Contains(collision.collider.tag))
         {
             DestroyParentObject();
             return;
         }
 
-        if (other.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
             DestroyParentObject();
             return;

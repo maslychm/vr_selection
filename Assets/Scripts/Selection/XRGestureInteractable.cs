@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class XRGestureInteractable : MonoBehaviour
@@ -7,8 +9,18 @@ public class XRGestureInteractable : MonoBehaviour
     private XRGestureFilterInteractor gestureInteractor;
 
     // grid selector var to be used instead of gesture interactor when needed
-    private XRGridSelectorInteractor secondInteractorHelper; 
-    
+    private XRGridSelectorInteractor gridInteractor;
+
+    internal List<GameObject> ToList()
+    {
+        throw new NotImplementedException();
+    }
+
+    // add a third access helper from the MiniMap Interactor
+    private MiniMapInteractor miniMapInteractor;
+
+    private LenSelectInteractor LenSelectInteractorHelper;
+
     [SerializeField] private Material hoverMaterial;
 
     private Material defaultMaterial;
@@ -16,22 +28,31 @@ public class XRGestureInteractable : MonoBehaviour
 
     public bool debug = false;
 
+    private string m_Scene;
+
+    private void Start()
+    {
+        m_Scene = SceneManager.GetActiveScene().name;
+
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2" || m_Scene.ToLower().Contains("minimap"))
+            miniMapInteractor = FindObjectOfType<MiniMapInteractor>();
+        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
+            gridInteractor = FindObjectOfType<XRGridSelectorInteractor>();
+        else if (m_Scene == "LenSelect_Implementation")
+            LenSelectInteractorHelper = FindObjectOfType<LenSelectInteractor>();
+        else
+            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
+    }
+
     private void Awake()
     {
         meshRenderers = new List<MeshRenderer>(GetComponents<MeshRenderer>());
         if (meshRenderers.Count == 0)
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
-
-        if (secondInteractorHelper == null)
-            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
-
-        // added to override the inability to access components through the gesture Interactor 
-            if (gestureInteractor == null)
-                secondInteractorHelper = FindObjectOfType<XRGridSelectorInteractor>();
     }
 
-    // add a getter for the meshrenderer list 
+    // add a getter for the meshrenderer list
     public List<MeshRenderer> getListOfAllObjects()
     {
         return meshRenderers;
@@ -61,14 +82,16 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = hoverMaterial;
 
-        // check which one is ready to be used 
-        if (gestureInteractor != null)
-
-            gestureInteractor.AddtoHighlighted(gameObject);
-
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2" || m_Scene.ToLower().Contains("minimap"))
+            miniMapInteractor.AddtoHighlighted(gameObject);
+        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
+            gridInteractor.AddtoHighlighted(gameObject);
+        else if (m_Scene == "LenSelect_Implementation")
+        {
+            LenSelectInteractorHelper.AddtoHighlighted(gameObject);
+        }
         else
-
-            secondInteractorHelper.AddtoHighlighted(gameObject);
+            gestureInteractor.AddtoHighlighted(gameObject);
     }
 
     private void EndHover()
@@ -78,18 +101,23 @@ public class XRGestureInteractable : MonoBehaviour
         foreach (var mr in meshRenderers)
             mr.material = defaultMaterial;
 
-        // check which one is ready to be used 
-        if(gestureInteractor != null)
-
-            gestureInteractor.RemoveFromHighlighted(gameObject);
-
+        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2" || m_Scene.ToLower().Contains("minimap"))
+            miniMapInteractor.RemoveFromHighlighted(gameObject);
+        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
+            gridInteractor.RemoveFromHighlighted(gameObject);
+        else if (m_Scene == "LenSelect_Implementation")
+            LenSelectInteractorHelper.RemoveFromHighlighted(gameObject);
         else
-
-            secondInteractorHelper.RemoveFromHighlighted(gameObject);
+            gestureInteractor.RemoveFromHighlighted(gameObject);
     }
 
     private void dprint(string msg)
     {
         if (debug) print(msg);
+    }
+
+    public void SetHoverMaterial(Material mat)
+    {
+        hoverMaterial = mat;
     }
 }

@@ -1,17 +1,9 @@
-// in the works..................
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Grid_Zone : MonoBehaviour
 {
-    /*
-     *
-     *  STILL CONTAINS LOGIC THAT NEEDS TO BE REVIEWED (Grabbing Items Logic)!!
-     * 
-     */
-
-    // this file will mainly take care of the zone/slot where the shapes 
-    // will be represented 
 
     public GameObject ItemInZone;
     public Image ZoneImage;
@@ -44,8 +36,6 @@ public class Grid_Zone : MonoBehaviour
         // and store its original scale and position/eulerAngles
         _originalEulerAngles = temp2.transform.eulerAngles;
         _originalPosition = temp2.transform.position;
-        //_originalScale = new Vector3(temp2.transform.localScale.x, temp2.transform.localScale.y, temp2.transform.localScale.z);
-
 
     }
 
@@ -75,11 +65,6 @@ public class Grid_Zone : MonoBehaviour
 
        
     }
-    /*
-    void _setToOriginalScale(GameObject temp3)
-    {
-        temp3.transform.localScale = _originalScale;
-    }*/
 
     void _setToOriginalPosition(GameObject temp4)
     {
@@ -93,15 +78,6 @@ public class Grid_Zone : MonoBehaviour
 
     public void InsertItem(GameObject temp)
     {
-
-        /* NOTE----
-         * isKinematic : 
-         * 
-         * Controls whether physics affects the rigidbody. 
-         * If isKinematic is enabled, Forces, collisions or joints will not 
-         * affect the rigidbody anymore. The rigidbody will be under full control 
-         * of animation or script control by changing transform.
-        */
 
         // first call the resizer 
         _autoResizerInZone(temp);

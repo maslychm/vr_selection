@@ -17,6 +17,7 @@ TagManager:
   - enemypyramid
   - enemystar
   - enemysphere
+  - clone
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
-  - 
+  - LenSelectInteractables
+  - confirmationCircle
   - 
   - 
   - 

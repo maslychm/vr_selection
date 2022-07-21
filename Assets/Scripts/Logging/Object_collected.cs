@@ -19,9 +19,9 @@ public class Object_collected : MonoBehaviour
     //Reset to original position
     public void ResetGameObject()
     {
-        _rigidbody.velocity = Vector3.zero;
         transform.position = _home_pos;
         transform.rotation = _home_rot;
+        _rigidbody.velocity = Vector3.zero;
     }
 
     public void MoveOutsideReach()

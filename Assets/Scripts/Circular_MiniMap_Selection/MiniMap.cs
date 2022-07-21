@@ -81,7 +81,7 @@ public class MiniMap : MonoBehaviour
             print($"Wrote TXT to: {filePath}");
         }
 
-        return null;
+       yield return null;
     }
 
     private void ClearObjectCopies()

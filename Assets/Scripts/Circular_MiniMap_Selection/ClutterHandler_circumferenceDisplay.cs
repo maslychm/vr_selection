@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,12 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     private int totalObjectsCount = 8;
     private Transform centreCircleTransform;
     private static Queue<GameObject> spotsAroundMiniMap;
+
+
+    // serialize these fields and assign their components manually 
+    // get the centre of the mini map
+    // get the whole mini map component 
+    // get the right hand itself assigned AS GAMEOBJECT
     [SerializeField] public GameObject centreCircle;
     [SerializeField] public GameObject MiniMap;
     [SerializeField] public GameObject TheHand;
@@ -147,11 +154,19 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         foreach (var currentCollider in _collidersWithHand)
         {
 
+            if (currentCollider.gameObject.name == "FlashlightCone" || currentCollider.gameObject.name == "Floor" || currentCollider.gameObject.name == "RightHand Controller")
+            {
+                continue;
+            }
+
             // store the game Object 
             GameObject currentCollidingObjWithHand = currentCollider.gameObject;
 
             // duplicate this colliding gameObject 
             GameObject duplicate = Instantiate(currentCollidingObjWithHand);
+
+            // when we duplicate the object it will already have the outline component in it
+            // no need for extra component addition
 
             // keep the same scale as the one shown in the Mini Map 
             duplicate.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,13 +16,20 @@ public class GrabbingHand : MonoBehaviour
 
     public GameObject objectInHand;
 
+    // add a variable to store the list of objects that are colliding with the hand live 
+    private List<GameObject> collidingWithHand;
+
     private void Start()
     {
         objectInHand = null;
+
+        // if we need this later we have it
+        collidingWithHand = new List<GameObject>();
     }
 
     private void Update()
     {
+
         if (grabActionReference.action.WasPressedThisFrame()) { }
 
         if (grabActionReference.action.WasReleasedThisFrame())
@@ -33,8 +42,20 @@ public class GrabbingHand : MonoBehaviour
     {
         if (objectInHand == null && grabActionReference.action.WasPressedThisFrame() && col.gameObject.GetComponent<shapeItem_2>())
         {
-            GameObject original = col.gameObject.GetComponent<shapeItem_2>().original;
-            GameObject duplicate = col.gameObject;
+            GameObject duplicate, original;
+            // check if the tag of the object  is one from the circumference display
+            if (col.gameObject.tag == "unclutterDuplicate")
+            {
+                ClutterHandler_circumferenceDisplay.await = false;
+                duplicate = col.gameObject;
+                original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
+                Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
+            }
+            else
+            {
+                original = col.gameObject.GetComponent<shapeItem_2>().original;
+                duplicate = col.gameObject;
+            }
             temp.RemoveFromMinimapUponGrab(duplicate);
 
             PickupObject(original);

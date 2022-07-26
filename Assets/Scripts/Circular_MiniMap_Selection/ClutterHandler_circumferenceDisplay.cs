@@ -144,10 +144,12 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             var extendedPosition = newPosition * (radius + offset) + centreCircleTransform.position;
 
             // let's create the placeHolder/empty gameObject now in the environment through instantiation
-            var tempPlaceHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity) as GameObject;
+            //var tempPlaceHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity) as GameObject;
+            var tempPlaceHolder = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Cylinder), extendedPosition, Quaternion.identity) as GameObject;
 
             // now need to set the rotation and parent of this instantiated gameObject to be the minimnap to rotate with it and even look at the centre
             tempPlaceHolder.transform.SetParent(MiniMap.transform);
+            tempPlaceHolder.transform.LookAt(centreCircle.transform);
 
             // then let's add this new empty gameObject to out queue
             spotsAroundMiniMap.Add(tempPlaceHolder, false);

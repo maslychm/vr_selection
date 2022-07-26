@@ -138,18 +138,22 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             float horizental_placement = Mathf.Cos(angle);
 
             // combine both placement into a vector3
-            Vector3 newPosition = new Vector3(horizental_placement, 0, vertical_placement);
+            Vector3 newPosition = new Vector3(horizental_placement, vertical_placement, 0);
 
             // now let's get the final position around the circle for the current iteration
-            var extendedPosition = newPosition * (radius + offset) + centreCircleTransform.position;
+            var extendedPosition = newPosition * (radius + offset) + centreCircleTransform.localPosition;
+
 
             // let's create the placeHolder/empty gameObject now in the environment through instantiation
             //var tempPlaceHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity) as GameObject;
-            var tempPlaceHolder = Instantiate(GameObject.CreatePrimitive(PrimitiveType.Cylinder), extendedPosition, Quaternion.identity) as GameObject;
 
-            // now need to set the rotation and parent of this instantiated gameObject to be the minimnap to rotate with it and even look at the centre
+            // checkpoint 1
+            var tempPlaceHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity) as GameObject;
             tempPlaceHolder.transform.SetParent(MiniMap.transform);
-            tempPlaceHolder.transform.LookAt(centreCircle.transform);
+            tempPlaceHolder.transform.localPosition = extendedPosition;
+            // now need to set the rotation and parent of this instantiated gameObject to be the minimnap to rotate with it and even look at the centre
+            //tempPlaceHolder.transform.SetParent(MiniMap.transform);
+             // tempPlaceHolder.transform.LookAt(centreCircle.transform);
 
             // then let's add this new empty gameObject to out queue
             spotsAroundMiniMap.Add(tempPlaceHolder, false);
@@ -161,11 +165,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     // In this process we assume that we are only dealing with spheres
     private void duplicateCurrentColliders()
     {
-
+        // isTrigger?????
         foreach (var currentCollider in _collidersWithHand)
         {
-
-            if (currentCollider.gameObject)
+            // check for anythin g that is nbot a sphere 
+            if (!currentCollider.gameObject.name.Contains("phere"))
             {
                 continue;
             }
@@ -220,7 +224,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         // if we do not have any spots to fill 
         // we simply return
 
-        if (spotsAroundMiniMap.Count == 0 || _collidersWithHand.Length <= 1)
+        if (_collidersWithHand.Length <= 1)
         {
             return;
         }
@@ -228,20 +232,30 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         for(int i = 0; (i < collidingWithHandDuplicates.Count) && (i < _collidersWithHand.Length); i++)
         {
             // get the next available spot 
-            foreach (GameObject j in  spotsAroundMiniMap.Keys)
+            foreach (GameObject j in spotsAroundMiniMap.Keys)
                 if (spotsAroundMiniMap[j] == false)
+                {
                     availableindex = j;
+                   
+                    break;
+                }
 
             GameObject _NextAvailableSpot = availableindex;
 
             // initiate the insertion process 
             // update the position the rotation and the parent 
+            if (!collidingWithHandDuplicates.ContainsKey(_collidersWithHand[i].gameObject))
+                continue;
             collidingWithHandDuplicates[_collidersWithHand[i].gameObject].transform.position = _NextAvailableSpot.transform.position;
             collidingWithHandDuplicates[_collidersWithHand[i].gameObject].transform.rotation = _NextAvailableSpot.transform.rotation;
 
             // this should fix the need to rotate and position needs to be going along with the minimap/hand
             collidingWithHandDuplicates[_collidersWithHand[i].gameObject].transform.SetParent(_NextAvailableSpot.transform);
-            
+            collidingWithHandDuplicates[_collidersWithHand[i].gameObject].SetActive(true);
+
+
+            spotsAroundMiniMap[availableindex] = true;
+
         }
     }
 }

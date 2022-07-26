@@ -18,6 +18,7 @@ TagManager:
   - enemystar
   - enemysphere
   - clone
+  - unclutterDuplicate
   layers:
   - Default
   - TransparentFX

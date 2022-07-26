@@ -40,16 +40,17 @@ public class GrabbingHand : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if (objectInHand == null && grabActionReference.action.WasPressedThisFrame() && col.gameObject.GetComponent<shapeItem_2>())
+        if (objectInHand == null && grabActionReference.action.WasPressedThisFrame() && (col.gameObject.GetComponent<shapeItem_3>() || col.gameObject.GetComponent<shapeItem_2>()))
         {
             GameObject duplicate, original;
             // check if the tag of the object  is one from the circumference display
             if (col.gameObject.tag == "unclutterDuplicate")
             {
-                ClutterHandler_circumferenceDisplay.await = false;
+                
                 duplicate = col.gameObject;
                 original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
                 Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
+                ClutterHandler_circumferenceDisplay.await = false;
             }
             else
             {

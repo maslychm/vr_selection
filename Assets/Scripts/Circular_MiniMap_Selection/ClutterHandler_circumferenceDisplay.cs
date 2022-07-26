@@ -154,7 +154,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         foreach (var currentCollider in _collidersWithHand)
         {
 
-            if (currentCollider.gameObject.name == "FlashlightCone" || currentCollider.gameObject.name == "Floor" || currentCollider.gameObject.name == "RightHand Controller")
+            if (currentCollider.gameObject.name == "World" || currentCollider.gameObject.transform.parent.name == "World" || currentCollider.gameObject.name == "FlashlightCone" || currentCollider.gameObject.name == "Platform (1)" || currentCollider.gameObject.name == "Floor" || currentCollider.gameObject.name == "RightHand Controller")
             {
                 continue;
             }

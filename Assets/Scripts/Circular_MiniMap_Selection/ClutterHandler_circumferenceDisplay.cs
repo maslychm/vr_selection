@@ -11,7 +11,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     private float offset = 1f;
     private int totalObjectsCount = 8;
     private Transform centreCircleTransform;
-    private static Queue<GameObject> spotsAroundMiniMap;
+    private static Dictionary<GameObject, bool> spotsAroundMiniMap;
 
 
     // serialize these fields and assign their components manually 
@@ -33,7 +33,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     void Start()
     {
-        spotsAroundMiniMap = new Queue<GameObject>();
+        spotsAroundMiniMap = new Dictionary<GameObject, bool>();
 
         collidingWithHandDuplicates = new Dictionary<GameObject, GameObject>();
 
@@ -50,7 +50,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     }
 
     // neeedx to set a getter to access the list/queue
-    public static Queue<GameObject> getSpotsAvailable()
+    public static Dictionary<GameObject, bool> getSpotsAvailable()
     {
         return spotsAroundMiniMap;
     }
@@ -63,10 +63,15 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             return;
 
         // just as a safety check we will clear the lists here again
+        foreach (var key in collidingWithHandDuplicates.Keys.ToList())
+        {
+            Destroy(collidingWithHandDuplicates[key]);
+        }
         collidingWithHandDuplicates.Clear();
-        spotsAroundMiniMap.Clear();
-
-        makeSpotsReady();
+        foreach (var key in spotsAroundMiniMap.Keys.ToList())
+        {
+            spotsAroundMiniMap[key] = false;
+        }
 
         // get all the colliders with the hand itself and store them in array
         // ame as the radius of the rioght hand's sphere
@@ -81,7 +86,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             Debug.Log("colliding with -> " + currentlyTouching);
         }
-
+        
         // start thye duplication process 
         duplicateCurrentColliders();
 
@@ -101,7 +106,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
 
             collidingWithHandDuplicates.Clear();
-            spotsAroundMiniMap.Clear();
+
+            foreach (var key in spotsAroundMiniMap.Keys.ToList())
+            {
+                spotsAroundMiniMap[key] = false;
+            }
 
             //// again make spots ready 
             //makeSpotsReady();
@@ -141,7 +150,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             tempPlaceHolder.transform.SetParent(MiniMap.transform);
 
             // then let's add this new empty gameObject to out queue
-            spotsAroundMiniMap.Enqueue(tempPlaceHolder);
+            spotsAroundMiniMap.Add(tempPlaceHolder, false);
 
         }
     }
@@ -154,7 +163,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         foreach (var currentCollider in _collidersWithHand)
         {
 
-            if (currentCollider.gameObject.name == "World" || currentCollider.gameObject.transform.parent.name == "World" || currentCollider.gameObject.name == "FlashlightCone" || currentCollider.gameObject.name == "Platform (1)" || currentCollider.gameObject.name == "Floor" || currentCollider.gameObject.name == "RightHand Controller")
+            if (currentCollider.gameObject)
             {
                 continue;
             }
@@ -213,11 +222,15 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             return;
         }
-
+        GameObject availableindex = null;
         for(int i = 0; (i < collidingWithHandDuplicates.Count) && (i < _collidersWithHand.Length); i++)
         {
             // get the next available spot 
-            GameObject _NextAvailableSpot = spotsAroundMiniMap.Dequeue();
+            foreach (GameObject j in  spotsAroundMiniMap.Keys)
+                if (spotsAroundMiniMap[j] == false)
+                    availableindex = j;
+
+            GameObject _NextAvailableSpot = availableindex;
 
             // initiate the insertion process 
             // update the position the rotation and the parent 

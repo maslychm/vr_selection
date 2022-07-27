@@ -151,6 +151,8 @@ public class MiniMapInteractor : MonoBehaviour
             // --------------------------------For Circumference of the mini map-----------------
             GameObject duplicateOFduplicate = Instantiate(duplicate);
             Destroy(duplicateOFduplicate.GetComponent<shapeItem_2>());
+            Destroy(duplicateOFduplicate.GetComponent<XRGestureInteractable>());
+            Destroy(duplicateOFduplicate.GetComponent<Object_collected>());
             duplicateOFduplicate.AddComponent<shapeItem_3>();
             duplicateOFduplicate.GetComponent<shapeItem_3>().original = duplicate;
             duplicateOFduplicate.GetComponent<Rigidbody>().isKinematic = true;

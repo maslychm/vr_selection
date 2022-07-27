@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 {
-    private float radius = 0.2f;
-    [SerializeField] public float offset = 0.05f;
+    [SerializeField] public float radius = 0.015f;
+    [SerializeField] public float offset = 0f;
     private int totalObjectsCount = 8;
     private Transform centreCircleTransform;
     private static Dictionary<GameObject, bool> spotsAroundMiniMap;
@@ -26,12 +26,13 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     private List<GameObject> duplicatedBefore;
 
-    public static bool await = false;
+    public bool await = false;
 
     private Collider[] _collidersWithHand;
 
     // this list will store all the currently colliding with hand objects DUPLICATES
     public static Dictionary<GameObject, GameObject> collidingWithHandDuplicates;
+
     public static Dictionary<GameObject, GameObject> originaltoduplicatewithgameObject;
 
     private void Start()
@@ -69,20 +70,20 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
         // get all the colliders with the hand itself and store them in array
         // ame as the radius of the rioght hand's sphere
-        _collidersWithHand = Physics.OverlapSphere(TheHand.transform.position, 0.03f);
+        //_collidersWithHand = Physics.OverlapSphere(TheHand.transform.position, 0.03f);
 
-        //if(await == false)
-        //    makeSpotsReady();
-        // we only fill the spots if there is clutter
-        if (_collidersWithHand.Length <= 1)
-            return;
+        ////if(await == false)
+        ////    makeSpotsReady();
+        //// we only fill the spots if there is clutter
+        //if (_collidersWithHand.Length <= 1)
+        //    return;
 
         // just as a safety check we will clear the lists here again
         if (collidingWithHandDuplicates.Count > 0)
         {
             collidingWithHandDuplicates.Clear();
         }
-        removeDuplicates();
+        //removeDuplicates();
         foreach (var key in spotsAroundMiniMap.Keys.ToList())
         {
             spotsAroundMiniMap[key] = false;
@@ -99,13 +100,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         //    return;
 
         // print all the colliders currently saved
-        foreach (var currentlyTouching in _collidersWithHand)
-        {
-            if (currentlyTouching.gameObject.name.Contains("phere"))
-                Debug.Log("colliding with -> " + currentlyTouching);
-        }
-
-       
+        //foreach (var currentlyTouching in _collidersWithHand)
+        //{
+        //    if (currentlyTouching.gameObject.name.Contains("phere"))
+        //        Debug.Log("colliding with -> " + currentlyTouching);
+        //}
 
         // check if the user clicked the trigger
         if (clickedRightHandController.action.WasPressedThisFrame())
@@ -136,13 +135,20 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         spotsAroundMiniMap.Clear();
     }
 
-    private void removeDuplicates()
+    public void removeDuplicates()
     {
         Vector3 originalOutCastPosition = new Vector3(50, 50, 50);
-        foreach (GameObject original in collidingWithHandDuplicates.Keys)
+        print("WE REACHED A re outcasting process 11111 ///////''''");
+        foreach (GameObject original in originaltoduplicatewithgameObject.Keys)
         {
             print("WE REACHED A re outcasting process ///////''''");
-            collidingWithHandDuplicates[original].transform.position = originalOutCastPosition;
+            originaltoduplicatewithgameObject[original].transform.position = originalOutCastPosition;
+            originaltoduplicatewithgameObject[original].transform.parent = null;
+
+        }
+        foreach (var key in spotsAroundMiniMap.Keys.ToList())
+        {
+            spotsAroundMiniMap[key] = false;
         }
     }
 
@@ -157,8 +163,8 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             float angle = i * Mathf.PI * 2f / totalObjectsCount;
 
             // let's try and get the vertical placement and horizental before combining them
-            float vertical_placement = Mathf.Sin(angle);
-            float horizental_placement = Mathf.Cos(angle);
+            float vertical_placement = Mathf.Cos(angle);
+            float horizental_placement = Mathf.Sin(angle);
 
             // combine both placement into a vector3
             Vector3 newPosition = new Vector3(horizental_placement, vertical_placement, 0);
@@ -173,9 +179,6 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             var tempPlaceHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity) as GameObject;
             tempPlaceHolder.transform.SetParent(MiniMap.transform);
             tempPlaceHolder.transform.localPosition = extendedPosition;
-            // now need to set the rotation and parent of this instantiated gameObject to be the minimnap to rotate with it and even look at the centre
-            //tempPlaceHolder.transform.SetParent(MiniMap.transform);
-            // tempPlaceHolder.transform.LookAt(centreCircle.transform);
 
             // then let's add this new empty gameObject to out queue
             spotsAroundMiniMap.Add(tempPlaceHolder, false);
@@ -242,34 +245,53 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
      }*/
 
     /// <summary>
-    /// this will only insert when the hand actually hits the items on the mini map 
+    /// this will only insert when the hand actually hits the items on the mini map
     /// </summary>
-    public void helper()
+    public void helper(Collider[] collidersHere)
     {
-         insertToSpots();
+        _collidersWithHand = collidersHere;
+        insertToSpots();
     }
+
     private void insertToSpots()
     {
         // first if we do not have any items to insert
         // if we do not have any spots to fill
         // we simply return
 
-        if (_collidersWithHand.Length <= 1)
+        //if (_collidersWithHand.Length < 2)
+        //{
+        //    return;
+        //}
+
+        List<GameObject> temp = new List<GameObject>();
+
+        for (int i = 0; i < _collidersWithHand.Length; i++)
         {
+            if (_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>())
+                temp.Add(_collidersWithHand[i].gameObject);
+        }
+        if (temp.Count <= 1)
+        {
+            temp.Clear();
             return;
         }
-
         GameObject availableindex = null;
-        for (int i = 0; (i < _collidersWithHand.Length); i++)
+
+        for (int i = 0; (i < temp.Count); i++)
         {
+            if (temp[i].gameObject.GetComponent<shapeItem_2>() == null)
+                continue;
             // get the next available spot
             foreach (GameObject j in spotsAroundMiniMap.Keys)
+            {
                 if (spotsAroundMiniMap[j] == false)
                 {
                     availableindex = j;
                     spotsAroundMiniMap[j] = true;
                     break;
                 }
+            }
 
             print("Started INSERTION ****");
             GameObject _NextAvailableSpot = availableindex;
@@ -277,47 +299,46 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             print("MID INSERTION ****");
             // initiate the insertion process
             // update the position the rotation and the parent
-            /*
-            if (_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>() == null)
-                print("Problem 1 triggered");
-            if (originalToDuplicate[_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>()] == null)
-                print("Problem 2 triggered");
-            print("HERE IS THE ORIGINAL TO DUPLICATE INFO ->>>>" + _collidersWithHand[i].gameObject.GetComponent<shapeItem_2>().gameObject.name + " " + originalToDuplicate[_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>()].gameObject.name);
-            originalToDuplicate[_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.position = _NextAvailableSpot.transform.position;
 
-            originalToDuplicate[_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.rotation = _NextAvailableSpot.transform.rotation;
-
-            print("ARE WE HERE ???????????????????");
-
-            // this should fix the need to rotate and position needs to be going along with the minimap/hand
-            originalToDuplicate[_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.SetParent(_NextAvailableSpot.transform);
-
-            collidingWithHandDuplicates.Add(_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>().gameObject, _collidersWithHand[i].gameObject.GetComponent<shapeItem_3>().gameObject);
-
-            print("COMPLETED INSERTION ****");
-
-            spotsAroundMiniMap[availableindex] = true;
-            */
-
-            if(originaltoduplicatewithgameObject.ContainsKey(_collidersWithHand[i].gameObject) == false)
-            {
-                print("PROBLEM 2");
+            if (temp[i].gameObject.GetComponent<shapeItem_2>() == null)
                 continue;
-            }
-            
-            originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject].transform.position = _NextAvailableSpot.transform.position;
-            originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject].transform.rotation = _NextAvailableSpot.transform.rotation;
+            if (originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()] == null)
+                print("Problem 2 triggered");
+            print("HERE IS THE ORIGINAL TO DUPLICATE INFO ->>>>" + temp[i].gameObject.GetComponent<shapeItem_2>().gameObject.name + " " + originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.name);
+            originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.position = _NextAvailableSpot.transform.position;
+
+            originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.rotation = _NextAvailableSpot.transform.rotation;
 
             print("ARE WE HERE ???????????????????");
 
             // this should fix the need to rotate and position needs to be going along with the minimap/hand
-            originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject].transform.SetParent(_NextAvailableSpot.transform);
+            originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.SetParent(_NextAvailableSpot.transform);
 
-            collidingWithHandDuplicates.Add(_collidersWithHand[i].gameObject, originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject]);
+            collidingWithHandDuplicates.Add(temp[i].gameObject.GetComponent<shapeItem_2>().gameObject, originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.GetComponent<shapeItem_3>().gameObject);
 
             print("COMPLETED INSERTION ****");
 
             spotsAroundMiniMap[availableindex] = true;
+
+            /*  if(originaltoduplicatewithgameObject.ContainsKey(_collidersWithHand[i].gameObject) == false)
+              {
+                  print("PROBLEM 2");
+                  continue;
+              }
+
+              originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject].transform.position = _NextAvailableSpot.transform.position;
+              originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject].transform.rotation = _NextAvailableSpot.transform.rotation;
+
+              print("ARE WE HERE ???????????????????");
+
+              // this should fix the need to rotate and position needs to be going along with the minimap/hand
+              originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject].transform.SetParent(_NextAvailableSpot.transform);
+
+              collidingWithHandDuplicates.Add(_collidersWithHand[i].gameObject, originaltoduplicatewithgameObject[_collidersWithHand[i].gameObject]);
+
+              print("COMPLETED INSERTION ****");
+
+              spotsAroundMiniMap[availableindex] = true;*/
         }
     }
 }

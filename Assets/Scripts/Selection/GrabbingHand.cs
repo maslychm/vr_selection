@@ -14,6 +14,8 @@ public class GrabbingHand : MonoBehaviour
     public bool addForceOnObjectDetach = true;
     public float objPushForce = 20.0f;
 
+    bool wasAdded = false;
+
     public GameObject objectInHand;
 
     // add a variable to store the list of objects that are colliding with the hand live
@@ -40,9 +42,37 @@ public class GrabbingHand : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<shapeItem_2>()){
-            helper208.helper();
+
+           Collider[] _collidersWithHand = Physics.OverlapSphere(this.gameObject.transform.position, 0.03f);
+
+            //if(await == false)
+            //    makeSpotsReady();
+            // we only fill the spots if there is clutter
+            //if (_collidersWithHand.Length <= 1)
+            //{
+                
+            //    return;
+            //}
+
+            foreach (var currentlyTouching in _collidersWithHand)
+            {
+                if (currentlyTouching.gameObject.name.Contains("phere"))
+                    Debug.Log("colliding with -> " + currentlyTouching);
+            }
+
+            helper208.helper(_collidersWithHand);
+            wasAdded = true;
         }
         
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (helper208.await == false && wasAdded == true)
+        {
+            helper208.removeDuplicates();
+            wasAdded = false;
+        }
     }
 
     private void OnTriggerStay(Collider col)
@@ -56,7 +86,7 @@ public class GrabbingHand : MonoBehaviour
                 duplicate = col.gameObject;
                 original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
                 Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
-                ClutterHandler_circumferenceDisplay.await = false;
+                helper208.await = false;
             }
             else
             {

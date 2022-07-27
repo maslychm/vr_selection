@@ -16,7 +16,6 @@ public class shapeItem_2 : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        print("We reached On Trigger Enter");
         if (!other.GetComponent<GrabbingHand>())
         {
             return;

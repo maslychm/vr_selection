@@ -10,13 +10,13 @@ public class GrabbingHand : MonoBehaviour
 
     public MiniMap temp;
     public MiniMapInteractor temp2;
-
+    public ClutterHandler_circumferenceDisplay helper208;
     public bool addForceOnObjectDetach = true;
     public float objPushForce = 20.0f;
 
     public GameObject objectInHand;
 
-    // add a variable to store the list of objects that are colliding with the hand live 
+    // add a variable to store the list of objects that are colliding with the hand live
     private List<GameObject> collidingWithHand;
 
     private void Start()
@@ -29,13 +29,20 @@ public class GrabbingHand : MonoBehaviour
 
     private void Update()
     {
-
         if (grabActionReference.action.WasPressedThisFrame()) { }
 
         if (grabActionReference.action.WasReleasedThisFrame())
         {
             ReleaseCurrentlyHeldObject();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<shapeItem_2>()){
+            helper208.helper();
+        }
+        
     }
 
     private void OnTriggerStay(Collider col)
@@ -46,7 +53,6 @@ public class GrabbingHand : MonoBehaviour
             // check if the tag of the object  is one from the circumference display
             if (col.gameObject.tag == "unclutterDuplicate")
             {
-                
                 duplicate = col.gameObject;
                 original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
                 Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);

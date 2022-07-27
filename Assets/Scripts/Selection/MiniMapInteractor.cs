@@ -57,7 +57,8 @@ public class MiniMapInteractor : MonoBehaviour
     private Vector3 temp; // simple helper to store the distance later in our dictionary
 
     private Dictionary<XRGestureInteractable, shapeItem_2> originalToDuplicate;
-
+    public static Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
+    public static Dictionary<GameObject, GameObject> originalToDuplicate_ForCirCumference_WITHOBJECTS;
     private static List<(shapeItem_2, Vector3)> duplicateDirections;
 
     private static Dictionary<GameObject, Transform> duplicate_and_originalPosition;
@@ -69,8 +70,9 @@ public class MiniMapInteractor : MonoBehaviour
         originalToDuplicate = new Dictionary<XRGestureInteractable, shapeItem_2>();
         duplicateDirections = new List<(shapeItem_2, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
-        allHighlightedObjects = new List<GameObject>();
-
+        originalToDuplicate_ForCirCumference_WITHOBJECTS = new Dictionary<GameObject, GameObject>();
+        allHighlightedObjects = new List<GameObject>(); 
+        originalToDuplicate_ForCirCumference = new Dictionary<shapeItem_2, shapeItem_3>();
         CreateDuplicatesForMiniMap();
 
         if (flashlightHighlighter == null)
@@ -90,7 +92,18 @@ public class MiniMapInteractor : MonoBehaviour
     {
         originalToDuplicate.Clear();
         duplicate_and_originalPosition.Clear();
+        originalToDuplicate_ForCirCumference.Clear();
+        originalToDuplicate_ForCirCumference_WITHOBJECTS.Clear();
         CreateDuplicatesForMiniMap();
+    }
+
+    public static Dictionary<shapeItem_2, shapeItem_3> getUpdatedListOfDuplicates()
+    {
+        return originalToDuplicate_ForCirCumference;
+    }
+    public static Dictionary<GameObject, GameObject> getUpdatedListOfDuplicates2()
+    {
+        return originalToDuplicate_ForCirCumference_WITHOBJECTS;
     }
 
     private void CreateDuplicatesForMiniMap()
@@ -134,6 +147,22 @@ public class MiniMapInteractor : MonoBehaviour
             duplicate.GetComponent<shapeItem_2>().original = interactable.gameObject;
             duplicate.GetComponent<Rigidbody>().isKinematic = true;
             duplicate.GetComponent<Rigidbody>().useGravity = false;
+
+            // --------------------------------For Circumference of the mini map-----------------
+            GameObject duplicateOFduplicate = Instantiate(duplicate);
+            Destroy(duplicateOFduplicate.GetComponent<shapeItem_2>());
+            duplicateOFduplicate.AddComponent<shapeItem_3>();
+            duplicateOFduplicate.GetComponent<shapeItem_3>().original = duplicate;
+            duplicateOFduplicate.GetComponent<Rigidbody>().isKinematic = true;
+            duplicateOFduplicate.GetComponent<Rigidbody>().useGravity = false;
+            duplicateOFduplicate.tag = "unclutterDuplicate";
+            originalToDuplicate_ForCirCumference.Add(duplicate.GetComponent<shapeItem_2>(), duplicateOFduplicate.GetComponent<shapeItem_3>());
+
+            print("cool we are here");
+            originalToDuplicate_ForCirCumference_WITHOBJECTS.Add(duplicate, duplicateOFduplicate);
+            // remove them away
+            duplicateOFduplicate.transform.position = new Vector3(50, 50, 50);
+            //---------------------------------------------------------------------------------
 
             originalToDuplicate.Add(interactable, duplicate.GetComponent<shapeItem_2>());
             duplicate_and_originalPosition.Add(duplicate, original.transform);

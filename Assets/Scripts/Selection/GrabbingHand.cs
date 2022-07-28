@@ -85,19 +85,41 @@ public class GrabbingHand : MonoBehaviour
             {
                 duplicate = col.gameObject;
                 original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
+                GameObject originalOfFirstDuplicate = original.gameObject.GetComponent<shapeItem_2>().original;
                 Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
                 helper208.await = false;
+
+                temp.RemoveFromMinimapUponGrab(original);
+
+                PickupObject(originalOfFirstDuplicate);
+
+                objectInHand = originalOfFirstDuplicate;
+
+
+                helper208.removeDuplicates();
+                wasAdded = false;
+                helper208.await = false;
+                
             }
             else
             {
                 original = col.gameObject.GetComponent<shapeItem_2>().original;
                 duplicate = col.gameObject;
+
+                temp.RemoveFromMinimapUponGrab(duplicate);
+
+                PickupObject(original);
+
+                objectInHand = original;
+
+               // helper208.removeDuplicates();
+                helper208.removeDuplicates();
+                wasAdded = false;
+                helper208.await = false;
             }
-            temp.RemoveFromMinimapUponGrab(duplicate);
 
-            PickupObject(original);
 
-            objectInHand = original;
+
         }
     }
 

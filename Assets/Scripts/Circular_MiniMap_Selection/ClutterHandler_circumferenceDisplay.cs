@@ -24,6 +24,8 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     [SerializeField] private InputActionReference clickedRightHandController;
     private Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
 
+    bool before = false;
+
     private List<GameObject> duplicatedBefore;
 
     public bool await = false;
@@ -64,6 +66,12 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     {
         originalToDuplicate = MiniMapInteractor.getUpdatedListOfDuplicates();
         originaltoduplicatewithgameObject = MiniMapInteractor.getUpdatedListOfDuplicates2();
+        if (clickedRightHandController.action.WasPressedThisFrame() && before == true)
+        {
+            await = false;
+            before = false;
+
+        }
 
         if (await == true)
             return;
@@ -84,6 +92,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             //isDuplicatedThisFrame = true;
             await = true;
+            before = true;
             return;
         }
         // if nothing then simply free the spots and clear the list of duplicates to be stored
@@ -136,8 +145,8 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             float angle = i * Mathf.PI * 2f / totalObjectsCount;
 
             // let's try and get the vertical placement and horizental before combining them
-            float vertical_placement = Mathf.Cos(angle);
-            float horizental_placement = Mathf.Sin(angle);
+            float vertical_placement = Mathf.Sin(angle);
+            float horizental_placement = Mathf.Cos(angle);
 
             // combine both placement into a vector3
             Vector3 newPosition = new Vector3(horizental_placement, vertical_placement, 0);

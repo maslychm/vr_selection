@@ -111,10 +111,10 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     public void removeDuplicates()
     {
         Vector3 originalOutCastPosition = new Vector3(50, 50, 50);
-        print("WE REACHED A re outcasting process 11111 ///////''''");
+
         foreach (GameObject original in originaltoduplicatewithgameObject.Keys)
         {
-            print("WE REACHED A re outcasting process ///////''''");
+
             originaltoduplicatewithgameObject[original].transform.position = originalOutCastPosition;
             originaltoduplicatewithgameObject[original].transform.parent = null;
 
@@ -146,7 +146,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
             // ITS 0.3F TO GET THE RIGHT CIRCUMFERENCE POSITIONING 
             // MOVE BY 0.1 DEPENDING ON THE RESIZING OF THE MINIMAP
-            var extendedPosition = newPosition * (radius - 0.3f) + centreCircleTransform.localPosition;
+            var extendedPosition = (newPosition * Mathf.Abs(radius - 0.3f)) + centreCircleTransform.localPosition;
 
             // checkpoint 1
             var tempPlaceHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity) as GameObject;

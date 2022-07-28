@@ -60,6 +60,9 @@ public class GrabbingHand : MonoBehaviour
                     Debug.Log("colliding with -> " + currentlyTouching);
             }
 
+            if (helper208.await == true)
+                return;
+            helper208.removeDuplicates();
             helper208.helper(_collidersWithHand);
             wasAdded = true;
         }
@@ -70,6 +73,9 @@ public class GrabbingHand : MonoBehaviour
     {
         if (helper208.await == false && wasAdded == true)
         {
+
+            if (helper208.await == true)
+                return;
             helper208.removeDuplicates();
             wasAdded = false;
         }
@@ -83,11 +89,13 @@ public class GrabbingHand : MonoBehaviour
             // check if the tag of the object  is one from the circumference display
             if (col.gameObject.tag == "unclutterDuplicate")
             {
+
+                print("PNL Ademo");
                 duplicate = col.gameObject;
                 original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
                 GameObject originalOfFirstDuplicate = original.gameObject.GetComponent<shapeItem_2>().original;
-                Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
-                helper208.await = false;
+                //Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
+               
 
                 temp.RemoveFromMinimapUponGrab(original);
 

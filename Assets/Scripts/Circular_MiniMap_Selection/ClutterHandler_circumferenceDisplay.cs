@@ -66,15 +66,25 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     {
         originalToDuplicate = MiniMapInteractor.getUpdatedListOfDuplicates();
         originaltoduplicatewithgameObject = MiniMapInteractor.getUpdatedListOfDuplicates2();
-        if (clickedRightHandController.action.WasPressedThisFrame() && before == true)
-        {
-            await = false;
-            before = false;
+        //if (clickedRightHandController.action.WasPressedThisFrame() && before == true)
+        //{
+        //    await = false;
+        //    before = false;
+        //    removeDuplicates();
 
-        }
+        //}
 
         if (await == true)
-            return;
+        {
+            if (clickedRightHandController.action.WasPressedThisFrame())
+            {
+                //isDuplicatedThisFrame = true;
+                await = false;
+                return;
+            }
+            else 
+                return;
+        }
 
         // just as a safety check we will clear the lists here again
         if (collidingWithHandDuplicates.Count > 0)
@@ -92,7 +102,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             //isDuplicatedThisFrame = true;
             await = true;
-            before = true;
+            //before = true;
             return;
         }
         // if nothing then simply free the spots and clear the list of duplicates to be stored

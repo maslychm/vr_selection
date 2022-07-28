@@ -60,7 +60,7 @@ public class GrabbingHand : MonoBehaviour
                     Debug.Log("colliding with -> " + currentlyTouching);
             }
 
-            if (helper208.await == true)
+            if (helper208.await == true || objectInHand != null)
                 return;
             helper208.removeDuplicates();
             helper208.helper(_collidersWithHand);
@@ -92,11 +92,19 @@ public class GrabbingHand : MonoBehaviour
 
                 print("PNL Ademo");
                 duplicate = col.gameObject;
+                if (duplicate == null)
+                    print("P111");
                 original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
-                GameObject originalOfFirstDuplicate = original.gameObject.GetComponent<shapeItem_2>().original;
-                //Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
-               
+                if (original == null)
+                    print("P222");
 
+                GameObject originalOfFirstDuplicate = duplicate.gameObject.GetComponent<shapeItem_3>().original.gameObject.GetComponent<shapeItem_2>().original;
+                //Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
+                if (originalOfFirstDuplicate == null)
+                    print("P333");
+
+
+                print("HERE ARE ALL THE CHAIN OF PARENTS ; " + duplicate.name + " its parent -> " + original.name + "its original ever -> " + originalOfFirstDuplicate.name);
                 temp.RemoveFromMinimapUponGrab(original);
 
                 PickupObject(originalOfFirstDuplicate);

@@ -80,6 +80,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             {
                 //isDuplicatedThisFrame = true;
                 await = false;
+                removeDuplicates();
                 return;
             }
             else 

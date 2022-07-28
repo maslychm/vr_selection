@@ -94,7 +94,7 @@ public class GrabbingHand : MonoBehaviour
                 duplicate = col.gameObject;
                 if (duplicate == null)
                     print("P111");
-                original = ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates.FirstOrDefault(x => x.Value == col.gameObject).Key;
+                original = ClutterHandler_circumferenceDisplay.originaltoduplicatewithgameObject.FirstOrDefault(x => x.Value == col.gameObject).Key;
                 if (original == null)
                     print("P222");
 

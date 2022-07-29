@@ -17,6 +17,7 @@ public class shapeItem_3 : MonoBehaviour
     {
         inCircle = false;
         currentMap = null;
+        this.gameObject.layer = 10;
     }
 
     private void OnTriggerEnter(Collider other)

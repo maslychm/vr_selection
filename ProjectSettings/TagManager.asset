@@ -30,7 +30,7 @@ TagManager:
   - Enemy
   - LenSelectInteractables
   - confirmationCircle
-  - 
+  - OnlyCollideWithHand
   - 
   - 
   - 

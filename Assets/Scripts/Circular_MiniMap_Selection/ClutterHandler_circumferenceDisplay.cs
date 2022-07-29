@@ -66,13 +66,6 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     {
         originalToDuplicate = MiniMapInteractor.getUpdatedListOfDuplicates();
         originaltoduplicatewithgameObject = MiniMapInteractor.getUpdatedListOfDuplicates2();
-        //if (clickedRightHandController.action.WasPressedThisFrame() && before == true)
-        //{
-        //    await = false;
-        //    before = false;
-        //    removeDuplicates();
-
-        //}
 
         if (await == true)
         {

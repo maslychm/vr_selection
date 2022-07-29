@@ -45,15 +45,6 @@ public class GrabbingHand : MonoBehaviour
 
            Collider[] _collidersWithHand = Physics.OverlapSphere(this.gameObject.transform.position, 0.03f);
 
-            //if(await == false)
-            //    makeSpotsReady();
-            // we only fill the spots if there is clutter
-            //if (_collidersWithHand.Length <= 1)
-            //{
-                
-            //    return;
-            //}
-
             foreach (var currentlyTouching in _collidersWithHand)
             {
                 if (currentlyTouching.gameObject.name.Contains("phere"))
@@ -99,7 +90,6 @@ public class GrabbingHand : MonoBehaviour
                     print("P222");
 
                 GameObject originalOfFirstDuplicate = duplicate.gameObject.GetComponent<shapeItem_3>().original.gameObject.GetComponent<shapeItem_2>().original;
-                //Destroy(ClutterHandler_circumferenceDisplay.collidingWithHandDuplicates[original]);
                 if (originalOfFirstDuplicate == null)
                     print("P333");
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-public class XRGestureInteractable : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
     private XRGestureFilterInteractor gestureInteractor;
 

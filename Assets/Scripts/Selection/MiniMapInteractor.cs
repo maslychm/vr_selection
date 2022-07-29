@@ -56,7 +56,7 @@ public class MiniMapInteractor : MonoBehaviour
 
     private Vector3 temp; // simple helper to store the distance later in our dictionary
 
-    private Dictionary<XRGestureInteractable, shapeItem_2> originalToDuplicate;
+    private Dictionary<Interactable, shapeItem_2> originalToDuplicate;
     public static Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
     public static Dictionary<GameObject, GameObject> originalToDuplicate_ForCirCumference_WITHOBJECTS;
     private static List<(shapeItem_2, Vector3)> duplicateDirections;
@@ -67,7 +67,7 @@ public class MiniMapInteractor : MonoBehaviour
 
     public void Start()
     {
-        originalToDuplicate = new Dictionary<XRGestureInteractable, shapeItem_2>();
+        originalToDuplicate = new Dictionary<Interactable, shapeItem_2>();
         duplicateDirections = new List<(shapeItem_2, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
         originalToDuplicate_ForCirCumference_WITHOBJECTS = new Dictionary<GameObject, GameObject>();
@@ -108,7 +108,7 @@ public class MiniMapInteractor : MonoBehaviour
 
     private void CreateDuplicatesForMiniMap()
     {
-        List<XRGestureInteractable> originalInteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
+        List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;
@@ -140,7 +140,7 @@ public class MiniMapInteractor : MonoBehaviour
             foreach (var c in duplicate.GetComponents<Collider>())
                 c.isTrigger = true;
 
-            Destroy(duplicate.GetComponent<XRGestureInteractable>());
+            Destroy(duplicate.GetComponent<Interactable>());
             Destroy(duplicate.GetComponent<Object_collected>());
 
             duplicate.AddComponent<shapeItem_2>();
@@ -151,7 +151,7 @@ public class MiniMapInteractor : MonoBehaviour
             // --------------------------------For Circumference of the mini map-----------------
             GameObject duplicateOFduplicate = Instantiate(duplicate);
             Destroy(duplicateOFduplicate.GetComponent<shapeItem_2>());
-            Destroy(duplicateOFduplicate.GetComponent<XRGestureInteractable>());
+            Destroy(duplicateOFduplicate.GetComponent<Interactable>());
             Destroy(duplicateOFduplicate.GetComponent<Object_collected>());
             duplicateOFduplicate.AddComponent<shapeItem_3>();
             duplicateOFduplicate.GetComponent<shapeItem_3>().original = duplicate;
@@ -251,7 +251,7 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (GameObject o in objects)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
-            shapeItem_2 duplicate = originalToDuplicate[o.GetComponent<XRGestureInteractable>()];
+            shapeItem_2 duplicate = originalToDuplicate[o.GetComponent<Interactable>()];
             if (duplicate == null)
                 continue;
 

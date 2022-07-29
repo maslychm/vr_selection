@@ -56,7 +56,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
     public float objPushForce = 20.0f;
 
     // add a helper 
-    public XRGestureInteractable ListOfMeshRenderers_Getter;
+    public Interactable ListOfMeshRenderers_Getter;
 
     // declare the dictionary 
     // initial one (key) will be a game object that contains the gesture interactable compoenent 
@@ -116,7 +116,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
         {
             GameObject _original = currentShapeParent.transform.GetChild(i).gameObject;
             GameObject temp = Instantiate(_original);
-            Component scriptToBeDestroyed = temp.GetComponent<XRGestureInteractable>();
+            Component scriptToBeDestroyed = temp.GetComponent<Interactable>();
             Destroy(scriptToBeDestroyed);
 
             // extra items for deletion
@@ -166,7 +166,7 @@ public class XRGridSelectorInteractor : MonoBehaviour
 
             GameObject _original2 = temp2[i].gameObject;
             GameObject _temp = Instantiate(_original2);
-            Component _scriptToBeDestroyed = _temp.GetComponent<XRGestureInteractable>();
+            Component _scriptToBeDestroyed = _temp.GetComponent<Interactable>();
             Destroy(_scriptToBeDestroyed);
 
             // add the item shape compoenent 

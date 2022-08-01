@@ -16,7 +16,7 @@ public class RayManager : MonoBehaviour
     private GameObject helper56;
 
     RaycastHit hit;
-    private List<XRGestureInteractable> allObjectsInteractables;
+    private List<Interactable> allObjectsInteractables;
     public static bool selectWasClicked = false;
 
     Vector3 fromPosition;
@@ -43,9 +43,9 @@ public class RayManager : MonoBehaviour
     {
 
 
-        allObjectsInteractables = new List<XRGestureInteractable>();
+        allObjectsInteractables = new List<Interactable>();
 
-        allObjectsInteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
+        allObjectsInteractables = FindObjectsOfType<Interactable>().ToList();
 
         selectWasClicked = false;
         //Ray  ray = new Ray(leftHandController.transform.position, transform.forward);

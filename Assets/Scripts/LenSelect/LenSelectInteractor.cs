@@ -106,19 +106,19 @@ public class LenSelectInteractor : MonoBehaviour
     private void setInteractablesToAppropriateLayer()
     {
 
-            List<XRGestureInteractable> parentinteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
+            List<Interactable> parentinteractables = FindObjectsOfType<Interactable>().ToList();
             
         // iterate and set layer
     }
 
     private void CreateDuplicatesForMiniMap()
     {
-        List<XRGestureInteractable> originalInteractables = FindObjectsOfType<XRGestureInteractable>().ToList();
+        List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;
             GameObject temp = Instantiate(original);
-            Destroy(temp.GetComponent<XRGestureInteractable>());
+            Destroy(temp.GetComponent<Interactable>());
 
             if (temp.CompareTag("star"))
             {

@@ -7,7 +7,7 @@ public class Trigger_reset : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.GetComponent<XRGestureInteractable>())
+        if (collider.GetComponent<Interactable>())
         {
             // if the component exists then in that case simply reset the game object
             collider.gameObject.GetComponent<Object_collected>().ResetGameObject();

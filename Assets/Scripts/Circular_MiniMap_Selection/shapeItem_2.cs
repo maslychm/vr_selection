@@ -15,14 +15,19 @@ public class shapeItem_2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (!other.GetComponent<GrabbingHand>())
+        {
             return;
+        }
 
         if (other.GetComponent<GrabbingHand>().objectInHand)
+        {
             return;
-
+        }
         GetComponent<cakeslice.Outline>().enabled = true;
         original.GetComponent<cakeslice.Outline>().enabled = true;
+
     }
 
     private void OnTriggerExit(Collider other)

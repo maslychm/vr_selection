@@ -10,7 +10,7 @@ public class SetHighlightedMaterials : MonoBehaviour
          * Assign lighter materials to each interactable in the scene.
          * Material swapping gets laggy when flicking over >20 objects >4 times per second.
          */
-        List<XRGestureInteractable> interactables = FindObjectsOfType<XRGestureInteractable>().ToList();
+        List<Interactable> interactables = FindObjectsOfType<Interactable>().ToList();
         foreach (var interactable in interactables)
         {
             Material highlightedMat = new Material(interactable.GetComponent<Renderer>().material);

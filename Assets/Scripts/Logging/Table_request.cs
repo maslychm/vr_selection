@@ -89,7 +89,7 @@ public class Table_request : MonoBehaviour
         expectedObjectCopy.tag = "Untagged";
 
         Destroy(expectedObjectCopy.GetComponent<Object_collected>());
-        Destroy(expectedObjectCopy.GetComponent<XRGestureInteractable>());
+        Destroy(expectedObjectCopy.GetComponent<Interactable>());
     }
 
     private void OnTriggerEnter(Collider collider)

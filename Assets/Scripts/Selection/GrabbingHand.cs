@@ -18,6 +18,8 @@ public class GrabbingHand : MonoBehaviour
 
     public GameObject objectInHand;
 
+    public static bool isHovering = false;
+
     // add a variable to store the list of objects that are colliding with the hand live
     private List<GameObject> collidingWithHand;
 
@@ -45,6 +47,8 @@ public class GrabbingHand : MonoBehaviour
 
            Collider[] _collidersWithHand = Physics.OverlapSphere(this.gameObject.transform.position, 0.03f);
 
+            isHovering = true;
+
             foreach (var currentlyTouching in _collidersWithHand)
             {
                 if (currentlyTouching.gameObject.name.Contains("phere"))
@@ -64,7 +68,7 @@ public class GrabbingHand : MonoBehaviour
     {
         if (helper208.await == false && wasAdded == true)
         {
-
+            isHovering = false;
             if (helper208.await == true)
                 return;
             helper208.removeDuplicates();
@@ -81,7 +85,6 @@ public class GrabbingHand : MonoBehaviour
             if (col.gameObject.tag == "unclutterDuplicate")
             {
 
-                print("PNL Ademo");
                 duplicate = col.gameObject;
                 if (duplicate == null)
                     print("P111");

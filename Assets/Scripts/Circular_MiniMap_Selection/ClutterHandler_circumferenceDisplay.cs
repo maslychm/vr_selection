@@ -92,7 +92,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         }
 
         // check if the user clicked the trigger
-        if (clickedRightHandController.action.WasPressedThisFrame())
+        if (clickedRightHandController.action.WasPressedThisFrame() && GrabbingHand.isHovering == true)
         {
             //isDuplicatedThisFrame = true;
             await = true;

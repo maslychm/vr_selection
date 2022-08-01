@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -22,7 +20,6 @@ public class shapeItem_3 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (!other.GetComponent<GrabbingHand>())
         {
             return;
@@ -35,7 +32,6 @@ public class shapeItem_3 : MonoBehaviour
         GetComponent<cakeslice.Outline>().enabled = true;
         original.GetComponent<cakeslice.Outline>().enabled = true;
         original.GetComponent<shapeItem_2>().original.GetComponent<cakeslice.Outline>().enabled = true;
-
     }
 
     private void OnTriggerExit(Collider other)

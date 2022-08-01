@@ -23,11 +23,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     [SerializeField] private InputActionReference clickedRightHandController;
     private Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
 
-    private List<GameObject> duplicatedBefore;
-
-    public bool await = false;
-
-    private Collider[] _collidersWithHand;
+    public bool isFrozen = false;
 
     // this list will store all the currently colliding with hand objects DUPLICATES
     public static Dictionary<GameObject, GameObject> collidingWithHandDuplicates;
@@ -37,11 +33,9 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     private void Start()
     {
         spotsAroundMiniMap = new Dictionary<GameObject, bool>();
-        duplicatedBefore = new List<GameObject>();
         originaltoduplicatewithgameObject = new Dictionary<GameObject, GameObject>();
         collidingWithHandDuplicates = new Dictionary<GameObject, GameObject>();
         originalToDuplicate = new Dictionary<shapeItem_2, shapeItem_3>();
-        //allInstantiables = FindObjectOfType<XRGestureInteractable>().ToList();
 
         // get the centre of the MiniMap Position
         centreCircleTransform = centreCircle.transform;
@@ -49,7 +43,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         // take care of setting our positions before we can use them
         makeSpotsReady();
 
-        await = false;
+        isFrozen = false;
     }
 
     // neeedx to set a getter to access the list/queue
@@ -64,12 +58,13 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         originalToDuplicate = MiniMapInteractor.getUpdatedListOfDuplicates();
         originaltoduplicatewithgameObject = MiniMapInteractor.getUpdatedListOfDuplicates2();
 
-        if (await == true)
+        if (isFrozen == true)
         {
             if (clickedRightHandController.action.WasPressedThisFrame())
             {
-                await = false;
+                isFrozen = false;
                 removeDuplicates();
+                TheHand.GetComponent<GrabbingHand>().collidingWithHand.Clear();
                 return;
             }
             else
@@ -90,7 +85,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         // check if the user clicked the trigger
         if (clickedRightHandController.action.WasPressedThisFrame() && GrabbingHand.isHovering == true)
         {
-            await = true;
+            isFrozen = true;
             return;
         }
         // if nothing then simply free the spots and clear the list of duplicates to be stored
@@ -99,20 +94,8 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             collidingWithHandDuplicates.Clear();
 
-            await = false;
+            isFrozen = false;
         }
-    }
-
-    //maybe can be used later
-    private void DestroySpots()
-    {
-        foreach (var temp in spotsAroundMiniMap.Keys)
-        {
-            GameObject spot = temp;
-            Destroy(spot);
-        }
-
-        spotsAroundMiniMap.Clear();
     }
 
     public void removeDuplicates()
@@ -163,23 +146,13 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// this will only insert when the hand actually hits the items on the mini map
-    /// </summary>
-    public void helper(Collider[] collidersHere)
-    {
-        _collidersWithHand = collidersHere;
-        insertToSpots();
-    }
-
-    private void insertToSpots()
+    public void insertToSpots(HashSet<shapeItem_2> toInsert)
     {
         List<GameObject> temp = new List<GameObject>();
 
-        for (int i = 0; i < _collidersWithHand.Length; i++)
+        foreach (var obj in toInsert)
         {
-            if (_collidersWithHand[i].gameObject.GetComponent<shapeItem_2>())
-                temp.Add(_collidersWithHand[i].gameObject);
+            temp.Add(obj.gameObject);
         }
         if (temp.Count <= 1)
         {

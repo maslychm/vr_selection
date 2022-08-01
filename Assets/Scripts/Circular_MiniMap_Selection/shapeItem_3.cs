@@ -34,7 +34,7 @@ public class shapeItem_3 : MonoBehaviour
         }
         GetComponent<cakeslice.Outline>().enabled = true;
         original.GetComponent<cakeslice.Outline>().enabled = true;
-        original.GetComponent<shapeItem_2>().GetComponent<cakeslice.Outline>().enabled = true;
+        original.GetComponent<shapeItem_2>().original.GetComponent<cakeslice.Outline>().enabled = true;
 
     }
 
@@ -45,6 +45,6 @@ public class shapeItem_3 : MonoBehaviour
 
         GetComponent<cakeslice.Outline>().enabled = false;
         original.GetComponent<cakeslice.Outline>().enabled = false;
-        original.GetComponent<shapeItem_2>().GetComponent<cakeslice.Outline>().enabled = false;
+        original.GetComponent<shapeItem_2>().original.GetComponent<cakeslice.Outline>().enabled = false;
     }
 }

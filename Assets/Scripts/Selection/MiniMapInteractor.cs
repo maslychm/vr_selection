@@ -71,7 +71,7 @@ public class MiniMapInteractor : MonoBehaviour
         duplicateDirections = new List<(shapeItem_2, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
         originalToDuplicate_ForCirCumference_WITHOBJECTS = new Dictionary<GameObject, GameObject>();
-        allHighlightedObjects = new List<GameObject>(); 
+        allHighlightedObjects = new List<GameObject>();
         originalToDuplicate_ForCirCumference = new Dictionary<shapeItem_2, shapeItem_3>();
         CreateDuplicatesForMiniMap();
 
@@ -101,6 +101,7 @@ public class MiniMapInteractor : MonoBehaviour
     {
         return originalToDuplicate_ForCirCumference;
     }
+
     public static Dictionary<GameObject, GameObject> getUpdatedListOfDuplicates2()
     {
         return originalToDuplicate_ForCirCumference_WITHOBJECTS;
@@ -160,7 +161,6 @@ public class MiniMapInteractor : MonoBehaviour
             duplicateOFduplicate.tag = "unclutterDuplicate";
             originalToDuplicate_ForCirCumference.Add(duplicate.GetComponent<shapeItem_2>(), duplicateOFduplicate.GetComponent<shapeItem_3>());
 
-            print("cool we are here");
             originalToDuplicate_ForCirCumference_WITHOBJECTS.Add(duplicate, duplicateOFduplicate);
             // remove them away
             duplicateOFduplicate.transform.position = new Vector3(50, 50, 50);
@@ -251,6 +251,12 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (GameObject o in objects)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
+
+            if (!originalToDuplicate.ContainsKey(o.GetComponent<Interactable>()))
+            {
+                continue;
+            }
+
             shapeItem_2 duplicate = originalToDuplicate[o.GetComponent<Interactable>()];
             if (duplicate == null)
                 continue;

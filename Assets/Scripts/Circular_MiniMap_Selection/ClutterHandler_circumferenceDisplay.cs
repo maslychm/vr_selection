@@ -10,7 +10,6 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     private int totalObjectsCount = 8;
     private Transform centreCircleTransform;
     private static Dictionary<GameObject, bool> spotsAroundMiniMap;
-    private bool isDuplicatedThisFrame = false;
 
     // serialize these fields and assign their components manually
     // get the centre of the mini map
@@ -23,8 +22,6 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     [SerializeField] private InputActionReference clickedRightHandController;
     private Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
-
-    bool before = false;
 
     private List<GameObject> duplicatedBefore;
 
@@ -71,12 +68,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             if (clickedRightHandController.action.WasPressedThisFrame())
             {
-                //isDuplicatedThisFrame = true;
                 await = false;
                 removeDuplicates();
                 return;
             }
-            else 
+            else
                 return;
         }
 
@@ -94,9 +90,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         // check if the user clicked the trigger
         if (clickedRightHandController.action.WasPressedThisFrame() && GrabbingHand.isHovering == true)
         {
-            //isDuplicatedThisFrame = true;
             await = true;
-            //before = true;
             return;
         }
         // if nothing then simply free the spots and clear the list of duplicates to be stored
@@ -127,10 +121,8 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
         foreach (GameObject original in originaltoduplicatewithgameObject.Keys)
         {
-
             originaltoduplicatewithgameObject[original].transform.position = originalOutCastPosition;
             originaltoduplicatewithgameObject[original].transform.parent = null;
-
         }
         foreach (var key in spotsAroundMiniMap.Keys.ToList())
         {
@@ -157,7 +149,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
             // now let's get the final position around the circle for the current iteration
 
-            // ITS 0.3F TO GET THE RIGHT CIRCUMFERENCE POSITIONING 
+            // ITS 0.3F TO GET THE RIGHT CIRCUMFERENCE POSITIONING
             // MOVE BY 0.1 DEPENDING ON THE RESIZING OF THE MINIMAP
             var extendedPosition = (newPosition * Mathf.Abs(radius - 0.3f)) + centreCircleTransform.localPosition;
 
@@ -182,7 +174,6 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     private void insertToSpots()
     {
-
         List<GameObject> temp = new List<GameObject>();
 
         for (int i = 0; i < _collidersWithHand.Length; i++)
@@ -199,8 +190,10 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
         for (int i = 0; (i < temp.Count); i++)
         {
-            if (temp[i].gameObject.GetComponent<shapeItem_2>() == null)
+            var tempShapeItem2 = temp[i].GetComponent<shapeItem_2>();
+            if (tempShapeItem2 == null)
                 continue;
+
             // get the next available spot
             foreach (GameObject j in spotsAroundMiniMap.Keys)
             {
@@ -212,27 +205,21 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
                 }
             }
 
-            print("Started INSERTION ****");
             GameObject _NextAvailableSpot = availableindex;
 
-
-            if (temp[i].gameObject.GetComponent<shapeItem_2>() == null)
-                continue;
-
-            if (originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()] == null)
-                print("Problem 2 triggered");
-
-            print("HERE IS THE ORIGINAL TO DUPLICATE INFO ->>>>" + temp[i].gameObject.GetComponent<shapeItem_2>().gameObject.name + " " + originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.name);
-            originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.position = _NextAvailableSpot.transform.position;
-
-            originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.rotation = _NextAvailableSpot.transform.rotation;
+            originalToDuplicate[tempShapeItem2].transform.position = _NextAvailableSpot.transform.position;
+            originalToDuplicate[tempShapeItem2].transform.rotation = _NextAvailableSpot.transform.rotation;
 
             // this should fix the need to rotate and position needs to be going along with the minimap/hand
-            originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.transform.SetParent(_NextAvailableSpot.transform);
+            originalToDuplicate[tempShapeItem2].transform.SetParent(_NextAvailableSpot.transform);
 
-            collidingWithHandDuplicates.Add(temp[i].gameObject.GetComponent<shapeItem_2>().gameObject, originalToDuplicate[temp[i].gameObject.GetComponent<shapeItem_2>()].gameObject.GetComponent<shapeItem_3>().gameObject);
+            if (collidingWithHandDuplicates.ContainsKey(tempShapeItem2.gameObject))
+            {
+                // skip if already present
+                continue;
+            }
 
-            print("COMPLETED INSERTION ****");
+            collidingWithHandDuplicates.Add(tempShapeItem2.gameObject, originalToDuplicate[tempShapeItem2].GetComponent<shapeItem_3>().gameObject);
 
             spotsAroundMiniMap[availableindex] = true;
         }

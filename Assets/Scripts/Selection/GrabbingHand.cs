@@ -14,7 +14,7 @@ public class GrabbingHand : MonoBehaviour
     public bool addForceOnObjectDetach = true;
     public float objPushForce = 20.0f;
 
-    bool wasAdded = false;
+    private bool wasAdded = false;
 
     public GameObject objectInHand;
 
@@ -43,17 +43,11 @@ public class GrabbingHand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<shapeItem_2>()){
-
-           Collider[] _collidersWithHand = Physics.OverlapSphere(this.gameObject.transform.position, 0.03f);
+        if (other.gameObject.GetComponent<shapeItem_2>())
+        {
+            Collider[] _collidersWithHand = Physics.OverlapSphere(this.gameObject.transform.position, 0.03f);
 
             isHovering = true;
-
-            foreach (var currentlyTouching in _collidersWithHand)
-            {
-                if (currentlyTouching.gameObject.name.Contains("phere"))
-                    Debug.Log("colliding with -> " + currentlyTouching);
-            }
 
             if (helper208.await == true || objectInHand != null)
                 return;
@@ -61,7 +55,6 @@ public class GrabbingHand : MonoBehaviour
             helper208.helper(_collidersWithHand);
             wasAdded = true;
         }
-        
     }
 
     private void OnTriggerExit(Collider other)
@@ -84,7 +77,6 @@ public class GrabbingHand : MonoBehaviour
             // check if the tag of the object  is one from the circumference display
             if (col.gameObject.tag == "unclutterDuplicate")
             {
-
                 duplicate = col.gameObject;
                 if (duplicate == null)
                     print("P111");
@@ -96,19 +88,16 @@ public class GrabbingHand : MonoBehaviour
                 if (originalOfFirstDuplicate == null)
                     print("P333");
 
-
-                print("HERE ARE ALL THE CHAIN OF PARENTS ; " + duplicate.name + " its parent -> " + original.name + "its original ever -> " + originalOfFirstDuplicate.name);
+                //print("HERE ARE ALL THE CHAIN OF PARENTS ; " + duplicate.name + " its parent -> " + original.name + "its original ever -> " + originalOfFirstDuplicate.name);
                 temp.RemoveFromMinimapUponGrab(original);
 
                 PickupObject(originalOfFirstDuplicate);
 
                 objectInHand = originalOfFirstDuplicate;
 
-
                 helper208.removeDuplicates();
                 wasAdded = false;
                 helper208.await = false;
-                
             }
             else
             {
@@ -121,14 +110,11 @@ public class GrabbingHand : MonoBehaviour
 
                 objectInHand = original;
 
-               // helper208.removeDuplicates();
+                // helper208.removeDuplicates();
                 helper208.removeDuplicates();
                 wasAdded = false;
                 helper208.await = false;
             }
-
-
-
         }
     }
 

@@ -125,6 +125,8 @@ public class MiniMap : MonoBehaviour
         }
 
         shapeItemObject.transform.parent = centerOfMiniMap.transform;
+
+        print($"IN RENDER OBJ IN DIR ON MM{shapeItemObject.name}");
     }
 
     private void MoveToTrash(GameObject o)

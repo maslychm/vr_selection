@@ -109,6 +109,24 @@ public class MiniMapInteractor : MonoBehaviour
 
     private void CreateDuplicatesForMiniMap()
     {
+        //if (FindObjectsOfType<shapeItem_3>().Length > 0)
+        //    return;
+
+        foreach (var g in FindObjectsOfType<shapeItem_2>())
+        {
+            Destroy(g.gameObject);
+        }
+
+        foreach (var g in FindObjectsOfType<shapeItem_3>())
+        {
+            Destroy(g.gameObject);
+        }
+
+        originalToDuplicate.Clear();
+        duplicate_and_originalPosition.Clear();
+        originalToDuplicate_ForCirCumference.Clear();
+        originalToDuplicate_ForCirCumference_WITHOBJECTS.Clear();
+
         List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
         foreach (var interactable in originalInteractables)
         {
@@ -176,6 +194,7 @@ public class MiniMapInteractor : MonoBehaviour
     private void Update()
     {
         ProcessInput();
+        print($"size high objs {allHighlightedObjects.Count}");
         CalculateDuplicateDirections(allHighlightedObjects);
     }
 
@@ -244,8 +263,30 @@ public class MiniMapInteractor : MonoBehaviour
         //print($"distHand: {distHand}");
     }
 
+    // migrated triggers from interactables
+    public void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("sphere"))
+            return;
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        other.gameObject.GetComponent<Interactable>().StartHover();
+
+        AddtoHighlighted(other.gameObject);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("sphere"))
+            return;
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        other.gameObject.GetComponent<Interactable>().EndHover();
+
+        RemoveFromHighlighted(other.gameObject);
+    }
+
     public void CalculateDuplicateDirections(List<GameObject> objects)
     {
+        //print(objects[0].name);
         duplicateDirections.Clear();
         Vector3 max = Vector3.zero;
         foreach (GameObject o in objects)
@@ -294,6 +335,7 @@ public class MiniMapInteractor : MonoBehaviour
 
     public static List<(shapeItem_2, Vector3)> GetDuplicatesAndDirections()
     {
+        print($"sizeof duplicates dirs {duplicateDirections.Count}");
         return duplicateDirections;
     }
 
@@ -306,7 +348,7 @@ public class MiniMapInteractor : MonoBehaviour
 
     public void AddtoHighlighted(GameObject o)
     {
-        //print($"{o.name}");
+        print($"{o.name}");
         allHighlightedObjects.Add(o);
     }
 

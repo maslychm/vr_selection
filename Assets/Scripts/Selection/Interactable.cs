@@ -11,6 +11,9 @@ public class Interactable : MonoBehaviour
     // grid selector var to be used instead of gesture interactor when needed
     private XRGridSelectorInteractor gridInteractor;
 
+    // this is for later for the flower cone 
+    
+
     internal List<GameObject> ToList()
     {
         throw new NotImplementedException();
@@ -30,19 +33,80 @@ public class Interactable : MonoBehaviour
 
     private string m_Scene;
 
-    private void Start()
-    {
-        m_Scene = SceneManager.GetActiveScene().name;
+    GameObject prior = null;
 
-        if (m_Scene == "ClutterFixApproach" || m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2" || m_Scene == "ALLCLUTTERLEVELSCENE_WithEditsAvailbleThroughEditor_WithKeyBoardManagementOfLevels" || m_Scene.ToLower().Contains("minimap"))
-            miniMapInteractor = FindObjectOfType<MiniMapInteractor>();
-        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
-            gridInteractor = FindObjectOfType<XRGridSelectorInteractor>();
-        else if (m_Scene == "LenSelect_Implementation")
-            LenSelectInteractorHelper = FindObjectOfType<LenSelectInteractor>();
-        else
-            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
-    }
+    public static Component currentInteractor = null;
+
+    //private void Start()
+    //{
+    //    //m_Scene = SceneManager.GetActiveScene().name;
+
+    //    if (SelectionTechniqueDistributer.currentlySetActiveTechnique == null)
+    //        return;
+
+    //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "MiniMap")
+    //    {
+    //        miniMapInteractor = FindObjectOfType<MiniMapInteractor>();
+    //        currentInteractor = miniMapInteractor;
+    //    }
+    //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "Grid")
+    //    {
+    //        gridInteractor = FindObjectOfType<XRGridSelectorInteractor>();
+    //        currentInteractor = gridInteractor;
+    //    }
+    //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "LenSelect")
+    //    {
+    //        LenSelectInteractorHelper = FindObjectOfType<LenSelectInteractor>();
+    //        currentInteractor = LenSelectInteractorHelper;
+    //    }
+    //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "FlowerCone")
+    //    {
+    //        // keep empty for now
+    //    }
+    //    else
+    //    {
+    //        gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
+    //        currentInteractor = gestureInteractor;
+    //    }
+    //    prior = SelectionTechniqueDistributer.currentlySetActiveTechnique;
+    //}
+
+    //private void Update()
+    //{
+    //    if (SelectionTechniqueDistributer.currentlySetActiveTechnique == prior || SelectionTechniqueDistributer.currentlySetActiveTechnique == null)
+    //    {
+    //        currentInteractor = null;
+    //        return;
+    //    }
+    //    else {
+    //        if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "MiniMap")
+    //        {
+    //            miniMapInteractor = FindObjectOfType<MiniMapInteractor>();
+    //            currentInteractor = miniMapInteractor;
+    //        }
+    //        else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "Grid")
+    //        {
+    //            gridInteractor = FindObjectOfType<XRGridSelectorInteractor>();
+    //            currentInteractor = gridInteractor;
+    //        }
+    //        else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "LenSelect")
+    //        {
+    //            LenSelectInteractorHelper = FindObjectOfType<LenSelectInteractor>();
+    //            currentInteractor = LenSelectInteractorHelper;
+    //        }
+    //        else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "FlowerCone")
+    //        {
+    //            // keep empty for now
+    //        }
+    //        else
+    //        {
+    //            gestureInteractor = FindObjectOfType<XRGestureFilterInteractor>();
+    //            currentInteractor = gestureInteractor;
+    //        }
+
+    //        prior = SelectionTechniqueDistributer.currentlySetActiveTechnique;
+    //    }
+    //}
 
     private void Awake()
     {
@@ -51,70 +115,109 @@ public class Interactable : MonoBehaviour
             meshRenderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         defaultMaterial = meshRenderers[0].material;
     }
-
     // add a getter for the meshrenderer list
     public List<MeshRenderer> getListOfAllObjects()
     {
         return meshRenderers;
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        dprint(other.tag);
-        if (!other.CompareTag("GestureFilter"))
-            return;
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    dprint(other.tag);
+    //    if (!other.CompareTag("GestureFilter"))
+    //        return;
 
-        StartHover();
-    }
+    //    StartHover();
+    //}
 
-    public void OnTriggerExit(Collider other)
-    {
-        if (!other.CompareTag("GestureFilter"))
-            return;
+    //public void OnTriggerExit(Collider other)
+    //{
+    //    if (!other.CompareTag("GestureFilter"))
+    //        return;
 
-        EndHover();
-    }
+    //    EndHover();
+    //}
 
-    private void StartHover()
+
+    public void StartHover()
     {
         dprint($"Start hover: {this.name}");
 
         foreach (var mr in meshRenderers)
             mr.material = hoverMaterial;
 
-        if (m_Scene == "ClutterFixApproach" || m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "Demo2" || m_Scene == "ALLCLUTTERLEVELSCENE_WithEditsAvailbleThroughEditor_WithKeyBoardManagementOfLevels" || m_Scene.ToLower().Contains("minimap"))
-            miniMapInteractor.AddtoHighlighted(gameObject);
-        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
-            gridInteractor.AddtoHighlighted(gameObject);
-        else if (m_Scene == "LenSelect_Implementation")
-        {
-            LenSelectInteractorHelper.AddtoHighlighted(gameObject);
-        }
-        else
-            gestureInteractor.AddtoHighlighted(gameObject);
+        //if (currentInteractor != null)
+        //{
+        //    if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "MiniMap")
+        //    {
+        //        miniMapInteractor.AddtoHighlighted(gameObject);
+
+        //    }
+        //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "Grid")
+        //    {
+        //        gridInteractor.AddtoHighlighted(gameObject);
+
+        //    }
+        //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "LenSelect")
+        //    {
+        //        LenSelectInteractorHelper.AddtoHighlighted(gameObject);
+
+        //    }
+        //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "FlowerCone")
+        //    {
+        //        // keep empty for now
+        //    }
+        //    else
+        //    {
+        //        gestureInteractor.AddtoHighlighted(gameObject);
+        //    }
+
+        //}
     }
 
-    private void EndHover()
+    public void EndHover()
     {
         dprint($"End hover: {this.name}");
 
         foreach (var mr in meshRenderers)
             mr.material = defaultMaterial;
 
-        if (m_Scene == "PitckupTest_Shelves_3_Circular_MiniMap" || m_Scene == "ClutterFixApproach" || m_Scene == "ALLCLUTTERLEVELSCENE_WithEditsAvailbleThroughEditor_WithKeyBoardManagementOfLevels" || m_Scene == "Demo2" || m_Scene.ToLower().Contains("minimap"))
-            miniMapInteractor.RemoveFromHighlighted(gameObject);
-        else if (m_Scene == "PitckupTest_Shelves_2_GridSelection")
-            gridInteractor.RemoveFromHighlighted(gameObject);
-        else if (m_Scene == "LenSelect_Implementation")
-            LenSelectInteractorHelper.RemoveFromHighlighted(gameObject);
-        else
-            gestureInteractor.RemoveFromHighlighted(gameObject);
+        //if (currentInteractor != null)
+        //{
+        //    if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "MiniMap")
+        //    {
+        //        miniMapInteractor.RemoveFromHighlighted(gameObject);
+
+        //    }
+        //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "Grid")
+        //    {
+        //        gridInteractor.RemoveFromHighlighted(gameObject);
+
+        //    }
+        //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "LenSelect")
+        //    {
+        //        LenSelectInteractorHelper.RemoveFromHighlighted(gameObject);
+
+        //    }
+        //    else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "FlowerCone")
+        //    {
+        //        // keep empty for now
+        //    }
+        //    else
+        //    {
+        //        gestureInteractor.RemoveFromHighlighted(gameObject);
+        //    }
+
+        //}
+   
+
     }
 
-    private void dprint(string msg)
+    public void dprint(string msg)
     {
         if (debug) print(msg);
     }
+
 
     public void SetHoverMaterial(Material mat)
     {

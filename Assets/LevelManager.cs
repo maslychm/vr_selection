@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
     int counter = 0;
     int prior = -1;
     public GameObject ControllerHand;
-    public MiniMapInteractor temp;
+    public MiniMapInteractor miniMapInteractor;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +22,13 @@ public class LevelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (counter == 5)
+            if (counter == 3)
                 counter = 0;
             if (prior != -1)
                 this.transform.GetChild(prior).gameObject.SetActive(false);
 
             this.transform.GetChild(counter).gameObject.SetActive(true);
-            temp.helperForLevelsUpdate();
+            miniMapInteractor.helperForLevelsUpdate();
             counter++;
             prior = counter - 1;
         }

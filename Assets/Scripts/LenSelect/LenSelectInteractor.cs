@@ -113,6 +113,9 @@ public class LenSelectInteractor : MonoBehaviour
 
     private void CreateDuplicatesForMiniMap()
     {
+
+        if (FindObjectsOfType<shapeItem_2>().Length > 0)
+            return;
         List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
         foreach (var interactable in originalInteractables)
         {
@@ -174,7 +177,29 @@ public class LenSelectInteractor : MonoBehaviour
         CalculateDuplicateDirections(allHighlightedObjects);
     }
 
+    // migrated triggers from interactables
+    public void OnTriggerEnter(Collider other)
+    {
 
+        if (!other.CompareTag("sphere"))
+            return;
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        other.gameObject.GetComponent<Interactable>().StartHover();
+
+        AddtoHighlighted(other.gameObject);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+
+
+        if (!other.CompareTag("sphere"))
+            return;
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        other.gameObject.GetComponent<Interactable>().EndHover();
+
+        RemoveFromHighlighted(other.gameObject);
+    }
     private void ProcessInput()
     {
        // if (flaslightActionReference.action.WasPressedThisFrame())

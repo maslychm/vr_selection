@@ -1,2 +1,0 @@
-SphereInteractable_(23)(Clone), 0.2165308, -0.01687655, 0
-SphereInteractable_(24)(Clone), 0.1055165, 0.9944175, 0

@@ -116,6 +116,16 @@ public class LenSelectInteractor : MonoBehaviour
 
         if (FindObjectsOfType<shapeItem_2>().Length > 0)
             return;
+
+        foreach (var g in FindObjectsOfType<shapeItem_2>())
+        {
+            Destroy(g.gameObject);
+        }
+
+        foreach (var g in FindObjectsOfType<shapeItem_3>())
+        {
+            Destroy(g.gameObject);
+        }
         List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
         foreach (var interactable in originalInteractables)
         {
@@ -178,28 +188,28 @@ public class LenSelectInteractor : MonoBehaviour
     }
 
     // migrated triggers from interactables
-    public void OnTriggerEnter(Collider other)
-    {
+    //public void OnTriggerEnter(Collider other)
+    //{
 
-        if (!other.CompareTag("sphere"))
-            return;
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
-        other.gameObject.GetComponent<Interactable>().StartHover();
+    //    if (!other.CompareTag("sphere"))
+    //        return;
+    //    other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+    //    other.gameObject.GetComponent<Interactable>().StartHover();
 
-        AddtoHighlighted(other.gameObject);
-    }
+    //    AddtoHighlighted(other.gameObject);
+    //}
 
-    public void OnTriggerExit(Collider other)
-    {
+    //public void OnTriggerExit(Collider other)
+    //{
 
 
-        if (!other.CompareTag("sphere"))
-            return;
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
-        other.gameObject.GetComponent<Interactable>().EndHover();
+    //    if (!other.CompareTag("sphere"))
+    //        return;
+    //    other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+    //    other.gameObject.GetComponent<Interactable>().EndHover();
 
-        RemoveFromHighlighted(other.gameObject);
-    }
+    //    RemoveFromHighlighted(other.gameObject);
+    //}
     private void ProcessInput()
     {
        // if (flaslightActionReference.action.WasPressedThisFrame())

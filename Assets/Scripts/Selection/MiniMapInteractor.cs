@@ -110,6 +110,9 @@ public class MiniMapInteractor : MonoBehaviour
     private void CreateDuplicatesForMiniMap()
     {
 
+        //if (SelectionTechniqueDistributer.SelectionTechniqueTriggers.ContainsKey("MiniMap") == false || SelectionTechniqueDistributer.SelectionTechniqueTriggers["MiniMap"] == false)
+        //    return;
+
         foreach (var g in FindObjectsOfType<shapeItem_2>())
         {
             Destroy(g.gameObject);

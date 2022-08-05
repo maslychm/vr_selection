@@ -13292,8 +13292,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useGestureDirection: 0
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  flashlightHighlighter: {fileID: 0}
-  attachTransform: {fileID: 0}
+  flashlightHighlighter: {fileID: 671910488}
+  attachTransform: {fileID: 1409524340}
   handDebugPlane: {fileID: 0}
   flashlightCenterCone: {fileID: 0}
   debugPlaneOffset: {x: 0, y: 0, z: 0}
@@ -13305,7 +13305,7 @@ MonoBehaviour:
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   debug: 0
   miniMap: {fileID: 0}
-  LenSelect: {fileID: 0}
+  LenSelect: {fileID: 478549712}
   normalizeOffsets: 0
 --- !u!114 &478549711
 MonoBehaviour:
@@ -13320,10 +13320,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectActionButton: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  circle: {fileID: 0}
-  leftHandController: {fileID: 0}
+  circle: {fileID: 1252331739}
+  leftHandController: {fileID: 992347894}
   confirmSelectionButton: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  temp5: {fileID: 0}
+  temp5: {fileID: 1640029588}
 --- !u!114 &478549712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13337,9 +13337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinearScaling: 0
-  LenselectInteractor: {fileID: 0}
+  LenselectInteractor: {fileID: 478549710}
   FlashLightCentreCone_Ray: {fileID: 0}
-  FlashLightBigCone: {fileID: 0}
+  FlashLightBigCone: {fileID: 671910488}
   Sm: {x: 0, y: 0, z: 0}
   n: {x: 0, y: 0, z: 0}
   startingScale: {x: 0, y: 0, z: 0}

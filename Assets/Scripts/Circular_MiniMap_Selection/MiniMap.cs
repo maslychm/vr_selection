@@ -88,6 +88,8 @@ public class MiniMap : MonoBehaviour
     {
         foreach (shapeItem_2 o in listInCircle)
         {
+
+            if (o == null) continue;
             o.inCircle = false;
             o.currentMap = null;
 

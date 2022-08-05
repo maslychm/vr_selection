@@ -109,8 +109,6 @@ public class MiniMapInteractor : MonoBehaviour
 
     private void CreateDuplicatesForMiniMap()
     {
-        //if (FindObjectsOfType<shapeItem_3>().Length > 0)
-        //    return;
 
         foreach (var g in FindObjectsOfType<shapeItem_2>())
         {
@@ -131,7 +129,10 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;
-            original.AddComponent<cakeslice.Outline>().enabled = false;
+            if (!original.GetComponent<cakeslice.Outline>())
+                original.AddComponent<cakeslice.Outline>().enabled = false;
+            else
+                original.GetComponent<cakeslice.Outline>().enabled = false;
 
             GameObject duplicate = Instantiate(original);
 

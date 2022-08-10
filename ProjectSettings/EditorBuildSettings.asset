@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SceneSelect.unity
+    path: Assets/Scenes/Select Scene.unity
     guid: 55b626997e1ebfb4aaf1b599e23b6431
   - enabled: 1
     path: Assets/Scenes/Gesture Cutomization.unity

@@ -117,6 +117,7 @@ public class GrabbingHand : MonoBehaviour
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
         objectInHand = o;
+        o.transform.localScale = o.GetComponent<Object_collected>().originalScale;
     }
 
     private void ReleaseCurrentlyHeldObject()

@@ -26,6 +26,8 @@ public class RayManager : MonoBehaviour
 
     RaycastHit[] hits;
 
+    
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -84,15 +86,17 @@ public class RayManager : MonoBehaviour
         }
         if (HoldRayCastHitCollider.Count == 0)
             return;
+
+        GameObject priorPlacedInHand;
         foreach (GameObject tempGameObjectFromSet in HoldRayCastHitCollider)
         {
             tempGameObjectFromSet.transform.SetParent(leftHandController.transform);
             tempGameObjectFromSet.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
-            tempGameObjectFromSet.transform.position = new Vector3(leftHandController.transform.position.x,
-                leftHandController.transform.position.y, leftHandController.transform.position.z + startOffsetOFspheres);
-
+            tempGameObjectFromSet.transform.position = transform.TransformPoint(new Vector3(leftHandController.transform.localPosition.x, leftHandController.transform.localPosition.y, leftHandController.transform.localPosition.z + startOffsetOFspheres));
+            priorPlacedInHand = tempGameObjectFromSet;
             startOffsetOFspheres += 0.065f;
         }
+
         lineRenderer.material = RedMaterial;
         startOffsetOFspheres = 0f;
         BringOrFlush = 1; 

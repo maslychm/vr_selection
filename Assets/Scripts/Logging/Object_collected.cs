@@ -15,7 +15,7 @@ public class Object_collected : MonoBehaviour
         _home_pos = transform.position;
         _home_rot = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
-        originalScale = transform.localScale;
+        originalScale = new Vector3(0.2f, 0.2f, 0.2f);
     }
 
 

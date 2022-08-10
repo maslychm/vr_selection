@@ -22,7 +22,7 @@ public class CircleConfirmationSpawner : MonoBehaviour
 
         THIS = this.gameObject;
         originalTransform = THIS.transform;
-        THIS.AddComponent<Renderer>();
+        //THIS.AddComponent<Renderer>();
 
         // this should credate a brown circle 
         Color brownEditted = new Color(165, 42, 42);
@@ -38,7 +38,7 @@ public class CircleConfirmationSpawner : MonoBehaviour
     }
     private void Update()
     {
-        wasSelectClicked = RayManager.getStatusOfGrip();
+        //wasSelectClicked = RayManager.getStatusOfGrip();
 
     }
 
@@ -50,7 +50,7 @@ public class CircleConfirmationSpawner : MonoBehaviour
 
         if (other.name == "FlashlightConeCenter" || other == null)
             return;
-        wasSelectClicked = RayManager.currentGameObjectHighlighted;
+        //wasSelectClicked = RayManager.currentGameObjectHighlighted;
         if (wasSelectClicked == true)
         {
             print("TREASURE************************************RAR***********************");

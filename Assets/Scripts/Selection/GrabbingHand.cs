@@ -1,25 +1,24 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Collider))]
 public class GrabbingHand : MonoBehaviour
 {
     [SerializeField] private InputActionReference grabActionReference;
     [SerializeField] private Transform attachTransform;
 
-    public MiniMap miniMap;
-    public MiniMapInteractor miniMapIntreractor;
-    public ClutterHandler_circumferenceDisplay ClutterHander_circumferenceDisplay;
+    public MiniMap miniMap = null;
+    public MiniMapInteractor miniMapIntreractor = null;
     public bool addForceOnObjectDetach = true;
     public float objPushForce = 20.0f;
 
-    public GameObject objectInHand;
-
-    public static bool isHovering = false;
-
-    // add a variable to store the list of objects that are colliding with the hand live
     public HashSet<shapeItem_2> collidingWithHand;
+    public bool isHovering = false;
+    public bool circumferenceDisplayInUse = false;
+    [SerializeField] private ClutterHandler_circumferenceDisplay clutterHandler_CircumferenceDisplay;
+
+    public GameObject objectInHand;
 
     private void Start()
     {
@@ -37,76 +36,76 @@ public class GrabbingHand : MonoBehaviour
         isHovering = collidingWithHand.Count != 0;
     }
 
+    private void FixedUpdate()
+    {
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (ClutterHander_circumferenceDisplay.isFrozen || objectInHand != null)
+        if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
 
-        if (other.gameObject.GetComponent<shapeItem_2>())
-        {
-            isHovering = true;
-
-            collidingWithHand.Add(other.GetComponent<shapeItem_2>());
-
-            ClutterHander_circumferenceDisplay.removeDuplicates();
-            ClutterHander_circumferenceDisplay.insertToSpots(collidingWithHand);
-        }
+        collidingWithHand.Add(other.GetComponent<shapeItem_2>());
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (ClutterHander_circumferenceDisplay.isFrozen || objectInHand != null)
+        if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
 
-        if (other.gameObject.GetComponent<shapeItem_2>())
-        {
-            collidingWithHand.Remove(other.GetComponent<shapeItem_2>());
-
-            ClutterHander_circumferenceDisplay.removeDuplicates();
-            ClutterHander_circumferenceDisplay.insertToSpots(collidingWithHand);
-        }
+        collidingWithHand.Remove(other.GetComponent<shapeItem_2>());
     }
 
     private void OnTriggerStay(Collider col)
     {
-        if (objectInHand == null && grabActionReference.action.WasPressedThisFrame())
+        if (objectInHand == null
+            && grabActionReference.action.WasPressedThisFrame()
+            && (col.GetComponent<shapeItem_2>() || col.GetComponent<shapeItem_3>() || col.GetComponent<Interactable>()))
         {
-            GameObject duplicate, original;
-            // check if the tag of the object  is one from the circumference display
-            if (col.gameObject.tag == "unclutterDuplicate")
+            shapeItem_2 shapeItem2_parent;
+            if (col.GetComponent<shapeItem_3>())
             {
-                duplicate = col.gameObject;
-
-                original = ClutterHandler_circumferenceDisplay.originaltoduplicatewithgameObject.FirstOrDefault(x => x.Value == col.gameObject).Key;
-
-                GameObject originalOfFirstDuplicate = duplicate.gameObject.GetComponent<shapeItem_3>().original.gameObject.GetComponent<shapeItem_2>().original;
-                miniMap.RemoveFromMinimapUponGrab(original);
-
-                PickupObject(originalOfFirstDuplicate);
-
-                objectInHand = originalOfFirstDuplicate;
-
-                collidingWithHand.Clear();
-                ClutterHander_circumferenceDisplay.removeDuplicates();
-                ClutterHander_circumferenceDisplay.isFrozen = false;
+                GameObject original = col.GetComponent<shapeItem_3>().original;
+                shapeItem2_parent = col.GetComponent<shapeItem_3>().shapeItem2_parent;
+                miniMap.RemoveFromMinimapUponGrab(shapeItem2_parent);
+                PickupObject(original);
+                collidingWithHand.Remove(shapeItem2_parent);
+                clutterHandler_CircumferenceDisplay.FreeCircularSlots();
             }
-            else
+
+            shapeItem2_parent = col.GetComponent<shapeItem_2>();
+            if (shapeItem2_parent)
             {
-                original = col.gameObject.GetComponent<shapeItem_2>().original;
-                duplicate = col.gameObject;
+                GameObject original = col.GetComponent<shapeItem_2>().original;
+                miniMap.RemoveFromMinimapUponGrab(col.GetComponent<shapeItem_2>());
+                PickupObject(original);
+                collidingWithHand.Remove(shapeItem2_parent);
 
-                miniMap.RemoveFromMinimapUponGrab(duplicate);
+                if (circumferenceDisplayInUse)
+                {
+                    clutterHandler_CircumferenceDisplay.FreeCircularSlots();
+                }
+            }
 
+            // in this case we must have  an original 
+            if(col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
+            {
+                GameObject original = col.gameObject;
+                RayManager.HoldRayCastHitCollider.Remove(col.gameObject);
                 PickupObject(original);
 
-                objectInHand = original;
+                RayManager.releaseObjectsBackToOriginalPosition();
 
-                collidingWithHand.Clear();
-                ClutterHander_circumferenceDisplay.removeDuplicates();
-                ClutterHander_circumferenceDisplay.isFrozen = false;
+                if (circumferenceDisplayInUse)
+                {
+                    clutterHandler_CircumferenceDisplay.FreeCircularSlots();
+                }
             }
+
+            
         }
     }
+
 
     private void PickupObject(GameObject o)
     {
@@ -114,6 +113,7 @@ public class GrabbingHand : MonoBehaviour
         o.transform.parent = attachTransform;
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
+        objectInHand = o;
     }
 
     private void ReleaseCurrentlyHeldObject()
@@ -122,8 +122,6 @@ public class GrabbingHand : MonoBehaviour
             return;
 
         objectInHand.transform.parent = null;
-        //objectInHand.GetComponent<Rigidbody>().useGravity = true;
-        //objectInHand.GetComponent<Rigidbody>().isKinematic = false;
 
         if (addForceOnObjectDetach)
         {

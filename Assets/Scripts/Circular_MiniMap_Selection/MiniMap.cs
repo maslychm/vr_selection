@@ -20,7 +20,8 @@ public class MiniMap : MonoBehaviour
 
     private bool isFrozen = false;
 
-    // Start is called before the first frame update
+    [SerializeField] private MiniMapInteractor miniMapInteractor;
+
     private void Start()
     {
         listInCircle = new List<shapeItem_2>();
@@ -29,12 +30,16 @@ public class MiniMap : MonoBehaviour
             centerOfMiniMap = transform.GetChild(0).gameObject.transform;
     }
 
-    public void RemoveFromMinimapUponGrab(GameObject toBeRemoved)
+    /// <summary>
+    /// ShapeItem2 which to be teleported away from the minimap.
+    /// Should correspond to the original one being grabbed.
+    /// </summary>
+    /// <param name="toBeRemoved"></param>
+    public void RemoveFromMinimapUponGrab(shapeItem_2 toBeRemoved)
     {
-        MoveToTrash(toBeRemoved);
+        MoveToTrash(toBeRemoved.gameObject);
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (isFrozen)
@@ -45,13 +50,13 @@ public class MiniMap : MonoBehaviour
 
         if (writeFileActionReference.action.WasPressedThisFrame())
         {
-            StartCoroutine(WriteShapesAndDirectionsToFile(MiniMapInteractor.GetDuplicatesAndDirections()));
+            StartCoroutine(WriteShapesAndDirectionsToFile(miniMapInteractor.GetDuplicatesAndDirections()));
         }
     }
 
     private void DisplayObjectCopies()
     {
-        List<(shapeItem_2 s, Vector3 dir)> ShapeItems_Directions = MiniMapInteractor.GetDuplicatesAndDirections();
+        List<(shapeItem_2 s, Vector3 dir)> ShapeItems_Directions = miniMapInteractor.GetDuplicatesAndDirections();
 
         foreach (var shapeItem_Dir in ShapeItems_Directions)
         {
@@ -81,15 +86,14 @@ public class MiniMap : MonoBehaviour
             print($"Wrote TXT to: {filePath}");
         }
 
-       yield return null;
+        yield return null;
     }
 
     private void ClearObjectCopies()
     {
         foreach (shapeItem_2 o in listInCircle)
         {
-            o.inCircle = false;
-            o.currentMap = null;
+            if (o == null) continue;
 
             // Deactivating causes multiple triggers, so move far away instead
             MoveToTrash(o.gameObject);
@@ -109,8 +113,6 @@ public class MiniMap : MonoBehaviour
 
         shapeItemObject.transform.position = centerOfMiniMap.transform.position;
         shapeItemObject.transform.position += transform.TransformDirection(dir);
-
-        shapeItemObject.GetComponent<shapeItem_2>().currentMap = this;
 
         shapeItemObject.transform.rotation = transform.rotation;
 

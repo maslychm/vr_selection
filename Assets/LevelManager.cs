@@ -1,39 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    int counter = 0;
-    int prior = -1;
-    public GameObject ControllerHand;
-    public MiniMapInteractor temp;
-    // Start is called before the first frame update
-    void Start()
+    private int densityLevel = 0;
+
+    [SerializeField] private GameObject densityLevel1, densityLevel2, densityLevel3;
+    [SerializeField] private SelectionTechniqueDistributer techniqueDistributer;
+
+    private void Start()
     {
-        for(int i = 0; i < this.transform.childCount; i++)
-        {
-            this.transform.GetChild(i).gameObject.SetActive(false);
-        }
+        DisableAllLevels();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (counter == 5)
-                counter = 0;
-            if (prior != -1)
-                this.transform.GetChild(prior).gameObject.SetActive(false);
+            densityLevel = (densityLevel + 1) % 4;
+            techniqueDistributer.DisableAllTechniques();
 
-            this.transform.GetChild(counter).gameObject.SetActive(true);
-            temp.helperForLevelsUpdate();
-            counter++;
-            prior = counter - 1;
+            if (densityLevel == 0)
+            {
+                DisableAllLevels();
+            }
+            else if (densityLevel == 1)
+            {
+                densityLevel1.SetActive(true);
+            }
+            else if (densityLevel == 2)
+            {
+                densityLevel2.SetActive(true);
+            }
+            else if (densityLevel == 3)
+            {
+                densityLevel3.SetActive(true);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Q))
             Application.Quit();
-        
+    }
+
+    private void DisableAllLevels()
+    {
+        densityLevel1.SetActive(false);
+        densityLevel2.SetActive(false);
+        densityLevel3.SetActive(false);
+
+        //System.Collections.Generic.List<Object_collected> ResetAllObjectsBackToOriginal = FindObjectsOfType<Object_collected>().To;
+
+
     }
 }

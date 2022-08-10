@@ -93,6 +93,7 @@ public class GrabbingHand : MonoBehaviour
             if(col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
             {
                 GameObject original = col.gameObject;
+                original.transform.localScale = original.GetComponent<Object_collected>().originalScale;
                 instanceOfRayManager.HoldRayCastHitCollider.Remove(col.gameObject);
                 PickupObject(original);
 

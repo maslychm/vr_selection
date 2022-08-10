@@ -8,7 +8,7 @@ public class Object_collected : MonoBehaviour
     private Vector3 _dumpster_location = new Vector3(12, 1, -3);
     private Quaternion _home_rot;
     private Rigidbody _rigidbody;
-    private Vector3 originalScale;
+    public Vector3 originalScale;
 
     private void Start()
     {

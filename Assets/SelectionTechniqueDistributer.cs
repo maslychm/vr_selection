@@ -15,6 +15,7 @@ public class SelectionTechniqueDistributer : MonoBehaviour
     [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root;
     [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap;
     [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor;
+    [SerializeField] private GameObject RayKebabGameObjectRoot;
 
     [SerializeField] private GrabbingHand grabbingHand;
 
@@ -31,6 +32,8 @@ public class SelectionTechniqueDistributer : MonoBehaviour
             ActivateMinimapWithCircumference();
         else if (Input.GetKeyDown(KeyCode.F))
             ActivateFlowerCone();
+        else if (Input.GetKeyDown(KeyCode.R))
+            ActivateRayKebab();
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             DisableAllTechniques();
@@ -42,6 +45,7 @@ public class SelectionTechniqueDistributer : MonoBehaviour
     {
         SimpleMiniMap_root.SetActive(false);
         OhMiniMap_root.SetActive(false);
+        RayKebabGameObjectRoot.SetActive(false);
 
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
@@ -51,6 +55,18 @@ public class SelectionTechniqueDistributer : MonoBehaviour
     private void ActivateFlowerCone()
     {
         DisableAllTechniques();
+    }
+
+    private void ActivateRayKebab()
+    {
+        DisableAllTechniques();
+        print("Enabling the RayKebab Technique");
+
+        grabbingHand.miniMap = null;
+        grabbingHand.miniMapIntreractor = null;
+        grabbingHand.circumferenceDisplayInUse = false;
+        RayKebabGameObjectRoot.SetActive(true);
+
     }
 
     private void ActivateMinimapWithCircumference()

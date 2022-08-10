@@ -60,7 +60,7 @@ public class GrabbingHand : MonoBehaviour
     {
         if (objectInHand == null
             && grabActionReference.action.WasPressedThisFrame()
-            && (col.GetComponent<shapeItem_2>() || col.GetComponent<shapeItem_3>()))
+            && (col.GetComponent<shapeItem_2>() || col.GetComponent<shapeItem_3>() || col.GetComponent<Interactable>()))
         {
             shapeItem_2 shapeItem2_parent;
             if (col.GetComponent<shapeItem_3>())
@@ -86,8 +86,26 @@ public class GrabbingHand : MonoBehaviour
                     clutterHandler_CircumferenceDisplay.FreeCircularSlots();
                 }
             }
+
+            // in this case we must have  an original 
+            if(col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
+            {
+                GameObject original = col.gameObject;
+                RayManager.HoldRayCastHitCollider.Remove(col.gameObject);
+                PickupObject(original);
+
+                RayManager.releaseObjectsBackToOriginalPosition();
+
+                if (circumferenceDisplayInUse)
+                {
+                    clutterHandler_CircumferenceDisplay.FreeCircularSlots();
+                }
+            }
+
+            
         }
     }
+
 
     private void PickupObject(GameObject o)
     {

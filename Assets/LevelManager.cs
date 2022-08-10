@@ -45,5 +45,9 @@ public class LevelManager : MonoBehaviour
         densityLevel1.SetActive(false);
         densityLevel2.SetActive(false);
         densityLevel3.SetActive(false);
+
+        //System.Collections.Generic.List<Object_collected> ResetAllObjectsBackToOriginal = FindObjectsOfType<Object_collected>().To;
+
+
     }
 }

@@ -188,46 +188,36 @@ public class LenSelectInteractor : MonoBehaviour
     }
 
     // migrated triggers from interactables
-    public void OnTriggerEnter(Collider other)
-    {
+    // will leave these out for now and set the sphere detection/p[hysics detection to be in the ray manager
 
-        if (!other.CompareTag("sphere"))
-            return;
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
-        other.gameObject.GetComponent<Interactable>().StartHover();
+    //public void OnTriggerEnter(Collider other)
+    //{
 
-        AddtoHighlighted(other.gameObject);
-    }
+    //    if (!other.CompareTag("sphere"))
+    //        return;
+    //    other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+    //    other.gameObject.GetComponent<Interactable>().StartHover();
 
-    public void OnTriggerExit(Collider other)
-    {
+    //    AddtoHighlighted(other.gameObject);
+    //}
 
+    //public void OnTriggerExit(Collider other)
+    //{
+    //    if (!other.CompareTag("sphere"))
+    //        return;
+    //    other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+    //    other.gameObject.GetComponent<Interactable>().EndHover();
 
-        if (!other.CompareTag("sphere"))
-            return;
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
-        other.gameObject.GetComponent<Interactable>().EndHover();
-
-        RemoveFromHighlighted(other.gameObject);
-    }
+    //    RemoveFromHighlighted(other.gameObject);
+    //}
     private void ProcessInput()
     {
-       // if (flaslightActionReference.action.WasPressedThisFrame())
+
         {
             ExtendFlashlight();
             
         }
 
-      /*  if (flaslightActionReference.action.IsPressed())
-        {
-            UpdateFlashlightScale();
-        }
-
-        if (flaslightActionReference.action.WasReleasedThisFrame())
-        {
-            ShrinkFlashlight();
-
-        }*/
     }
 
     private void SetRecognizerMode()

@@ -38,7 +38,7 @@ public class CircleConfirmationSpawner : MonoBehaviour
     }
     private void Update()
     {
-        wasSelectClicked = RayManager.getStatusOfGrip();
+        //wasSelectClicked = RayManager.getStatusOfGrip();
 
     }
 
@@ -50,7 +50,7 @@ public class CircleConfirmationSpawner : MonoBehaviour
 
         if (other.name == "FlashlightConeCenter" || other == null)
             return;
-        wasSelectClicked = RayManager.currentGameObjectHighlighted;
+        //wasSelectClicked = RayManager.currentGameObjectHighlighted;
         if (wasSelectClicked == true)
         {
             print("TREASURE************************************RAR***********************");

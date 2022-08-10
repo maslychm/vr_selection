@@ -16,6 +16,8 @@ public class Object_collected : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+
+     // use thisb for p[osition reset 
     //Reset to original position
     public void ResetGameObject()
     {

@@ -81,10 +81,6 @@ public class GrabbingHand : MonoBehaviour
             if (col.gameObject.tag == "unclutterDuplicate")
             {
                 duplicate = col.gameObject;
-
-                //original = ClutterHandler_circumferenceDisplay.originaltoduplicatewithgameObject.FirstOrDefault(x => x.Value == col.gameObject).Key;
-                //original = ClutterHandler_circumferenceDisplay.originalToDuplicate.FirstOrDefault(x => x.Value == col.GetComponent<shapeItem_3>().gameObject).Key.gameObject;
-
                 original = duplicate.GetComponent<shapeItem_3>().original;
                 GameObject originalOfFirstDuplicate = duplicate.gameObject.GetComponent<shapeItem_3>().original.gameObject.GetComponent<shapeItem_2>().original;
                 miniMap.RemoveFromMinimapUponGrab(original);
@@ -132,8 +128,6 @@ public class GrabbingHand : MonoBehaviour
             return;
 
         objectInHand.transform.parent = null;
-        //objectInHand.GetComponent<Rigidbody>().useGravity = true;
-        //objectInHand.GetComponent<Rigidbody>().isKinematic = false;
 
         if (addForceOnObjectDetach)
         {

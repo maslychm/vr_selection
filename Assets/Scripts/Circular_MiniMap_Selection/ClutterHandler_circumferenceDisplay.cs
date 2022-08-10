@@ -29,14 +29,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     // this list will store all the currently colliding with hand objects DUPLICATES
     public static Dictionary<GameObject, GameObject> collidingWithHandDuplicates;
 
-    //public static Dictionary<GameObject, GameObject> originaltoduplicatewithgameObject;
-
     public static MiniMapInteractor miniMapInteractor;
 
     private void Start()
     {
         spotsAroundMiniMap = new Dictionary<GameObject, bool>();
-        //originaltoduplicatewithgameObject = new Dictionary<GameObject, GameObject>();
         collidingWithHandDuplicates = new Dictionary<GameObject, GameObject>();
         originalToDuplicate = new Dictionary<shapeItem_2, shapeItem_3>();
 
@@ -44,7 +41,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         centreCircleTransform = centreCircle.transform;
 
         // take care of setting our positions before we can use them
-        makeSpotsReady();
+        MakeSpotsReady();
 
         isFrozen = false;
     }
@@ -117,12 +114,6 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     {
         Vector3 originalOutCastPosition = new Vector3(50, 50, 50);
 
-        //foreach (GameObject original in originaltoduplicatewithgameObject.Keys)
-        //{
-        //    originaltoduplicatewithgameObject[original].transform.position = originalOutCastPosition;
-        //    originaltoduplicatewithgameObject[original].transform.parent = null;
-        //}
-
         foreach (shapeItem_2 original in originalToDuplicate.Keys)
         {
             originalToDuplicate[original].transform.position = originalOutCastPosition;
@@ -137,7 +128,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     /// <summary>
     /// set the spots positions around the circle's circumference and acoomodate the presence of 8 placements
     /// </summary>
-    private void makeSpotsReady()
+    private void MakeSpotsReady()
     {
         for (int i = 0; i < totalObjectsCount; i++)
         {

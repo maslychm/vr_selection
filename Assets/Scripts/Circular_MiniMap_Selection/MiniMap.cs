@@ -91,8 +91,6 @@ public class MiniMap : MonoBehaviour
         foreach (shapeItem_2 o in listInCircle)
         {
             if (o == null) continue;
-            o.inCircle = false;
-            o.currentMap = null;
 
             // Deactivating causes multiple triggers, so move far away instead
             MoveToTrash(o.gameObject);
@@ -112,8 +110,6 @@ public class MiniMap : MonoBehaviour
 
         shapeItemObject.transform.position = centerOfMiniMap.transform.position;
         shapeItemObject.transform.position += transform.TransformDirection(dir);
-
-        shapeItemObject.GetComponent<shapeItem_2>().currentMap = this;
 
         shapeItemObject.transform.rotation = transform.rotation;
 

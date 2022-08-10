@@ -58,7 +58,6 @@ public class MiniMapInteractor : MonoBehaviour
 
     private Dictionary<Interactable, shapeItem_2> originalToDuplicate;
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
-    //public Dictionary<GameObject, GameObject> originalToDuplicate_ForCirCumference_WITHOBJECTS;
     private List<(shapeItem_2, Vector3)> duplicateDirections;
 
     private Dictionary<GameObject, Transform> duplicate_and_originalPosition;
@@ -69,13 +68,8 @@ public class MiniMapInteractor : MonoBehaviour
         originalToDuplicate = new Dictionary<Interactable, shapeItem_2>();
         duplicateDirections = new List<(shapeItem_2, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
-        //originalToDuplicate_ForCirCumference_WITHOBJECTS = new Dictionary<GameObject, GameObject>();
         allHighlightedObjects = new List<GameObject>();
         originalToDuplicate_ForCirCumference = new Dictionary<shapeItem_2, shapeItem_3>();
-        //CreateDuplicatesForMiniMap();
-
-        //if (flashlightHighlighter == null)
-        //    print("NEED TO ASSIGN FLASHLIGHT HIGHLIGHTER");
 
         if (defaultFlashlightScale == Vector3.zero)
             defaultFlashlightScale = new Vector3(150, 150, 560);
@@ -87,26 +81,17 @@ public class MiniMapInteractor : MonoBehaviour
             tabletUI.SetTabletActive(debug);
     }
 
-    //public void helperForLevelsUpdate()
-    //{
-    //    CreateDuplicatesForMiniMap();
-    //}
+
 
     public Dictionary<shapeItem_2, shapeItem_3> getUpdatedListOfDuplicates()
     {
         return originalToDuplicate_ForCirCumference;
     }
 
-    //public Dictionary<GameObject, GameObject> getUpdatedListOfDuplicates2()
-    //{
-    //    return originalToDuplicate_ForCirCumference_WITHOBJECTS;
-    //}
+
 
     public void CreateDuplicatesForMiniMap()
     {
-        //if (SelectionTechniqueDistributer.SelectionTechniqueTriggers.ContainsKey("MiniMap") == false || SelectionTechniqueDistributer.SelectionTechniqueTriggers["MiniMap"] == false)
-        //    return;
-
         foreach (var g in FindObjectsOfType<shapeItem_2>())
         {
             Destroy(g.gameObject);
@@ -122,7 +107,6 @@ public class MiniMapInteractor : MonoBehaviour
         originalToDuplicate.Clear();
         duplicate_and_originalPosition.Clear();
         originalToDuplicate_ForCirCumference.Clear();
-        //originalToDuplicate_ForCirCumference_WITHOBJECTS.Clear();
 
         List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
         print("Count of originals ->>>> " + originalInteractables.Count + " OK ");
@@ -181,7 +165,6 @@ public class MiniMapInteractor : MonoBehaviour
             duplicateOFduplicate.tag = "unclutterDuplicate";
 
             originalToDuplicate_ForCirCumference.Add(duplicate.GetComponent<shapeItem_2>(), duplicateOFduplicate.GetComponent<shapeItem_3>());
-            //originalToDuplicate_ForCirCumference_WITHOBJECTS.Add(duplicate, duplicateOFduplicate);
             // remove them away
             duplicateOFduplicate.transform.position = new Vector3(50, 50, 50);
 
@@ -197,7 +180,6 @@ public class MiniMapInteractor : MonoBehaviour
     private void Update()
     {
         ProcessInput();
-        //print($"size high objs {allHighlightedObjects.Count}");
         if (allHighlightedObjects.Count > 0)
         {
             CalculateDuplicateDirections(allHighlightedObjects);

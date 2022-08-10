@@ -16,6 +16,10 @@ public class Object_collected : MonoBehaviour
         _home_rot = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
         originalScale = new Vector3(0.2f, 0.2f, 0.2f);
+
+        this.gameObject.AddComponent<cakeslice.Outline>();
+
+        this.gameObject.GetComponent<cakeslice.Outline>().eraseRenderer = true;
     }
 
 
@@ -29,6 +33,12 @@ public class Object_collected : MonoBehaviour
         transform.localScale = originalScale;
     }
 
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.gameObject.name == "RightHand Controller")
+            this.gameObject.GetComponent<cakeslice.Outline>().eraseRenderer = true;
+    }
     public void MoveOutsideReach()
     {
         transform.position = _dumpster_location + new Vector3(
@@ -38,6 +48,8 @@ public class Object_collected : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        if (collider.gameObject.name == "RightHand Controller")
+            this.gameObject.GetComponent<cakeslice.Outline>().eraseRenderer = false;
         switch (collider.tag)
         {
             case "end_manipulator":

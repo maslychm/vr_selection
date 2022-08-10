@@ -1,5 +1,3 @@
-using cakeslice;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,151 +5,101 @@ using UnityEngine.InputSystem;
 
 public class RayManager : MonoBehaviour
 {
-    [SerializeField] private InputActionReference selectActionButton;
-    Vector3 fwd;
-    LineRenderer LenSelectRay;
-
-    public CircleConfirmationSpawner circle;
-
-    private GameObject helper56;
-
-    RaycastHit hit;
+    private LineRenderer LenSelectRay;
     private List<Interactable> allObjectsInteractables;
-    public static bool selectWasClicked = false;
-
-    Vector3 fromPosition;
-    Vector3 toPosition;
-
     public GameObject leftHandController;
-    GameObject Destination;
+    public static HashSet<GameObject> HoldRayCastHitCollider = new HashSet<GameObject>();
+    private float startOffsetOFspheres = 0.2f;
 
-    GameObject helperT;
+    [SerializeField] public InputActionReference BringItemsAligned;
+    [SerializeField] public InputActionReference TakeItemsBack;
 
-    bool wasSelectedBefore = false;
-    bool debug = false;
+    // build a dictionary to map ouyt the transforms back to original 
+    public static Dictionary<GameObject, Transform> MapToOriginalPosisition;
 
-    [SerializeField] private InputActionReference confirmSelectionButton;
+    // add a boolean to limit the the selection action to one button 
+    public static int BringOrFlush = 0;
 
-    GameObject Prior;
+    RaycastHit[] hits;
 
-    GameObject off;
-
-    public OutlineEffect temp5;
-    public static GameObject currentGameObjectHighlighted;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
 
+        MapToOriginalPosisition = new Dictionary<GameObject, Transform>();
 
         allObjectsInteractables = new List<Interactable>();
 
         allObjectsInteractables = FindObjectsOfType<Interactable>().ToList();
 
-        selectWasClicked = false;
-        //Ray  ray = new Ray(leftHandController.transform.position, transform.forward);
-
         LenSelectRay = this.gameObject.GetComponent<LineRenderer>();
-
-        helper56 = null;
     }
 
     private void Update()
     {
+        // store the array of colliders hit by the raycast
+        hits = Physics.RaycastAll(transform.position, transform.forward, 100.0F);
 
+        // add an input action reference here
+        if (BringItemsAligned.action.WasPerformedThisFrame() && BringOrFlush == 0)
+            ProcessInputHere();
+        else if (TakeItemsBack.action.WasPressedThisFrame() && BringOrFlush == 1)
+        {
+            releaseObjectsBackToOriginalPosition();
 
-        Detecthis();
+            if (HoldRayCastHitCollider.Count > 0)
+                HoldRayCastHitCollider.Clear();
 
+            BringOrFlush = 0;
+        }
     }
-    IEnumerator waiter(GameObject other)
+
+    /// <summary>
+    /// This typically just places the spheres hit by the raycast in the hand in a BBQ Shape
+    /// ----[][][][][]-------------------
+    /// </summary>
+    private void ProcessInputHere()
     {
-        print("we reached the coroutine roger that }}}}}}}}}}}}}}}}??????????????????");
-        //Wait for 2 seconds
-        yield return new WaitForSeconds(0.1f);
-        other.GetComponent<Outline>().eraseRenderer = true;
-        other.SetActive(false);
-        off = other;
+        // iterate throuigh the array of colliders and then basicvally just get the spheres
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+
+            if (hit.collider.gameObject.name.Contains("phere"))
+            {
+
+                MapToOriginalPosisition.Add(hit.collider.gameObject, hit.collider.gameObject.transform);
+                HoldRayCastHitCollider.Add(hit.collider.gameObject);
+            }
+        }
+        if (HoldRayCastHitCollider.Count == 0)
+            return;
+        foreach (GameObject tempGameObjectFromSet in HoldRayCastHitCollider)
+        {
+            tempGameObjectFromSet.transform.SetParent(leftHandController.transform);
+            tempGameObjectFromSet.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            tempGameObjectFromSet.transform.position = new Vector3(leftHandController.transform.position.x,
+                leftHandController.transform.position.y, leftHandController.transform.position.z + startOffsetOFspheres);
+
+            startOffsetOFspheres += 0.2f;
+        }
+
+        startOffsetOFspheres = 0.2f;
+        BringOrFlush = 1; 
     }
 
-    private void Detecthis()
+    // thios functiuobn should set back the objects to their original transform 
+    public static void releaseObjectsBackToOriginalPosition()
     {
         
-        string[] temp = { "LenSelectInteractables", "confirmationCircle" };
-        int layerMask = LayerMask.GetMask(temp);
-        if (Physics.Raycast(leftHandController.transform.position, transform.forward, out hit, Mathf.Infinity, layerMask))
+        foreach(var temp in HoldRayCastHitCollider)
         {
-
-            // add an if
-
-            //if (helper56 != null && hit.transform.gameObject != helper56 && helper56.name != "FlashLightCone" && helper56.name != "ConfirmationSphere")
-            //   helper56.gameObject.GetComponent<Outline>().eraseRenderer = true;
-
-            print("ok we reached this after raycasting ->>>>>>>" + hit.transform.gameObject.name);            
-            GameObject other = hit.transform.gameObject;
-            if (other.name == "FlashLightCone")
-                return;
-
-
-            currentGameObjectHighlighted = other;
-
-            if (debug == true && wasSelectedBefore == true)
-            {
-                if (other != Prior)
-                    return;
-
-                wasSelectedBefore = false;
-                debug = false;
-                
-                if (other == Prior)
-                    StartCoroutine(waiter(Prior));
-   
-                return;
-
-            }
-
-            if (confirmSelectionButton.action.WasPressedThisFrame()&& other.name == "ConfirmationSphere" && wasSelectedBefore == true && Prior != null && Prior.name != "FlashLightCone")
-            {
-                
-                circle.ConfirmSelection();
-
-                
-                debug = true;
-            }
-            else if (confirmSelectionButton.action.WasPressedThisFrame() && other.name != "ConfirmationSphere" && wasSelectedBefore == true && Prior != null && Prior.name != "FlashLightCone")
-            {
-
-                circle.ConfirmSelection();
-                Destroy(other.GetComponent<Outline>());
-                selectWasClicked = false;
-                wasSelectedBefore = false;
-                debug = false;
-            }
-
-            //LenSelectRay.transform.position = new Vector3(LenSelectRay.transform.position.x, LenSelectRay.transform.position.y, other.transform.position.z);
-            else if (selectActionButton.action.WasPressedThisFrame() && (other != off) && wasSelectedBefore == false && other != null)
-            {
-                selectWasClicked = true;
-                wasSelectedBefore = true;
-                circle.Inraycastmodification(other);
-                other.AddComponent<Outline>();
-                Prior = other;
-                return;
-            }
-            else 
-            helper56 = other;
-
+            temp.transform.SetParent(null);
+            temp.transform.position = MapToOriginalPosisition[temp].position;
+            temp.transform.localScale = MapToOriginalPosisition[temp].localScale;
+            temp.transform.rotation = MapToOriginalPosisition[temp].rotation;
         }
-        NothittingAnymore();
-        selectWasClicked = false;
-    }
-    private void NothittingAnymore()
-    {
 
-        if (selectActionButton.action.WasReleasedThisFrame())
-            selectWasClicked = false;
-    }
-
-    public static bool getStatusOfGrip()
-    {
-        return selectWasClicked;
+        BringOrFlush = 0;
     }
 }

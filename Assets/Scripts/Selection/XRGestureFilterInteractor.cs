@@ -82,7 +82,29 @@ public class XRGestureFilterInteractor : MonoBehaviour
     {
         ProcessInput();
     }
+    // migrated triggers from interactables
+    public void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        if (!other.CompareTag("sphere"))
+            return;
 
+        other.gameObject.GetComponent<Interactable>().StartHover();
+
+        AddtoHighlighted(other.gameObject);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+
+        if (!other.CompareTag("sphere"))
+            return;
+
+        other.gameObject.GetComponent<Interactable>().EndHover();
+
+        RemoveFromHighlighted(other.gameObject);
+    }
     private void ProcessInput()
     {
         if (flaslightActionReference.action.WasPressedThisFrame())

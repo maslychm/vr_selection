@@ -107,6 +107,8 @@ public class XRGridSelectorInteractor : MonoBehaviour
     // ----------------------------------------------------------------------------------------------------------
     public void _DuplicationMethod1 ()
     {
+        if (FindObjectsOfType<shapeItem_2>().Length > 0)
+            return;
         // first we need to get the number of shapes that can be duplicaed 
         int children = currentShapeParent.transform.childCount;
 
@@ -183,7 +185,29 @@ public class XRGridSelectorInteractor : MonoBehaviour
     {
         ProcessInput();
     }
+    // migrated triggers from interactables
+    public void OnTriggerEnter(Collider other)
+    {
 
+        if (!other.CompareTag("sphere"))
+            return;
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        other.gameObject.GetComponent<Interactable>().StartHover();
+
+        AddtoHighlighted(other.gameObject);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+
+
+        if (!other.CompareTag("sphere"))
+            return;
+        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        other.gameObject.GetComponent<Interactable>().EndHover();
+
+        RemoveFromHighlighted(other.gameObject);
+    }
     private void ProcessInput()
     {
         

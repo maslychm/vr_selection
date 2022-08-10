@@ -5,112 +5,72 @@ using UnityEngine.InputSystem;
 
 public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 {
+    private int totalObjectsCount = 8;
     [SerializeField] public float radius = 0.015f;
     [SerializeField] public float offset;
-    private int totalObjectsCount = 8;
-    private Transform centreCircleTransform;
-    private static Dictionary<GameObject, bool> spotsAroundMiniMap;
 
-    // serialize these fields and assign their components manually
-    // get the centre of the mini map
-    // get the whole mini map component
-    // get the right hand itself assigned AS GAMEOBJECT
-    [SerializeField] public GameObject centreCircle;
-
-    [SerializeField] public GameObject MiniMap;
-    [SerializeField] public GameObject TheHand;
-
+    [SerializeField] private Transform centreCircleTransform;
+    [SerializeField] private MiniMapInteractor miniMapInteractor;
+    [SerializeField] private MiniMap MiniMap;
+    [SerializeField] private GrabbingHand grabbingHand;
     [SerializeField] private InputActionReference clickedRightHandController;
-    public static Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
+
+    private Dictionary<GameObject, bool> slotsAroundMiniMap;
+    public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
 
     public bool isFrozen = false;
-    public static bool runCircumference = false;
-
-    // this list will store all the currently colliding with hand objects DUPLICATES
-    public static Dictionary<GameObject, GameObject> collidingWithHandDuplicates;
-
-    public static MiniMapInteractor miniMapInteractor;
+    public bool runCircumference = false;
 
     private void Start()
     {
-        spotsAroundMiniMap = new Dictionary<GameObject, bool>();
-        collidingWithHandDuplicates = new Dictionary<GameObject, GameObject>();
+        slotsAroundMiniMap = new Dictionary<GameObject, bool>();
         originalToDuplicate = new Dictionary<shapeItem_2, shapeItem_3>();
 
-        // get the centre of the MiniMap Position
-        centreCircleTransform = centreCircle.transform;
-
-        // take care of setting our positions before we can use them
-        MakeSpotsReady();
-
+        PrepareSlots();
         isFrozen = false;
     }
 
-    // neeedx to set a getter to access the list/queue
-    public static Dictionary<GameObject, bool> getSpotsAvailable()
+    private void ProcessFreezing()
     {
-        return spotsAroundMiniMap;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if (
-            runCircumference ||
-            (SelectionTechniqueDistributer.currentlySetActiveTechnique != null
-            && SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "MiniMapWithoutExpansion"))
+        if (clickedRightHandController.action.WasPressedThisFrame())
         {
-            return;
-        }
-
-        originalToDuplicate = miniMapInteractor.getUpdatedListOfDuplicates();
-        //originaltoduplicatewithgameObject = miniMapInteractor.getUpdatedListOfDuplicates2();
-
-        if (isFrozen == true)
-        {
-            if (clickedRightHandController.action.WasPressedThisFrame())
+            if (isFrozen)
             {
+                FreeCircularSlots();
+                grabbingHand.collidingWithHand.Clear();
                 isFrozen = false;
-                removeDuplicates();
-                TheHand.GetComponent<GrabbingHand>().collidingWithHand.Clear();
-                return;
             }
             else
-                return;
-        }
-
-        // just as a safety check we will clear the lists here again
-        if (collidingWithHandDuplicates == null)
-        {
-            print("I AM NULL");
-        }
-        if (collidingWithHandDuplicates.Count > 0)
-        {
-            collidingWithHandDuplicates.Clear();
-        }
-        //removeDuplicates();
-        foreach (var key in spotsAroundMiniMap.Keys.ToList())
-        {
-            spotsAroundMiniMap[key] = false;
-        }
-
-        // check if the user clicked the trigger
-        if (clickedRightHandController.action.WasPressedThisFrame() && GrabbingHand.isHovering == true)
-        {
-            isFrozen = true;
-            return;
-        }
-        // if nothing then simply free the spots and clear the list of duplicates to be stored
-        // we can clear as techniaclly we won't have that many to instantiate again later
-        else
-        {
-            collidingWithHandDuplicates.Clear();
-
-            isFrozen = false;
+            {
+                if (grabbingHand.isHovering)
+                {
+                    isFrozen = true;
+                }
+                else
+                {
+                    grabbingHand.collidingWithHand.Clear();
+                    isFrozen = false;
+                }
+            }
         }
     }
 
-    public void removeDuplicates()
+    private void Update()
+    {
+        ProcessFreezing();
+
+        originalToDuplicate = miniMapInteractor.getUpdatedListOfDuplicates();
+
+        foreach (var key in slotsAroundMiniMap.Keys.ToList())
+        {
+            slotsAroundMiniMap[key] = false;
+        }
+    }
+
+    /// <summary>
+    /// Free up the circular slots around the MiniMap
+    /// </summary>
+    public void FreeCircularSlots()
     {
         Vector3 originalOutCastPosition = new Vector3(50, 50, 50);
 
@@ -119,16 +79,16 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             originalToDuplicate[original].transform.position = originalOutCastPosition;
             originalToDuplicate[original].transform.parent = null;
         }
-        foreach (var key in spotsAroundMiniMap.Keys.ToList())
+        foreach (var key in slotsAroundMiniMap.Keys.ToList())
         {
-            spotsAroundMiniMap[key] = false;
+            slotsAroundMiniMap[key] = false;
         }
     }
 
     /// <summary>
-    /// set the spots positions around the circle's circumference and acoomodate the presence of 8 placements
+    /// Set the slots positions around the circle's circumference and acoomodate the presence of 8 placements
     /// </summary>
-    private void MakeSpotsReady()
+    private void PrepareSlots()
     {
         for (int i = 0; i < totalObjectsCount; i++)
         {
@@ -154,61 +114,38 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             tempPlaceHolder.transform.localPosition = extendedPosition;
 
             // then let's add this new empty gameObject to out queue
-            spotsAroundMiniMap.Add(tempPlaceHolder, false);
+            slotsAroundMiniMap.Add(tempPlaceHolder, false);
         }
     }
 
-    public void insertToSpots(HashSet<shapeItem_2> toInsert)
+    public void InsertToSlots(HashSet<shapeItem_2> toInsert)
     {
-        //print(" TOINSERT COUNT " + toInsert.Count + " ORIGINAL TO DUP -> " + originalToDuplicate.Count);
+        GameObject slotToFill = null;
 
-        List<GameObject> temp = new List<GameObject>();
-
-        foreach (var obj in toInsert)
+        foreach (shapeItem_2 sa2 in toInsert)
         {
-            temp.Add(obj.gameObject);
-        }
-        if (temp.Count <= 1)
-        {
-            temp.Clear();
-            return;
-        }
-        GameObject availableindex = null;
-
-        for (int i = 0; (i < temp.Count); i++)
-        {
-            var shapeItem2 = temp[i].GetComponent<shapeItem_2>();
-            if (shapeItem2 == null)
-                continue;
-
-            // get the next available spot
-            foreach (GameObject j in spotsAroundMiniMap.Keys)
+            // get the next available slot
+            foreach (GameObject slot in slotsAroundMiniMap.Keys)
             {
-                if (spotsAroundMiniMap[j] == false)
+                if (slotsAroundMiniMap[slot] == false)
                 {
-                    availableindex = j;
-                    spotsAroundMiniMap[j] = true;
+                    slotToFill = slot;
+                    slotsAroundMiniMap[slot] = true;
                     break;
                 }
             }
 
-            GameObject _NextAvailableSpot = availableindex;
-
-            originalToDuplicate[shapeItem2].transform.position = _NextAvailableSpot.transform.position;
-            originalToDuplicate[shapeItem2].transform.rotation = _NextAvailableSpot.transform.rotation;
-
-            // this should fix the need to rotate and position needs to be going along with the minimap/hand
-            originalToDuplicate[shapeItem2].transform.SetParent(_NextAvailableSpot.transform);
-
-            if (collidingWithHandDuplicates.ContainsKey(shapeItem2.gameObject))
+            if (slotToFill == null)
             {
-                // skip if already present
-                continue;
+                print("All slots around the map are full.");
+                return;
             }
 
-            collidingWithHandDuplicates.Add(shapeItem2.gameObject, originalToDuplicate[shapeItem2].GetComponent<shapeItem_3>().gameObject);
+            originalToDuplicate[sa2].transform.position = slotToFill.transform.position;
+            originalToDuplicate[sa2].transform.rotation = slotToFill.transform.rotation;
+            originalToDuplicate[sa2].transform.SetParent(slotToFill.transform);
 
-            spotsAroundMiniMap[availableindex] = true;
+            slotsAroundMiniMap[slotToFill] = true;
         }
     }
 }

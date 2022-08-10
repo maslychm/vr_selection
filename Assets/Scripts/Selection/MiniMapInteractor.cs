@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /**
- * This script must be attached to the hand which will be holding the flashlight
+ * This script must be attached to the cone that will hit the Interactables.
  * This script represents the Mini Map (circular) selector Interactor
  */
 
+[RequireComponent(typeof(Collider))]
 public class MiniMapInteractor : MonoBehaviour
 {
-    [Header("Use gesture shape, or direction")]
-    public bool useGestureDirection = false;
-
     [SerializeField] private InputActionReference flaslightActionReference;
 
     [Tooltip("This object must have a collider and be tagged as GestureFilter")]
@@ -62,9 +60,9 @@ public class MiniMapInteractor : MonoBehaviour
 
     private Dictionary<GameObject, Transform> duplicate_and_originalPosition;
 
-    public void Start()
+    public void OnEnable()
     {
-        print($"START IN MMINTERACTOR IS CALLED in {name}");
+        //print($"AWAKE IN MMINTERACTOR IS CALLED in {name}");
         originalToDuplicate = new Dictionary<Interactable, shapeItem_2>();
         duplicateDirections = new List<(shapeItem_2, Vector3)>();
         duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
@@ -75,20 +73,17 @@ public class MiniMapInteractor : MonoBehaviour
             defaultFlashlightScale = new Vector3(150, 150, 560);
 
         ShrinkFlashlight();
-        SetRecognizerMode();
 
         if (tabletUI)
             tabletUI.SetTabletActive(debug);
+
+        CreateDuplicatesForMiniMap();
     }
-
-
 
     public Dictionary<shapeItem_2, shapeItem_3> getUpdatedListOfDuplicates()
     {
         return originalToDuplicate_ForCirCumference;
     }
-
-
 
     public void CreateDuplicatesForMiniMap()
     {
@@ -159,7 +154,8 @@ public class MiniMapInteractor : MonoBehaviour
             Destroy(duplicateOFduplicate.GetComponent<Interactable>());
             Destroy(duplicateOFduplicate.GetComponent<Object_collected>());
             duplicateOFduplicate.AddComponent<shapeItem_3>();
-            duplicateOFduplicate.GetComponent<shapeItem_3>().original = duplicate;
+            duplicateOFduplicate.GetComponent<shapeItem_3>().original = original.gameObject;
+            duplicateOFduplicate.GetComponent<shapeItem_3>().shapeItem2_parent = duplicate.GetComponent<shapeItem_2>();
             duplicateOFduplicate.GetComponent<Rigidbody>().isKinematic = true;
             duplicateOFduplicate.GetComponent<Rigidbody>().useGravity = false;
             duplicateOFduplicate.tag = "unclutterDuplicate";
@@ -184,14 +180,6 @@ public class MiniMapInteractor : MonoBehaviour
         {
             CalculateDuplicateDirections(allHighlightedObjects);
         }
-    }
-
-    private void OnDisable()
-    {
-        if (allHighlightedObjects == null)
-            allHighlightedObjects = new List<GameObject>();
-        else
-            allHighlightedObjects.Clear();
     }
 
     private void ProcessInput()
@@ -219,12 +207,6 @@ public class MiniMapInteractor : MonoBehaviour
             //miniMap.CloseMiniMap();
             miniMap.FreezeMiniMap();
         }
-    }
-
-    private void SetRecognizerMode()
-    {
-        Gestures.Recognizer recognizer = FindObjectOfType<Gestures.Recognizer>();
-        recognizer.useAsDirection = useGestureDirection;
     }
 
     private void ExtendFlashlight()

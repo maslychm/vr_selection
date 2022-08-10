@@ -10,161 +10,96 @@ using UnityEngine;
 
 public class SelectionTechniqueDistributer : MonoBehaviour
 {
-    [SerializeField] private GrabbingHand hand;
+    //[SerializeField] private GrabbingHand hand;
 
-    private Transform trans;
+    [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root;
+    [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap;
+    [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor;
 
-    public static GameObject currentlySetActiveTechnique = null;
+    [SerializeField] private GrabbingHand grabbingHand;
 
-    //private string FC, MM, LS, G, MwE;
-
-    private string FC = "FlowerCone";
-    private string G = "Grid";
-    private string LS = "LenSelect";
-    private string MM = "MiniMap";
-    private string MwE = "MiniMapWithoutExpansion";
-
-    public MiniMapInteractor miniMapInteractorMM, miniMapInteractorWO;
-
-    //public static Dictionary<string, bool> SelectionTechniqueTriggers;
-
-    // Start is called before the first frame update
     private void Start()
     {
-        //FC = "FlowerCone";
-        //G = "Grid";
-        //LS = "LenSelect";
-        //MM = "MiniMap";
-        //MwE = "MiniMapWithoutExpansion";
-
-        //SelectionTechniqueTriggers = new Dictionary<string, bool>();
-
-        //trans = this.transform;
-        // just check if we actually have a selection technique manager or if an issue happened
-        //if (this.gameObject == null)
-        //{
-        //    print("Couldn't find the selection technique assigner.... -> error issue from XROrigin/LeftHandController");
-        //    return;
-        //}
-
-        //// make sure that every technique trigger is set to false
-        //{
-        //    SelectionTechniqueTriggers.Add(MM, false);
-        //    SelectionTechniqueTriggers.Add(G, false);
-        //    SelectionTechniqueTriggers.Add(FC, false);
-        //    SelectionTechniqueTriggers.Add(LS, false);
-        //    SelectionTechniqueTriggers.Add(MwE, false);
-        //}
-
-        // at the start go over all the children and set them to false
-        // this should turn off all the selection techniques present in the left hand
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        currentlySetActiveTechnique = null;
+        DisableAllTechniques();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
-        {
-            //SelectionTechniqueTriggers[LS] = false;
-            //SelectionTechniqueTriggers[FC] = false;
-            //SelectionTechniqueTriggers[G] = false;
-            //SelectionTechniqueTriggers[MM] = false;
-            //SelectionTechniqueTriggers[MwE] = true;
-
-            if (currentlySetActiveTechnique != null)
-                currentlySetActiveTechnique.SetActive(false);
-
-            Transform childTrans = trans.Find(MwE);
-            if (childTrans != null)
-            {
-                print("We assigned MiniMap Without Expansion Technique to the user");
-                childTrans.gameObject.SetActive(true);
-                currentlySetActiveTechnique = childTrans.gameObject;
-                hand.miniMap = miniMapInteractorWO.miniMap;
-                ClutterHandler_circumferenceDisplay.miniMapInteractor = miniMapInteractorWO;
-                ClutterHandler_circumferenceDisplay.runCircumference = false;
-                miniMapInteractorWO.CreateDuplicatesForMiniMap();
-            }
-            else
-            {
-                print("We couldn't find MiniMap withotu expansion Selection Assigned Child ->Error in Left Hand Selection Technique Manager");
-            }
-        }
+            ActivateSimpleMinimap();
         else if (Input.GetKeyDown(KeyCode.M))
-        {
-            //SelectionTechniqueTriggers[LS] = false;
-            //SelectionTechniqueTriggers[FC] = false;
-            //SelectionTechniqueTriggers[G] = false;
-            //SelectionTechniqueTriggers[MM] = true;
-            //SelectionTechniqueTriggers[MwE] = false;
-
-            if (currentlySetActiveTechnique != null)
-                currentlySetActiveTechnique.SetActive(false);
-
-            Transform childTrans = trans.Find(MM);
-            if (childTrans != null)
-            {
-                print("We assigned MiniMap Technique to the user");
-
-                childTrans.gameObject.SetActive(true);
-                currentlySetActiveTechnique = childTrans.gameObject;
-                hand.miniMap = miniMapInteractorMM.miniMap;
-                ClutterHandler_circumferenceDisplay.miniMapInteractor = miniMapInteractorMM;
-                ClutterHandler_circumferenceDisplay.runCircumference = true;
-                miniMapInteractorMM.CreateDuplicatesForMiniMap();
-            }
-            else
-            {
-                print("We couldn't find MiniMap Selection Assigned Child ->Error in Left Hand Selection Technique Manager");
-            }
-        }
+            ActivateMinimapWithCircumference();
         else if (Input.GetKeyDown(KeyCode.F))
-        {
-            //SelectionTechniqueTriggers[LS] = false;
-            //SelectionTechniqueTriggers[FC] = true;
-            //SelectionTechniqueTriggers[G] = false;
-            //SelectionTechniqueTriggers[MM] = false;
-            //SelectionTechniqueTriggers[MwE] = false;
-
-            if (currentlySetActiveTechnique != null)
-                currentlySetActiveTechnique.SetActive(false);
-
-            Transform childTrans = trans.Find(FC);
-            if (childTrans != null)
-            {
-                print("We assigned Flower Cone Technique to the user");
-                childTrans.gameObject.SetActive(true);
-                currentlySetActiveTechnique = childTrans.gameObject;
-            }
-            else
-            {
-                print("We couldn't find Flower Cone Technique Assigned Child ->Error in Left Hand Selection Technique Manager");
-            }
-        }
+            ActivateFlowerCone();
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //SelectionTechniqueTriggers[LS] = false;
-            //SelectionTechniqueTriggers[FC] = false;
-            //SelectionTechniqueTriggers[G] = false;
-            //SelectionTechniqueTriggers[MM] = false;
-            //SelectionTechniqueTriggers[MwE] = false;
-
             // simply turn off the ongoing selection technique if there is any
-            if (currentlySetActiveTechnique != null)
-                currentlySetActiveTechnique.SetActive(false);
-            currentlySetActiveTechnique = null;
+            DisableAllTechniques();
             print("End of the experiment, thank you, back to starting position :D");
         }
+    }
 
+    private void DisableAllTechniques()
+    {
+        SimpleMiniMap_root.SetActive(false);
+        OhMiniMap_root.SetActive(false);
+
+        grabbingHand.miniMap = null;
+        grabbingHand.miniMapIntreractor = null;
+        grabbingHand.circumferenceDisplayInUse = false;
+    }
+
+    private void ActivateFlowerCone()
+    {
+        DisableAllTechniques();
+        //Transform childTrans = trans.Find(FC);
+        //if (childTrans != null)
+        //{
+        //    print("We assigned Flower Cone Technique to the user");
+        //    childTrans.gameObject.SetActive(true);
+        //    currentlySetActiveTechnique = childTrans.gameObject;
+        //}
         //else
         //{
-        //    print("This Key has no matching behaviour -- ERROR -- chose either F, L, M, G or esc");
+        //    print("We couldn't find Flower Cone Technique Assigned Child ->Error in Left Hand Selection Technique Manager");
         //}
+    }
+
+    private void ActivateMinimapWithCircumference()
+    {
+        DisableAllTechniques();
+        print("Enabling OH Mini Map");
+
+        grabbingHand.miniMap = OhMiniMap;
+        grabbingHand.miniMapIntreractor = OhMiniMapInteractor;
+        grabbingHand.circumferenceDisplayInUse = true;
+        OhMiniMap_root.SetActive(true);
+
+        //Transform childTrans = trans.Find(MM);
+        //if (childTrans != null)
+        //{
+        //    print("We assigned MiniMap Technique to the user");
+
+        //    childTrans.gameObject.SetActive(true);
+        //    currentlySetActiveTechnique = childTrans.gameObject;
+        //    hand.miniMap = miniMapInteractorMM.miniMap;
+        //    ClutterHandler_circumferenceDisplay.miniMapInteractor = miniMapInteractorMM;
+        //    ClutterHandler_circumferenceDisplay.runCircumference = true;
+        //    miniMapInteractorMM.CreateDuplicatesForMiniMap();
+        //}
+        //else
+        //{
+        //    print("We couldn't find MiniMap Selection Assigned Child ->Error in Left Hand Selection Technique Manager");
+        //}
+    }
+
+    private void ActivateSimpleMinimap()
+    {
+        DisableAllTechniques();
+        print("Enabling Simple Mini Map");
+
+        grabbingHand.miniMap = SimpleMiniMap;
+        grabbingHand.miniMapIntreractor = SimpleMiniMapInteractor;
+        SimpleMiniMap_root.SetActive(true);
     }
 }

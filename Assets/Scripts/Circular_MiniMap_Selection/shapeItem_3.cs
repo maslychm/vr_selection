@@ -7,35 +7,30 @@ using UnityEngine;
 public class shapeItem_3 : MonoBehaviour
 {
     public GameObject original;
+    public shapeItem_2 shapeItem2_parent;
 
     private void Start()
     {
-        this.gameObject.layer = 10;
+        gameObject.layer = 10;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>())
-        {
+        if (!other.GetComponent<GrabbingHand>() || other.GetComponent<GrabbingHand>().objectInHand)
             return;
-        }
 
-        if (other.GetComponent<GrabbingHand>().objectInHand)
-        {
-            return;
-        }
         GetComponent<cakeslice.Outline>().enabled = true;
+        shapeItem2_parent.GetComponent<cakeslice.Outline>().enabled = true;
         original.GetComponent<cakeslice.Outline>().enabled = true;
-        original.GetComponent<shapeItem_2>().original.GetComponent<cakeslice.Outline>().enabled = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>())
+        if (!other.GetComponent<GrabbingHand>() || other.GetComponent<GrabbingHand>().objectInHand)
             return;
 
         GetComponent<cakeslice.Outline>().enabled = false;
+        shapeItem2_parent.GetComponent<cakeslice.Outline>().enabled = false;
         original.GetComponent<cakeslice.Outline>().enabled = false;
-        original.GetComponent<shapeItem_2>().original.GetComponent<cakeslice.Outline>().enabled = false;
     }
 }

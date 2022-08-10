@@ -4361,7 +4361,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b6cb49850bbeecb45a6a5a707974733e, type: 2}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_Name
-      value: FlashlightConeMM
+      value: FlashlightConeOhMM
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_TagString
@@ -4405,7 +4405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8711d86df66a946a6b1355d9267fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useGestureDirection: 0
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   attachTransform: {fileID: 1840967834}
   handDebugPlane: {fileID: 0}
@@ -9743,7 +9742,7 @@ GameObject:
   - component: {fileID: 441624303}
   - component: {fileID: 441624304}
   m_Layer: 0
-  m_Name: MiniMap
+  m_Name: OhMiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9795,11 +9794,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.015
   offset: 1
-  centreCircle: {fileID: 1671960926}
-  MiniMap: {fileID: 441624301}
-  TheHand: {fileID: 2103060855}
+  centreCircleTransform: {fileID: 1671960927}
+  MiniMap: {fileID: 441624303}
+  grabbingHand: {fileID: 2103060859}
   clickedRightHandController: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   isFrozen: 0
+  runCircumference: 0
+  miniMapInteractor: {fileID: 153800341}
 --- !u!1001 &442031378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20710,7 +20711,7 @@ GameObject:
   - component: {fileID: 958048661}
   - component: {fileID: 958048662}
   m_Layer: 0
-  m_Name: MiniMap
+  m_Name: OhMiniMapRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20732,7 +20733,7 @@ Transform:
   - {fileID: 137947589}
   - {fileID: 441624302}
   m_Father: {fileID: 992347895}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &958048662
 MonoBehaviour:
@@ -21193,8 +21194,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
-  - {fileID: 958048661}
   - {fileID: 2099844789}
+  - {fileID: 958048661}
   m_Father: {fileID: 349897844}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21210,9 +21211,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64b0166f6877d34c9b91d3c2d7f218c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 2103060859}
-  miniMapInteractorMM: {fileID: 153800341}
-  miniMapInteractorWO: {fileID: 1543534842}
+  SimpleMiniMap_root: {fileID: 2099844788}
+  OhMiniMap_root: {fileID: 958048660}
+  SimpleMiniMap: {fileID: 1742748541}
+  OhMiniMap: {fileID: 441624303}
+  SimpleMiniMapInteractor: {fileID: 1543534842}
+  OhMiniMapInteractor: {fileID: 153800341}
+  grabbingHand: {fileID: 2103060859}
 --- !u!114 &992347897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33726,7 +33731,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b6cb49850bbeecb45a6a5a707974733e, type: 2}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_Name
-      value: FlashlightConeWO
+      value: FlashlightConeSimpleMM
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_TagString
@@ -33756,7 +33761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8711d86df66a946a6b1355d9267fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useGestureDirection: 0
   flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   attachTransform: {fileID: 2013495121}
   handDebugPlane: {fileID: 0}
@@ -38394,7 +38398,7 @@ GameObject:
   - component: {fileID: 1742748540}
   - component: {fileID: 1742748541}
   m_Layer: 0
-  m_Name: MiniMap
+  m_Name: SimpleMiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46073,7 +46077,7 @@ GameObject:
   - component: {fileID: 2099844789}
   - component: {fileID: 2099844790}
   m_Layer: 0
-  m_Name: MiniMapWithoutExpansion
+  m_Name: SimpleMiniMapRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46095,7 +46099,7 @@ Transform:
   - {fileID: 713296993}
   - {fileID: 1742748540}
   m_Father: {fileID: 992347895}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2099844790
 MonoBehaviour:
@@ -46259,11 +46263,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabActionReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   attachTransform: {fileID: 1409524340}
-  miniMap: {fileID: 441624303}
-  miniMapIntreractor: {fileID: 153800341}
-  ClutterHander_circumferenceDisplay: {fileID: 0}
+  miniMap: {fileID: 0}
+  miniMapIntreractor: {fileID: 0}
   addForceOnObjectDetach: 0
   objPushForce: 20
+  circumferenceDisplayInUse: 0
+  clutterHandler_CircumferenceDisplay: {fileID: 441624304}
   objectInHand: {fileID: 0}
 --- !u!114 &2103060860
 MonoBehaviour:

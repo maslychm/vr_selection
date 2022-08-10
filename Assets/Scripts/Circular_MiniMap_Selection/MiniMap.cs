@@ -31,9 +31,14 @@ public class MiniMap : MonoBehaviour
             centerOfMiniMap = transform.GetChild(0).gameObject.transform;
     }
 
-    public void RemoveFromMinimapUponGrab(GameObject toBeRemoved)
+    /// <summary>
+    /// ShapeItem2 which to be teleported away from the minimap.
+    /// Should correspond to the original one being grabbed.
+    /// </summary>
+    /// <param name="toBeRemoved"></param>
+    public void RemoveFromMinimapUponGrab(shapeItem_2 toBeRemoved)
     {
-        MoveToTrash(toBeRemoved);
+        MoveToTrash(toBeRemoved.gameObject);
     }
 
     // Update is called once per frame
@@ -57,6 +62,7 @@ public class MiniMap : MonoBehaviour
 
         foreach (var shapeItem_Dir in ShapeItems_Directions)
         {
+            //print(shapeItem_Dir);
             RenderObjectInDirectionOnMinimap(shapeItem_Dir);
             listInCircle.Add(shapeItem_Dir.s);
         }

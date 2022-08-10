@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            densityLevel = (densityLevel + 1) % 4;
+
             if (densityLevel == 0)
             {
                 DisableAllLevels();
@@ -31,8 +33,6 @@ public class LevelManager : MonoBehaviour
             {
                 densityLevel3.SetActive(true);
             }
-
-            densityLevel = (densityLevel + 1) % 4;
         }
         else if (Input.GetKeyDown(KeyCode.Q))
             Application.Quit();

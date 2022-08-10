@@ -2,55 +2,46 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    private int counter = 0;
+    private int densityLevel = 0;
 
-    public MiniMapInteractor miniMapInteractorMM;
-    public MiniMapInteractor miniMapInteractorWO;
+    [SerializeField] private GameObject densityLevel1, densityLevel2, densityLevel3;
 
-    // Start is called before the first frame update
     private void Start()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
+        DisableAllLevels();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (counter == 3)
+            if (densityLevel == 0)
             {
-                counter = 0;
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    transform.GetChild(i).gameObject.SetActive(false);
-                }
+                DisableAllLevels();
+            }
+            else if (densityLevel == 1)
+            {
+                densityLevel1.SetActive(true);
+            }
+            else if (densityLevel == 2)
+            {
+                densityLevel2.SetActive(true);
+            }
+            else if (densityLevel == 3)
+            {
+                densityLevel3.SetActive(true);
             }
 
-            transform.GetChild(counter).gameObject.SetActive(true);
-
-            if (counter == 1)
-                transform.GetChild(counter - 1).gameObject.SetActive(true);
-
-            else if (counter == 2)
-            {
-                transform.GetChild(counter - 1).gameObject.SetActive(true);
-                transform.GetChild(counter - 2).gameObject.SetActive(true);
-            }
-            if (SelectionTechniqueDistributer.currentlySetActiveTechnique != null)
-            {
-                if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "MiniMap")
-                    miniMapInteractorMM.CreateDuplicatesForMiniMap();
-                else if (SelectionTechniqueDistributer.currentlySetActiveTechnique.name == "MiniMapWithoutExpansion")
-                    miniMapInteractorWO.CreateDuplicatesForMiniMap();
-            }
-
-            counter++;
+            densityLevel = (densityLevel + 1) % 4;
         }
         else if (Input.GetKeyDown(KeyCode.Q))
             Application.Quit();
+    }
+
+    private void DisableAllLevels()
+    {
+        densityLevel1.SetActive(false);
+        densityLevel2.SetActive(false);
+        densityLevel3.SetActive(false);
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,60 +10,55 @@ using UnityEngine;
 
 public class SelectionTechniqueDistributer : MonoBehaviour
 {
-    //[SerializeField] public bool MiniMapTrigger = false;
-    //[SerializeField] public bool FlowerConeTrigger = false;
-    //[SerializeField] public bool MiniMapWithoutExpansion = false;
-
-    //public static bool wasDuplicated = false;
-
     [SerializeField] private GrabbingHand hand;
 
     private Transform trans;
-    //int count = 0;
 
     public static GameObject currentlySetActiveTechnique = null;
 
-    private string FC, MM, LS, G, MwE;
+    //private string FC, MM, LS, G, MwE;
+
+    private string FC = "FlowerCone";
+    private string G = "Grid";
+    private string LS = "LenSelect";
+    private string MM = "MiniMap";
+    private string MwE = "MiniMapWithoutExpansion";
 
     public MiniMapInteractor miniMapInteractorMM, miniMapInteractorWO;
 
-    public static Dictionary<string, bool> SelectionTechniqueTriggers;
+    //public static Dictionary<string, bool> SelectionTechniqueTriggers;
 
     // Start is called before the first frame update
     private void Start()
     {
-        //MiniMapTrigger = false;
-        //FlowerConeTrigger = false;
-        //MiniMapWithoutExpansion = false;
+        //FC = "FlowerCone";
+        //G = "Grid";
+        //LS = "LenSelect";
+        //MM = "MiniMap";
+        //MwE = "MiniMapWithoutExpansion";
 
-        FC = "FlowerCone";
-        G = "Grid";
-        LS = "LenSelect";
-        MM = "MiniMap";
-        MwE = "MiniMapWithoutExpansion";
+        //SelectionTechniqueTriggers = new Dictionary<string, bool>();
 
-        SelectionTechniqueTriggers = new Dictionary<string, bool>();
-
-        trans = this.transform;
+        //trans = this.transform;
         // just check if we actually have a selection technique manager or if an issue happened
-        if (this.gameObject == null)
-        {
-            print("Couldn't find the selection technique assigner.... -> error issue from XROrigin/LeftHandController");
-            return;
-        }
+        //if (this.gameObject == null)
+        //{
+        //    print("Couldn't find the selection technique assigner.... -> error issue from XROrigin/LeftHandController");
+        //    return;
+        //}
 
-        // make sure that every technique trigger is set to false
-        {
-            SelectionTechniqueTriggers.Add(MM, false);
-            SelectionTechniqueTriggers.Add(G, false);
-            SelectionTechniqueTriggers.Add(FC, false);
-            SelectionTechniqueTriggers.Add(LS, false);
-            SelectionTechniqueTriggers.Add(MwE, false);
-        }
+        //// make sure that every technique trigger is set to false
+        //{
+        //    SelectionTechniqueTriggers.Add(MM, false);
+        //    SelectionTechniqueTriggers.Add(G, false);
+        //    SelectionTechniqueTriggers.Add(FC, false);
+        //    SelectionTechniqueTriggers.Add(LS, false);
+        //    SelectionTechniqueTriggers.Add(MwE, false);
+        //}
 
         // at the start go over all the children and set them to false
         // this should turn off all the selection techniques present in the left hand
-        for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
@@ -77,11 +71,11 @@ public class SelectionTechniqueDistributer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            SelectionTechniqueTriggers[LS] = false;
-            SelectionTechniqueTriggers[FC] = false;
-            SelectionTechniqueTriggers[G] = false;
-            SelectionTechniqueTriggers[MM] = false;
-            SelectionTechniqueTriggers[MwE] = true;
+            //SelectionTechniqueTriggers[LS] = false;
+            //SelectionTechniqueTriggers[FC] = false;
+            //SelectionTechniqueTriggers[G] = false;
+            //SelectionTechniqueTriggers[MM] = false;
+            //SelectionTechniqueTriggers[MwE] = true;
 
             if (currentlySetActiveTechnique != null)
                 currentlySetActiveTechnique.SetActive(false);
@@ -104,11 +98,11 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.M))
         {
-            SelectionTechniqueTriggers[LS] = false;
-            SelectionTechniqueTriggers[FC] = false;
-            SelectionTechniqueTriggers[G] = false;
-            SelectionTechniqueTriggers[MM] = true;
-            SelectionTechniqueTriggers[MwE] = false;
+            //SelectionTechniqueTriggers[LS] = false;
+            //SelectionTechniqueTriggers[FC] = false;
+            //SelectionTechniqueTriggers[G] = false;
+            //SelectionTechniqueTriggers[MM] = true;
+            //SelectionTechniqueTriggers[MwE] = false;
 
             if (currentlySetActiveTechnique != null)
                 currentlySetActiveTechnique.SetActive(false);
@@ -132,11 +126,11 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.F))
         {
-            SelectionTechniqueTriggers[LS] = false;
-            SelectionTechniqueTriggers[FC] = true;
-            SelectionTechniqueTriggers[G] = false;
-            SelectionTechniqueTriggers[MM] = false;
-            SelectionTechniqueTriggers[MwE] = false;
+            //SelectionTechniqueTriggers[LS] = false;
+            //SelectionTechniqueTriggers[FC] = true;
+            //SelectionTechniqueTriggers[G] = false;
+            //SelectionTechniqueTriggers[MM] = false;
+            //SelectionTechniqueTriggers[MwE] = false;
 
             if (currentlySetActiveTechnique != null)
                 currentlySetActiveTechnique.SetActive(false);
@@ -155,11 +149,11 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SelectionTechniqueTriggers[LS] = false;
-            SelectionTechniqueTriggers[FC] = false;
-            SelectionTechniqueTriggers[G] = false;
-            SelectionTechniqueTriggers[MM] = false;
-            SelectionTechniqueTriggers[MwE] = false;
+            //SelectionTechniqueTriggers[LS] = false;
+            //SelectionTechniqueTriggers[FC] = false;
+            //SelectionTechniqueTriggers[G] = false;
+            //SelectionTechniqueTriggers[MM] = false;
+            //SelectionTechniqueTriggers[MwE] = false;
 
             // simply turn off the ongoing selection technique if there is any
             if (currentlySetActiveTechnique != null)

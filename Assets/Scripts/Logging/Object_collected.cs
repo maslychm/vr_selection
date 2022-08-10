@@ -8,12 +8,14 @@ public class Object_collected : MonoBehaviour
     private Vector3 _dumpster_location = new Vector3(12, 1, -3);
     private Quaternion _home_rot;
     private Rigidbody _rigidbody;
+    private Vector3 originalScale;
 
     private void Start()
     {
         _home_pos = transform.position;
         _home_rot = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
+        originalScale = transform.localScale;
     }
 
 
@@ -24,6 +26,7 @@ public class Object_collected : MonoBehaviour
         transform.position = _home_pos;
         transform.rotation = _home_rot;
         _rigidbody.velocity = Vector3.zero;
+        transform.localScale = originalScale;
     }
 
     public void MoveOutsideReach()

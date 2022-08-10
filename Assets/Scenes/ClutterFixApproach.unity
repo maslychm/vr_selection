@@ -21267,6 +21267,7 @@ MonoBehaviour:
   SimpleMiniMapInteractor: {fileID: 1543534842}
   OhMiniMapInteractor: {fileID: 153800341}
   RayKebabGameObjectRoot: {fileID: 1026403698}
+  instanceOfRayManager: {fileID: 1026403703}
   grabbingHand: {fileID: 2103060859}
 --- !u!114 &992347897
 MonoBehaviour:
@@ -22526,7 +22527,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 30979760e8a68324f9c4543a65b7b60b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22620,6 +22621,9 @@ MonoBehaviour:
   leftHandController: {fileID: 1026403698}
   BringItemsAligned: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   TakeItemsBack: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  lineRenderer: {fileID: 0}
+  whiteMaterial: {fileID: 2100000, guid: cf5897b1543fea34399ab7a325c12911, type: 2}
+  RedMaterial: {fileID: 2100000, guid: 8039ee3d27bb63b4bb66a4c103234343, type: 2}
 --- !u!1001 &1029457795
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46597,6 +46601,7 @@ MonoBehaviour:
   isHovering: 0
   circumferenceDisplayInUse: 0
   clutterHandler_CircumferenceDisplay: {fileID: 441624304}
+  instanceOfRayManager: {fileID: 0}
   objectInHand: {fileID: 0}
 --- !u!114 &2103060860
 MonoBehaviour:

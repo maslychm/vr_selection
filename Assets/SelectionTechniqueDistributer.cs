@@ -16,6 +16,7 @@ public class SelectionTechniqueDistributer : MonoBehaviour
     [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap;
     [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor;
     [SerializeField] private GameObject RayKebabGameObjectRoot;
+    [SerializeField] private RayManager instanceOfRayManager;
 
     [SerializeField] private GrabbingHand grabbingHand;
 
@@ -49,6 +50,7 @@ public class SelectionTechniqueDistributer : MonoBehaviour
 
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
+        grabbingHand.instanceOfRayManager = null;
         grabbingHand.circumferenceDisplayInUse = false;
     }
 
@@ -65,6 +67,7 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
         grabbingHand.circumferenceDisplayInUse = false;
+        grabbingHand.instanceOfRayManager = instanceOfRayManager;
         RayKebabGameObjectRoot.SetActive(true);
 
     }
@@ -77,6 +80,8 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         grabbingHand.miniMap = OhMiniMap;
         grabbingHand.miniMapIntreractor = OhMiniMapInteractor;
         grabbingHand.circumferenceDisplayInUse = true;
+        grabbingHand.instanceOfRayManager = null;
+
         OhMiniMap_root.SetActive(true);
     }
 
@@ -87,6 +92,8 @@ public class SelectionTechniqueDistributer : MonoBehaviour
 
         grabbingHand.miniMap = SimpleMiniMap;
         grabbingHand.miniMapIntreractor = SimpleMiniMapInteractor;
+        grabbingHand.instanceOfRayManager = null;
+
         SimpleMiniMap_root.SetActive(true);
     }
 }

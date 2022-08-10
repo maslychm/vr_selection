@@ -18,6 +18,8 @@ public class GrabbingHand : MonoBehaviour
     public bool circumferenceDisplayInUse = false;
     [SerializeField] private ClutterHandler_circumferenceDisplay clutterHandler_CircumferenceDisplay;
 
+    public RayManager instanceOfRayManager = null;
+
     public GameObject objectInHand;
 
     private void Start()
@@ -91,10 +93,10 @@ public class GrabbingHand : MonoBehaviour
             if(col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
             {
                 GameObject original = col.gameObject;
-                RayManager.HoldRayCastHitCollider.Remove(col.gameObject);
+                instanceOfRayManager.HoldRayCastHitCollider.Remove(col.gameObject);
                 PickupObject(original);
 
-                RayManager.releaseObjectsBackToOriginalPosition();
+                instanceOfRayManager.releaseObjectsBackToOriginalPosition();
 
                 if (circumferenceDisplayInUse)
                 {

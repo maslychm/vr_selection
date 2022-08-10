@@ -22,7 +22,6 @@ public class MiniMap : MonoBehaviour
 
     [SerializeField] private MiniMapInteractor miniMapInteractor;
 
-    // Start is called before the first frame update
     private void Start()
     {
         listInCircle = new List<shapeItem_2>();
@@ -41,7 +40,6 @@ public class MiniMap : MonoBehaviour
         MoveToTrash(toBeRemoved.gameObject);
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (isFrozen)
@@ -62,7 +60,6 @@ public class MiniMap : MonoBehaviour
 
         foreach (var shapeItem_Dir in ShapeItems_Directions)
         {
-            //print(shapeItem_Dir);
             RenderObjectInDirectionOnMinimap(shapeItem_Dir);
             listInCircle.Add(shapeItem_Dir.s);
         }
@@ -130,8 +127,6 @@ public class MiniMap : MonoBehaviour
         }
 
         shapeItemObject.transform.parent = centerOfMiniMap.transform;
-
-        //print($"IN RENDER OBJ IN DIR ON MM{shapeItemObject.name}");
     }
 
     private void MoveToTrash(GameObject o)

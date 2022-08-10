@@ -33,7 +33,6 @@ public class SelectionTechniqueDistributer : MonoBehaviour
             ActivateFlowerCone();
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // simply turn off the ongoing selection technique if there is any
             DisableAllTechniques();
             print("End of the experiment, thank you, back to starting position :D");
         }
@@ -52,17 +51,6 @@ public class SelectionTechniqueDistributer : MonoBehaviour
     private void ActivateFlowerCone()
     {
         DisableAllTechniques();
-        //Transform childTrans = trans.Find(FC);
-        //if (childTrans != null)
-        //{
-        //    print("We assigned Flower Cone Technique to the user");
-        //    childTrans.gameObject.SetActive(true);
-        //    currentlySetActiveTechnique = childTrans.gameObject;
-        //}
-        //else
-        //{
-        //    print("We couldn't find Flower Cone Technique Assigned Child ->Error in Left Hand Selection Technique Manager");
-        //}
     }
 
     private void ActivateMinimapWithCircumference()
@@ -74,23 +62,6 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         grabbingHand.miniMapIntreractor = OhMiniMapInteractor;
         grabbingHand.circumferenceDisplayInUse = true;
         OhMiniMap_root.SetActive(true);
-
-        //Transform childTrans = trans.Find(MM);
-        //if (childTrans != null)
-        //{
-        //    print("We assigned MiniMap Technique to the user");
-
-        //    childTrans.gameObject.SetActive(true);
-        //    currentlySetActiveTechnique = childTrans.gameObject;
-        //    hand.miniMap = miniMapInteractorMM.miniMap;
-        //    ClutterHandler_circumferenceDisplay.miniMapInteractor = miniMapInteractorMM;
-        //    ClutterHandler_circumferenceDisplay.runCircumference = true;
-        //    miniMapInteractorMM.CreateDuplicatesForMiniMap();
-        //}
-        //else
-        //{
-        //    print("We couldn't find MiniMap Selection Assigned Child ->Error in Left Hand Selection Technique Manager");
-        //}
     }
 
     private void ActivateSimpleMinimap()

@@ -4,10 +4,6 @@ public class shapeItem_2 : MonoBehaviour
 {
     public GameObject original;
 
-    private void Start()
-    {
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.GetComponent<GrabbingHand>())

@@ -95,14 +95,14 @@ public class MiniMapInteractor : MonoBehaviour
             Destroy(g.gameObject);
         }
 
-        print($"Calling duplication in {name}");
+        //print($"Calling duplication in {name}");
         duplicateDirections.Clear();
         originalToDuplicate.Clear();
 
         originalToDuplicate_ForCirCumference.Clear();
 
         List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
-        print("Count of originals ->>>> " + originalInteractables.Count + " OK ");
+        //print("Count of originals ->>>> " + originalInteractables.Count + " OK ");
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;

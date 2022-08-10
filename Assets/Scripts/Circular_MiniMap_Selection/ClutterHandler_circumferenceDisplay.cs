@@ -35,7 +35,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             if (isFrozen)
             {
-                print("was frozen -> unfroze");
+                //print("was frozen -> unfroze");
                 FreeCircularSlots();
                 grabbingHand.collidingWithHand.Clear();
                 isFrozen = false;
@@ -44,12 +44,12 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             {
                 if (grabbingHand.isHovering)
                 {
-                    print("was hovering -> froze");
+                    //print("was hovering -> froze");
                     isFrozen = true;
                 }
                 else
                 {
-                    print("was not hovering -> unfroze");
+                    //print("was not hovering -> unfroze");
                     grabbingHand.collidingWithHand.Clear();
                     isFrozen = false;
                 }

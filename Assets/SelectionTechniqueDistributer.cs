@@ -39,7 +39,7 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         }
     }
 
-    private void DisableAllTechniques()
+    public void DisableAllTechniques()
     {
         SimpleMiniMap_root.SetActive(false);
         OhMiniMap_root.SetActive(false);

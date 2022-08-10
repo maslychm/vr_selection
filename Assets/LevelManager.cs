@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour
     private int densityLevel = 0;
 
     [SerializeField] private GameObject densityLevel1, densityLevel2, densityLevel3;
+    [SerializeField] private SelectionTechniqueDistributer techniqueDistributer;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             densityLevel = (densityLevel + 1) % 4;
+            techniqueDistributer.DisableAllTechniques();
 
             if (densityLevel == 0)
             {

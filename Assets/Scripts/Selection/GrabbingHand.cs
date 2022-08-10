@@ -38,11 +38,6 @@ public class GrabbingHand : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //if (circumferenceDisplayInUse)
-        //{
-        //clutterHandler_CircumferenceDisplay.FreeCircularSlots();
-        //clutterHandler_CircumferenceDisplay.InsertToSlots(collidingWithHand);
-        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,15 +45,7 @@ public class GrabbingHand : MonoBehaviour
         if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
 
-        //isHovering = true;
-
         collidingWithHand.Add(other.GetComponent<shapeItem_2>());
-
-        //if (circumferenceDisplayInUse)
-        //{
-        //    clutterHandler_CircumferenceDisplay.FreeCircularSpots();
-        //    clutterHandler_CircumferenceDisplay.InsertToSpots(collidingWithHand);
-        //}
     }
 
     private void OnTriggerExit(Collider other)
@@ -67,12 +54,6 @@ public class GrabbingHand : MonoBehaviour
             return;
 
         collidingWithHand.Remove(other.GetComponent<shapeItem_2>());
-
-        //if (circumferenceDisplayInUse)
-        //{
-        //    clutterHandler_CircumferenceDisplay.FreeCircularSpots();
-        //    clutterHandler_CircumferenceDisplay.InsertToSpots(collidingWithHand);
-        //}
     }
 
     private void OnTriggerStay(Collider col)
@@ -89,8 +70,7 @@ public class GrabbingHand : MonoBehaviour
                 miniMap.RemoveFromMinimapUponGrab(shapeItem2_parent);
                 PickupObject(original);
                 collidingWithHand.Remove(shapeItem2_parent);
-
-                //clutterHandler_CircumferenceDisplay.isFrozen = false;
+                clutterHandler_CircumferenceDisplay.FreeCircularSlots();
             }
 
             shapeItem2_parent = col.GetComponent<shapeItem_2>();
@@ -104,7 +84,6 @@ public class GrabbingHand : MonoBehaviour
                 if (circumferenceDisplayInUse)
                 {
                     clutterHandler_CircumferenceDisplay.FreeCircularSlots();
-                    //clutterHandler_CircumferenceDisplay.isFrozen = false;
                 }
             }
         }

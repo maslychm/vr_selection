@@ -35,6 +35,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         {
             if (isFrozen)
             {
+                print("was frozen -> unfroze");
                 FreeCircularSlots();
                 grabbingHand.collidingWithHand.Clear();
                 isFrozen = false;
@@ -43,10 +44,12 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             {
                 if (grabbingHand.isHovering)
                 {
+                    print("was hovering -> froze");
                     isFrozen = true;
                 }
                 else
                 {
+                    print("was not hovering -> unfroze");
                     grabbingHand.collidingWithHand.Clear();
                     isFrozen = false;
                 }
@@ -60,14 +63,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
         originalToDuplicate = miniMapInteractor.getUpdatedListOfDuplicates();
 
+        if (isFrozen)
+            return;
+
         FreeCircularSlots();
-
         InsertToSlots(grabbingHand.collidingWithHand);
-
-        //foreach (var key in slotsAroundMiniMap.Keys.ToList())
-        //{
-        //    slotsAroundMiniMap[key] = false;
-        //}
     }
 
     /// <summary>
@@ -75,13 +75,10 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     /// </summary>
     public void FreeCircularSlots()
     {
+        isFrozen = false;
+
         Vector3 originalOutCastPosition = new Vector3(50, 50, 50);
 
-        //foreach (shapeItem_2 original in originalToDuplicate.Keys)
-        //{
-        //    originalToDuplicate[original].transform.position = originalOutCastPosition;
-        //    originalToDuplicate[original].transform.parent = null;
-        //}
         foreach (var key in slotsAroundMiniMap.Keys.ToList())
         {
             if (slotsAroundMiniMap[key] == null)
@@ -117,11 +114,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             var extendedPosition = (newPosition * Mathf.Abs(radius - 0.3f)) + centreCircleTransform.localPosition;
 
             // checkpoint 1
-            var tempPlaceHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity) as GameObject;
-            tempPlaceHolder.transform.SetParent(MiniMap.transform);
-            tempPlaceHolder.transform.localPosition = extendedPosition;
+            GameObject placeHolder = Instantiate(new GameObject(), extendedPosition, Quaternion.identity);
+            placeHolder.transform.SetParent(MiniMap.transform);
+            placeHolder.transform.localPosition = extendedPosition;
 
-            slotsAroundMiniMap.Add(tempPlaceHolder, null);
+            slotsAroundMiniMap.Add(placeHolder, null);
         }
     }
 

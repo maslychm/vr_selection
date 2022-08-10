@@ -9,6 +9,7 @@ public class Object_collected : MonoBehaviour
     private Quaternion _home_rot;
     private Rigidbody _rigidbody;
     public Vector3 originalScale;
+    private Transform originalParent; 
 
     private void Start()
     {
@@ -16,10 +17,10 @@ public class Object_collected : MonoBehaviour
         _home_rot = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
         originalScale = new Vector3(0.2f, 0.2f, 0.2f);
-
+        originalParent = this.transform.parent;
         this.gameObject.AddComponent<cakeslice.Outline>();
 
-        this.gameObject.GetComponent<cakeslice.Outline>().eraseRenderer = true;
+        this.gameObject.GetComponent<cakeslice.Outline>().enabled = false;
     }
 
 
@@ -31,13 +32,18 @@ public class Object_collected : MonoBehaviour
         transform.rotation = _home_rot;
         _rigidbody.velocity = Vector3.zero;
         transform.localScale = originalScale;
+        if(this.gameObject.GetComponent<cakeslice.Outline>())
+            this.gameObject.GetComponent<cakeslice.Outline>().enabled = false;
+
+        transform.SetParent(originalParent);
+
     }
 
 
     private void OnTriggerExit(Collider collider)
     {
         if (collider.gameObject.name == "RightHand Controller")
-            this.gameObject.GetComponent<cakeslice.Outline>().eraseRenderer = true;
+            this.gameObject.GetComponent<cakeslice.Outline>().enabled = false;
     }
     public void MoveOutsideReach()
     {
@@ -49,7 +55,7 @@ public class Object_collected : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.name == "RightHand Controller")
-            this.gameObject.GetComponent<cakeslice.Outline>().eraseRenderer = false;
+            this.gameObject.GetComponent<cakeslice.Outline>().enabled = true;
         switch (collider.tag)
         {
             case "end_manipulator":

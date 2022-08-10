@@ -21,6 +21,8 @@ public class GrabbingHand : MonoBehaviour
     public RayManager instanceOfRayManager = null;
 
     public GameObject objectInHand;
+    public static bool flushOrNo = false;
+    public List<GameObject> helperListOfPriorGrabbedItemsToBeFlushed = new List<GameObject>();
 
     private void Start()
     {
@@ -36,6 +38,13 @@ public class GrabbingHand : MonoBehaviour
         }
 
         isHovering = collidingWithHand.Count != 0;
+
+        if(flushOrNo == true)
+        {
+
+            helperListOfPriorGrabbedItemsToBeFlushed.Clear();
+            flushOrNo = false;
+        }
     }
 
     private void FixedUpdate()
@@ -118,6 +127,12 @@ public class GrabbingHand : MonoBehaviour
         o.GetComponent<Rigidbody>().isKinematic = true;
         objectInHand = o;
         o.transform.localScale = o.GetComponent<Object_collected>().originalScale;
+        helperListOfPriorGrabbedItemsToBeFlushed.Add(o);
+    }
+
+    public List<GameObject> GetListOfToBeFlushedItems()
+    {
+        return helperListOfPriorGrabbedItemsToBeFlushed;
     }
 
     private void ReleaseCurrentlyHeldObject()

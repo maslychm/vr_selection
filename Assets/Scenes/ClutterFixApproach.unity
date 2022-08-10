@@ -15390,6 +15390,7 @@ MonoBehaviour:
   densityLevel2: {fileID: 168397685}
   densityLevel3: {fileID: 1464251796}
   techniqueDistributer: {fileID: 992347896}
+  instanceOfRightHand: {fileID: 2103060859}
 --- !u!4 &705400350
 Transform:
   m_ObjectHideFlags: 0
@@ -22622,7 +22623,7 @@ MonoBehaviour:
   BringItemsAligned: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   TakeItemsBack: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   lineRenderer: {fileID: 0}
-  whiteMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  whiteMaterial: {fileID: 2100000, guid: 0ed5568339d0787498afa8a897a18404, type: 2}
   RedMaterial: {fileID: 2100000, guid: 8039ee3d27bb63b4bb66a4c103234343, type: 2}
 --- !u!1001 &1029457795
 PrefabInstance:
@@ -46603,6 +46604,7 @@ MonoBehaviour:
   clutterHandler_CircumferenceDisplay: {fileID: 441624304}
   instanceOfRayManager: {fileID: 0}
   objectInHand: {fileID: 0}
+  helperListOfPriorGrabbedItemsToBeFlushed: []
 --- !u!114 &2103060860
 MonoBehaviour:
   m_ObjectHideFlags: 0

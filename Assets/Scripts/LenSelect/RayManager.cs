@@ -9,7 +9,7 @@ public class RayManager : MonoBehaviour
     private List<Interactable> allObjectsInteractables;
     public GameObject leftHandController;
     public HashSet<GameObject> HoldRayCastHitCollider = new HashSet<GameObject>();
-    private float startOffsetOFspheres = 0f;
+    private float startOffsetOFspheres = 0.05f;
 
     [SerializeField] public InputActionReference BringItemsAligned;
     [SerializeField] public InputActionReference TakeItemsBack;
@@ -98,7 +98,7 @@ public class RayManager : MonoBehaviour
         }
 
         lineRenderer.material = RedMaterial;
-        startOffsetOFspheres = 0f;
+        startOffsetOFspheres = 0.05f;
         BringOrFlush = 1; 
     }
 

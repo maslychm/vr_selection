@@ -50,7 +50,7 @@ public class GrabbingHand : MonoBehaviour
         if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
 
-        isHovering = true;
+        //isHovering = true;
 
         collidingWithHand.Add(other.GetComponent<shapeItem_2>());
 

@@ -15,7 +15,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     [SerializeField] private GrabbingHand grabbingHand;
     [SerializeField] private InputActionReference clickedRightHandController;
 
-    private Dictionary<GameObject, bool> slotsAroundMiniMap;
+    private Dictionary<GameObject, shapeItem_3> slotsAroundMiniMap;
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
 
     public bool isFrozen = false;
@@ -23,8 +23,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     private void Start()
     {
-        slotsAroundMiniMap = new Dictionary<GameObject, bool>();
-        originalToDuplicate = new Dictionary<shapeItem_2, shapeItem_3>();
+        slotsAroundMiniMap = new Dictionary<GameObject, shapeItem_3>();
 
         PrepareSlots();
         isFrozen = false;
@@ -61,10 +60,14 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
         originalToDuplicate = miniMapInteractor.getUpdatedListOfDuplicates();
 
-        foreach (var key in slotsAroundMiniMap.Keys.ToList())
-        {
-            slotsAroundMiniMap[key] = false;
-        }
+        FreeCircularSlots();
+
+        InsertToSlots(grabbingHand.collidingWithHand);
+
+        //foreach (var key in slotsAroundMiniMap.Keys.ToList())
+        //{
+        //    slotsAroundMiniMap[key] = false;
+        //}
     }
 
     /// <summary>
@@ -74,14 +77,19 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     {
         Vector3 originalOutCastPosition = new Vector3(50, 50, 50);
 
-        foreach (shapeItem_2 original in originalToDuplicate.Keys)
-        {
-            originalToDuplicate[original].transform.position = originalOutCastPosition;
-            originalToDuplicate[original].transform.parent = null;
-        }
+        //foreach (shapeItem_2 original in originalToDuplicate.Keys)
+        //{
+        //    originalToDuplicate[original].transform.position = originalOutCastPosition;
+        //    originalToDuplicate[original].transform.parent = null;
+        //}
         foreach (var key in slotsAroundMiniMap.Keys.ToList())
         {
-            slotsAroundMiniMap[key] = false;
+            if (slotsAroundMiniMap[key] == null)
+                continue;
+
+            slotsAroundMiniMap[key].transform.position = originalOutCastPosition;
+            slotsAroundMiniMap[key].transform.parent = null;
+            slotsAroundMiniMap[key] = null;
         }
     }
 
@@ -113,8 +121,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             tempPlaceHolder.transform.SetParent(MiniMap.transform);
             tempPlaceHolder.transform.localPosition = extendedPosition;
 
-            // then let's add this new empty gameObject to out queue
-            slotsAroundMiniMap.Add(tempPlaceHolder, false);
+            slotsAroundMiniMap.Add(tempPlaceHolder, null);
         }
     }
 
@@ -127,10 +134,9 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             // get the next available slot
             foreach (GameObject slot in slotsAroundMiniMap.Keys)
             {
-                if (slotsAroundMiniMap[slot] == false)
+                if (slotsAroundMiniMap[slot] == null)
                 {
                     slotToFill = slot;
-                    slotsAroundMiniMap[slot] = true;
                     break;
                 }
             }
@@ -145,7 +151,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             originalToDuplicate[sa2].transform.rotation = slotToFill.transform.rotation;
             originalToDuplicate[sa2].transform.SetParent(slotToFill.transform);
 
-            slotsAroundMiniMap[slotToFill] = true;
+            slotsAroundMiniMap[slotToFill] = originalToDuplicate[sa2];
         }
     }
 }

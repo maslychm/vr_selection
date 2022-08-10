@@ -58,14 +58,12 @@ public class MiniMapInteractor : MonoBehaviour
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
     private List<(shapeItem_2, Vector3)> duplicateDirections;
 
-    private Dictionary<GameObject, Transform> duplicate_and_originalPosition;
-
     public void OnEnable()
     {
         //print($"AWAKE IN MMINTERACTOR IS CALLED in {name}");
         originalToDuplicate = new Dictionary<Interactable, shapeItem_2>();
         duplicateDirections = new List<(shapeItem_2, Vector3)>();
-        duplicate_and_originalPosition = new Dictionary<GameObject, Transform>();
+
         allHighlightedObjects = new List<GameObject>();
         originalToDuplicate_ForCirCumference = new Dictionary<shapeItem_2, shapeItem_3>();
 
@@ -100,7 +98,7 @@ public class MiniMapInteractor : MonoBehaviour
         print($"Calling duplication in {name}");
         duplicateDirections.Clear();
         originalToDuplicate.Clear();
-        duplicate_and_originalPosition.Clear();
+
         originalToDuplicate_ForCirCumference.Clear();
 
         List<Interactable> originalInteractables = FindObjectsOfType<Interactable>().ToList();
@@ -167,7 +165,6 @@ public class MiniMapInteractor : MonoBehaviour
             //---------------------------------------------------------------------------------
 
             originalToDuplicate.Add(interactable, duplicate.GetComponent<shapeItem_2>());
-            duplicate_and_originalPosition.Add(duplicate, original.transform);
 
             duplicate.SetActive(false);
         }
@@ -319,11 +316,6 @@ public class MiniMapInteractor : MonoBehaviour
     {
         //print($"sizeof duplicates dirs {duplicateDirections.Count}");
         return duplicateDirections;
-    }
-
-    public Dictionary<GameObject, Transform> GetDuplicatesAndOriginalPositions()
-    {
-        return duplicate_and_originalPosition;
     }
 
     #region CALLABLE BY INTERACTABLES

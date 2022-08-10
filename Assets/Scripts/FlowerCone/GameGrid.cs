@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,18 +8,18 @@ public class GameGrid : MonoBehaviour
     // private int height = 3;
     // private float GridSpaceSize = 0.45f;
     [SerializeField] private int height;
+
     [SerializeField] private int width;
     [SerializeField] private float GridSpaceSize;
 
     // So see in inspector
     [SerializeField] private GameObject gridCellPrefab;
 
-
     // Grid array out of game objects, 2d array
     private GameObject[,] gameGrid;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         CreateGrid();
     }
@@ -44,18 +43,37 @@ public class GameGrid : MonoBehaviour
             for (int x = 0; x < width; x++)
             {
                 // Create a new GridSpace object for each cell
-                gameGrid[x,y] = Instantiate(gridCellPrefab, new Vector3(x * GridSpaceSize, y * GridSpaceSize), Quaternion.identity);
+                gameGrid[x, y] = Instantiate(gridCellPrefab, new Vector3(x * GridSpaceSize, y * GridSpaceSize), Quaternion.identity);
+                gameGrid[x, y].transform.localScale *= .04f;
 
-                gameGrid[x,y].GetComponent<GridCell>().SetPosition(x,y); // Sets position
+                gameGrid[x, y].GetComponent<GridCell>().SetPosition(x, y); // Sets position
 
-                gameGrid[x,y].transform.parent = transform; // Everything it spawns will be a child under the grid
-                gameGrid[x,y].gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")"; // Show x & y position to help with debugging
+                gameGrid[x, y].transform.parent = transform; // Everything it spawns will be a child under the grid
+                gameGrid[x, y].gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")"; // Show x & y position to help with debugging
             }
         }
     }
 
-    // Gets the grid positioin from world position
+    public void DestroyGrid()
+    {
+        // Will be called when user selected an item or exits the grid
+    }
 
+    public void CreateGridForInteractables(List<Interactable> interactables)
+    {
+        // Note: grid will be created each time user clicks.
+        // Need to implement a way to destroy it in real time.
+
+        // Calculate the sides: math_ceiling(math_sqrt(interactables.Count))
+
+        // Create the grid -> placeholders (maybe empty objects) for interactables
+
+        // Fill in the grid with interactables -> go through the grid and set position and rotation
+        // (so that they face the user)
+        // Set appropriate scaling (will require playing around with params)
+    }
+
+    // Gets the grid positioin from world position
     public Vector2Int GetGridPosFromWorld(Vector3 worldPosition)
     {
         int x = Mathf.FloorToInt(worldPosition.x / GridSpaceSize);

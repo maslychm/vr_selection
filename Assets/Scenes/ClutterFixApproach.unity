@@ -22622,7 +22622,7 @@ MonoBehaviour:
   BringItemsAligned: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   TakeItemsBack: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   lineRenderer: {fileID: 0}
-  whiteMaterial: {fileID: 2100000, guid: cf5897b1543fea34399ab7a325c12911, type: 2}
+  whiteMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   RedMaterial: {fileID: 2100000, guid: 8039ee3d27bb63b4bb66a4c103234343, type: 2}
 --- !u!1001 &1029457795
 PrefabInstance:

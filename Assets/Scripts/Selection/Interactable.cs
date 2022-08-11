@@ -45,4 +45,21 @@ public class Interactable : MonoBehaviour
     {
         hoverMaterial = mat;
     }
+
+    public void OnSelect()
+    {
+        if (ExperimentTrial.activeTrial == null)
+        {
+            return;
+        }
+
+        if (TryGetComponent<TargetInteractable>(out _))
+        {
+            ExperimentTrial.activeTrial.RecordTargetHit();
+        }
+        else
+        {
+            ExperimentTrial.activeTrial.RecordTargetMiss();
+        }
+    }
 }

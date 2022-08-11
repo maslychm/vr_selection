@@ -120,6 +120,7 @@ public class GrabbingHand : MonoBehaviour
         o.GetComponent<Object_collected>().ResetOriginalScale();
         objectInHand = o;
         grabbedByHandHistory.Add(o);
+        o.OnSelect();
     }
 
     public List<Interactable> GetListOfToBeFlushedItems()

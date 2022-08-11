@@ -1,74 +1,93 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
+[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ExperimentManager : MonoBehaviour
 {
-    public class Level
+    public enum ExperimentState
+    { Idle, BetweenLevels, RunningLevel }
+
+    [Header("Experiment Settings")]
+    [SerializeField] private float levelDuration = 10f;
+
+    [SerializeField] private float pauseDuration = 10f;
+
+    [Header("Current Level Status")]
+    [ReadOnly] [SerializeField] private ExperimentState state = ExperimentState.Idle;
+
+    [ReadOnly] [SerializeField] private string currentLevelName = "NONE";
+    [ReadOnly] [SerializeField] private int numRemaininLevels = -1;
+
+    [ReadOnly] [SerializeField] private float pauseTimeRemaining = -1f;
+
+    private Queue<ExperimentLevel> remainingLevels;
+    private List<ExperimentLevel> finishedLevels;
+    private ExperimentLevel currentLevel;
+
+    public void ClearExperiment()
     {
+        if (Application.IsPlaying(gameObject) && state != ExperimentState.Idle)
+        { return; }
+
+        // Remove all Experiment Levels that might have stayed from the editor
+        gameObject.GetComponents<ExperimentLevel>().ToList().ForEach(x => DestroyImmediate(x));
+
+        // Reset the states and other values that might have been modified through editor
+        state = ExperimentState.Idle;
     }
-
-    public enum ExperimentState { Idle, RunningLevel, BetweenLevels }
-
-    [SerializeField] private float levelDuration = 1f;
-    [SerializeField] private float pauseDuration = 1f;
-
-    private float levelDurationCountdown = -1f;
-    private float pauseDurationCountdown = -1f;
-
-    private ExperimentState state = ExperimentState.Idle;
-
-    private Queue<Level> remainingLevels;
-    private List<Level> finishedLevels;
-    private Level currentLevel;
 
     public void StartExperiment()
     {
-        List<Level> levels = new List<Level>
-        {
-            new Level(),
-            new Level()
-        };
-        var rnd = new System.Random();
-        levels = levels.OrderBy(i => Guid.NewGuid()).ToList();
+        ClearExperiment();
 
-        remainingLevels = new Queue<Level>(levels);
-        finishedLevels = new List<Level>();
+        List<ExperimentLevel> levels = new List<ExperimentLevel>
+        {
+            gameObject.AddComponent<ExperimentLevel>(),
+            //gameObject.AddComponent<ExperimentLevel>(),
+        };
+
+        foreach (ExperimentLevel level in levels)
+        {
+            level.levelTechnique = "tech1";
+            level.levelDensity = "dens1";
+            level.SetLevelDuration(levelDuration);
+        }
+
+        remainingLevels = new Queue<ExperimentLevel>(levels);
+        finishedLevels = new List<ExperimentLevel>();
 
         print($"===> Experiment START <===");
         print($"Will run {remainingLevels.Count} levels");
 
-        StartNextLevel();
+        TransitionToPause();
     }
 
-    private void FinishExperiment()
+    private void TransitionToNextLevel()
     {
-        print("===> Experiment END <===");
-        state = ExperimentState.Idle;
-    }
+        if (currentLevel)
+        {
+            finishedLevels.Add(currentLevel);
+        }
 
-    private void StartNextLevel()
-    {
         if (remainingLevels.Count == 0)
         {
-            FinishExperiment();
+            print("===> Experiment END <===");
+            currentLevel = null;
+            state = ExperimentState.Idle;
             return;
         }
 
-        print("-> Level START <-");
         currentLevel = remainingLevels.Dequeue();
+        currentLevel.StartLevel();
         state = ExperimentState.RunningLevel;
-        levelDurationCountdown = levelDuration;
     }
 
-    private void EndLevel()
+    private void TransitionToPause()
     {
-        print("-> Level END <-");
-        finishedLevels.Add(currentLevel);
-        currentLevel = null;
+        pauseTimeRemaining = pauseDuration;
         state = ExperimentState.BetweenLevels;
-        pauseDurationCountdown = pauseDuration;
     }
 
     private void Update()
@@ -79,18 +98,15 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.RunningLevel:
-                //print($"RUNNING: {Time.deltaTime}");
-                levelDurationCountdown -= Time.deltaTime;
-                if (levelDurationCountdown < 0)
-                    EndLevel();
+                if (currentLevel.state == ExperimentLevel.ExperimentLevelState.Finished)
+                    TransitionToPause();
 
                 break;
 
             case ExperimentState.BetweenLevels:
-                //print($"BETWEEN: {Time.deltaTime}");
-                pauseDurationCountdown -= Time.deltaTime;
-                if (pauseDurationCountdown < 0)
-                    StartNextLevel();
+                pauseTimeRemaining -= Time.deltaTime;
+                if (pauseTimeRemaining < 0)
+                    TransitionToNextLevel();
 
                 break;
         }

@@ -12,8 +12,12 @@ public class UI_Button : Editor
 
         if (GUILayout.Button("Start Experiment"))
         {
-            //Debug.Log("Clicked Start Experiment");
             experimentManager.StartExperiment();
+        }
+
+        if (GUILayout.Button("Clear Experiment"))
+        {
+            experimentManager.ClearExperiment();
         }
     }
 }

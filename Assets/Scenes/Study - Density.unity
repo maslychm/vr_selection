@@ -15457,6 +15457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 705400350}
+  - component: {fileID: 705400352}
   - component: {fileID: 705400349}
   - component: {fileID: 705400351}
   m_Layer: 0
@@ -15481,7 +15482,7 @@ MonoBehaviour:
   densityLevel1: {fileID: 758949532}
   densityLevel2: {fileID: 168397685}
   densityLevel3: {fileID: 1464251796}
-  techniqueDistributer: {fileID: 992347896}
+  techniqueDistributer: {fileID: 705400352}
   instanceOfRightHand: {fileID: 2103060859}
 --- !u!4 &705400350
 Transform:
@@ -15512,8 +15513,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDuration: 1
-  pauseDuration: 1
+  levelDuration: 15
+  pauseDuration: 3
+  state: 0
+  currentLevelName: NONE
+  numRemaininLevels: -1
+  pauseTimeRemaining: 5
+--- !u!114 &705400352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705400348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64b0166f6877d34c9b91d3c2d7f218c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SimpleMiniMap_root: {fileID: 2099844788}
+  OhMiniMap_root: {fileID: 958048660}
+  SimpleMiniMap: {fileID: 1742748541}
+  OhMiniMap: {fileID: 441624303}
+  ThreeDMiniMap: {fileID: 1460134090}
+  SimpleMiniMapInteractor: {fileID: 1543534842}
+  OhMiniMapInteractor: {fileID: 153800341}
+  ThreeDMiniMapInteractor: {fileID: 1316593419}
+  RayKebabGameObjectRoot: {fileID: 1026403698}
+  ThreeDMiniMapRoot: {fileID: 949268213}
+  instanceOfRayManager: {fileID: 1026403703}
+  grabbingHand: {fileID: 2103060859}
 --- !u!1001 &711044813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21351,7 +21380,6 @@ GameObject:
   m_Component:
   - component: {fileID: 992347895}
   - component: {fileID: 992347897}
-  - component: {fileID: 992347896}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -21374,30 +21402,6 @@ Transform:
   m_Father: {fileID: 349897844}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &992347896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992347894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64b0166f6877d34c9b91d3c2d7f218c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SimpleMiniMap_root: {fileID: 2099844788}
-  OhMiniMap_root: {fileID: 958048660}
-  SimpleMiniMap: {fileID: 1742748541}
-  OhMiniMap: {fileID: 441624303}
-  ThreeDMiniMap: {fileID: 1460134090}
-  SimpleMiniMapInteractor: {fileID: 1543534842}
-  OhMiniMapInteractor: {fileID: 153800341}
-  ThreeDMiniMapInteractor: {fileID: 1316593419}
-  RayKebabGameObjectRoot: {fileID: 1026403698}
-  ThreeDMiniMapRoot: {fileID: 949268213}
-  instanceOfRayManager: {fileID: 1026403703}
-  grabbingHand: {fileID: 2103060859}
 --- !u!114 &992347897
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,14 +10,10 @@ using UnityEngine;
 
 public class SelectionTechniqueDistributer : MonoBehaviour
 {
-    //[SerializeField] private GrabbingHand hand;
-
-    [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root;
+    [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root, RayKebabGameObjectRoot, ThreeDMiniMapRoot;
     [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap, ThreeDMiniMap;
     [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor, ThreeDMiniMapInteractor;
-    [SerializeField] private GameObject RayKebabGameObjectRoot, ThreeDMiniMapRoot;
     [SerializeField] private RayManager instanceOfRayManager;
-
     [SerializeField] private GrabbingHand grabbingHand;
 
     private void Start()
@@ -71,7 +67,6 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         grabbingHand.circumferenceDisplayInUse = false;
         grabbingHand.instanceOfRayManager = instanceOfRayManager;
         RayKebabGameObjectRoot.SetActive(true);
-
     }
 
     private void ActivateMinimapWithCircumference()

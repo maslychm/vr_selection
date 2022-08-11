@@ -39,9 +39,8 @@ public class GrabbingHand : MonoBehaviour
 
         isHovering = collidingWithHand.Count != 0;
 
-        if(flushOrNo == true)
+        if (flushOrNo == true)
         {
-
             helperListOfPriorGrabbedItemsToBeFlushed.Clear();
             flushOrNo = false;
         }
@@ -98,26 +97,26 @@ public class GrabbingHand : MonoBehaviour
                 }
             }
 
-            // in this case we must have  an original 
-            if(col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
+            // in this case we must have  an original
+            if (col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
             {
                 GameObject original = col.gameObject;
                 original.transform.localScale = original.GetComponent<Object_collected>().originalScale;
-                instanceOfRayManager.HoldRayCastHitCollider.Remove(col.gameObject);
                 PickupObject(original);
 
-                instanceOfRayManager.releaseObjectsBackToOriginalPosition();
+                if (instanceOfRayManager)
+                {
+                    instanceOfRayManager.HoldRayCastHitCollider.Remove(col.gameObject);
+                    instanceOfRayManager.releaseObjectsBackToOriginalPosition();
+                }
 
                 if (circumferenceDisplayInUse)
                 {
                     clutterHandler_CircumferenceDisplay.FreeCircularSlots();
                 }
             }
-
-            
         }
     }
-
 
     private void PickupObject(GameObject o)
     {

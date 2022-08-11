@@ -13,9 +13,9 @@ public class SelectionTechniqueDistributer : MonoBehaviour
     //[SerializeField] private GrabbingHand hand;
 
     [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root;
-    [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap;
-    [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor;
-    [SerializeField] private GameObject RayKebabGameObjectRoot;
+    [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap, ThreeDMiniMap;
+    [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor, ThreeDMiniMapInteractor;
+    [SerializeField] private GameObject RayKebabGameObjectRoot, ThreeDMiniMapRoot;
     [SerializeField] private RayManager instanceOfRayManager;
 
     [SerializeField] private GrabbingHand grabbingHand;
@@ -35,6 +35,8 @@ public class SelectionTechniqueDistributer : MonoBehaviour
             ActivateFlowerCone();
         else if (Input.GetKeyDown(KeyCode.R))
             ActivateRayKebab();
+        else if (Input.GetKeyDown(KeyCode.T))
+            Activate3DMiniMap();
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             DisableAllTechniques();
@@ -83,6 +85,19 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         grabbingHand.instanceOfRayManager = null;
 
         OhMiniMap_root.SetActive(true);
+    }
+
+    private void Activate3DMiniMap()
+    {
+        DisableAllTechniques();
+        print("Enabling 3D Mini Map");
+
+        grabbingHand.miniMap = ThreeDMiniMap;
+        grabbingHand.miniMapIntreractor = ThreeDMiniMapInteractor;
+        grabbingHand.circumferenceDisplayInUse = false;
+        grabbingHand.instanceOfRayManager = null;
+
+        ThreeDMiniMapRoot.SetActive(true);
     }
 
     private void ActivateSimpleMinimap()

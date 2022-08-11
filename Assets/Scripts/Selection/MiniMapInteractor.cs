@@ -16,6 +16,8 @@ public class MiniMapInteractor : MonoBehaviour
     [Tooltip("This object must have a collider and be tagged as GestureFilter")]
     //[SerializeField] private GameObject flashlightHighlighter;
 
+    [SerializeField] private Transform transformForProjection;
+
     [SerializeField] private Transform attachTransform;
 
     [Header("Gesture Direction technique-related")]
@@ -50,7 +52,16 @@ public class MiniMapInteractor : MonoBehaviour
     [Header("MiniMap Selector variables")]
     public MiniMap miniMap;
 
+    /// <summary>
+    /// Flat repr settings: norm=false, farthest=true, ignoreDepth=true
+    /// </summary>
+
     [SerializeField] private bool normalizeOffsets = false;
+    [SerializeField] private bool scaleByFarthest = true;
+    [SerializeField] private bool ignoreDepth = true;
+
+    [Tooltip("Multiplication factor before applying radius inside minimap")]
+    [SerializeField] private Vector3 scaleFactor = Vector3.one;
 
     private Vector3 temp; // simple helper to store the distance later in our dictionary
 
@@ -69,6 +80,9 @@ public class MiniMapInteractor : MonoBehaviour
 
         if (defaultFlashlightScale == Vector3.zero)
             defaultFlashlightScale = new Vector3(150, 150, 560);
+
+        if (transformForProjection == null)
+            transformForProjection = transform;
 
         ShrinkFlashlight();
 
@@ -244,8 +258,7 @@ public class MiniMapInteractor : MonoBehaviour
     // migrated triggers from interactables
     public void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("sphere"))
-            return;
+        if (!other.GetComponent<Interactable>()) return;
         other.gameObject.GetComponent<Interactable>().dprint(other.tag);
         other.gameObject.GetComponent<Interactable>().StartHover();
 
@@ -254,8 +267,8 @@ public class MiniMapInteractor : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("sphere"))
-            return;
+        if (!other.GetComponent<Interactable>()) return;
+
         other.gameObject.GetComponent<Interactable>().dprint(other.tag);
         other.gameObject.GetComponent<Interactable>().EndHover();
 
@@ -267,6 +280,8 @@ public class MiniMapInteractor : MonoBehaviour
         //print(objects[0].name);
         duplicateDirections.Clear();
         Vector3 max = Vector3.zero;
+        float minZ = Mathf.Infinity;
+        float maxZ = -1;
         foreach (GameObject o in objects)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
@@ -281,34 +296,44 @@ public class MiniMapInteractor : MonoBehaviour
                 continue;
 
             // highlighted object in flashlight's corrdinate system
-            //var objectPositionInFlashlightCoords = flashlightHighlighter.transform.InverseTransformPoint(o.transform.position);
-            var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
-            objectPositionInFlashlightCoords.z = 0f;
+            var objectPositionInFlashlightCoords = transformForProjection.InverseTransformPoint(o.transform.position);
+
+            if (ignoreDepth)
+                objectPositionInFlashlightCoords.z = 0f;
 
             if (normalizeOffsets)
                 objectPositionInFlashlightCoords.Normalize();
 
-            //print($"in calculation: {objectPositionInFlashlightCoords.magnitude} - {objectPositionInFlashlightCoords}");
-
             if (objectPositionInFlashlightCoords.magnitude > max.magnitude)
                 max = objectPositionInFlashlightCoords;
+
+            if (objectPositionInFlashlightCoords.z < minZ)
+                minZ = objectPositionInFlashlightCoords.z;
+
+            if (objectPositionInFlashlightCoords.z > maxZ)
+                maxZ = objectPositionInFlashlightCoords.z;
 
             duplicateDirections.Add((duplicate, objectPositionInFlashlightCoords));
         }
 
-        if (normalizeOffsets == false)
+        for (int i = 0; i < duplicateDirections.Count; i++)
         {
-            for (int i = 0; i < duplicateDirections.Count; i++)
-            {
-                //if (duplicateDirections.Count == 1) break; // <- Yes?
-                // TODO need to find a fix here! When there is only 1 element, normalization happens. When more, they sometimes go outside the boundaries
+            //if (duplicateDirections.Count == 1) break; // <- Yes?
+            // TODO need to find a fix here! When there is only 1 element, normalization happens. When more, they sometimes go outside the boundaries
 
-                Vector3 temp = duplicateDirections[i].Item2 / max.magnitude;
-                duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
+            Vector3 temp = duplicateDirections[i].Item2;
 
-                // TODO try dividing by current flashlight scale times some factor
-                // ^^^ Yes, this is correct, because as of right now, if there's only 1 element highlighted, the above code acts as normalization. Added length check.
-            }
+            temp.z -= (maxZ + minZ) / 2f;
+
+            if (scaleByFarthest)
+                temp /= max.magnitude;
+            else
+                temp.Scale(scaleFactor);
+
+            duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
+
+            // TODO try dividing by current flashlight scale times some factor
+            // ^^^ Yes, this is correct, because as of right now, if there's only 1 element highlighted, the above code acts as normalization. Added length check.
         }
     }
 

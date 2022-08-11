@@ -20,14 +20,14 @@ public class GrabbingHand : MonoBehaviour
 
     public RayManager instanceOfRayManager = null;
 
-    public GameObject objectInHand;
-    public static bool flushOrNo = false;
-    public List<GameObject> helperListOfPriorGrabbedItemsToBeFlushed = new List<GameObject>();
+    public Interactable objectInHand;
+    private List<Interactable> grabbedByHandHistory;
 
     private void Start()
     {
         objectInHand = null;
         collidingWithHand = new HashSet<shapeItem_2>();
+        grabbedByHandHistory = new List<Interactable>();
     }
 
     private void Update()
@@ -38,16 +38,6 @@ public class GrabbingHand : MonoBehaviour
         }
 
         isHovering = collidingWithHand.Count != 0;
-
-        if (flushOrNo == true)
-        {
-            helperListOfPriorGrabbedItemsToBeFlushed.Clear();
-            flushOrNo = false;
-        }
-    }
-
-    private void FixedUpdate()
-    {
     }
 
     private void OnTriggerEnter(Collider other)
@@ -70,12 +60,15 @@ public class GrabbingHand : MonoBehaviour
     {
         if (objectInHand == null
             && grabActionReference.action.WasPressedThisFrame()
-            && (col.GetComponent<shapeItem_2>() || col.GetComponent<shapeItem_3>() || col.GetComponent<Interactable>()))
+            && (col.GetComponent<shapeItem_2>()
+                || col.GetComponent<shapeItem_3>()
+                || col.GetComponent<Interactable>())
+           )
         {
             shapeItem_2 shapeItem2_parent;
             if (col.GetComponent<shapeItem_3>())
             {
-                GameObject original = col.GetComponent<shapeItem_3>().original;
+                Interactable original = col.GetComponent<shapeItem_3>().original;
                 shapeItem2_parent = col.GetComponent<shapeItem_3>().shapeItem2_parent;
                 miniMap.RemoveFromMinimapUponGrab(shapeItem2_parent);
                 PickupObject(original);
@@ -86,7 +79,7 @@ public class GrabbingHand : MonoBehaviour
             shapeItem2_parent = col.GetComponent<shapeItem_2>();
             if (shapeItem2_parent)
             {
-                GameObject original = col.GetComponent<shapeItem_2>().original;
+                Interactable original = col.GetComponent<shapeItem_2>().original;
                 miniMap.RemoveFromMinimapUponGrab(col.GetComponent<shapeItem_2>());
                 PickupObject(original);
                 collidingWithHand.Remove(shapeItem2_parent);
@@ -100,8 +93,8 @@ public class GrabbingHand : MonoBehaviour
             // in this case we must have  an original
             if (col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
             {
-                GameObject original = col.gameObject;
-                original.transform.localScale = original.GetComponent<Object_collected>().originalScale;
+                Interactable original = col.GetComponent<Interactable>();
+                original.GetComponent<Object_collected>().ResetOriginalScale();
                 PickupObject(original);
 
                 if (instanceOfRayManager)
@@ -118,20 +111,20 @@ public class GrabbingHand : MonoBehaviour
         }
     }
 
-    private void PickupObject(GameObject o)
+    private void PickupObject(Interactable o)
     {
         o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
         o.transform.parent = attachTransform;
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
+        o.GetComponent<Object_collected>().ResetOriginalScale();
         objectInHand = o;
-        o.transform.localScale = o.GetComponent<Object_collected>().originalScale;
-        helperListOfPriorGrabbedItemsToBeFlushed.Add(o);
+        grabbedByHandHistory.Add(o);
     }
 
-    public List<GameObject> GetListOfToBeFlushedItems()
+    public List<Interactable> GetListOfToBeFlushedItems()
     {
-        return helperListOfPriorGrabbedItemsToBeFlushed;
+        return grabbedByHandHistory;
     }
 
     private void ReleaseCurrentlyHeldObject()

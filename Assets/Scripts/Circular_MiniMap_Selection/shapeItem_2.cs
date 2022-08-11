@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class shapeItem_2 : MonoBehaviour
 {
-    public GameObject original;
+    public Interactable original;
+    public cakeslice.Outline interactionOutline = null;
+    public cakeslice.Outline targetOutline = null;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,8 +18,8 @@ public class shapeItem_2 : MonoBehaviour
             return;
         }
 
-        GetComponent<cakeslice.Outline>().enabled = true;
-        original.GetComponent<cakeslice.Outline>().enabled = true;
+        interactionOutline.enabled = true;
+        original.interactionOutline.enabled = true;
     }
 
     private void OnTriggerExit(Collider other)
@@ -25,7 +27,7 @@ public class shapeItem_2 : MonoBehaviour
         if (!other.GetComponent<GrabbingHand>())
             return;
 
-        GetComponent<cakeslice.Outline>().enabled = false;
-        original.GetComponent<cakeslice.Outline>().enabled = false;
+        interactionOutline.enabled = false;
+        original.interactionOutline.enabled = false;
     }
 }

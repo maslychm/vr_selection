@@ -63,8 +63,6 @@ public class MiniMapInteractor : MonoBehaviour
     [Tooltip("Multiplication factor before applying radius inside minimap")]
     [SerializeField] private Vector3 scaleFactor = Vector3.one;
 
-    private Vector3 temp; // simple helper to store the distance later in our dictionary
-
     private Dictionary<Interactable, shapeItem_2> originalToDuplicate;
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
     private List<(shapeItem_2, Vector3)> duplicateDirections;
@@ -120,10 +118,31 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;
-            if (!original.GetComponent<cakeslice.Outline>())
-                original.AddComponent<cakeslice.Outline>().enabled = false;
+
+            if (interactable.TryGetComponent<TargetInteractable>(out var ti))
+            {
+                // If it's a target, the already set outline is the target outline, save it
+                ti.targetOutline = original.GetComponent<cakeslice.Outline>();
+                ti.targetOutline.enabled = true;
+
+                // Also add the highlighting outline
+                interactable.interactionOutline = original.AddComponent<cakeslice.Outline>();
+                interactable.interactionOutline.enabled = false;
+            }
             else
-                original.GetComponent<cakeslice.Outline>().enabled = false;
+            {
+                // If it's a regular object, add outline if it does not have one
+                if (original.TryGetComponent<cakeslice.Outline>(out var outl))
+                {
+                    interactable.interactionOutline = outl;
+                    interactable.interactionOutline.enabled = false;
+                }
+                else
+                {
+                    interactable.interactionOutline = original.AddComponent<cakeslice.Outline>();
+                    interactable.interactionOutline.enabled = false;
+                }
+            }
 
             GameObject duplicate = Instantiate(original);
 
@@ -154,8 +173,19 @@ public class MiniMapInteractor : MonoBehaviour
             Destroy(duplicate.GetComponent<Interactable>());
             Destroy(duplicate.GetComponent<Object_collected>());
 
-            duplicate.AddComponent<shapeItem_2>();
-            duplicate.GetComponent<shapeItem_2>().original = interactable.gameObject;
+            shapeItem_2 si2 = duplicate.AddComponent<shapeItem_2>();
+            si2.original = interactable;
+            foreach (var outl in si2.GetComponents<cakeslice.Outline>())
+            {
+                if (outl.color == 0)
+                {
+                    si2.interactionOutline = outl;
+                }
+                else
+                {
+                    si2.targetOutline = outl;
+                }
+            }
             duplicate.GetComponent<Rigidbody>().isKinematic = true;
             duplicate.GetComponent<Rigidbody>().useGravity = false;
 
@@ -165,20 +195,31 @@ public class MiniMapInteractor : MonoBehaviour
             Destroy(duplicateOFduplicate.GetComponent<shapeItem_2>());
             Destroy(duplicateOFduplicate.GetComponent<Interactable>());
             Destroy(duplicateOFduplicate.GetComponent<Object_collected>());
-            duplicateOFduplicate.AddComponent<shapeItem_3>();
-            duplicateOFduplicate.GetComponent<shapeItem_3>().original = original.gameObject;
-            duplicateOFduplicate.GetComponent<shapeItem_3>().shapeItem2_parent = duplicate.GetComponent<shapeItem_2>();
+
+            shapeItem_3 si3 = duplicateOFduplicate.AddComponent<shapeItem_3>();
+            si3.original = interactable;
+            si3.shapeItem2_parent = si2;
+            foreach (var outl in si3.GetComponents<cakeslice.Outline>())
+            {
+                if (outl.color == 0)
+                {
+                    si3.interactionOutline = outl;
+                }
+                else
+                {
+                    si3.targetOutline = outl;
+                }
+            }
             duplicateOFduplicate.GetComponent<Rigidbody>().isKinematic = true;
             duplicateOFduplicate.GetComponent<Rigidbody>().useGravity = false;
             duplicateOFduplicate.tag = "unclutterDuplicate";
 
-            originalToDuplicate_ForCirCumference.Add(duplicate.GetComponent<shapeItem_2>(), duplicateOFduplicate.GetComponent<shapeItem_3>());
-            // remove them away
+            originalToDuplicate_ForCirCumference.Add(si2, si3);
             duplicateOFduplicate.transform.position = new Vector3(50, 50, 50);
 
             //---------------------------------------------------------------------------------
 
-            originalToDuplicate.Add(interactable, duplicate.GetComponent<shapeItem_2>());
+            originalToDuplicate.Add(interactable, si2);
 
             duplicate.SetActive(false);
         }
@@ -249,35 +290,25 @@ public class MiniMapInteractor : MonoBehaviour
 
         var newScale = factor * maxFlashlightScale;
         newScale.z = 600;
-        //flashlightHighlighter.transform.localScale = newScale;
         transform.localScale = newScale;
-        //print(factor);
-        //print($"distHand: {distHand}");
     }
 
-    // migrated triggers from interactables
     public void OnTriggerEnter(Collider other)
     {
         if (!other.GetComponent<Interactable>()) return;
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
         other.gameObject.GetComponent<Interactable>().StartHover();
-
         AddtoHighlighted(other.gameObject);
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (!other.GetComponent<Interactable>()) return;
-
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
         other.gameObject.GetComponent<Interactable>().EndHover();
-
         RemoveFromHighlighted(other.gameObject);
     }
 
     public void CalculateDuplicateDirections(List<GameObject> objects)
     {
-        //print(objects[0].name);
         duplicateDirections.Clear();
         Vector3 max = Vector3.zero;
         float minZ = Mathf.Infinity;

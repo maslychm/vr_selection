@@ -1,19 +1,19 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Table_request))]
+[CustomEditor(typeof(ExperimentManager))]
 [CanEditMultipleObjects]
 public class UI_Button : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        Table_request button = (Table_request)target;
+        ExperimentManager experimentManager = (ExperimentManager)target;
 
-        if (GUILayout.Button("Reset Experiment for New Trial"))
+        if (GUILayout.Button("Start Experiment"))
         {
-            Debug.Log("Confirming username inputted.");
-            button.StartExperiment();
+            //Debug.Log("Clicked Start Experiment");
+            experimentManager.StartExperiment();
         }
     }
 }

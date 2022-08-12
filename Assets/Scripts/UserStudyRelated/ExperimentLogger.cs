@@ -5,7 +5,7 @@ using System.Linq;
 public static class ExperimentLogger
 {
     public static int runTime;
-    public static int subjectId;
+    public static string subjectId;
     public static int densityLevel;
     public static SelectionTechniqueManager.SelectionTechnique selectionTechnique;
 
@@ -24,7 +24,7 @@ public static class ExperimentLogger
 
     public static string LogTrial(ExperimentTrial trial)
     {
-        if (subjectId == -1)
+        if (subjectId == "-1")
         {
             return "SKIPPING WRITING BECAUSE SUBJECTID = -1";
         }

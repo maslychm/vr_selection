@@ -11,7 +11,7 @@ public class ExperimentManager : MonoBehaviour
     { Idle, BetweenLevels, RunningLevel }
 
     [Header("Experiment Settings")]
-    [SerializeField] private int subjectId = -1;
+    [SerializeField] private string subjectId = "-1";
 
     [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
 

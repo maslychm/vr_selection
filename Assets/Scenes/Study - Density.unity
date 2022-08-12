@@ -646,8 +646,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25070813}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.137, y: -0.4795, z: 2.57}
-  m_LocalScale: {x: 12.76537, y: 7.6912413, z: 1}
+  m_LocalPosition: {x: 8.137, y: -0.4795, z: 12.95}
+  m_LocalScale: {x: 16.168121, y: 9.741427, z: 1.266561}
   m_Children: []
   m_Father: {fileID: 805750577}
   m_RootOrder: 3
@@ -4060,7 +4060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 650
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4313,7 +4313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 560
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4413,7 +4413,7 @@ MonoBehaviour:
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 1640029587}
   tabletUI: {fileID: 0}
-  defaultFlashlightScale: {x: 75, y: 75, z: 560}
+  defaultFlashlightScale: {x: 75, y: 75, z: 1000}
   scaleWithDistance: 0
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   shoulderOffset: {x: 0, y: 0, z: 0}
@@ -4663,8 +4663,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174454418}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.37, y: -0.4166, z: -5.2518}
-  m_LocalScale: {x: 14.8949995, y: 7.6482573, z: 1}
+  m_LocalPosition: {x: 2.37, y: -0.4166, z: -5.8067}
+  m_LocalScale: {x: 37.04185, y: 7.6482573, z: 1}
   m_Children: []
   m_Father: {fileID: 805750577}
   m_RootOrder: 2
@@ -8413,8 +8413,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383230099}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 14.04, y: -0.4731, z: -4.8283}
-  m_LocalScale: {x: 15.745386, y: 7.739734, z: 1}
+  m_LocalPosition: {x: 14.04, y: -0.4731, z: -4.7535}
+  m_LocalScale: {x: 39.156647, y: 7.739734, z: 1}
   m_Children: []
   m_Father: {fileID: 805750577}
   m_RootOrder: 1
@@ -12961,7 +12961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 650
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15480,7 +15480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705400348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.66754663, y: 1.0923707, z: -3.556269}
+  m_LocalPosition: {x: -0.66754663, y: 1.0923707, z: 3.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 758949533}
@@ -15502,9 +15502,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subjectId: -1
-  selectionTechnique: 0
-  levelDuration: 2
-  pauseBetweenLevelsDuration: 1
+  selectionTechnique: 3
+  levelDuration: 30
+  pauseBetweenLevelsDuration: 4
   randomSeed: 1234
   state: 0
   numRemaininLevels: -1
@@ -15720,7 +15720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 650
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22439,7 +22439,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 0
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -22502,7 +22502,7 @@ MonoBehaviour:
   m_HapticHoverCancelDuration: 0
   m_LineType: 0
   m_BlendVisualLinePoints: 1
-  m_MaxRaycastDistance: 30
+  m_MaxRaycastDistance: 200
   m_RayOriginTransform: {fileID: 0}
   m_ReferenceFrame: {fileID: 0}
   m_Velocity: 16
@@ -22518,7 +22518,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 0
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_HoverToSelect: 0
@@ -22543,7 +22543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LineWidth: 0.0086
   m_OverrideInteractorLineLength: 1
-  m_LineLength: 10
+  m_LineLength: 200
   m_WidthCurve:
     serializedVersion: 2
     m_Curve:
@@ -25895,8 +25895,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197426585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.0858, y: -4.2536, z: -5.2964}
-  m_LocalScale: {x: 1.2459289, y: 1, z: 1.501037}
+  m_LocalPosition: {x: 8.0858, y: -4.2536, z: -5.9176}
+  m_LocalScale: {x: 1.2459289, y: 1, z: 3.7328763}
   m_Children: []
   m_Father: {fileID: 805750577}
   m_RootOrder: 4
@@ -28851,7 +28851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 560
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28937,7 +28937,7 @@ MonoBehaviour:
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 1640029587}
   tabletUI: {fileID: 0}
-  defaultFlashlightScale: {x: 30, y: 30, z: 560}
+  defaultFlashlightScale: {x: 30, y: 30, z: 1000}
   scaleWithDistance: 0
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   shoulderOffset: {x: 0, y: 0, z: 0}
@@ -29256,8 +29256,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325096987}
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 8.0858, y: 0.13, z: -5.2964}
-  m_LocalScale: {x: 1.2459289, y: 1, z: 1.501037}
+  m_LocalPosition: {x: 8.0858, y: 0.13, z: -5.9176}
+  m_LocalScale: {x: 1.2459289, y: 1, z: 3.7328763}
   m_Children: []
   m_Father: {fileID: 805750577}
   m_RootOrder: 5
@@ -34495,7 +34495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 560
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34581,7 +34581,7 @@ MonoBehaviour:
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 1640029587}
   tabletUI: {fileID: 0}
-  defaultFlashlightScale: {x: 30, y: 30, z: 560}
+  defaultFlashlightScale: {x: 30, y: 30, z: 1000}
   scaleWithDistance: 0
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   shoulderOffset: {x: 0, y: 0, z: 0}
@@ -35048,7 +35048,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -242187440769767142, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803556, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_Name
@@ -35060,11 +35060,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.169
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09998713
+      value: 0.273
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_LocalPosition.z

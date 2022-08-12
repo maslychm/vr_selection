@@ -19,6 +19,8 @@ public class SelectionTechniqueManager : MonoBehaviour
     [SerializeField] private RayManager instanceOfRayManager;
     [SerializeField] private GrabbingHand grabbingHand;
 
+    public static bool allowKeySelectionTechniqueSwitching = true;
+
     private void Start()
     {
         DisableAllTechniques();
@@ -26,6 +28,9 @@ public class SelectionTechniqueManager : MonoBehaviour
 
     private void Update()
     {
+        if (!allowKeySelectionTechniqueSwitching)
+            return;
+
         if (Input.GetKeyDown(KeyCode.W))
             ActivateSimpleMinimap();
         else if (Input.GetKeyDown(KeyCode.M))

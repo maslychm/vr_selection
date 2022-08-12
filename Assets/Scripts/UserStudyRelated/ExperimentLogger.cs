@@ -24,6 +24,11 @@ public static class ExperimentLogger
 
     public static string LogTrial(ExperimentTrial trial)
     {
+        if (subjectId == -1)
+        {
+            return "SKIPPING WRITING BECAUSE SUBJECTID = -1";
+        }
+
         List<(string, string)> trialValues = new List<(string, string)>
         {
             ( "subject_id", $"sub{subjectId}"),

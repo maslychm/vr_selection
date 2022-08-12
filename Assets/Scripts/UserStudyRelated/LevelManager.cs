@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public static bool allowKeyLevelSwitching = true;
     private int densityLevel = 0;
     public static readonly List<int> densityLevelIntegers = new List<int> { 1, 2, 3 };
 
@@ -18,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (allowKeyLevelSwitching && Input.GetKeyDown(KeyCode.Space))
         {
             densityLevel = (densityLevel + 1) % 4;
             EnableDensityLevel(densityLevel);

@@ -24,11 +24,11 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private int randomSeed = 1234;
 
     [Header("Current Level Status")]
-    [ReadOnly] [SerializeField] private ExperimentState state = ExperimentState.Idle;
+    [ReadOnly][SerializeField] private ExperimentState state = ExperimentState.Idle;
 
-    [ReadOnly] [SerializeField] private int numRemaininLevels = -1;
+    [ReadOnly][SerializeField] private int numRemaininLevels = -1;
 
-    [ReadOnly] [SerializeField] private float pauseTimeRemaining = -1f;
+    [ReadOnly][SerializeField] private float pauseTimeRemaining = -1f;
 
     private Queue<ExperimentLevel> remainingLevels;
     private List<ExperimentLevel> finishedLevels;
@@ -77,6 +77,8 @@ public class ExperimentManager : MonoBehaviour
         print($"===> Experiment START <===");
         print($"Will run {remainingLevels.Count} levels");
 
+        SetAllowSwitching(false);
+
         TransitionToPause();
     }
 
@@ -89,9 +91,10 @@ public class ExperimentManager : MonoBehaviour
 
         if (remainingLevels.Count == 0)
         {
-            print("===> Experiment END <===");
+            SetAllowSwitching(true);
             currentLevel = null;
             state = ExperimentState.Idle;
+            print("===> Experiment END <===");
             return;
         }
 
@@ -104,6 +107,12 @@ public class ExperimentManager : MonoBehaviour
     {
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
+    }
+
+    private void SetAllowSwitching(bool value)
+    {
+        LevelManager.allowKeyLevelSwitching = value;
+        SelectionTechniqueManager.allowKeySelectionTechniqueSwitching = value;
     }
 
     private void Update()

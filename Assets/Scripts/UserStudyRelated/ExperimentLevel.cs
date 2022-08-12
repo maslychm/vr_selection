@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -14,25 +15,42 @@ public class ExperimentLevel : MonoBehaviour
     private ExperimentTrial currentTrial = null;
     private List<ExperimentTrial> trialHistory = null;
     private string levelName;
+    private Random.State lastUsedRandomState;
+    private List<Interactable> levelInteractables;
 
     // Mostly for editor display purposes
     [ReadOnly] public ExperimentLevelState state = ExperimentLevelState.Idle;
 
-    [ReadOnly] public string levelTechnique = "NONE";
-    [ReadOnly] public string levelDensity = "NONE";
+    [ReadOnly] public SelectionTechniqueManager.SelectionTechnique levelTechnique;
+    [ReadOnly] public int levelDensity = -1;
 
     [ReadOnly] [SerializeField] private float levelTimeRemaining = -1f;
     [ReadOnly] [SerializeField] private int numTrials = -1;
 
-    public void StartLevel()
+    public void StartLevel(int randomSeed)
     {
         print("-> Level START <-");
 
-        levelName = $"{levelTechnique}-{levelDensity}";
+        levelName = $"{levelTechnique}_dens{levelDensity}";
         levelTimeRemaining = levelDuration;
         numTrials = 0;
         currentTrial = null;
         trialHistory = new List<ExperimentTrial>();
+
+        GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
+        GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
+
+        //levelInteractables = ;
+        levelInteractables = FindObjectsOfType<Interactable>()
+            .ToList()
+            .Where(x => x.isActiveAndEnabled && !x.GetComponent<TargetInteractable>())
+            .ToList();
+        
+        ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
+
+        print($"is destroyed? {ExperimentTrial.targetInteractable}");
+
+        Random.InitState(randomSeed);
 
         TransitionToNextTrial();
     }
@@ -52,7 +70,8 @@ public class ExperimentLevel : MonoBehaviour
 
         currentTrial = new ExperimentTrial();
         trialHistory.Add(currentTrial);
-        currentTrial.StartTrial();
+        Interactable interactableToReplace = levelInteractables[Random.Range(0, levelInteractables.Count + 1)];
+        currentTrial.StartTrial(interactableToReplace);
 
         state = ExperimentLevelState.Running;
     }

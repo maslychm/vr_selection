@@ -4,7 +4,7 @@ public class Object_collected : MonoBehaviour
 {
     private Vector3 homePos;
 
-    private Vector3 dumpsterLocation = new Vector3(12, 1, -3);
+    private Vector3 dumpsterLocation = new Vector3(100, 100, 100);
     private new Rigidbody rigidbody;
     private Quaternion originalRotaion;
     private Vector3 originalScale;

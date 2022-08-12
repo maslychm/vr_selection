@@ -7698,7 +7698,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 349897844}
-  - component: {fileID: 349897845}
   m_Layer: 0
   m_Name: Camera Offset
   m_TagString: Untagged
@@ -7723,18 +7722,6 @@ Transform:
   m_Father: {fileID: 1177616496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &349897845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349897843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9aa161dd64b9641bbff7bfd21477c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &356899707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21373,14 +21360,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleMiniMap_root: {fileID: 2099844788}
   OhMiniMap_root: {fileID: 958048660}
+  RayKebabGameObjectRoot: {fileID: 1026403698}
+  ThreeDMiniMapRoot: {fileID: 949268213}
   SimpleMiniMap: {fileID: 1742748541}
   OhMiniMap: {fileID: 441624303}
   ThreeDMiniMap: {fileID: 1460134090}
   SimpleMiniMapInteractor: {fileID: 1543534842}
   OhMiniMapInteractor: {fileID: 153800341}
   ThreeDMiniMapInteractor: {fileID: 1316593419}
-  RayKebabGameObjectRoot: {fileID: 1026403698}
-  ThreeDMiniMapRoot: {fileID: 949268213}
   instanceOfRayManager: {fileID: 1026403703}
   grabbingHand: {fileID: 2103060859}
 --- !u!114 &992347897
@@ -47093,7 +47080,6 @@ MonoBehaviour:
   clutterHandler_CircumferenceDisplay: {fileID: 441624304}
   instanceOfRayManager: {fileID: 0}
   objectInHand: {fileID: 0}
-  helperListOfPriorGrabbedItemsToBeFlushed: []
 --- !u!114 &2103060860
 MonoBehaviour:
   m_ObjectHideFlags: 0

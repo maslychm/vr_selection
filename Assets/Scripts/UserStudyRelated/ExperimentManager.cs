@@ -10,14 +10,15 @@ public class ExperimentManager : MonoBehaviour
     { Idle, BetweenLevels, RunningLevel }
 
     [Header("Experiment Settings")]
-    [SerializeField] private float levelDuration = 10f;
+    [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
 
-    [SerializeField] private float pauseDuration = 10f;
+    [SerializeField] private float levelDuration = 10f;
+    [SerializeField] private float pauseBetweenLevelsDuration = 10f;
+    [SerializeField] private int randomSeed = 1234;
 
     [Header("Current Level Status")]
     [ReadOnly] [SerializeField] private ExperimentState state = ExperimentState.Idle;
 
-    [ReadOnly] [SerializeField] private string currentLevelName = "NONE";
     [ReadOnly] [SerializeField] private int numRemaininLevels = -1;
 
     [ReadOnly] [SerializeField] private float pauseTimeRemaining = -1f;
@@ -42,17 +43,17 @@ public class ExperimentManager : MonoBehaviour
     {
         ClearExperiment();
 
-        List<ExperimentLevel> levels = new List<ExperimentLevel>
-        {
-            gameObject.AddComponent<ExperimentLevel>(),
-            //gameObject.AddComponent<ExperimentLevel>(),
-        };
+        List<ExperimentLevel> levels = new List<ExperimentLevel>();
 
-        foreach (ExperimentLevel level in levels)
+        foreach (int densityLevel in LevelManager.densityLevelIntegers)
         {
-            level.levelTechnique = "tech1";
-            level.levelDensity = "dens1";
+            ExperimentLevel level = gameObject.AddComponent<ExperimentLevel>();
+
+            level.levelTechnique = selectionTechnique;
+            level.levelDensity = densityLevel;
             level.SetLevelDuration(levelDuration);
+
+            levels.Add(level);
         }
 
         remainingLevels = new Queue<ExperimentLevel>(levels);
@@ -80,13 +81,13 @@ public class ExperimentManager : MonoBehaviour
         }
 
         currentLevel = remainingLevels.Dequeue();
-        currentLevel.StartLevel();
+        currentLevel.StartLevel(randomSeed);
         state = ExperimentState.RunningLevel;
     }
 
     private void TransitionToPause()
     {
-        pauseTimeRemaining = pauseDuration;
+        pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }
 
@@ -100,6 +101,8 @@ public class ExperimentManager : MonoBehaviour
             case ExperimentState.RunningLevel:
                 if (currentLevel.state == ExperimentLevel.ExperimentLevelState.Finished)
                     TransitionToPause();
+
+                numRemaininLevels = remainingLevels.Count;
 
                 break;
 

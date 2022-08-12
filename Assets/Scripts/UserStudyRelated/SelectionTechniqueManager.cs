@@ -8,8 +8,11 @@ using UnityEngine;
 /// MM -> MiniMap
 /// </summary>
 
-public class SelectionTechniqueDistributer : MonoBehaviour
+public class SelectionTechniqueManager : MonoBehaviour
 {
+    public enum SelectionTechnique
+    { SimpleMiniMap, OhMiniMap, ThreeDMiniMap, RayKebab }
+
     [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root, RayKebabGameObjectRoot, ThreeDMiniMapRoot;
     [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap, ThreeDMiniMap;
     [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor, ThreeDMiniMapInteractor;
@@ -45,11 +48,34 @@ public class SelectionTechniqueDistributer : MonoBehaviour
         SimpleMiniMap_root.SetActive(false);
         OhMiniMap_root.SetActive(false);
         RayKebabGameObjectRoot.SetActive(false);
+        ThreeDMiniMapRoot.SetActive(false);
 
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
         grabbingHand.instanceOfRayManager = null;
         grabbingHand.circumferenceDisplayInUse = false;
+    }
+
+    public void ActivateTechnique(SelectionTechnique technique)
+    {
+        switch (technique)
+        {
+            case SelectionTechnique.SimpleMiniMap:
+                ActivateSimpleMinimap();
+                break;
+
+            case SelectionTechnique.OhMiniMap:
+                ActivateMinimapWithCircumference();
+                break;
+
+            case SelectionTechnique.ThreeDMiniMap:
+                Activate3DMiniMap();
+                break;
+
+            case SelectionTechnique.RayKebab:
+                ActivateRayKebab();
+                break;
+        }
     }
 
     private void ActivateFlowerCone()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -10,10 +11,16 @@ public class ExperimentManager : MonoBehaviour
     { Idle, BetweenLevels, RunningLevel }
 
     [Header("Experiment Settings")]
+    [SerializeField] private int subjectId = -1;
+
     [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
 
+    [Range(1, 100)]
     [SerializeField] private float levelDuration = 10f;
+
+    [Range(1, 60)]
     [SerializeField] private float pauseBetweenLevelsDuration = 10f;
+
     [SerializeField] private int randomSeed = 1234;
 
     [Header("Current Level Status")]
@@ -26,6 +33,12 @@ public class ExperimentManager : MonoBehaviour
     private Queue<ExperimentLevel> remainingLevels;
     private List<ExperimentLevel> finishedLevels;
     private ExperimentLevel currentLevel;
+
+    private void Start()
+    {
+        ExperimentLogger.runTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
+        ExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data");
+    }
 
     public void ClearExperiment()
     {
@@ -42,6 +55,8 @@ public class ExperimentManager : MonoBehaviour
     public void StartExperiment()
     {
         ClearExperiment();
+
+        ExperimentLogger.subjectId = subjectId;
 
         List<ExperimentLevel> levels = new List<ExperimentLevel>();
 

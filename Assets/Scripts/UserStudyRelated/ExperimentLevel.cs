@@ -50,6 +50,9 @@ public class ExperimentLevel : MonoBehaviour
 
         Random.InitState(randomSeed);
 
+        ExperimentLogger.densityLevel = levelDensity;
+        ExperimentLogger.selectionTechnique = levelTechnique;
+
         TransitionToNextTrial();
     }
 
@@ -66,9 +69,11 @@ public class ExperimentLevel : MonoBehaviour
     {
         numTrials = trialHistory.Count;
 
-        currentTrial = new ExperimentTrial();
+        int randIdx = Random.Range(0, levelInteractables.Count + 1);
+        Interactable interactableToReplace = levelInteractables[randIdx];
+
+        currentTrial = new ExperimentTrial(numTrials + 1, randIdx);
         trialHistory.Add(currentTrial);
-        Interactable interactableToReplace = levelInteractables[Random.Range(0, levelInteractables.Count + 1)];
         currentTrial.StartTrial(interactableToReplace);
 
         state = ExperimentLevelState.Running;

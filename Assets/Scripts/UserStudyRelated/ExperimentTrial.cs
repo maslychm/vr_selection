@@ -5,11 +5,20 @@ public class ExperimentTrial
     public static ExperimentTrial activeTrial = null;
     public static TargetInteractable targetInteractable = null;
 
+    public int trialIdx = 0;
+    public int randObjIdx = 0;
+
     private bool targetWasClicked = false;
     private float startTime = 0f;
     private float completionTime = 0f;
     private int numberOfAttempts = 0;
     private Interactable replacedInteractable;
+
+    public ExperimentTrial(int _trialIdx, int _randObjIdx)
+    {
+        trialIdx = _trialIdx;
+        randObjIdx = _randObjIdx;
+    }
 
     public void StartTrial(Interactable interactableToReplace)
     {
@@ -48,8 +57,10 @@ public class ExperimentTrial
 
     public void EndTrial()
     {
-        Debug.Log("-- Trial END --");
+        var fname = ExperimentLogger.LogTrial(this);
+        Debug.Log($"Wrote results file: {fname}");
         activeTrial = null;
+        Debug.Log("-- Trial END --");
         replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
         targetInteractable.GetComponent<Object_collected>().ResetGameObject();
     }
@@ -64,10 +75,15 @@ public class ExperimentTrial
         return numberOfAttempts;
     }
 
+    public int GenNumSuccessful()
+    {
+        if (WasSuccessful()) return 1; return 0;
+    }
+
     public float ComputeTrialTime()
     {
         if (!WasSuccessful())
-            throw new System.Exception("Computing accuracy on unfinished Trial");
+            return 0;
 
         return completionTime - startTime;
     }

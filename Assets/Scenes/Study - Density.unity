@@ -15501,9 +15501,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionTechnique: 1
-  levelDuration: 30
-  pauseBetweenLevelsDuration: 1
+  subjectId: 192
+  selectionTechnique: 0
+  levelDuration: 25
+  pauseBetweenLevelsDuration: 3
   randomSeed: 1234
   state: 0
   numRemaininLevels: -1

@@ -37,6 +37,7 @@ public class ExperimentLevel : MonoBehaviour
         currentTrial = null;
         trialHistory = new List<ExperimentTrial>();
 
+        GetComponent<LevelManager>().DisableAllLevels();
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
 

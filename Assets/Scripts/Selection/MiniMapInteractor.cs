@@ -99,12 +99,12 @@ public class MiniMapInteractor : MonoBehaviour
     {
         foreach (var g in FindObjectsOfType<shapeItem_2>())
         {
-            Destroy(g.gameObject);
+            DestroyImmediate(g.gameObject);
         }
 
         foreach (var g in FindObjectsOfType<shapeItem_3>())
         {
-            Destroy(g.gameObject);
+            DestroyImmediate(g.gameObject);
         }
 
         //print($"Calling duplication in {name}");
@@ -170,8 +170,8 @@ public class MiniMapInteractor : MonoBehaviour
             foreach (var c in duplicate.GetComponents<Collider>())
                 c.isTrigger = true;
 
-            Destroy(duplicate.GetComponent<Interactable>());
-            Destroy(duplicate.GetComponent<Object_collected>());
+            DestroyImmediate(duplicate.GetComponent<Interactable>());
+            DestroyImmediate(duplicate.GetComponent<Object_collected>());
 
             shapeItem_2 si2 = duplicate.AddComponent<shapeItem_2>();
             si2.original = interactable;
@@ -192,9 +192,9 @@ public class MiniMapInteractor : MonoBehaviour
             // --------------------------------For Circumference of the mini map-----------------
 
             GameObject duplicateOFduplicate = Instantiate(duplicate);
-            Destroy(duplicateOFduplicate.GetComponent<shapeItem_2>());
-            Destroy(duplicateOFduplicate.GetComponent<Interactable>());
-            Destroy(duplicateOFduplicate.GetComponent<Object_collected>());
+            DestroyImmediate(duplicateOFduplicate.GetComponent<shapeItem_2>());
+            DestroyImmediate(duplicateOFduplicate.GetComponent<Interactable>());
+            DestroyImmediate(duplicateOFduplicate.GetComponent<Object_collected>());
 
             shapeItem_3 si3 = duplicateOFduplicate.AddComponent<shapeItem_3>();
             si3.original = interactable;

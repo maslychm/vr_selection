@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void DisableAllLevels()
+    public void DisableAllLevels()
     {
         densityLevels.ForEach(x => x.SetActive(false));
     }

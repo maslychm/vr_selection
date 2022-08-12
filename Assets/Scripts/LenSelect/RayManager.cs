@@ -14,25 +14,22 @@ public class RayManager : MonoBehaviour
     [SerializeField] public InputActionReference BringItemsAligned;
     [SerializeField] public InputActionReference TakeItemsBack;
 
-    // build a dictionary to map ouyt the transforms back to original 
-    public Dictionary<GameObject, Transform> MapToOriginalPosisition;
+    // build a dictionary to map ouyt the transforms back to original
+    //public Dictionary<GameObject, Transform> MapToOriginalPosisition;
 
-    public LineRenderer lineRenderer; // stor ethe current puyrpole linerenderer 
+    public LineRenderer lineRenderer; // stor ethe current puyrpole linerenderer
 
     public Material whiteMaterial, RedMaterial;
 
-    // add a boolean to limit the the selection action to one button 
+    // add a boolean to limit the the selection action to one button
     public static int BringOrFlush = 0;
 
-    RaycastHit[] hits;
-
-    
+    private RaycastHit[] hits;
 
     // Start is called before the first frame update
     private void Start()
     {
-
-        MapToOriginalPosisition = new Dictionary<GameObject, Transform>();
+        //MapToOriginalPosisition = new Dictionary<GameObject, Transform>();
 
         allObjectsInteractables = new List<Interactable>();
 
@@ -47,9 +44,6 @@ public class RayManager : MonoBehaviour
 
     private void Update()
     {
-        // store the array of colliders hit by the raycast
-        hits = Physics.RaycastAll(transform.position, transform.forward, 100.0F);
-
         // add an input action reference here
         if (BringItemsAligned.action.WasPerformedThisFrame() && BringOrFlush == 0)
             ProcessInputHere();
@@ -70,17 +64,18 @@ public class RayManager : MonoBehaviour
     /// </summary>
     private void ProcessInputHere()
     {
-        MapToOriginalPosisition.Clear();
+        // store the array of colliders hit by the raycast
+        hits = Physics.RaycastAll(transform.position, transform.forward, 100.0F);
+        //MapToOriginalPosisition.Clear();
         HoldRayCastHitCollider.Clear();
         // iterate throuigh the array of colliders and then basicvally just get the spheres
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
 
-            if (hit.collider.gameObject.name.Contains("phere"))
+            if (hit.collider.GetComponent<Interactable>())
             {
-               
-                MapToOriginalPosisition.Add(hit.collider.gameObject, hit.collider.gameObject.transform);
+                //MapToOriginalPosisition.Add(hit.collider.gameObject, hit.collider.gameObject.transform);
                 HoldRayCastHitCollider.Add(hit.collider.gameObject);
             }
         }
@@ -99,14 +94,13 @@ public class RayManager : MonoBehaviour
 
         lineRenderer.material = RedMaterial;
         startOffsetOFspheres = 0.05f;
-        BringOrFlush = 1; 
+        BringOrFlush = 1;
     }
 
-    // thios functiuobn should set back the objects to their original transform 
+    // thios functiuobn should set back the objects to their original transform
     public void releaseObjectsBackToOriginalPosition()
     {
-        
-        foreach(var temp in HoldRayCastHitCollider)
+        foreach (var temp in HoldRayCastHitCollider)
         {
             temp.transform.SetParent(null);
             temp.GetComponent<Object_collected>().ResetGameObject();

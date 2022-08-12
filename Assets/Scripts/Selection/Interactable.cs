@@ -60,6 +60,7 @@ public class Interactable : MonoBehaviour
         else
         {
             ExperimentTrial.activeTrial.RecordTargetMiss();
+            GetComponent<Object_collected>().ResetGameObject();
         }
     }
 }

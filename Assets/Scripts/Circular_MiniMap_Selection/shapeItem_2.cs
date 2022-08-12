@@ -6,6 +6,11 @@ public class shapeItem_2 : MonoBehaviour
     public cakeslice.Outline interactionOutline = null;
     public cakeslice.Outline targetOutline = null;
 
+    private void Start()
+    {
+        gameObject.layer = 10;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.GetComponent<GrabbingHand>())

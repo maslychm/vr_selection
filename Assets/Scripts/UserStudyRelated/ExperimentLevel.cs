@@ -41,15 +41,12 @@ public class ExperimentLevel : MonoBehaviour
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
 
-        //levelInteractables = ;
         levelInteractables = FindObjectsOfType<Interactable>()
             .ToList()
             .Where(x => x.isActiveAndEnabled && !x.GetComponent<TargetInteractable>())
             .ToList();
-        
-        ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
 
-        print($"is destroyed? {ExperimentTrial.targetInteractable}");
+        ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
 
         Random.InitState(randomSeed);
 

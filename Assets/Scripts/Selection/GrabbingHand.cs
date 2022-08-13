@@ -30,6 +30,12 @@ public class GrabbingHand : MonoBehaviour
         grabbedByHandHistory = new List<Interactable>();
     }
 
+    public void ClearGrabbed()
+    {
+        grabbedByHandHistory.Clear();
+        collidingWithHand.Clear();
+    }
+
     private void Update()
     {
         if (grabActionReference.action.WasReleasedThisFrame())

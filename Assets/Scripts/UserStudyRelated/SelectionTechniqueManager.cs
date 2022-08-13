@@ -59,6 +59,7 @@ public class SelectionTechniqueManager : MonoBehaviour
         grabbingHand.miniMapIntreractor = null;
         grabbingHand.instanceOfRayManager = null;
         grabbingHand.circumferenceDisplayInUse = false;
+        grabbingHand.ClearGrabbed();
     }
 
     public void ActivateTechnique(SelectionTechnique technique)

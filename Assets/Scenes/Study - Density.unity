@@ -15502,7 +15502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subjectId: -1
-  selectionTechnique: 3
+  selectionTechnique: 1
   levelDuration: 30
   pauseBetweenLevelsDuration: 4
   randomSeed: 1234
@@ -36513,11 +36513,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78da3f00f3328541b4526c0b0b5ec5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineThickness: 3
-  lineIntensity: 0.6
+  lineThickness: 4
+  lineIntensity: 1
   fillAmount: 0
   lineColor0: {r: 0.8537736, g: 1, b: 0.9827327, a: 1}
-  lineColor1: {r: 1, g: 0, b: 1, a: 1}
+  lineColor1: {r: 1, g: 1, b: 0, a: 1}
   lineColor2: {r: 1, g: 1, b: 1, a: 1}
   additiveRendering: 0
   backfaceCulling: 1

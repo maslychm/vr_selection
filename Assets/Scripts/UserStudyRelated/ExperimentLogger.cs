@@ -46,7 +46,7 @@ public static class ExperimentLogger
 
         bool writeHeader = !File.Exists(fname);
 
-        using var writer = new StreamWriter(fname, true);
+        using StreamWriter writer = new StreamWriter(fname, true);
         if (writeHeader)
             writer.Write(string.Join(",", trialValues.Select(x => x.Item1)) + "\n");
         writer.Write(string.Join(",", trialValues.Select(x => x.Item2)) + "\n");

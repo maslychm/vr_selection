@@ -35,6 +35,8 @@ public class ExperimentLevel : MonoBehaviour
     // need to assign an experiemnt manager handler here
     [SerializeField] private ExperimentManager experimentManager;
 
+    private int priorRandomIndex = -1; // will help in the randomization process
+
 
     private void Start()
     {
@@ -93,6 +95,14 @@ public class ExperimentLevel : MonoBehaviour
         numTrials = trialHistory.Count;
 
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
+
+        while (priorRandomIndex == randIdx)
+        {
+            randIdx = Random.Range(0, levelInteractables.Count + 1);
+        }
+
+        priorRandomIndex = randIdx;
+        
         Interactable interactableToReplace = levelInteractables[randIdx];
 
         currentTrial = new ExperimentTrial(numTrials + 1, randIdx);

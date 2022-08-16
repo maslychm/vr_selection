@@ -5,18 +5,27 @@ using UnityEngine;
 public class PassInteractablesToGrid : MonoBehaviour
 {
     public GameGrid grid;
+    public GridCell gridObjects;
 
     private float chanceOfAdding = .5f;
 
     [Range(0, 100)]
     [SerializeField] private int fixedValueToUse = 0;
 
+    public int numOfInteractables = 0;
+
+    public Material[] materialsOfInteractables = new Material[200];
+    public int materialCount = 0;
+
     private void Start()
     {
+        CallGridInitialize();
     }
 
     private void CallGridInitialize()
     {
+        materialCount = 0; // for adding materials to material list
+
         chanceOfAdding = Random.Range(0f, 1f);
 
         List<Interactable> interactables = FindObjectsOfType<Interactable>().ToList();
@@ -29,7 +38,14 @@ public class PassInteractablesToGrid : MonoBehaviour
             foreach (Interactable interactable in interactables)
             {
                 if (Random.Range(0f, 1f) > chanceOfAdding)
+                {
                     subsetOfInteractables.Add(interactable);
+
+                    // Adding materials
+                    Material myMaterial = interactable.GetComponent<Renderer>().material;
+                    materialsOfInteractables[materialCount] = myMaterial;
+                    materialCount++;
+                }
             }
         }
         else
@@ -37,6 +53,8 @@ public class PassInteractablesToGrid : MonoBehaviour
             for (int i = 0; i < fixedValueToUse; i++)
             {
                 subsetOfInteractables.Add(interactables[i]);
+                
+                numOfInteractables++;
             }
         }
 
@@ -46,12 +64,12 @@ public class PassInteractablesToGrid : MonoBehaviour
         //    if (Random.Range(0f, 1f) > chanceOfAdding)
         //        subsetOfInteractables.Add(interactables[i]);
         //}
-
+        
         print("Destroying the previous grid");
-        grid.DestroyGrid();
+        grid.DestroyGrid(subsetOfInteractables.Count, subsetOfInteractables.Count);
 
         print($"Passing {subsetOfInteractables.Count} interactables");
-        grid.CreateGridForInteractables(interactables);
+        grid.CreateGrid(interactables, subsetOfInteractables.Count, materialsOfInteractables);
     }
 
     private void Update()
@@ -59,6 +77,7 @@ public class PassInteractablesToGrid : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             print("Space was pressed -> CallGridInitialize()");
+            numOfInteractables = 0;
             CallGridInitialize();
         }
     }

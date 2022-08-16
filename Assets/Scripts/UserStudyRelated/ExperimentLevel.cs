@@ -27,10 +27,19 @@ public class ExperimentLevel : MonoBehaviour
     [ReadOnly] [SerializeField] private float levelTimeRemaining = -1f;
     [ReadOnly] [SerializeField] private int numTrials = -1;
 
+    // this will be used as the one to determine where the target object swappers will be placed
+    // should be assigned from the editor to guarantee a O(1) access (no need for linear approach 
+    // comparison)
+    [SerializeField] private GameObject MiddleMarkerEmptyGameObject;
 
     // need to assign an experiemnt manager handler here
     [SerializeField] private ExperimentManager experimentManager;
 
+
+    private void Start()
+    {
+        MiddleMarkerEmptyGameObject = GameObject.Find("HalfwayMarker");
+    }
     public void StartLevel(int randomSeed)
     {
         print("-> Level START <-");
@@ -48,9 +57,13 @@ public class ExperimentLevel : MonoBehaviour
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
 
+
+        // only pick the gameObject Spheres that are positioned in the spawn area
+        // the second half within the clutter zone across levels.
         levelInteractables = FindObjectsOfType<Interactable>()
             .ToList()
-            .Where(x => x.isActiveAndEnabled && !x.GetComponent<TargetInteractable>())
+            .Where(x => x.isActiveAndEnabled && !x.GetComponent<TargetInteractable>() 
+            && (x.gameObject.transform.position.z > MiddleMarkerEmptyGameObject.transform.position.z))
             .ToList();
 
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();

@@ -27,10 +27,17 @@ public class ExperimentLevel : MonoBehaviour
     [ReadOnly] [SerializeField] private float levelTimeRemaining = -1f;
     [ReadOnly] [SerializeField] private int numTrials = -1;
 
+
+    // need to assign an experiemnt manager handler here
+    [SerializeField] private ExperimentManager experimentManager;
+
     public void StartLevel(int randomSeed)
     {
         print("-> Level START <-");
 
+        // first be sure that the count is 0 for the trials at the start
+        experimentManager.setCountOfTrialsToZero();
+        
         levelName = $"{levelTechnique}_dens{levelDensity}";
         levelTimeRemaining = levelDuration;
         numTrials = 0;
@@ -63,6 +70,9 @@ public class ExperimentLevel : MonoBehaviour
         ComputeLevelStats();
 
         print("-> Level END <-");
+
+        // after the end of the current level we set the count of trials to 0
+        experimentManager.setCountOfTrialsToZero();
     }
 
     private void TransitionToNextTrial()
@@ -77,6 +87,10 @@ public class ExperimentLevel : MonoBehaviour
         currentTrial.StartTrial(interactableToReplace);
 
         state = ExperimentLevelState.Running;
+
+        // now we increment the trial number 
+        experimentManager.incrementNumberfTrialsForCurrentLvl();
+
     }
 
     private void Update()
@@ -89,11 +103,12 @@ public class ExperimentLevel : MonoBehaviour
 
             case ExperimentLevelState.Running:
 
-                if (currentTrial.WasSuccessful())
+                if (currentTrial.WasSuccessful() && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
                     TransitionToNextTrial();
 
-                levelTimeRemaining -= Time.deltaTime;
-                if (levelTimeRemaining < 0)
+                //levelTimeRemaining -= Time.deltaTime;
+                //if (levelTimeRemaining < 0)
+                if(experimentManager.accessCountOfTrialsForCurrentLvL() >= 10)
                     EndLevel();
 
                 break;

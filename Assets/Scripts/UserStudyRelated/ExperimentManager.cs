@@ -34,6 +34,9 @@ public class ExperimentManager : MonoBehaviour
     private List<ExperimentLevel> finishedLevels;
     private ExperimentLevel currentLevel;
 
+
+    [SerializeField] private int countOfTrialsPerCurrentLvl = 0;
+
     private void Start()
     {
         ExperimentLogger.runTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
@@ -75,6 +78,8 @@ public class ExperimentManager : MonoBehaviour
         finishedLevels = new List<ExperimentLevel>();
 
         print($"===> Experiment START <===");
+        // we set the amount of trial to be 0 again 
+        countOfTrialsPerCurrentLvl = 0;
         print($"Will run {remainingLevels.Count} levels");
 
         SetAllowSwitching(false);
@@ -95,6 +100,10 @@ public class ExperimentManager : MonoBehaviour
             currentLevel = null;
             state = ExperimentState.Idle;
             print("===> Experiment END <===");
+
+            // reset the trial count 
+            setCountOfTrialsToZero();
+            
             return;
         }
 
@@ -131,11 +140,33 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.BetweenLevels:
-                pauseTimeRemaining -= Time.deltaTime;
-                if (pauseTimeRemaining < 0)
+                //pauseTimeRemaining -= Time.deltaTime;
+
+                // we switch only if the number of trials per the current level has reached 10 trials
+                if (countOfTrialsPerCurrentLvl == 10)
                     TransitionToNextLevel();
 
                 break;
         }
+    }
+
+    public void incrementNumberfTrialsForCurrentLvl()
+    {
+        // don't increment if the count of trials is actually 10 or more
+        // either level ended or if bigger than 10, then we need a fix 
+        if (countOfTrialsPerCurrentLvl >= 10) { return; }
+        countOfTrialsPerCurrentLvl += 1;
+    }
+    
+    public int accessCountOfTrialsForCurrentLvL()
+    {
+        print($"The count of trials for the current level is {countOfTrialsPerCurrentLvl}");
+        return countOfTrialsPerCurrentLvl;
+    }
+    
+    public void setCountOfTrialsToZero()
+    {
+        print($"The count of trials after the current level is {countOfTrialsPerCurrentLvl}");
+        countOfTrialsPerCurrentLvl = 0;
     }
 }

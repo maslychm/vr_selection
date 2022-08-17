@@ -26,6 +26,10 @@ public class ExperimentTrial
 
     public void StartTrial(Interactable interactableToReplace)
     {
+
+        // added this condition too to not start the trial iunless the user hovers over the circle first
+        if (circleManager.wasHoveredOver == false)
+            return;
         Debug.Log("-- Trial START --");
 
         replacedInteractable = interactableToReplace;
@@ -41,6 +45,7 @@ public class ExperimentTrial
         targetWasClicked = false;
         startTime = Time.unscaledTime;
         numberOfAttempts = 0;
+
     }
 
     public void RecordTargetMiss()
@@ -74,6 +79,10 @@ public class ExperimentTrial
         Debug.Log("-- Trial END --");
         replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
         targetInteractable.GetComponent<Object_collected>().ResetGameObject();
+
+        // at the end of the trial we simply set back the circle as it was
+        circleManager.wasHoveredOver = false;
+
     }
 
     public bool WasSuccessful()

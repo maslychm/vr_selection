@@ -112,10 +112,10 @@ public class ExperimentLevel : MonoBehaviour
 
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
 
-        while (priorRandomIndex == randIdx)
-        {
-            randIdx = Random.Range(0, levelInteractables.Count + 1);
-        }
+        //while (priorRandomIndex == randIdx)
+        //{
+        //    randIdx = Random.Range(0, levelInteractables.Count + 1);
+        //}
 
         priorRandomIndex = randIdx;
         
@@ -142,10 +142,8 @@ public class ExperimentLevel : MonoBehaviour
                 break;
 
             case ExperimentLevelState.Running:
-                if (BoundaryCircleManager.wasHoveredOver == false)
-                    return;
                 //if (currentTrial.WasSuccessful() && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
-                if (experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
+                if (BoundaryCircleManager.wasHoveredOver == true && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
                     TransitionToNextTrial();
 
                 //levelTimeRemaining -= Time.deltaTime;

@@ -28,8 +28,8 @@ public class ExperimentTrial
     {
         Debug.Log("How many times do we call this cancer 2***???");
         // added this condition too to not start the trial iunless the user hovers over the circle first
-        if (BoundaryCircleManager.wasHoveredOver == false)
-            return;
+        //if (BoundaryCircleManager.wasHoveredOver == false)
+        //    return;
         Debug.Log("-- Trial START --");
 
         replacedInteractable = interactableToReplace;

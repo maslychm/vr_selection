@@ -43,6 +43,8 @@ public class ExperimentLevel : MonoBehaviour
     private void Start()
     {
         MiddleMarkerEmptyGameObject = GameObject.Find("HalfwayMarker");
+        experimentManager = FindObjectOfType<ExperimentManager>();
+        hideViewRectangleHelper = FindObjectOfType<HideViewOfSpheresController>();
     }
     public void StartLevel(int randomSeed)
     {
@@ -50,18 +52,20 @@ public class ExperimentLevel : MonoBehaviour
 
         // first be sure that the count is 0 for the trials at the start
         experimentManager.setCountOfTrialsToZero();
-
+        print("Debug test -- startLVL -- 2");
         hideViewRectangleHelper.hideTheBarrier();        
         levelName = $"{levelTechnique}_dens{levelDensity}";
         levelTimeRemaining = levelDuration;
         numTrials = 0;
         currentTrial = null;
         trialHistory = new List<ExperimentTrial>();
-
+        print("Debug test -- startLVL -- 3");
         GetComponent<LevelManager>().DisableAllLevels();
+        print("Debug test -- startLVL -- 4");
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
+        print("Debug test -- startLVL -- 5");
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
-
+        print("Debug test -- startLVL -- 6");
 
         // only pick the gameObject Spheres that are positioned in the spawn area
         // the second half within the clutter zone across levels.
@@ -70,19 +74,21 @@ public class ExperimentLevel : MonoBehaviour
             .Where(x => x.isActiveAndEnabled && !x.GetComponent<TargetInteractable>() 
             && (x.gameObject.transform.position.z > MiddleMarkerEmptyGameObject.transform.position.z))
             .ToList();
-
+        print("Debug test -- startLVL -- 7");
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
 
         Random.InitState(randomSeed);
 
         ExperimentLogger.densityLevel = levelDensity;
         ExperimentLogger.selectionTechnique = levelTechnique;
-
+        print("Debug test -- startLVL -- 1");
         TransitionToNextTrial();
     }
 
     public void EndLevel()
     {
+
+        print("Debug test -- endLVL -- 1");
         state = ExperimentLevelState.Finished;
         currentTrial?.EndTrial();
         ComputeLevelStats();
@@ -100,6 +106,8 @@ public class ExperimentLevel : MonoBehaviour
 
     private void TransitionToNextTrial()
     {
+
+        print("Debug test -- transitionLVL -- 1");
         numTrials = trialHistory.Count;
 
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
@@ -121,6 +129,7 @@ public class ExperimentLevel : MonoBehaviour
 
         // now we increment the trial number 
         experimentManager.incrementNumberfTrialsForCurrentLvl();
+        print("Debug test -- transitionLVL -- 2");
 
     }
 

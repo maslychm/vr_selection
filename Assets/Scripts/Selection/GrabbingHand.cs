@@ -32,8 +32,12 @@ public class GrabbingHand : MonoBehaviour
 
     public void ClearGrabbed()
     {
-        grabbedByHandHistory.Clear();
-        collidingWithHand.Clear();
+        if (grabbedByHandHistory == null || collidingWithHand == null || grabbedByHandHistory.Count == 0 || collidingWithHand.Count == 0)
+            return;
+        if (grabbedByHandHistory.Count > 0)
+            grabbedByHandHistory.Clear();
+        if (collidingWithHand.Count > 0)
+            collidingWithHand.Clear();
     }
 
     private void Update()

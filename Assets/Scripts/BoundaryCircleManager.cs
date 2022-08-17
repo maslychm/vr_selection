@@ -64,7 +64,6 @@ public class BoundaryCircleManager : MonoBehaviour
     // this will be called fronm thge Experiment trial file 
     public void resetParameters()
     {
-        Debug.Log("Resetting the trial circle paramters to await user input -- circle -> red");
         wasHoveredOver = false;
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }

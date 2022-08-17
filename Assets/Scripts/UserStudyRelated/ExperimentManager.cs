@@ -37,11 +37,12 @@ public class ExperimentManager : MonoBehaviour
     // add an instance for the hide view rectangle 
     HideViewOfSpheresController hideViewRectangle;
 
-
+    int firstLevel = 0;
     [SerializeField] private int countOfTrialsPerCurrentLvl = 0;
 
     private void Start()
     {
+        
         ExperimentLogger.runTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
         ExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data");
     }
@@ -60,6 +61,8 @@ public class ExperimentManager : MonoBehaviour
 
     public void StartExperiment()
     {
+
+        firstLevel = 0;
         ClearExperiment();
 
         ExperimentLogger.subjectId = subjectId;
@@ -92,6 +95,7 @@ public class ExperimentManager : MonoBehaviour
 
     private void TransitionToNextLevel()
     {
+
         if (currentLevel)
         {
             finishedLevels.Add(currentLevel);
@@ -117,6 +121,8 @@ public class ExperimentManager : MonoBehaviour
 
     private void TransitionToPause()
     {
+
+        print("do we reach transition to pause????");
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }
@@ -143,11 +149,15 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.BetweenLevels:
-                //pauseTimeRemaining -= Time.deltaTime;
+                pauseTimeRemaining -= Time.deltaTime;
 
                 // we switch only if the number of trials per the current level has reached 10 trials
-                if (countOfTrialsPerCurrentLvl == 10)
+                //if (firstLevel == 0 || countOfTrialsPerCurrentLvl == 10)
+                if (remainingLevels.Count> 0)
+                {
                     TransitionToNextLevel();
+                    //firstLevel = 1;
+                }
 
                 break;
         }

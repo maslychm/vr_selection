@@ -16,6 +16,7 @@ public class BoundaryCircleManager : MonoBehaviour
     private Renderer circleRenderer;
 
     public static bool wasHoveredOver = false;
+    HideViewOfSpheresController hideViewRectangleHelper;
 
     // this should store the controller of the right hand 
     [SerializeField] private GameObject transformReference;
@@ -27,7 +28,7 @@ public class BoundaryCircleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        hideViewRectangleHelper = FindObjectOfType<HideViewOfSpheresController>();
         circleRenderer = circleOfTrialConfirmation.GetComponent<Renderer>();
 
         wasHoveredOver = false;
@@ -55,6 +56,7 @@ public class BoundaryCircleManager : MonoBehaviour
             {
                 circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
                 wasHoveredOver = true;
+                hideViewRectangleHelper.hideTheBarrier();
             }
 
         }

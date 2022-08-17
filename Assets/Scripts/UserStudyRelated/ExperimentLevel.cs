@@ -53,7 +53,7 @@ public class ExperimentLevel : MonoBehaviour
         // first be sure that the count is 0 for the trials at the start
         experimentManager.setCountOfTrialsToZero();
         print("Debug test -- startLVL -- 2");
-        hideViewRectangleHelper.hideTheBarrier();        
+        //hideViewRectangleHelper.hideTheBarrier();        
         levelName = $"{levelTechnique}_dens{levelDensity}";
         levelTimeRemaining = levelDuration;
         numTrials = 0;
@@ -142,8 +142,10 @@ public class ExperimentLevel : MonoBehaviour
                 break;
 
             case ExperimentLevelState.Running:
-
-                if (currentTrial.WasSuccessful() && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
+                if (BoundaryCircleManager.wasHoveredOver == false)
+                    return;
+                //if (currentTrial.WasSuccessful() && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
+                if (experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
                     TransitionToNextTrial();
 
                 //levelTimeRemaining -= Time.deltaTime;

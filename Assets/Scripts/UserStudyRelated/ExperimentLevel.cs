@@ -38,6 +38,8 @@ public class ExperimentLevel : MonoBehaviour
     private int priorRandomIndex = -1; // will help in the randomization process
 
 
+    HideViewOfSpheresController hideViewRectangleHelper;
+
     private void Start()
     {
         MiddleMarkerEmptyGameObject = GameObject.Find("HalfwayMarker");
@@ -48,7 +50,8 @@ public class ExperimentLevel : MonoBehaviour
 
         // first be sure that the count is 0 for the trials at the start
         experimentManager.setCountOfTrialsToZero();
-        
+
+        hideViewRectangleHelper.hideTheBarrier();        
         levelName = $"{levelTechnique}_dens{levelDensity}";
         levelTimeRemaining = levelDuration;
         numTrials = 0;
@@ -83,7 +86,7 @@ public class ExperimentLevel : MonoBehaviour
         state = ExperimentLevelState.Finished;
         currentTrial?.EndTrial();
         ComputeLevelStats();
-
+        hideViewRectangleHelper.showTheBarrier();
         print("-> Level END <-");
 
         // after the end of the current level we set the count of trials to 0

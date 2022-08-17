@@ -34,6 +34,9 @@ public class ExperimentManager : MonoBehaviour
     private List<ExperimentLevel> finishedLevels;
     private ExperimentLevel currentLevel;
 
+    // add an instance for the hide view rectangle 
+    HideViewOfSpheresController hideViewRectangle;
+
 
     [SerializeField] private int countOfTrialsPerCurrentLvl = 0;
 

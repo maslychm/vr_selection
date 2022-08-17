@@ -15504,11 +15504,11 @@ MonoBehaviour:
   subjectId: -1
   selectionTechnique: 1
   levelDuration: 30
-  pauseBetweenLevelsDuration: 4
+  pauseBetweenLevelsDuration: 1
   randomSeed: 1234
   state: 0
   numRemaininLevels: -1
-  pauseTimeRemaining: 1
+  pauseTimeRemaining: 4
   countOfTrialsPerCurrentLvl: 0
 --- !u!114 &705400352
 MonoBehaviour:

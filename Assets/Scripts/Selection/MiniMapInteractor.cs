@@ -58,6 +58,7 @@ public class MiniMapInteractor : MonoBehaviour
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
     private List<(shapeItem_2, Vector3)> duplicateDirections;
 
+
     public void OnEnable()
     {
         //print($"AWAKE IN MMINTERACTOR IS CALLED in {name}");
@@ -177,6 +178,8 @@ public class MiniMapInteractor : MonoBehaviour
         {
             CalculateDuplicateDirections(allHighlightedObjects);
         }
+
+        print("***" + allHighlightedObjects.Count());
     }
 
     private void ProcessInput()
@@ -329,6 +332,12 @@ public class MiniMapInteractor : MonoBehaviour
     public void RemoveFromHighlighted(GameObject o)
     {
         allHighlightedObjects.Remove(o);
+    }
+
+
+    public List<GameObject> getList()
+    {
+        return allHighlightedObjects;
     }
 
     #endregion CALLABLE BY INTERACTABLES

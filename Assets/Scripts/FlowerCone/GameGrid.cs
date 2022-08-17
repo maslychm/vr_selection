@@ -22,16 +22,25 @@ public class GameGrid : MonoBehaviour
 
     int countingObjects;
 
-    // Start is called before the first frame update
+    // The Grid itself
+    [SerializeField] private GameObject theGrid;
+
     public void start()
     {
-
+        // Trying to get grid to spawn further from user but it isn't working
+        theGrid.transform.position = new Vector3(0, 0, 6);
     }
 
     // Creates the grid when the game starts
     // CreateGrid(List<Interactable> interactables)
     public void CreateGrid(List<Interactable> interactables, int numOfInteractables, Material[] interactableMaterial)
     {
+
+        // Trying to get the grid to be further back (fix later)
+        theGrid.transform.position = new Vector3(0, 0, 6);
+
+
+
         // Calculates the sides
         height = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));
         width = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));

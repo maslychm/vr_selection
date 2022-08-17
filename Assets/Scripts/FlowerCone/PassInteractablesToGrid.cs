@@ -6,6 +6,7 @@ public class PassInteractablesToGrid : MonoBehaviour
 {
     public GameGrid grid;
     public GridCell gridObjects;
+    public MiniMapInteractor interactor;
 
     private float chanceOfAdding = .5f;
 
@@ -17,10 +18,14 @@ public class PassInteractablesToGrid : MonoBehaviour
     public Material[] materialsOfInteractables = new Material[200];
     public int materialCount = 0;
 
+    private List<GameObject> allHighlightedObjects;
+
     private void Start()
     {
         CallGridInitialize();
     }
+
+    
 
     private void CallGridInitialize()
     {
@@ -28,7 +33,17 @@ public class PassInteractablesToGrid : MonoBehaviour
 
         chanceOfAdding = Random.Range(0f, 1f);
 
-        List<Interactable> interactables = FindObjectsOfType<Interactable>().ToList();
+        List<GameObject> temp = interactor.getList();
+
+        // List<Interactable> interactables = FindObjectsOfType<Interactable>().ToList();
+
+        List<Interactable> interactables = new List<Interactable>();
+
+        foreach (var t in temp)
+        {
+            interactables.Add(t.GetComponent<Interactable>());
+        }
+
         print($"Num interactables in total: {interactables.Count}");
 
         List<Interactable> subsetOfInteractables = new List<Interactable>();
@@ -69,6 +84,7 @@ public class PassInteractablesToGrid : MonoBehaviour
         grid.DestroyGrid(subsetOfInteractables.Count, subsetOfInteractables.Count);
 
         print($"Passing {subsetOfInteractables.Count} interactables");
+
         grid.CreateGrid(interactables, subsetOfInteractables.Count, materialsOfInteractables);
     }
 

@@ -15,8 +15,8 @@ public class ExperimentTrial
     private Interactable replacedInteractable;
 
     // made them serialized just so in the editor we can debug if the files assigned are not he correct ones
-    [SerializeField] private AudioSource incorrectSelectionSound;
-    [SerializeField] private AudioSource validSelectionSound;
+    //[SerializeField] private AudioSource incorrectSelectionSound;
+    //[SerializeField] private AudioSource validSelectionSound;
 
     public ExperimentTrial(int _trialIdx, int _randObjIdx)
     {
@@ -52,8 +52,8 @@ public class ExperimentTrial
     {
 
         // collect the audio source and then play it 
-        incorrectSelectionSound = Resources.Load("Click") as AudioSource;
-        incorrectSelectionSound.Play();
+        //incorrectSelectionSound = Resources.Load("Click") as AudioSource;
+        //incorrectSelectionSound.Play();
         Debug.Log("Non-t was hit");
         numberOfAttempts += 1;
     }
@@ -61,8 +61,8 @@ public class ExperimentTrial
     public void RecordTargetHit()
     {
         // collect the audio source and then play it 
-        validSelectionSound = Resources.Load("Collect001") as AudioSource;
-        validSelectionSound.Play();
+        //validSelectionSound = Resources.Load("Collect001") as AudioSource;
+        //validSelectionSound.Play();
         Debug.Log("Target was hit");
         numberOfAttempts += 1;
         targetWasClicked = true;

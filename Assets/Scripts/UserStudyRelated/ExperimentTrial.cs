@@ -52,7 +52,7 @@ public class ExperimentTrial
     {
 
         // collect the audio source and then play it 
-        incorrectSelectionSound = Resources.Load("incorrectSelectionSound") as AudioSource;
+        incorrectSelectionSound = Resources.Load("Click") as AudioSource;
         incorrectSelectionSound.Play();
         Debug.Log("Non-t was hit");
         numberOfAttempts += 1;
@@ -61,7 +61,7 @@ public class ExperimentTrial
     public void RecordTargetHit()
     {
         // collect the audio source and then play it 
-        validSelectionSound = Resources.Load("validSelectionSound") as AudioSource;
+        validSelectionSound = Resources.Load("Collect001") as AudioSource;
         validSelectionSound.Play();
         Debug.Log("Target was hit");
         numberOfAttempts += 1;

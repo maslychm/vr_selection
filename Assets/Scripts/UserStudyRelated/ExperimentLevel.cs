@@ -92,7 +92,7 @@ public class ExperimentLevel : MonoBehaviour
         state = ExperimentLevelState.Finished;
         currentTrial?.EndTrial();
         ComputeLevelStats();
-        hideViewRectangleHelper.showTheBarrier();
+        
         print("-> Level END <-");
 
         // after the end of the current level we set the count of trials to 0
@@ -101,6 +101,8 @@ public class ExperimentLevel : MonoBehaviour
         GetComponent<LevelManager>().DisableAllLevels();
 
         GetComponent<SelectionTechniqueManager>().DisableAllTechniques();
+
+        hideViewRectangleHelper.showTheBarrier();
 
     }
 
@@ -112,10 +114,11 @@ public class ExperimentLevel : MonoBehaviour
 
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
 
-        //while (priorRandomIndex == randIdx)
-        //{
-        //    randIdx = Random.Range(0, levelInteractables.Count + 1);
-        //}
+        // removed while loop here and just used if 
+        if (priorRandomIndex == randIdx)
+        {
+            randIdx = Random.Range(0, levelInteractables.Count + 1);
+        }
 
         priorRandomIndex = randIdx;
         
@@ -143,7 +146,7 @@ public class ExperimentLevel : MonoBehaviour
 
             case ExperimentLevelState.Running:
                 //if (currentTrial.WasSuccessful() && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
-                if (BoundaryCircleManager.wasHoveredOver == true && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
+                if (currentTrial.WasSuccessful() && BoundaryCircleManager.wasHoveredOver == true && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
                     TransitionToNextTrial();
 
                 //levelTimeRemaining -= Time.deltaTime;

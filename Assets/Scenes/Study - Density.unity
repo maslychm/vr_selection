@@ -3459,6 +3459,7 @@ GameObject:
   - component: {fileID: 115226010}
   - component: {fileID: 115226009}
   - component: {fileID: 115226008}
+  - component: {fileID: 115226011}
   m_Layer: 0
   m_Name: CircleBoundaryForUser
   m_TagString: Untagged
@@ -3543,6 +3544,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115226006}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &115226011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115226006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ec7fe20bbba3848a7e49725a5b4c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleOfTrialConfirmation: {fileID: 0}
+  transformReference: {fileID: 0}
+  clickedCircleForStartOfTrial: {fileID: 0}
 --- !u!1001 &116373464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47039,6 +47055,7 @@ GameObject:
   - component: {fileID: 2103060860}
   - component: {fileID: 2103060859}
   - component: {fileID: 2103060857}
+  - component: {fileID: 2103060858}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -47076,6 +47093,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.015
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2103060858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103060855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ec7fe20bbba3848a7e49725a5b4c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleOfTrialConfirmation: {fileID: 115226006}
+  transformReference: {fileID: 2103060855}
+  clickedCircleForStartOfTrial: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &2103060859
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class ExperimentTrial
     {
 
         // added this condition too to not start the trial iunless the user hovers over the circle first
-        if (circleManager.wasHoveredOver == false)
+        if (BoundaryCircleManager.wasHoveredOver == false)
             return;
         Debug.Log("-- Trial START --");
 
@@ -81,7 +81,7 @@ public class ExperimentTrial
         targetInteractable.GetComponent<Object_collected>().ResetGameObject();
 
         // at the end of the trial we simply set back the circle as it was
-        circleManager.wasHoveredOver = false;
+        BoundaryCircleManager.wasHoveredOver = false;
 
     }
 

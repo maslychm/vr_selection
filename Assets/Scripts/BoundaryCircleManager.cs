@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 /// need to set this to switch from red to green whem the user hovers over it 
 /// this file should be p[ut in the right hand controller 
 /// </summary>
-public class circleManager : MonoBehaviour
+public class BoundaryCircleManager : MonoBehaviour
 {
 
     // this needs to store the circle itself 
@@ -21,6 +21,7 @@ public class circleManager : MonoBehaviour
     [SerializeField] private GameObject transformReference;
 
     // add an action reference to simulate the click 
+    // this should be the select button of the righ thand 
     [SerializeField] public InputActionReference clickedCircleForStartOfTrial;
 
     // Start is called before the first frame update

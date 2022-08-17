@@ -91,6 +91,11 @@ public class ExperimentLevel : MonoBehaviour
 
         // after the end of the current level we set the count of trials to 0
         experimentManager.setCountOfTrialsToZero();
+
+        GetComponent<LevelManager>().DisableAllLevels();
+
+        GetComponent<SelectionTechniqueManager>().DisableAllTechniques();
+
     }
 
     private void TransitionToNextTrial()

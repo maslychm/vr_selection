@@ -15502,7 +15502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subjectId: -1
-  selectionTechnique: 1
+  selectionTechnique: 0
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 5
   randomSeed: 1234

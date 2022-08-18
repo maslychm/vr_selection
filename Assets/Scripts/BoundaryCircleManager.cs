@@ -21,6 +21,7 @@ public class BoundaryCircleManager : MonoBehaviour
     // add an action reference to simulate the click
     // this should be the select button of the righ thand
     [SerializeField] public InputActionReference clickedCircleForStartOfTrial;
+    public HideViewOfSpheresController mimir2;
 
     // Start is called before the first frame update
     private void Start()
@@ -54,6 +55,8 @@ public class BoundaryCircleManager : MonoBehaviour
                 {
                     circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
                     wasHoveredOver = true;
+
+                    mimir2.HideTheBarrier();
                     //hideViewRectangleHelper.HideTheBarrier();
                 }
             }

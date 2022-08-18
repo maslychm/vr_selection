@@ -15509,6 +15509,7 @@ MonoBehaviour:
   state: 0
   numRemainingLevels: -1
   pauseTimeRemaining: 1
+  Mimir: {fileID: 1403336810}
 --- !u!114 &705400352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47437,6 +47438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circleOfTrialConfirmation: {fileID: 115226006}
   clickedCircleForStartOfTrial: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  mimir2: {fileID: 1403336810}
 --- !u!114 &2103060859
 MonoBehaviour:
   m_ObjectHideFlags: 0

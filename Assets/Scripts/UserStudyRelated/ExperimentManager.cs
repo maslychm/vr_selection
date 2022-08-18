@@ -33,6 +33,8 @@ public class ExperimentManager : MonoBehaviour
     private List<ExperimentLevel> finishedLevels;
     private ExperimentLevel currentLevel;
 
+    public HideViewOfSpheresController Mimir;
+
     private void Start()
     {
         ExperimentLogger.runTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
@@ -121,6 +123,7 @@ public class ExperimentManager : MonoBehaviour
         switch (state)
         {
             case ExperimentState.Idle:
+                Mimir.ShowTheBarrier();
                 break;
 
             case ExperimentState.RunningLevel:
@@ -132,6 +135,8 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.BetweenLevels:
+                Mimir.ShowTheBarrier();
+
                 pauseTimeRemaining -= Time.deltaTime;
                 if (pauseTimeRemaining < 0f)
                     TransitionToNextLevel();

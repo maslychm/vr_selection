@@ -4,6 +4,7 @@ public class ExperimentTrial
 {
     public static ExperimentTrial activeTrial = null;
     public static TargetInteractable targetInteractable = null;
+    public static SoundSystemHolder soundSystemHolder = null;
 
     public int trialIdx = 0;
     public int randObjIdx = 0;
@@ -14,20 +15,15 @@ public class ExperimentTrial
     private int numberOfAttempts = 0;
     private Interactable replacedInteractable;
 
-    soundSystemHolder tempHelperDJ;
-
-    public ExperimentTrial(int _trialIdx, int _randObjIdx)
+    public ExperimentTrial(in int trialIdx)
     {
-        trialIdx = _trialIdx;
-        randObjIdx = _randObjIdx;
+        this.trialIdx = trialIdx;
     }
 
-    public void StartTrial(Interactable interactableToReplace)
+    public void StartTrial(in int randObjIdx, in Interactable interactableToReplace)
     {
-        Debug.Log("How many times do we call this cancer 2***???");
-        // added this condition too to not start the trial iunless the user hovers over the circle first
-        //if (BoundaryCircleManager.wasHoveredOver == false)
-        //    return;
+        this.randObjIdx = randObjIdx;
+
         Debug.Log("-- Trial START --");
 
         replacedInteractable = interactableToReplace;
@@ -43,31 +39,18 @@ public class ExperimentTrial
         targetWasClicked = false;
         startTime = Time.unscaledTime;
         numberOfAttempts = 0;
-
     }
 
     public void RecordTargetMiss()
     {
-
-        // collect the audio source and then play it 
-        //incorrectSelectionSound = Resources.Load("Click") as AudioSource;
-        //incorrectSelectionSound.Play();
-        tempHelperDJ = GameObject.FindObjectOfType<soundSystemHolder>();
-        tempHelperDJ.incorrectPlay();
-        //soundSystemHolder.incorrectPlay();
+        soundSystemHolder.incorrectPlay();
         Debug.Log("Non-t was hit");
         numberOfAttempts += 1;
     }
 
     public void RecordTargetHit()
     {
-        // collect the audio source and then play it 
-        //validSelectionSound = Resources.Load("Collect001") as AudioSource;
-        //validSelectionSound.Play();
-        //soundSystemHolder.correctPlay();
-        tempHelperDJ = GameObject.FindObjectOfType<soundSystemHolder>();
-
-        tempHelperDJ.correctPlay();
+        soundSystemHolder.correctPlay();
         Debug.Log("Target was hit");
         numberOfAttempts += 1;
         targetWasClicked = true;
@@ -87,7 +70,6 @@ public class ExperimentTrial
 
         // at the end of the trial we simply set back the circle as it was
         BoundaryCircleManager.wasHoveredOver = false;
-
     }
 
     public bool WasSuccessful()

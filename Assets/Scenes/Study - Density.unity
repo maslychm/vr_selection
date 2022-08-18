@@ -15487,7 +15487,7 @@ Transform:
   - {fileID: 168397687}
   - {fileID: 1464251798}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &705400351
 MonoBehaviour:
@@ -15503,13 +15503,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subjectId: -1
   selectionTechnique: 3
-  levelDuration: 30
   pauseBetweenLevelsDuration: 1
+  numTrialsPerLevel: 2
   randomSeed: 1234
   state: 0
-  numRemaininLevels: -1
-  pauseTimeRemaining: 4
-  countOfTrialsPerCurrentLvl: 0
+  numRemainingLevels: -1
+  pauseTimeRemaining: 1
 --- !u!114 &705400352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31318,7 +31317,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1403336806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31393,7 +31392,7 @@ Transform:
   m_LocalScale: {x: 11.110357, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1403336810
 MonoBehaviour:
@@ -35165,7 +35164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39935,7 +39934,7 @@ Transform:
   m_LocalScale: {x: 0.20000002, y: 0.19999999, z: 0.19999999}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1771919834
 PrefabInstance:
@@ -42113,7 +42112,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1854865446
 PrefabInstance:
@@ -47437,7 +47436,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleOfTrialConfirmation: {fileID: 115226006}
-  transformReference: {fileID: 2103060855}
   clickedCircleForStartOfTrial: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!114 &2103060859
 MonoBehaviour:

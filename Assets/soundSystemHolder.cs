@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class soundSystemHolder : MonoBehaviour
+public class SoundSystemHolder : MonoBehaviour
 {
-
     [SerializeField] private AudioSource incorrectSelectionSound;
     [SerializeField] private AudioSource validSelectionSound;
 

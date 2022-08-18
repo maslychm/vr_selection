@@ -15,34 +15,26 @@ public class ExperimentManager : MonoBehaviour
 
     [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
 
-    [Range(1, 100)]
-    [SerializeField] private float levelDuration = 10f;
-
     [Range(1, 60)]
     [SerializeField] private float pauseBetweenLevelsDuration = 10f;
+
+    [SerializeField] private int numTrialsPerLevel = 5;
 
     [SerializeField] private int randomSeed = 1234;
 
     [Header("Current Level Status")]
-    [ReadOnly][SerializeField] private ExperimentState state = ExperimentState.Idle;
+    [ReadOnly] [SerializeField] private ExperimentState state = ExperimentState.Idle;
 
-    [ReadOnly][SerializeField] private int numRemaininLevels = -1;
+    [ReadOnly] [SerializeField] private int numRemainingLevels = -1;
 
-    [ReadOnly][SerializeField] private float pauseTimeRemaining = -1f;
+    [ReadOnly] [SerializeField] private float pauseTimeRemaining = -1f;
 
     private Queue<ExperimentLevel> remainingLevels;
     private List<ExperimentLevel> finishedLevels;
     private ExperimentLevel currentLevel;
 
-    // add an instance for the hide view rectangle 
-    HideViewOfSpheresController hideViewRectangle;
-
-    int firstLevel = 0;
-    [SerializeField] private int countOfTrialsPerCurrentLvl = 0;
-
     private void Start()
     {
-        
         ExperimentLogger.runTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
         ExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data");
     }
@@ -61,11 +53,11 @@ public class ExperimentManager : MonoBehaviour
 
     public void StartExperiment()
     {
-
-        firstLevel = 0;
+        if (state != ExperimentState.Idle) { return; }
         ClearExperiment();
 
         ExperimentLogger.subjectId = subjectId;
+        ExperimentTrial.soundSystemHolder = FindObjectOfType<SoundSystemHolder>();
 
         List<ExperimentLevel> levels = new List<ExperimentLevel>();
 
@@ -75,7 +67,6 @@ public class ExperimentManager : MonoBehaviour
 
             level.levelTechnique = selectionTechnique;
             level.levelDensity = densityLevel;
-            level.SetLevelDuration(levelDuration);
 
             levels.Add(level);
         }
@@ -84,8 +75,6 @@ public class ExperimentManager : MonoBehaviour
         finishedLevels = new List<ExperimentLevel>();
 
         print($"===> Experiment START <===");
-        // we set the amount of trial to be 0 again 
-        countOfTrialsPerCurrentLvl = 0;
         print($"Will run {remainingLevels.Count} levels");
 
         SetAllowSwitching(false);
@@ -95,7 +84,6 @@ public class ExperimentManager : MonoBehaviour
 
     private void TransitionToNextLevel()
     {
-
         if (currentLevel)
         {
             finishedLevels.Add(currentLevel);
@@ -108,21 +96,16 @@ public class ExperimentManager : MonoBehaviour
             state = ExperimentState.Idle;
             print("===> Experiment END <===");
 
-            // reset the trial count 
-            setCountOfTrialsToZero();
-            
             return;
         }
 
         currentLevel = remainingLevels.Dequeue();
-        currentLevel.StartLevel(randomSeed);
+        currentLevel.StartLevel(randomSeed, numTrialsPerLevel);
         state = ExperimentState.RunningLevel;
     }
 
     private void TransitionToPause()
     {
-
-        print("do we reach transition to pause????");
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }
@@ -144,42 +127,16 @@ public class ExperimentManager : MonoBehaviour
                 if (currentLevel.state == ExperimentLevel.ExperimentLevelState.Finished)
                     TransitionToPause();
 
-                numRemaininLevels = remainingLevels.Count;
+                numRemainingLevels = remainingLevels.Count;
 
                 break;
 
             case ExperimentState.BetweenLevels:
                 pauseTimeRemaining -= Time.deltaTime;
-
-                // we switch only if the number of trials per the current level has reached 10 trials
-                //if (firstLevel == 0 || countOfTrialsPerCurrentLvl == 10)
-                if (remainingLevels.Count> 0)
-                {
+                if (pauseTimeRemaining < 0f)
                     TransitionToNextLevel();
-                    //firstLevel = 1;
-                }
 
                 break;
         }
-    }
-
-    public void incrementNumberfTrialsForCurrentLvl()
-    {
-        // don't increment if the count of trials is actually 10 or more
-        // either level ended or if bigger than 10, then we need a fix 
-        if (countOfTrialsPerCurrentLvl >= 10) { return; }
-        countOfTrialsPerCurrentLvl += 1;
-    }
-    
-    public int accessCountOfTrialsForCurrentLvL()
-    {
-        print($"The count of trials for the current level is {countOfTrialsPerCurrentLvl}");
-        return countOfTrialsPerCurrentLvl;
-    }
-    
-    public void setCountOfTrialsToZero()
-    {
-        print($"The count of trials after the current level is {countOfTrialsPerCurrentLvl}");
-        countOfTrialsPerCurrentLvl = 0;
     }
 }

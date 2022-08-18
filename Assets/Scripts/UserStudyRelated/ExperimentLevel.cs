@@ -4,18 +4,18 @@ using UnityEngine;
 
 /// <summary>
 /// For replicable randomness: https://docs.unity3d.com/ScriptReference/Random-state.html
-///
 /// </summary>
 public class ExperimentLevel : MonoBehaviour
 {
     public enum ExperimentLevelState
-    { Idle, Running, Finished }
+    { Idle, BeforeNextTrial, RunningTrial, Finished }
 
-    private float levelDuration;
-    private ExperimentTrial currentTrial = null;
-    private List<ExperimentTrial> trialHistory = null;
+    private ExperimentTrial currentTrial;
+    private Queue<ExperimentTrial> remainingTrials;
+    private List<ExperimentTrial> completedTrials;
+
     private string levelName;
-    private Random.State lastUsedRandomState;
+
     private List<Interactable> levelInteractables;
 
     // Mostly for editor display purposes
@@ -24,116 +24,106 @@ public class ExperimentLevel : MonoBehaviour
     [ReadOnly] public SelectionTechniqueManager.SelectionTechnique levelTechnique;
     [ReadOnly] public int levelDensity = -1;
 
-    [ReadOnly] [SerializeField] private float levelTimeRemaining = -1f;
-    [ReadOnly] [SerializeField] private int numTrials = -1;
-
     // this will be used as the one to determine where the target object swappers will be placed
-    // should be assigned from the editor to guarantee a O(1) access (no need for linear approach 
+    // should be assigned from the editor to guarantee a O(1) access (no need for linear approach
     // comparison)
-    [SerializeField] private GameObject MiddleMarkerEmptyGameObject;
+    private GameObject MiddleMarkerEmptyGameObject;
 
-    // need to assign an experiemnt manager handler here
-    [SerializeField] private ExperimentManager experimentManager;
-
-    private int priorRandomIndex = -1; // will help in the randomization process
-
-
-    HideViewOfSpheresController hideViewRectangleHelper;
+    private int priorRandomIndex = -1;
 
     private void Start()
     {
         MiddleMarkerEmptyGameObject = GameObject.Find("HalfwayMarker");
-        experimentManager = FindObjectOfType<ExperimentManager>();
-        hideViewRectangleHelper = FindObjectOfType<HideViewOfSpheresController>();
+        if (MiddleMarkerEmptyGameObject == null)
+        { print("HalfwayMarker object was not found!"); }
     }
-    public void StartLevel(int randomSeed)
+
+    public void StartLevel(in int randomSeed, in int numTrialsPerLevel)
     {
         print("-> Level START <-");
 
-        // first be sure that the count is 0 for the trials at the start
-        experimentManager.setCountOfTrialsToZero();
-        print("Debug test -- startLVL -- 2");
-        //hideViewRectangleHelper.hideTheBarrier();        
+        //
+        // Set level settings
+        //
+
         levelName = $"{levelTechnique}_dens{levelDensity}";
-        levelTimeRemaining = levelDuration;
-        numTrials = 0;
-        currentTrial = null;
-        trialHistory = new List<ExperimentTrial>();
-        print("Debug test -- startLVL -- 3");
+
         GetComponent<LevelManager>().DisableAllLevels();
-        print("Debug test -- startLVL -- 4");
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
-        print("Debug test -- startLVL -- 5");
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
-        print("Debug test -- startLVL -- 6");
+
+        ExperimentLogger.densityLevel = levelDensity;
+        ExperimentLogger.selectionTechnique = levelTechnique;
 
         // only pick the gameObject Spheres that are positioned in the spawn area
         // the second half within the clutter zone across levels.
         levelInteractables = FindObjectsOfType<Interactable>()
             .ToList()
-            .Where(x => x.isActiveAndEnabled && !x.GetComponent<TargetInteractable>() 
+            .Where(x => x.isActiveAndEnabled && !x.GetComponent<TargetInteractable>()
             && (x.gameObject.transform.position.z > MiddleMarkerEmptyGameObject.transform.position.z))
             .ToList();
-        print("Debug test -- startLVL -- 7");
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
 
         Random.InitState(randomSeed);
 
-        ExperimentLogger.densityLevel = levelDensity;
-        ExperimentLogger.selectionTechnique = levelTechnique;
-        print("Debug test -- startLVL -- 1");
-        TransitionToNextTrial();
+        //
+        // Initialize trials
+        //
+
+        currentTrial = null;
+        completedTrials = new List<ExperimentTrial>();
+        remainingTrials = new Queue<ExperimentTrial>();
+
+        for (int trialIdx = 1; trialIdx < numTrialsPerLevel + 1; trialIdx++)
+        {
+            remainingTrials.Enqueue(new ExperimentTrial(trialIdx));
+        }
+
+        TransitionToBeforeTrial();
     }
 
     public void EndLevel()
     {
-
-        print("Debug test -- endLVL -- 1");
         state = ExperimentLevelState.Finished;
-        currentTrial?.EndTrial();
         ComputeLevelStats();
-        
+
         print("-> Level END <-");
 
-        // after the end of the current level we set the count of trials to 0
-        experimentManager.setCountOfTrialsToZero();
-
         GetComponent<LevelManager>().DisableAllLevels();
-
         GetComponent<SelectionTechniqueManager>().DisableAllTechniques();
-
-        hideViewRectangleHelper.showTheBarrier();
-
     }
 
     private void TransitionToNextTrial()
     {
-
-        print("Debug test -- transitionLVL -- 1");
-        numTrials = trialHistory.Count;
-
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
-
-        // removed while loop here and just used if 
-        if (priorRandomIndex == randIdx)
+        while (priorRandomIndex == randIdx)
         {
+            print("Re-randomizing random object index because same as last one was drawn.");
             randIdx = Random.Range(0, levelInteractables.Count + 1);
         }
-
         priorRandomIndex = randIdx;
-        
+
         Interactable interactableToReplace = levelInteractables[randIdx];
 
-        currentTrial = new ExperimentTrial(numTrials + 1, randIdx);
-        trialHistory.Add(currentTrial);
-        currentTrial.StartTrial(interactableToReplace);
+        currentTrial = remainingTrials.Dequeue();
+        currentTrial.StartTrial(randIdx, interactableToReplace);
+        state = ExperimentLevelState.RunningTrial;
+    }
 
-        state = ExperimentLevelState.Running;
+    private void TransitionToBeforeTrial()
+    {
+        if (currentTrial != null)
+        {
+            completedTrials.Add(currentTrial);
+        }
 
-        // now we increment the trial number 
-        experimentManager.incrementNumberfTrialsForCurrentLvl();
-        print("Debug test -- transitionLVL -- 2");
+        if (remainingTrials.Count == 0)
+        {
+            EndLevel();
+            return;
+        }
 
+        state = ExperimentLevelState.BeforeNextTrial;
     }
 
     private void Update()
@@ -144,15 +134,14 @@ public class ExperimentLevel : MonoBehaviour
             case ExperimentLevelState.Finished:
                 break;
 
-            case ExperimentLevelState.Running:
-                //if (currentTrial.WasSuccessful() && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
-                if (currentTrial.WasSuccessful() && BoundaryCircleManager.wasHoveredOver == true && experimentManager.accessCountOfTrialsForCurrentLvL() < 10)
+            case ExperimentLevelState.BeforeNextTrial:
+                if (BoundaryCircleManager.wasHoveredOver)
                     TransitionToNextTrial();
+                break;
 
-                //levelTimeRemaining -= Time.deltaTime;
-                //if (levelTimeRemaining < 0)
-                if(experimentManager.accessCountOfTrialsForCurrentLvL() >= 10)
-                    EndLevel();
+            case ExperimentLevelState.RunningTrial:
+                if (currentTrial.WasSuccessful())
+                    TransitionToBeforeTrial();
 
                 break;
         }
@@ -160,13 +149,13 @@ public class ExperimentLevel : MonoBehaviour
 
     private void ComputeLevelStats()
     {
-        float numTrials = trialHistory.Count;
+        float numTrials = completedTrials.Count;
 
         float numSuccessfulTrials = 0;
         float totalSuccessfulTime = 0;
         float totalAttempts = 0;
 
-        foreach (ExperimentTrial et in trialHistory)
+        foreach (ExperimentTrial et in completedTrials)
         {
             if (et.WasSuccessful())
             {
@@ -180,10 +169,5 @@ public class ExperimentLevel : MonoBehaviour
         float avgTime = totalSuccessfulTime / numTrials;
 
         print($"> {levelName}: acc: {accuracy}, time: {avgTime}, attempts: {totalAttempts}");
-    }
-
-    public void SetLevelDuration(float _levelDuration)
-    {
-        levelDuration = _levelDuration;
     }
 }

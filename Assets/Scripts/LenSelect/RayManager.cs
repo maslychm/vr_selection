@@ -26,6 +26,8 @@ public class RayManager : MonoBehaviour
 
     private RaycastHit[] hits;
 
+    private Transform currentTransformOfTarget;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -75,6 +77,10 @@ public class RayManager : MonoBehaviour
 
             if (hit.collider.GetComponent<Interactable>())
             {
+                //if(hit.collider.name == "TargetInteractable")
+                //{
+                //    currentTransformOfTarget = hit.collider.transform;
+                //}
                 //MapToOriginalPosisition.Add(hit.collider.gameObject, hit.collider.gameObject.transform);
                 HoldRayCastHitCollider.Add(hit.collider.gameObject);
             }
@@ -102,6 +108,14 @@ public class RayManager : MonoBehaviour
     {
         foreach (var temp in HoldRayCastHitCollider)
         {
+            //if (temp.name == "TargetInteractable")
+            //{
+            //    // set back to position in the clutter rather than original spot 
+            //    temp.transform.SetParent(null);
+            //    temp.transform.position = ExperimentTrial.getReplaceableTranaform().position;
+            //    temp.transform.rotation = ExperimentTrial.getReplaceableTranaform().rotation;
+            //    continue;
+            //}
             temp.transform.SetParent(null);
             temp.GetComponent<Object_collected>().ResetGameObject();
         }

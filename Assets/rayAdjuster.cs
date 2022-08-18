@@ -9,12 +9,12 @@ public class rayAdjuster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.transform.position = new Vector3(sphere.transform.position.x, sphere.transform.position.y, sphere.transform.position.z + 0.05f);
+        this.gameObject.transform.position = new Vector3(sphere.transform.position.x, sphere.transform.position.y, sphere.transform.position.z + 0.05f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position =  new Vector3(sphere.transform.position.x, sphere.transform.position.y , sphere.transform.position.z + 0.05f);
+       this.gameObject.transform.position =  new Vector3(sphere.transform.position.x, sphere.transform.position.y , sphere.transform.position.z + 0.05f);
     }
 }

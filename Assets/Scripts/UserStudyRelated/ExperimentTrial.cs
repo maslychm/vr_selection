@@ -4,7 +4,7 @@ public class ExperimentTrial
 {
     public static ExperimentTrial activeTrial = null;
     public static TargetInteractable targetInteractable = null;
-    public static SoundSystemHolder soundSystemHolder = null;
+    public soundSystemHolder soundSystemHolder = GameObject.FindObjectOfType<soundSystemHolder>();
 
     public int trialIdx = 0;
     public int randObjIdx = 0;

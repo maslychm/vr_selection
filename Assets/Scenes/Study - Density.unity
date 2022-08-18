@@ -41884,9 +41884,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1854078432}
-  - component: {fileID: 1854078431}
   - component: {fileID: 1854078430}
   - component: {fileID: 1854078429}
+  - component: {fileID: 1854078431}
   m_Layer: 0
   m_Name: SoundSystemHolder
   m_TagString: Untagged
@@ -41905,7 +41905,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 76152fc1f103b3845a8dc158fd782505, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -42000,7 +42000,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1b01e3afec956e841b87a90beae73b2c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f6bb18bc5697a7e43953ce0731e423bd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -1,19 +1,17 @@
 using UnityEngine;
 
-public class SoundSystemHolder : MonoBehaviour
+public class soundSystemHolder : MonoBehaviour
 {
-    [SerializeField] private AudioSource incorrectSelectionSound;
-    [SerializeField] private AudioSource validSelectionSound;
+    public AudioSource incorrectSelectionSound;
+    public AudioSource validSelectionSound;
 
     public void correctPlay()
     {
-        incorrectSelectionSound.Stop();
         validSelectionSound.Play();
     }
 
     public void incorrectPlay()
     {
-        validSelectionSound.Stop();
         incorrectSelectionSound.Play();
     }
 }

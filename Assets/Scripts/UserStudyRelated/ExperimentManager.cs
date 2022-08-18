@@ -57,7 +57,7 @@ public class ExperimentManager : MonoBehaviour
         ClearExperiment();
 
         ExperimentLogger.subjectId = subjectId;
-        ExperimentTrial.soundSystemHolder = FindObjectOfType<SoundSystemHolder>();
+        //ExperimentTrial.soundSystemHolder = FindObjectOfType<SoundSystemHolder>();
 
         List<ExperimentLevel> levels = new List<ExperimentLevel>();
 

@@ -22,6 +22,7 @@ public class BoundaryCircleManager : MonoBehaviour
     // this should be the select button of the righ thand
     [SerializeField] public InputActionReference clickedCircleForStartOfTrial;
     public HideViewOfSpheresController mimir2;
+    public GameObject ray;
 
     // Start is called before the first frame update
     private void Start()
@@ -33,6 +34,8 @@ public class BoundaryCircleManager : MonoBehaviour
 
         // initiually will kepp the color to be red
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+
+        //lineRenderer.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -42,8 +45,8 @@ public class BoundaryCircleManager : MonoBehaviour
         //if (wasHoveredOver == true)
             //return;
 
-        //if (wasHoveredOver == false)
-            //ResetParameters();
+        if (wasHoveredOver == false)
+            ResetParameters();
 
         if (clickedCircleForStartOfTrial.action.WasPressedThisFrame())
         {
@@ -58,6 +61,7 @@ public class BoundaryCircleManager : MonoBehaviour
 
                     mimir2.HideTheBarrier();
                     //hideViewRectangleHelper.HideTheBarrier();
+                    ray.SetActive(false);
                 }
             }
         }
@@ -65,6 +69,7 @@ public class BoundaryCircleManager : MonoBehaviour
 
     public void ResetParameters()
     {
+        ray.SetActive(true);
         wasHoveredOver = false;
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }

@@ -48,7 +48,8 @@ public class BoundaryCircleManager : MonoBehaviour
         if (wasHoveredOver == false)
             ResetParameters();
 
-        if (clickedCircleForStartOfTrial.action.WasPressedThisFrame())
+        if (clickedCircleForStartOfTrial.action.WasPressedThisFrame() 
+            && ExperimentManager.state != ExperimentManager.ExperimentState.BetweenLevels)
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))

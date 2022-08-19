@@ -48,7 +48,10 @@ public class RayManager : MonoBehaviour
     {
         // add an input action reference here
         if (BringItemsAligned.action.WasPerformedThisFrame() && BringOrFlush == 0)
+        {
+            currentTransformOfTarget = ExperimentTrial.targetInteractable.transform;
             ProcessInputHere();
+        }
         else if (TakeItemsBack.action.WasPressedThisFrame() && BringOrFlush == 1)
         {
             releaseObjectsBackToOriginalPosition();
@@ -116,6 +119,25 @@ public class RayManager : MonoBehaviour
             //    temp.transform.rotation = ExperimentTrial.getReplaceableTranaform().rotation;
             //    continue;
             //}
+            if (temp.name != "TargetInteractable")
+            {
+                temp.transform.SetParent(null);
+                temp.GetComponent<Object_collected>().ResetGameObject();
+
+            }
+            else if(temp.name == "TargetInteractable" && ExperimentTrial.activeTrial != null)
+            {
+
+                Debug.Log("We have reached a reset state mid trial but it fails ");
+                temp.transform.position = currentTransformOfTarget.position;
+            }
+            else if (temp.name == "TargetInteractable" && ExperimentTrial.activeTrial == null)
+            {
+                temp.transform.SetParent(null);
+                temp.GetComponent<Object_collected>().ResetGameObject();
+            }
+
+            // backup generic code for resetting 
             temp.transform.SetParent(null);
             temp.GetComponent<Object_collected>().ResetGameObject();
         }

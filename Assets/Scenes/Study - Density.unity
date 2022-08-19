@@ -15501,12 +15501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: testagain
+  subjectId: testagain_fr1232
   selectionTechnique: 3
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 5
   randomSeed: 1234
-  state: 0
   numRemainingLevels: -1
   pauseTimeRemaining: 1
   Mimir: {fileID: 1403336810}
@@ -18890,6 +18889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 864568989}
   - component: {fileID: 864568990}
+  - component: {fileID: 864568991}
   m_Layer: 0
   m_Name: FilterAllTechniques
   m_TagString: Untagged
@@ -18922,7 +18922,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864568988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ebad786d3050b542bea3636a9e57020, type: 3}
   m_Name: 
@@ -18930,6 +18930,21 @@ MonoBehaviour:
   handToFollow: {fileID: 992347895}
   newValConfidence: 0.3
   applyFilter: 1
+--- !u!114 &864568991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864568988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6b4ce9371205545967750f0f1de612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothingFactor: 0.712
+  dataSmoothingFactor: 0.72
+  applySmoothing: 1
 --- !u!1001 &866794785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21408,7 +21423,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 0}
+  m_ModelPrefab: {fileID: -8679921383154817045, guid: 411b2957af2e61b43a3bb1afe9b5fc43, type: 3}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
@@ -36644,10 +36659,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineThickness: 1
-  lineIntensity: 0.3
+  lineIntensity: 0
   fillAmount: 0
-  lineColor0: {r: 0.6603774, g: 0.39560342, b: 0.4117647, a: 1}
-  lineColor1: {r: 0.9528302, g: 0.9528302, b: 0, a: 1}
+  lineColor0: {r: 0, g: 1, b: 1, a: 0}
+  lineColor1: {r: 1, g: 0.3993749, b: 0, a: 1}
   lineColor2: {r: 1, g: 1, b: 1, a: 1}
   additiveRendering: 0
   backfaceCulling: 1
@@ -36655,7 +36670,7 @@ MonoBehaviour:
   useFillColor: 0
   cornerOutlines: 0
   addLinesBetweenColors: 0
-  scaleWithScreenSize: 1
+  scaleWithScreenSize: 0
   alphaCutoff: 0.5
   flipY: 0
   sourceCamera: {fileID: 1640029584}
@@ -47595,8 +47610,8 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 0}
-  m_ModelParent: {fileID: 0}
+  m_ModelPrefab: {fileID: -8679921383154817045, guid: dfa3c71bc2f886b4dadc8609063c2837, type: 3}
+  m_ModelParent: {fileID: -8679921383154817045, guid: b3ccbed949619fb49a455c76242fbf16, type: 3}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
   m_ModelSelectTransition: 

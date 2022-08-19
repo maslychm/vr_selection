@@ -23,7 +23,7 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private int randomSeed = 1234;
 
     [Header("Current Level Status")]
-    [ReadOnly] [SerializeField] private ExperimentState state = ExperimentState.Idle;
+    [ReadOnly]  public static ExperimentState state = ExperimentState.Idle;
 
     [ReadOnly] [SerializeField] private int numRemainingLevels = -1;
 

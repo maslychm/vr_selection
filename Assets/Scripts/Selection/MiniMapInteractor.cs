@@ -119,6 +119,12 @@ public class MiniMapInteractor : MonoBehaviour
         {
             GameObject original = interactable.gameObject;
 
+
+            // check if it has two then skip assigning a new one 
+
+            // fix this
+
+
             if (interactable.TryGetComponent<TargetInteractable>(out var ti))
             {
                 // If it's a target, the already set outline is the target outline, save it

@@ -51,7 +51,7 @@ public class ExperimentLevel : MonoBehaviour
         GetComponent<LevelManager>().DisableAllLevels();
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
-
+        
         ExperimentLogger.densityLevel = levelDensity;
         ExperimentLogger.selectionTechnique = levelTechnique;
 
@@ -63,6 +63,9 @@ public class ExperimentLevel : MonoBehaviour
             && (x.gameObject.transform.position.z > MiddleMarkerEmptyGameObject.transform.position.z))
             .ToList();
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
+        ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
+        ExperimentTrial.targetInteractable.targetOutline.enabled = true ;
+
 
         Random.InitState(randomSeed);
 

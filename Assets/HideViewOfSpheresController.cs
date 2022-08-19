@@ -12,13 +12,13 @@ public class HideViewOfSpheresController : MonoBehaviour
 
     public void ShowTheBarrier()
     {
-        Debug.Log("Hiding the User View");
+
         gameObject.SetActive(true);
     }
 
     public void HideTheBarrier()
     {
-        Debug.Log("showing the User the View");
+
         gameObject.SetActive(false);
     }
 }

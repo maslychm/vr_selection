@@ -127,13 +127,18 @@ public class MiniMapInteractor : MonoBehaviour
 
             if (interactable.TryGetComponent<TargetInteractable>(out var ti))
             {
-                // If it's a target, the already set outline is the target outline, save it
-                ti.targetOutline = original.GetComponent<cakeslice.Outline>();
-                ti.targetOutline.enabled = true;
 
-                // Also add the highlighting outline
-                interactable.interactionOutline = original.AddComponent<cakeslice.Outline>();
-                interactable.interactionOutline.enabled = false;
+                if (interactable.GetComponents<cakeslice.Outline>().ToList().Count < 2)
+                {
+                    // If it's a target, the already set outline is the target outline, save it
+                    ti.targetOutline = original.GetComponent<cakeslice.Outline>();
+
+                    ti.targetOutline.enabled = true;
+
+                    // Also add the highlighting outline
+                    interactable.interactionOutline = original.AddComponent<cakeslice.Outline>();
+                    interactable.interactionOutline.enabled = false;
+                }
             }
             else
             {

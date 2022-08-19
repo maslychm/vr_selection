@@ -97,7 +97,7 @@ public class ExperimentManager : MonoBehaviour
             currentLevel = null;
             state = ExperimentState.Idle;
             print("===> Experiment END <===");
-
+            Mimir.ShowTheBarrier();
             return;
         }
 
@@ -108,6 +108,7 @@ public class ExperimentManager : MonoBehaviour
 
     private void TransitionToPause()
     {
+        Mimir.ShowTheBarrier();
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }
@@ -123,7 +124,7 @@ public class ExperimentManager : MonoBehaviour
         switch (state)
         {
             case ExperimentState.Idle:
-                Mimir.ShowTheBarrier();
+                //Mimir.ShowTheBarrier();
                 break;
 
             case ExperimentState.RunningLevel:
@@ -135,7 +136,7 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.BetweenLevels:
-                Mimir.ShowTheBarrier();
+                //Mimir.ShowTheBarrier();
 
                 pauseTimeRemaining -= Time.deltaTime;
                 if (pauseTimeRemaining < 0f)

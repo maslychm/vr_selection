@@ -133,6 +133,10 @@ public class GrabbingHand : MonoBehaviour
         o.OnSelect();
     }
 
+    public void callPickUpObject(Interactable o)
+    {
+        PickupObject(o);
+    }
     public List<Interactable> GetListOfToBeFlushedItems()
     {
         return grabbedByHandHistory;

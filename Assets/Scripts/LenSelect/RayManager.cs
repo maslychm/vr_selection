@@ -28,6 +28,8 @@ public class RayManager : MonoBehaviour
 
     private Transform currentTransformOfTarget;
 
+    public GrabbingHand theHand;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -44,6 +46,11 @@ public class RayManager : MonoBehaviour
         lineRenderer.material = whiteMaterial;
     }
 
+    private void OnEnable()
+    {
+        theHand = FindObjectOfType<GrabbingHand>();
+    }
+
     private void Update()
     {
         // add an input action reference here
@@ -54,11 +61,18 @@ public class RayManager : MonoBehaviour
         }
         else if (TakeItemsBack.action.WasPressedThisFrame() && BringOrFlush == 1)
         {
+            if (HoldRayCastHitCollider.Count() < 2)
+            {
+                lineRenderer.material = whiteMaterial;
+                BringOrFlush = 0;
+                HoldRayCastHitCollider.Clear();
+                return;
+            }
             releaseObjectsBackToOriginalPosition();
 
             if (HoldRayCastHitCollider.Count > 0)
                 HoldRayCastHitCollider.Clear();
-
+            lineRenderer.material = whiteMaterial;
             BringOrFlush = 0;
         }
     }
@@ -92,6 +106,19 @@ public class RayManager : MonoBehaviour
             return;
 
         GameObject priorPlacedInHand;
+
+        if (HoldRayCastHitCollider.Count == 1)
+        {
+            theHand.callPickUpObject(HoldRayCastHitCollider.ElementAt(0).GetComponent<Interactable>());
+
+            lineRenderer.material = RedMaterial;
+            lineRenderer.material = whiteMaterial;
+            startOffsetOFspheres = 0.05f;
+            //BringOrFlush = 1;
+            BringOrFlush = 0;
+
+            return;
+        }
         foreach (GameObject tempGameObjectFromSet in HoldRayCastHitCollider)
         {
             tempGameObjectFromSet.transform.SetParent(leftHandController.transform);
@@ -113,7 +140,7 @@ public class RayManager : MonoBehaviour
         {
             //if (temp.name == "TargetInteractable")
             //{
-            //    // set back to position in the clutter rather than original spot 
+            //    // set back to position in the clutter rather than original spot
             //    temp.transform.SetParent(null);
             //    temp.transform.position = ExperimentTrial.getReplaceableTranaform().position;
             //    temp.transform.rotation = ExperimentTrial.getReplaceableTranaform().rotation;
@@ -123,11 +150,9 @@ public class RayManager : MonoBehaviour
             {
                 temp.transform.SetParent(null);
                 temp.GetComponent<Object_collected>().ResetGameObject();
-
             }
-            else if(temp.name == "TargetInteractable" && ExperimentTrial.activeTrial != null)
+            else if (temp.name == "TargetInteractable" && ExperimentTrial.activeTrial != null)
             {
-
                 Debug.Log("We have reached a reset state mid trial but it fails ");
                 temp.transform.position = currentTransformOfTarget.position;
             }
@@ -137,11 +162,11 @@ public class RayManager : MonoBehaviour
                 temp.GetComponent<Object_collected>().ResetGameObject();
             }
 
-            // backup generic code for resetting 
+            // backup generic code for resetting
             temp.transform.SetParent(null);
             temp.GetComponent<Object_collected>().ResetGameObject();
         }
-        lineRenderer.material = whiteMaterial;
+        //lineRenderer.material = whiteMaterial;
         BringOrFlush = 0;
     }
 }

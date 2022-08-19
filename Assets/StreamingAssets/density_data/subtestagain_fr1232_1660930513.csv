@@ -1,0 +1,16 @@
+subject_id,technique,density,trial_id,randObjIdx,successful_selections,total_attempts,trial_time
+subtestagain_fr1232,RayKebab,1,1,30,1,1,108.9635
+subtestagain_fr1232,RayKebab,1,2,20,1,1,3.258003
+subtestagain_fr1232,RayKebab,1,3,1,1,1,12.19287
+subtestagain_fr1232,RayKebab,1,4,15,1,1,4.713379
+subtestagain_fr1232,RayKebab,1,5,30,1,1,2.027435
+subtestagain_fr1232,RayKebab,2,1,72,1,1,9.69841
+subtestagain_fr1232,RayKebab,2,2,65,1,1,2.371399
+subtestagain_fr1232,RayKebab,2,3,79,1,1,3.928513
+subtestagain_fr1232,RayKebab,2,4,24,1,1,4.169495
+subtestagain_fr1232,RayKebab,2,5,81,1,1,1.46376
+subtestagain_fr1232,RayKebab,3,1,18,1,1,3.642807
+subtestagain_fr1232,RayKebab,3,2,296,1,1,3.051117
+subtestagain_fr1232,RayKebab,3,3,259,1,1,2.958588
+subtestagain_fr1232,RayKebab,3,4,171,1,1,3.73317
+subtestagain_fr1232,RayKebab,3,5,120,1,1,2.714752

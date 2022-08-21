@@ -335,9 +335,17 @@ public class MiniMapInteractor : MonoBehaviour
     }
 
 
-    public List<GameObject> getList()
+    public List<Interactable> getList()
     {
-        return allHighlightedObjects;
+        List<Interactable> interactableHighlighted = new List<Interactable>();
+
+
+        for( int i = 0; i < allHighlightedObjects.Count; i++)
+        {
+            interactableHighlighted.Add(allHighlightedObjects[i].GetComponent<Interactable>());
+        }
+
+        return interactableHighlighted;
     }
 
     #endregion CALLABLE BY INTERACTABLES

@@ -107,7 +107,7 @@ public class GrabbingHand : MonoBehaviour
     }
 
 
-    private void PickupObject(GameObject o)
+    public void PickupObject(GameObject o)
     {
         o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
         o.transform.parent = attachTransform;

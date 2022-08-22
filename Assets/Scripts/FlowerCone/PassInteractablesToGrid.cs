@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class PassInteractablesToGrid : MonoBehaviour
 {
     [SerializeField] private InputActionReference controlFreezing;
-    public GameGrid grid;
+    public GameGrid grid; // Add scipt to set position to camera
     public GridCell gridObjects;
     public MiniMapInteractor interactor;
 
@@ -28,9 +28,36 @@ public class PassInteractablesToGrid : MonoBehaviour
     private List<Interactable> allHighlightedObjects;
     private List<GameObject> ogInteractables;
 
+    public Transform rayStartPoint;
+    [SerializeField] private InputActionReference sendRaycast;
+
     private void Start()
     {
-        CallGridInitialize();
+        //CallGridInitialize();
+    }
+
+    private void SelectWithRay()
+    {
+        // Creates a Ray from this object, moving forward
+        Ray ray = new Ray(rayStartPoint.position, rayStartPoint.forward);
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(rayStartPoint.position, rayStartPoint.forward, out hit, Mathf.Infinity))
+        {
+            print(hit.collider.name);
+
+            if (hit.collider.CompareTag("GridInteractable"))
+            {
+                GameObject og = hit.collider.transform.parent.GetComponent<GridCell>().objectInThisGridSpace;
+                FindObjectOfType<GrabbingHand>().PickupObject(og);
+                grid.DestroyGrid();
+            }
+        }
+        else
+        {
+            Debug.Log("Did not Hit");
+        }
     }
 
     private void CallGridInitialize()
@@ -66,7 +93,7 @@ public class PassInteractablesToGrid : MonoBehaviour
 
         print("Destroying the previous grid");
         // grid.DestroyGrid(subsetOfInteractables.Count, subsetOfInteractables.Count);
-        grid.DestroyGrid(allHighlightedObjects.Count, allHighlightedObjects.Count);
+        grid.DestroyGrid();
 
         // print($"Passing {subsetOfInteractables.Count} interactables");
         print($"Passing {allHighlightedObjects.Count} interactables");
@@ -81,7 +108,12 @@ public class PassInteractablesToGrid : MonoBehaviour
         {
             CallGridInitialize();
         }
-            
+
+        if (sendRaycast.action.WasPerformedThisFrame())
+        {
+            SelectWithRay();
+        }
+
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
         //    print("Space was pressed -> CallGridInitialize()");

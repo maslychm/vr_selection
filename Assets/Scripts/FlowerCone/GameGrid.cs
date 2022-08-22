@@ -8,6 +8,7 @@ public class GameGrid : MonoBehaviour
     // private int height = 3;
     // private float GridSpaceSize = 0.45f;
     private int height;
+
     private int width;
     [SerializeField] private float GridSpaceSize;
 
@@ -20,7 +21,7 @@ public class GameGrid : MonoBehaviour
     // Grid array out of game objects, 2d array
     private GameObject[,] gameGrid;
 
-    int countingObjects;
+    private int countingObjects;
 
     // The Grid itself
     [SerializeField] private GameObject theGrid;
@@ -35,18 +36,16 @@ public class GameGrid : MonoBehaviour
     // CreateGrid(List<Interactable> interactables)
     public void CreateGrid(List<Interactable> interactables, int numOfInteractables, Material[] interactableMaterial, GameObject[] oringalInteractables)
     {
-
         // Trying to get the grid to be further back (fix later)
-        theGrid.transform.position = new Vector3(0, 0, 6);
-
-
+        theGrid.transform.position = new Vector3(0, 0, 4);
+        // theGrid.transform.parent = Camera.main.transform;
 
         // Calculates the sides
         height = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));
         width = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));
 
         // de-bugging
-        print("NUM"+ numOfInteractables);
+        print("NUM" + numOfInteractables);
         print("height: " + height + "width: " + width);
 
         gameGrid = new GameObject[height, width];
@@ -62,7 +61,6 @@ public class GameGrid : MonoBehaviour
             return;
         }
 
-
         // Make the grid
         for (int y = 0; y < height; y++)
         {
@@ -74,53 +72,32 @@ public class GameGrid : MonoBehaviour
 
                 gameGrid[x, y].GetComponent<GridCell>().SetPosition(x, y); // Sets position
 
-                
                 // Sets material & active objects
                 if (countingObjects < numOfInteractables)
                 {
-                    gameGrid[x, y].GetComponent<GridCell>().SetMaterial(interactableMaterial[countingObjects]); 
+                    gameGrid[x, y].GetComponent<GridCell>().SetMaterial(interactableMaterial[countingObjects]);
                 }
-                countingObjects++;
-
 
                 // refernce the highlighted object in the grid. todo - if the object in the grid is select gets orginal
                 gameGrid[x, y].GetComponent<GridCell>().SetReference(oringalInteractables[countingObjects]); // Sets gameobject the cell references
 
-
                 gameGrid[x, y].transform.parent = transform; // Everything it spawns will be a child under the grid
                 gameGrid[x, y].gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")"; // Show x & y position to help with debugging
+                countingObjects++;
             }
         }
-
-        
+        transform.SetPositionAndRotation(new Vector3(0, 0, -2), Quaternion.identity);
     }
 
-    public void DestroyGrid(int height, int width)
+    public void DestroyGrid()
     {
         // Will be called when user selected an item or exits the grid
         // For now it is called in PassInteractablesToGrid when space is pressed
-        foreach (Transform child in transform) 
+        foreach (Transform child in transform)
         {
             GameObject.Destroy(child.gameObject);
         }
     }
-
-    /*public void CreateGridForInteractables(List<Interactable> interactables, int numOfInteractables)
-    {
-        // Note: grid will be created each time user clicks.
-        // Need to implement a way to destroy it in real time.
-
-        // Calculate the sides: math_ceiling(math_sqrt(interactables.Count))
-        height = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));
-        width = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));
-
-        // Create the grid -> placeholders (maybe empty objects) for interactables
-
-        // Fill in the grid with interactables -> go through the grid and set position and rotation
-        // (so that they face the user)
-        // Set appropriate scaling (will require playing around with params)
-    }
-    */
 
     // Gets the grid position from world position
     public Vector2Int GetGridPosFromWorld(Vector3 worldPosition)

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
+
 public class SelectingObjects : MonoBehaviour
 {
     // Add tag
@@ -40,4 +40,3 @@ public class SelectingObjects : MonoBehaviour
         }
     }
 }
-*/

@@ -179,7 +179,7 @@ public class MiniMapInteractor : MonoBehaviour
             CalculateDuplicateDirections(allHighlightedObjects);
         }
 
-        print("***" + allHighlightedObjects.Count());
+        // print("***" + allHighlightedObjects.Count());
     }
 
     private void ProcessInput()
@@ -335,17 +335,24 @@ public class MiniMapInteractor : MonoBehaviour
     }
 
 
+    // For flower cone
     public List<Interactable> getList()
     {
         List<Interactable> interactableHighlighted = new List<Interactable>();
 
+        print("***" + allHighlightedObjects.Count());
 
-        for( int i = 0; i < allHighlightedObjects.Count; i++)
+        for ( int i = 0; i < allHighlightedObjects.Count; i++)
         {
             interactableHighlighted.Add(allHighlightedObjects[i].GetComponent<Interactable>());
         }
 
         return interactableHighlighted;
+    }
+
+    public List<GameObject> getObjectsList()
+    {
+        return allHighlightedObjects;
     }
 
     #endregion CALLABLE BY INTERACTABLES

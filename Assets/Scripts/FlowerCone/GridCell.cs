@@ -35,11 +35,20 @@ public class GridCell : MonoBehaviour
         ActivateObject.GetComponent<MeshRenderer>().material = interactable;
 
         //print("Material" + myMaterial);
-
         
         ActivateObject.SetActive(true);
     }
-    
+
+
+    // refernce the highlighted object in the grid. todo - if the object in the grid is select gets orginal
+    public void SetReference(GameObject reference)
+    {
+        if (ActivateObject.activeSelf)
+        {
+            objectInThisGridSpace = reference;
+        }
+    }
+
 
     // Saves if the grid space is occupied or not
     // public bool isOccupied = false;
@@ -50,6 +59,4 @@ public class GridCell : MonoBehaviour
     {
         return new Vector2Int(posX, posY);
     }
-
-
 }

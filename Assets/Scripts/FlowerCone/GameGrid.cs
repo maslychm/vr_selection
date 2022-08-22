@@ -15,7 +15,7 @@ public class GameGrid : MonoBehaviour
     [SerializeField] private GameObject gridCellPrefab;
 
     // Placeholder for testing
-    [SerializeField] private GameObject placeholderObject;
+    // [SerializeField] private GameObject placeholderObject;
 
     // Grid array out of game objects, 2d array
     private GameObject[,] gameGrid;
@@ -33,7 +33,7 @@ public class GameGrid : MonoBehaviour
 
     // Creates the grid when the game starts
     // CreateGrid(List<Interactable> interactables)
-    public void CreateGrid(List<Interactable> interactables, int numOfInteractables, Material[] interactableMaterial)
+    public void CreateGrid(List<Interactable> interactables, int numOfInteractables, Material[] interactableMaterial, GameObject[] oringalInteractables)
     {
 
         // Trying to get the grid to be further back (fix later)
@@ -74,12 +74,18 @@ public class GameGrid : MonoBehaviour
 
                 gameGrid[x, y].GetComponent<GridCell>().SetPosition(x, y); // Sets position
 
+                
                 // Sets material & active objects
                 if (countingObjects < numOfInteractables)
                 {
                     gameGrid[x, y].GetComponent<GridCell>().SetMaterial(interactableMaterial[countingObjects]); 
                 }
                 countingObjects++;
+
+
+                // refernce the highlighted object in the grid. todo - if the object in the grid is select gets orginal
+                gameGrid[x, y].GetComponent<GridCell>().SetReference(oringalInteractables[countingObjects]); // Sets gameobject the cell references
+
 
                 gameGrid[x, y].transform.parent = transform; // Everything it spawns will be a child under the grid
                 gameGrid[x, y].gameObject.name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")"; // Show x & y position to help with debugging

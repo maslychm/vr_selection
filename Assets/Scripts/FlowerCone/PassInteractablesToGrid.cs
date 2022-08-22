@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // this script needs to be implemented into the mini-map script (?)
 
-// 
-
+//
 
 public class PassInteractablesToGrid : MonoBehaviour
 {
+    [SerializeField] private InputActionReference controlFreezing;
     public GameGrid grid;
     public GridCell gridObjects;
     public MiniMapInteractor interactor;
@@ -20,25 +20,27 @@ public class PassInteractablesToGrid : MonoBehaviour
 
     // public int numOfInteractables = 0;
 
-    public Material[] materialsOfInteractables = new Material[200];
+    public Material[] materialsOfInteractables = new Material[300];
     // public int materialCount = 0;
 
+    public GameObject[] oringalInteractables = new GameObject[300];
+
     private List<Interactable> allHighlightedObjects;
+    private List<GameObject> ogInteractables;
 
     private void Start()
     {
         CallGridInitialize();
     }
 
-    
-
     private void CallGridInitialize()
     {
-       // materialCount = 0; // for adding materials to material list
+        // materialCount = 0; // for adding materials to material list
 
         // chanceOfAdding = Random.Range(0f, 1f);
 
         allHighlightedObjects = interactor.getList();
+        ogInteractables = interactor.getObjectsList();
 
         /* List<Interactable> interactables = FindObjectsOfType<Interactable>().ToList();
          List<Interactable> interactables = new List<Interactable>();
@@ -49,7 +51,6 @@ public class PassInteractablesToGrid : MonoBehaviour
         }
         */
 
-
         print($"Num interactables in total: {allHighlightedObjects.Count}");
 
         // List<Interactable> subsetOfInteractables = new List<Interactable>();
@@ -59,43 +60,10 @@ public class PassInteractablesToGrid : MonoBehaviour
         {
             Material myMaterial = allHighlightedObjects[i].GetComponent<Renderer>().material;
             materialsOfInteractables[i] = myMaterial;
+
+            oringalInteractables[i] = ogInteractables[i];
         }
 
-
-        // Random
-        /*if (fixedValueToUse == 0)
-        {
-            foreach (Interactable interactable in interactables)
-            {
-                if (Random.Range(0f, 1f) > chanceOfAdding)
-                {
-                    subsetOfInteractables.Add(interactable);
-
-                    // Adding materials
-                    Material myMaterial = interactable.GetComponent<Renderer>().material;
-                    materialsOfInteractables[materialCount] = myMaterial;
-                    materialCount++;
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < fixedValueToUse; i++)
-            {
-                subsetOfInteractables.Add(interactables[i]);
-                
-                numOfInteractables++;
-            }
-        }
-        */
-
-        // Same thing as above
-        //for (int i = 0; i < interactables.Count; i++)
-        //{
-        //    if (Random.Range(0f, 1f) > chanceOfAdding)
-        //        subsetOfInteractables.Add(interactables[i]);
-        //}
-        
         print("Destroying the previous grid");
         // grid.DestroyGrid(subsetOfInteractables.Count, subsetOfInteractables.Count);
         grid.DestroyGrid(allHighlightedObjects.Count, allHighlightedObjects.Count);
@@ -103,20 +71,22 @@ public class PassInteractablesToGrid : MonoBehaviour
         // print($"Passing {subsetOfInteractables.Count} interactables");
         print($"Passing {allHighlightedObjects.Count} interactables");
 
-
-        grid.CreateGrid(allHighlightedObjects, allHighlightedObjects.Count, materialsOfInteractables);
+        grid.CreateGrid(allHighlightedObjects, allHighlightedObjects.Count, materialsOfInteractables, oringalInteractables);
     }
 
-
-    // Currently runs space 
+    // Currently runs space
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (controlFreezing.action.WasPressedThisFrame())
         {
-            print("Space was pressed -> CallGridInitialize()");
-            // numOfInteractables = 0;
             CallGridInitialize();
         }
+            
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    print("Space was pressed -> CallGridInitialize()");
+        //    // numOfInteractables = 0;
+        //    CallGridInitialize();
+        //}
     }
-    
 }

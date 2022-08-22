@@ -33,6 +33,11 @@ public class Interactable : MonoBehaviour
 
     public static Component currentInteractor = null;
 
+    // Ostritch alg
+    private void Start()
+    {
+        hoverMaterial = this.gameObject.GetComponent<Renderer>().material;
+    }
     private void Awake()
     {
         meshRenderers = new List<MeshRenderer>(GetComponents<MeshRenderer>());

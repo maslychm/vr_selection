@@ -21,6 +21,8 @@ public class SelectionTechniqueManager : MonoBehaviour
 
     public static bool allowKeySelectionTechniqueSwitching = true;
 
+    public static bool isRayKebab = false;
+
     private void Start()
     {
         DisableAllTechniques();
@@ -54,7 +56,7 @@ public class SelectionTechniqueManager : MonoBehaviour
         OhMiniMap_root.SetActive(false);
         RayKebabGameObjectRoot.SetActive(false);
         ThreeDMiniMapRoot.SetActive(false);
-
+        isRayKebab = false;
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
         grabbingHand.instanceOfRayManager = null;
@@ -93,7 +95,7 @@ public class SelectionTechniqueManager : MonoBehaviour
     {
         DisableAllTechniques();
         print("Enabling the RayKebab Technique");
-
+        isRayKebab = true;
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
         grabbingHand.circumferenceDisplayInUse = false;

@@ -20,9 +20,14 @@ public class BoundaryCircleManager : MonoBehaviour
 
     // add an action reference to simulate the click
     // this should be the select button of the righ thand
-    [SerializeField] public InputActionReference clickedCircleForStartOfTrial;
+    [SerializeField] private InputActionReference clickedCircleForStartOfTrial_Right;
+    [SerializeField] private InputActionReference clickedCircleForStartOfTrial_Left;
+    [SerializeField] private Transform LeftHandTransform;
     public HideViewOfSpheresController mimir2;
-    public GameObject ray;
+    public static GameObject ray;
+    public static GameObject rayLeft;
+
+    public GameObject RayKebabHolder;
 
     // Start is called before the first frame update
     private void Start()
@@ -48,22 +53,51 @@ public class BoundaryCircleManager : MonoBehaviour
         if (wasHoveredOver == false)
             ResetParameters();
 
-        if (clickedCircleForStartOfTrial.action.WasPressedThisFrame() 
+        if(SelectionTechniqueManager.isRayKebab == true)
+        {
+            rayLeft.SetActive(false);
+        }
+
+        if (clickedCircleForStartOfTrial_Right.action.WasPressedThisFrame() 
+            && clickedCircleForStartOfTrial_Left.action.WasPressedThisFrame()
             && ExperimentManager.state != ExperimentManager.ExperimentState.BetweenLevels)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+            RaycastHit[] hit, hit2;
+            hit = Physics.RaycastAll(transform.position, transform.forward, 1000.0F);
+            hit2 = Physics.RaycastAll(LeftHandTransform.position, transform.forward, 1000.0F);
             {
-                // CHECK if the hit is actually the circle
-                if (hit.collider.gameObject.name == "CircleBoundaryForUser")
-                {
+                bool check1 = false, check2 = false;
+
+                foreach (var i in hit)
+                    if (i.collider.gameObject.name == "CircleBoundaryForUser")
+                    {
+                        check1 = true;
+                        break;
+                    }
+
+                if (check1 ==false)
+                    return;
+
+                foreach (var j in hit2)
+                    if (j.collider.gameObject.name == "CircleBoundaryForUser")
+                    {
+                        check2 = true;
+                        break;
+                    }
+
+                if (check2 == false)
+                    return;
+
+
                     circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
                     wasHoveredOver = true;
 
                     mimir2.HideTheBarrier();
                     //hideViewRectangleHelper.HideTheBarrier();
                     ray.SetActive(false);
-                }
+                    rayLeft.SetActive(false);
+
+                
             }
         }
     }
@@ -71,6 +105,7 @@ public class BoundaryCircleManager : MonoBehaviour
     public void ResetParameters()
     {
         ray.SetActive(true);
+        rayLeft.SetActive(true);
         wasHoveredOver = false;
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }

@@ -46,6 +46,12 @@ public class ExperimentLevel : MonoBehaviour
         // Set level settings
         //
 
+        //if(BoundaryCircleManager.wasHoveredOver == false)
+        //{
+        //    StartLevel(randomSeed, numTrialsPerLevel);
+        //    return;
+        //}
+
         levelName = $"{levelTechnique}_dens{levelDensity}";
 
         GetComponent<LevelManager>().DisableAllLevels();

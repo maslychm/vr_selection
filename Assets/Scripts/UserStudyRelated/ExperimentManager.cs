@@ -14,7 +14,7 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private string subjectId = "-1";
 
     [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
-
+    public static string selectionTechniqueName;
     [Range(1, 60)]
     [SerializeField] private float pauseBetweenLevelsDuration = 10f;
 
@@ -68,6 +68,7 @@ public class ExperimentManager : MonoBehaviour
             ExperimentLevel level = gameObject.AddComponent<ExperimentLevel>();
 
             level.levelTechnique = selectionTechnique;
+
             level.levelDensity = densityLevel;
 
             levels.Add(level);

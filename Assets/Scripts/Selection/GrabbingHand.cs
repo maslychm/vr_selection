@@ -123,6 +123,7 @@ public class GrabbingHand : MonoBehaviour
 
     private void PickupObject(Interactable o)
     {
+        Debug.Log(" this is the picked up object -> " + o.gameObject.name);
         o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
         o.transform.parent = attachTransform;
         o.GetComponent<Rigidbody>().useGravity = false;
@@ -135,6 +136,8 @@ public class GrabbingHand : MonoBehaviour
 
     public void callPickUpObject(Interactable o)
     {
+
+        Debug.Log(" this is the picked up object -> " + o.gameObject.name);
         PickupObject(o);
     }
     public List<Interactable> GetListOfToBeFlushedItems()

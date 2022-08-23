@@ -153,7 +153,7 @@ public class RayManager : MonoBehaviour
             else if (temp.name == "TargetInteractable" && ExperimentTrial.activeTrial != null)
             {
                 Debug.Log("We have reached a reset state mid trial but it fails ");
-                temp.transform.position = currentTransformOfTarget.position;
+                TargetInteractable.UpdateTransformOfTarget();
             }
             else if (temp.name == "TargetInteractable" && ExperimentTrial.activeTrial == null)
             {
@@ -161,9 +161,7 @@ public class RayManager : MonoBehaviour
                 temp.GetComponent<Object_collected>().ResetGameObject();
             }
 
-            // backup generic code for resetting
-            temp.transform.SetParent(null);
-            temp.GetComponent<Object_collected>().ResetGameObject();
+
         }
         lineRenderer.material = whiteMaterial;
         BringOrFlush = 0;

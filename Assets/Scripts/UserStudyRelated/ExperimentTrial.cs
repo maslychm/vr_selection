@@ -27,7 +27,9 @@ public class ExperimentTrial
         Debug.Log("-- Trial START --");
 
         replacedInteractable = interactableToReplace;
-        //targetInteractable.gameObject.SetActive(true);
+        // this will store the updated transform for every time we assign a new target
+        TargetInteractable.UpdateReferenceTransformOfTarget(replacedInteractable.gameObject.transform);
+
         targetInteractable.transform.position = replacedInteractable.transform.position;
         targetInteractable.transform.rotation = replacedInteractable.transform.rotation;
         targetInteractable.transform.localScale = replacedInteractable.transform.localScale;

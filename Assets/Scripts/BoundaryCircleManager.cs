@@ -37,7 +37,8 @@ public class BoundaryCircleManager : MonoBehaviour
         //circleRenderer = circleOfTrialConfirmation.GetComponent<Renderer>();
 
         circleWasClicked = false;
-
+        if (SelectionTechniqueManager.isRayKebab == true)
+            rayLeft.SetActive(false);
         // initiually will kepp the color to be red
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 
@@ -103,10 +104,10 @@ public class BoundaryCircleManager : MonoBehaviour
 
     public void ResetParameters()
     {
-
         RayManager.turnWhite = true;
         ray.SetActive(true);
-        rayLeft.SetActive(true);
+        if (SelectionTechniqueManager.isRayKebab != true)
+            rayLeft.SetActive(true);
         circleWasClicked = false;
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }

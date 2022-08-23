@@ -9,7 +9,7 @@ public class SphereGrabbingTool : MonoBehaviour
     public GrabbingHand handHelper;
     private void OnTriggerEnter(Collider other)
     {
-        handHelper._OnTriggerEnter(other);
+        handHelper._OnTriggerStay(other);
     }
 
     private void OnTriggerExit(Collider other)

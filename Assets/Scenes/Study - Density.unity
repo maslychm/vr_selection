@@ -15502,8 +15502,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: testSubject
-  selectionTechnique: 3
+  subjectId: penTesting
+  selectionTechnique: 1
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 2
   randomSeed: 1234
@@ -31628,8 +31628,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416526585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.008333332, y: 0, z: 0.93441635}
-  m_LocalScale: {x: 0.004166666, y: 0.004166666, z: 1.6666665}
+  m_LocalPosition: {x: -0.0083, y: -0.0018, z: 1.1272}
+  m_LocalScale: {x: 0.004166666, y: 0.0005424999, z: 2.1145}
   m_Children: []
   m_Father: {fileID: 992347895}
   m_RootOrder: 0
@@ -46152,8 +46152,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047269870}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 35.71}
-  m_LocalScale: {x: 0.16666667, y: 0.16666667, z: 66.66667}
+  m_LocalPosition: {x: -0.032, y: 0, z: 36.825}
+  m_LocalScale: {x: 0.10216667, y: 0.16666667, z: 68.86667}
   m_Children: []
   m_Father: {fileID: 1309045917}
   m_RootOrder: 0

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Collider))]
+
 public class GrabbingHand : MonoBehaviour
 {
     [SerializeField] private InputActionReference grabActionReference;
@@ -50,7 +50,7 @@ public class GrabbingHand : MonoBehaviour
         isHovering = collidingWithHand.Count != 0;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void _OnTriggerEnter(Collider other)
     {
         if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
@@ -58,7 +58,7 @@ public class GrabbingHand : MonoBehaviour
         collidingWithHand.Add(other.GetComponent<shapeItem_2>());
     }
 
-    private void OnTriggerExit(Collider other)
+    public void _OnTriggerExit(Collider other)
     {
         if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
@@ -66,7 +66,7 @@ public class GrabbingHand : MonoBehaviour
         collidingWithHand.Remove(other.GetComponent<shapeItem_2>());
     }
 
-    private void OnTriggerStay(Collider col)
+    public void _OnTriggerStay(Collider col)
     {
         if (objectInHand == null
             && grabActionReference.action.WasPressedThisFrame()

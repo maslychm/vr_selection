@@ -28116,6 +28116,8 @@ GameObject:
   - component: {fileID: 1309045917}
   - component: {fileID: 1309045920}
   - component: {fileID: 1309045919}
+  - component: {fileID: 1309045918}
+  - component: {fileID: 1309045921}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -28138,6 +28140,19 @@ Transform:
   m_Father: {fileID: 2103060856}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1309045918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309045916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390d8031524ede544aa89d05247ca577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handHelper: {fileID: 2103060859}
 --- !u!23 &1309045919
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28187,6 +28202,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309045916}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &1309045921
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309045916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1309523998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28965,7 +28993,7 @@ MonoBehaviour:
   normalizeOffsets: 0
   scaleByFarthest: 0
   ignoreDepth: 0
-  scaleFactor: {x: 4, y: 4, z: 0.8}
+  scaleFactor: {x: 1.9, y: 1.9, z: 0.8}
 --- !u!64 &1316593420
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -47604,7 +47632,6 @@ GameObject:
   - component: {fileID: 2103060861}
   - component: {fileID: 2103060860}
   - component: {fileID: 2103060859}
-  - component: {fileID: 2103060857}
   - component: {fileID: 2103060858}
   m_Layer: 0
   m_Name: RightHand Controller
@@ -47630,19 +47657,6 @@ Transform:
   m_Father: {fileID: 349897844}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2103060857
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103060855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.015
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2103060858
 MonoBehaviour:
   m_ObjectHideFlags: 0

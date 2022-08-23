@@ -1,0 +1,13 @@
+subject_id,technique,density,trial_id,randObjIdx,successful_selections,total_attempts,trial_time
+subtestSubject,OhMiniMap,1,1,30,1,1,6.359919
+subtestSubject,OhMiniMap,1,2,20,1,1,7.309414
+subtestSubject,OhMiniMap,2,1,72,1,1,2.318174
+subtestSubject,OhMiniMap,2,2,65,1,1,2.036215
+subtestSubject,OhMiniMap,3,1,18,1,1,2.257584
+subtestSubject,OhMiniMap,3,2,296,1,1,2.131012
+subtestSubject,SimpleMiniMap,1,1,30,1,1,5.314507
+subtestSubject,SimpleMiniMap,1,2,20,1,1,1.786018
+subtestSubject,SimpleMiniMap,2,1,72,1,1,2.579853
+subtestSubject,SimpleMiniMap,2,2,65,1,1,1.838387
+subtestSubject,SimpleMiniMap,3,1,18,1,1,1.776436
+subtestSubject,SimpleMiniMap,3,2,296,1,1,1.973145

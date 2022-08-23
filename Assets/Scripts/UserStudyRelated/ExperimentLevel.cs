@@ -72,6 +72,7 @@ public class ExperimentLevel : MonoBehaviour
         ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
         ExperimentTrial.targetInteractable.targetOutline.enabled = true ;
 
+        BoundaryCircleManager.circleWasClicked = false;
 
         Random.InitState(randomSeed);
 
@@ -97,6 +98,7 @@ public class ExperimentLevel : MonoBehaviour
         ComputeLevelStats();
 
         print("-> Level END <-");
+        //BoundaryCircleManager.enableBothRaysNextFrame = false;
 
         GetComponent<LevelManager>().DisableAllLevels();
         GetComponent<SelectionTechniqueManager>().DisableAllTechniques();
@@ -115,6 +117,8 @@ public class ExperimentLevel : MonoBehaviour
         Interactable interactableToReplace = levelInteractables[randIdx];
 
         currentTrial = remainingTrials.Dequeue();
+
+        BoundaryCircleManager.circleWasClicked = false; 
         currentTrial.StartTrial(randIdx, interactableToReplace);
         state = ExperimentLevelState.RunningTrial;
     }
@@ -144,7 +148,7 @@ public class ExperimentLevel : MonoBehaviour
                 break;
 
             case ExperimentLevelState.BeforeNextTrial:
-                if (BoundaryCircleManager.wasHoveredOver)
+                if (BoundaryCircleManager.circleWasClicked)
                     TransitionToNextTrial();
                 break;
 

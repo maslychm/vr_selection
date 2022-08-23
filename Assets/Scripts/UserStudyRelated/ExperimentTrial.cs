@@ -69,7 +69,7 @@ public class ExperimentTrial
         targetInteractable.GetComponent<Object_collected>().ResetGameObject();
         //targetInteractable.transform.position = new Vector3(targetInteractable.transform.position.x + 20.0f, targetInteractable.transform.position.y, targetInteractable.transform.position.z);
         // at the end of the trial we simply set back the circle as it was
-        BoundaryCircleManager.wasHoveredOver = false;
+        //BoundaryCircleManager.wasHoveredOver = false;
 
     }
 

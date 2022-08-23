@@ -12,7 +12,7 @@ public class BoundaryCircleManager : MonoBehaviour
 
     //private Renderer circleRenderer;
 
-    public static bool wasHoveredOver = false;
+    public static bool circleWasClicked = false;
     //private HideViewOfSpheresController hideViewRectangleHelper;
 
     // this should store the controller of the right hand
@@ -36,7 +36,7 @@ public class BoundaryCircleManager : MonoBehaviour
         //hideViewRectangleHelper = FindObjectOfType<HideViewOfSpheresController>();
         //circleRenderer = circleOfTrialConfirmation.GetComponent<Renderer>();
 
-        wasHoveredOver = false;
+        circleWasClicked = false;
 
         // initiually will kepp the color to be red
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
@@ -51,13 +51,13 @@ public class BoundaryCircleManager : MonoBehaviour
         //if (wasHoveredOver == true)
         //return;
 
-        if (wasHoveredOver == false)
+        if (circleWasClicked == false)
             ResetParameters();
 
-        if (SelectionTechniqueManager.isRayKebab == true)
-        {
-            rayLeft.SetActive(false);
-        }
+        //if (SelectionTechniqueManager.isRayKebab == true)
+        //{
+        //    rayLeft.SetActive(false);
+        //}
 
         if (clickedCircleForStartOfTrial_Right.action.IsPressed()
             && clickedCircleForStartOfTrial_Left.action.IsPressed()
@@ -90,7 +90,7 @@ public class BoundaryCircleManager : MonoBehaviour
                     return;
 
                 circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                wasHoveredOver = true;
+                circleWasClicked = true;
 
                 mimir2.HideTheBarrier();
                 //hideViewRectangleHelper.HideTheBarrier();
@@ -104,7 +104,7 @@ public class BoundaryCircleManager : MonoBehaviour
     {
         ray.SetActive(true);
         rayLeft.SetActive(true);
-        wasHoveredOver = false;
+        circleWasClicked = false;
         circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
     }
 }

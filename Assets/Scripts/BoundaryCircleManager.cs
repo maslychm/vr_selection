@@ -21,11 +21,12 @@ public class BoundaryCircleManager : MonoBehaviour
     // add an action reference to simulate the click
     // this should be the select button of the righ thand
     [SerializeField] private InputActionReference clickedCircleForStartOfTrial_Right;
+
     [SerializeField] private InputActionReference clickedCircleForStartOfTrial_Left;
     [SerializeField] private Transform LeftHandTransform;
     public HideViewOfSpheresController mimir2;
-    public static GameObject ray;
-    public static GameObject rayLeft;
+    public GameObject ray;
+    public GameObject rayLeft;
 
     public GameObject RayKebabHolder;
 
@@ -48,23 +49,23 @@ public class BoundaryCircleManager : MonoBehaviour
     {
         // set this to not be used during the trial
         //if (wasHoveredOver == true)
-            //return;
+        //return;
 
         if (wasHoveredOver == false)
             ResetParameters();
 
-        if(SelectionTechniqueManager.isRayKebab == true)
+        if (SelectionTechniqueManager.isRayKebab == true)
         {
             rayLeft.SetActive(false);
         }
 
-        if (clickedCircleForStartOfTrial_Right.action.WasPressedThisFrame() 
+        if (clickedCircleForStartOfTrial_Right.action.WasPressedThisFrame()
             && clickedCircleForStartOfTrial_Left.action.WasPressedThisFrame()
             && ExperimentManager.state != ExperimentManager.ExperimentState.BetweenLevels)
         {
             RaycastHit[] hit, hit2;
-            hit = Physics.RaycastAll(transform.position, transform.forward, 1000.0F);
-            hit2 = Physics.RaycastAll(LeftHandTransform.position, transform.forward, 1000.0F);
+            hit = Physics.RaycastAll(transform.position, transform.forward, Mathf.Infinity);
+            hit2 = Physics.RaycastAll(LeftHandTransform.position, transform.forward, Mathf.Infinity);
             {
                 bool check1 = false, check2 = false;
 
@@ -75,7 +76,7 @@ public class BoundaryCircleManager : MonoBehaviour
                         break;
                     }
 
-                if (check1 ==false)
+                if (check1 == false)
                     return;
 
                 foreach (var j in hit2)
@@ -88,16 +89,13 @@ public class BoundaryCircleManager : MonoBehaviour
                 if (check2 == false)
                     return;
 
+                circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                wasHoveredOver = true;
 
-                    circleOfTrialConfirmation.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                    wasHoveredOver = true;
-
-                    mimir2.HideTheBarrier();
-                    //hideViewRectangleHelper.HideTheBarrier();
-                    ray.SetActive(false);
-                    rayLeft.SetActive(false);
-
-                
+                mimir2.HideTheBarrier();
+                //hideViewRectangleHelper.HideTheBarrier();
+                ray.SetActive(false);
+                rayLeft.SetActive(false);
             }
         }
     }

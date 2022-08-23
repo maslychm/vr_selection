@@ -15502,8 +15502,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: DrlAVIOLA
-  selectionTechnique: 2
+  subjectId: testSubject
+  selectionTechnique: 3
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 2
   randomSeed: 1234
@@ -22431,9 +22431,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026403698}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.01, y: 0, z: 0.05}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 2019252975}
   m_Father: {fileID: 864568989}
@@ -35326,6 +35326,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6496783376580009791, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
+      propertyPath: targetOutline
+      value: 
+      objectReference: {fileID: 1759856191}
+    - target: {fileID: 6496783376580009791, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
+      propertyPath: interactionOutline
+      value: 
+      objectReference: {fileID: 1759856191}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
 --- !u!1001 &1581154807
@@ -39860,6 +39868,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
   m_PrefabInstance: {fileID: 1751473209}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1759856191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -242187440769767142, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
+  m_PrefabInstance: {fileID: 1580657262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1760192678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47665,7 +47684,7 @@ MonoBehaviour:
   isHovering: 0
   circumferenceDisplayInUse: 0
   clutterHandler_CircumferenceDisplay: {fileID: 441624304}
-  instanceOfRayManager: {fileID: 0}
+  instanceOfRayManager: {fileID: 1026403703}
   objectInHand: {fileID: 0}
 --- !u!114 &2103060860
 MonoBehaviour:

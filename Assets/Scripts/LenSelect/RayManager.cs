@@ -53,6 +53,12 @@ public class RayManager : MonoBehaviour
 
     private void Update()
     {
+        // addedthis for later debugging purposes 
+        if(lineRenderer.material == RedMaterial && HoldRayCastHitCollider.Count == 0)
+        {
+            lineRenderer.material = whiteMaterial;
+        }
+
         // add an input action reference here
         if (BringItemsAligned.action.WasPerformedThisFrame() && BringOrFlush == 0)
         {
@@ -122,7 +128,9 @@ public class RayManager : MonoBehaviour
         foreach (GameObject tempGameObjectFromSet in HoldRayCastHitCollider)
         {
             tempGameObjectFromSet.transform.SetParent(leftHandController.transform);
-            tempGameObjectFromSet.transform.localScale = new Vector3(0.06f, 0.06f, 0.06f);
+
+            // for some reason the scale of these is too small
+            tempGameObjectFromSet.transform.localScale = new Vector3(4f, 4f, 4f);
             tempGameObjectFromSet.transform.position = transform.TransformPoint(new Vector3(leftHandController.transform.localPosition.x, leftHandController.transform.localPosition.y, leftHandController.transform.localPosition.z + startOffsetOFspheres));
             priorPlacedInHand = tempGameObjectFromSet;
             startOffsetOFspheres += 0.065f;

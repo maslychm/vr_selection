@@ -55,10 +55,10 @@ public class BoundaryCircleManager : MonoBehaviour
         if (circleWasClicked == false)
             ResetParameters();
 
-        //if (SelectionTechniqueManager.isRayKebab == true)
-        //{
-        //    rayLeft.SetActive(false);
-        //}
+        if (SelectionTechniqueManager.isRayKebab == true)
+        {
+            rayLeft.SetActive(false);
+        }
 
         if (clickedCircleForStartOfTrial_Right.action.IsPressed()
             && clickedCircleForStartOfTrial_Left.action.IsPressed()

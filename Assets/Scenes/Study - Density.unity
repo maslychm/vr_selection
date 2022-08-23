@@ -15503,7 +15503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subjectId: penTesting
-  selectionTechnique: 1
+  selectionTechnique: 3
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 2
   randomSeed: 1234

@@ -59,13 +59,13 @@ public class BoundaryCircleManager : MonoBehaviour
             rayLeft.SetActive(false);
         }
 
-        if (clickedCircleForStartOfTrial_Right.action.WasPressedThisFrame()
-            && clickedCircleForStartOfTrial_Left.action.WasPressedThisFrame()
+        if (clickedCircleForStartOfTrial_Right.action.IsPressed()
+            && clickedCircleForStartOfTrial_Left.action.IsPressed()
             && ExperimentManager.state != ExperimentManager.ExperimentState.BetweenLevels)
         {
             RaycastHit[] hit, hit2;
             hit = Physics.RaycastAll(transform.position, transform.forward, Mathf.Infinity);
-            hit2 = Physics.RaycastAll(LeftHandTransform.position, transform.forward, Mathf.Infinity);
+            hit2 = Physics.RaycastAll(LeftHandTransform.position, LeftHandTransform.forward, Mathf.Infinity);
             {
                 bool check1 = false, check2 = false;
 

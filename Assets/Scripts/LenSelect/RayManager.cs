@@ -130,10 +130,10 @@ public class RayManager : MonoBehaviour
             tempGameObjectFromSet.transform.SetParent(leftHandController.transform);
 
             // for some reason the scale of these is too small
-            tempGameObjectFromSet.transform.localScale = new Vector3(4f, 4f, 4f);
+            tempGameObjectFromSet.transform.localScale = new Vector3(0.08f, 0.08f, 0.08f);
             tempGameObjectFromSet.transform.position = transform.TransformPoint(new Vector3(leftHandController.transform.localPosition.x, leftHandController.transform.localPosition.y, leftHandController.transform.localPosition.z + startOffsetOFspheres));
             priorPlacedInHand = tempGameObjectFromSet;
-            startOffsetOFspheres += 0.065f;
+            startOffsetOFspheres += 0.085f;
         }
 
         lineRenderer.material = RedMaterial;

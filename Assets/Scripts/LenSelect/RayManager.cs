@@ -14,6 +14,8 @@ public class RayManager : MonoBehaviour
     [SerializeField] public InputActionReference BringItemsAligned;
     [SerializeField] public InputActionReference TakeItemsBack;
 
+    public static bool turnWhite = false;
+
     // build a dictionary to map ouyt the transforms back to original
     //public Dictionary<GameObject, Transform> MapToOriginalPosisition;
 
@@ -54,7 +56,8 @@ public class RayManager : MonoBehaviour
     private void Update()
     {
         // addedthis for later debugging purposes 
-        if(lineRenderer.material == RedMaterial && HoldRayCastHitCollider.Count == 0)
+        //if(lineRenderer.material == RedMaterial && HoldRayCastHitCollider.Count == 0)
+        if (turnWhite == true || (lineRenderer.material == RedMaterial && HoldRayCastHitCollider.Count == 0))
         {
             lineRenderer.material = whiteMaterial;
         }
@@ -100,11 +103,6 @@ public class RayManager : MonoBehaviour
 
             if (hit.collider.GetComponent<Interactable>())
             {
-                //if(hit.collider.name == "TargetInteractable")
-                //{
-                //    currentTransformOfTarget = hit.collider.transform;
-                //}
-                //MapToOriginalPosisition.Add(hit.collider.gameObject, hit.collider.gameObject.transform);
                 HoldRayCastHitCollider.Add(hit.collider.gameObject);
             }
         }
@@ -146,14 +144,7 @@ public class RayManager : MonoBehaviour
     {
         foreach (var temp in HoldRayCastHitCollider)
         {
-            //if (temp.name == "TargetInteractable")
-            //{
-            //    // set back to position in the clutter rather than original spot
-            //    temp.transform.SetParent(null);
-            //    temp.transform.position = ExperimentTrial.getReplaceableTranaform().position;
-            //    temp.transform.rotation = ExperimentTrial.getReplaceableTranaform().rotation;
-            //    continue;
-            //}
+
             if (temp.name != "TargetInteractable")
             {
                 temp.transform.SetParent(null);
@@ -174,7 +165,7 @@ public class RayManager : MonoBehaviour
             temp.transform.SetParent(null);
             temp.GetComponent<Object_collected>().ResetGameObject();
         }
-        //lineRenderer.material = whiteMaterial;
+        lineRenderer.material = whiteMaterial;
         BringOrFlush = 0;
     }
 }

@@ -96,12 +96,15 @@ public class BoundaryCircleManager : MonoBehaviour
                 //hideViewRectangleHelper.HideTheBarrier();
                 ray.SetActive(false);
                 rayLeft.SetActive(false);
+                RayManager.turnWhite = false;
             }
         }
     }
 
     public void ResetParameters()
     {
+
+        RayManager.turnWhite = true;
         ray.SetActive(true);
         rayLeft.SetActive(true);
         circleWasClicked = false;

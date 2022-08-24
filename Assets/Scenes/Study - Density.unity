@@ -15523,8 +15523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: penTesting
-  selectionTechnique: 1
+  subjectId: -1
+  selectionTechnique: 3
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 2
   randomSeed: 1234

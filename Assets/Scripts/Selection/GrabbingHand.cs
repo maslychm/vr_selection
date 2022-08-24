@@ -17,7 +17,7 @@ public class GrabbingHand : MonoBehaviour
     public bool circumferenceDisplayInUse = false;
     [SerializeField] private ClutterHandler_circumferenceDisplay clutterHandler_CircumferenceDisplay;
 
-    public RayManager instanceOfRayManager = null;
+    public RayKebabManager instanceOfRayManager = null;
 
     public Interactable objectInHand;
     private List<Interactable> grabbedByHandHistory;
@@ -138,7 +138,7 @@ public class GrabbingHand : MonoBehaviour
         o.OnSelect();
     }
 
-    public void callPickUpObject(Interactable o)
+    public void CallPickUpObject(Interactable o)
     {
         PickupObject(o);
     }

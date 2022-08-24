@@ -16,7 +16,7 @@ public class SelectionTechniqueManager : MonoBehaviour
     [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root, RayKebabGameObjectRoot, ThreeDMiniMapRoot;
     [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap, ThreeDMiniMap;
     [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor, ThreeDMiniMapInteractor;
-    [SerializeField] private RayManager instanceOfRayManager;
+    [SerializeField] private RayKebabManager instanceOfRayManager;
     [SerializeField] private GrabbingHand grabbingHand;
 
     public static bool allowKeySelectionTechniqueSwitching = true;

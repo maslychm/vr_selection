@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RayManager : MonoBehaviour
+public class RayKebabManager : MonoBehaviour
 {
     private List<Interactable> rayCastedInteractables;
     private float startOffsetOFspheres = 0.05f;
@@ -86,7 +86,7 @@ public class RayManager : MonoBehaviour
 
         if (rayCastedInteractables.Count == 1)
         {
-            grabbingHand.callPickUpObject(rayCastedInteractables.ElementAt(0).GetComponent<Interactable>());
+            grabbingHand.CallPickUpObject(rayCastedInteractables.ElementAt(0).GetComponent<Interactable>());
 
             lineRenderer.material = RedMaterial;
             lineRenderer.material = whiteMaterial;

@@ -40,7 +40,7 @@ public class BoundaryCircleManager : MonoBehaviour
 
     private void ShowTrialReadinessVisuals()
     {
-        RayManager.turnWhite = true;
+        RayKebabManager.turnWhite = true;
 
         if (!SelectionTechniqueManager.isRayKebab)
         {
@@ -53,7 +53,7 @@ public class BoundaryCircleManager : MonoBehaviour
 
     private void HideTrialReadinessVisuals()
     {
-        RayManager.turnWhite = false;
+        RayKebabManager.turnWhite = false;
 
         dominantLine.enabled = false;
         nonDominantLine.enabled = false;

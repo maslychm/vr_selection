@@ -16,6 +16,8 @@ public class MiniMapInteractor : MonoBehaviour
     [Tooltip("This object must have a collider and be tagged as GestureFilter")]
     //[SerializeField] private GameObject flashlightHighlighter;
 
+    [SerializeField] private Transform transformForProjection;
+
     [SerializeField] private Transform attachTransform;
 
     [Header("Gesture Direction technique-related")]
@@ -50,9 +52,16 @@ public class MiniMapInteractor : MonoBehaviour
     [Header("MiniMap Selector variables")]
     public MiniMap miniMap;
 
-    [SerializeField] private bool normalizeOffsets = false;
+    /// <summary>
+    /// Flat repr settings: norm=false, farthest=true, ignoreDepth=true
+    /// </summary>
 
-    private Vector3 temp; // simple helper to store the distance later in our dictionary
+    [SerializeField] private bool normalizeOffsets = false;
+    [SerializeField] private bool scaleByFarthest = true;
+    [SerializeField] private bool ignoreDepth = true;
+
+    [Tooltip("Multiplication factor before applying radius inside minimap")]
+    [SerializeField] private Vector3 scaleFactor = Vector3.one;
 
     private Dictionary<Interactable, shapeItem_2> originalToDuplicate;
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
@@ -71,6 +80,9 @@ public class MiniMapInteractor : MonoBehaviour
         if (defaultFlashlightScale == Vector3.zero)
             defaultFlashlightScale = new Vector3(150, 150, 560);
 
+        if (transformForProjection == null)
+            transformForProjection = transform;
+
         ShrinkFlashlight();
 
         if (tabletUI)
@@ -88,12 +100,12 @@ public class MiniMapInteractor : MonoBehaviour
     {
         foreach (var g in FindObjectsOfType<shapeItem_2>())
         {
-            Destroy(g.gameObject);
+            DestroyImmediate(g.gameObject);
         }
 
         foreach (var g in FindObjectsOfType<shapeItem_3>())
         {
-            Destroy(g.gameObject);
+            DestroyImmediate(g.gameObject);
         }
 
         //print($"Calling duplication in {name}");
@@ -107,10 +119,42 @@ public class MiniMapInteractor : MonoBehaviour
         foreach (var interactable in originalInteractables)
         {
             GameObject original = interactable.gameObject;
-            if (!original.GetComponent<cakeslice.Outline>())
-                original.AddComponent<cakeslice.Outline>().enabled = false;
+
+
+            // check if it has two then skip assigning a new one 
+
+            // fix this
+
+
+            if (interactable.TryGetComponent<TargetInteractable>(out var ti))
+            {
+
+                if (interactable.GetComponents<cakeslice.Outline>().ToList().Count < 2)
+                {
+                    // If it's a target, the already set outline is the target outline, save it
+                    ti.targetOutline = original.GetComponent<cakeslice.Outline>();
+
+                    ti.targetOutline.enabled = true;
+
+                    // Also add the highlighting outline
+                    interactable.interactionOutline = original.AddComponent<cakeslice.Outline>();
+                    interactable.interactionOutline.enabled = false;
+                }
+            }
             else
-                original.GetComponent<cakeslice.Outline>().enabled = false;
+            {
+                // If it's a regular object, add outline if it does not have one
+                if (original.TryGetComponent<cakeslice.Outline>(out var outl))
+                {
+                    interactable.interactionOutline = outl;
+                    interactable.interactionOutline.enabled = false;
+                }
+                else
+                {
+                    interactable.interactionOutline = original.AddComponent<cakeslice.Outline>();
+                    interactable.interactionOutline.enabled = false;
+                }
+            }
 
             GameObject duplicate = Instantiate(original);
 
@@ -138,34 +182,56 @@ public class MiniMapInteractor : MonoBehaviour
             foreach (var c in duplicate.GetComponents<Collider>())
                 c.isTrigger = true;
 
-            Destroy(duplicate.GetComponent<Interactable>());
-            Destroy(duplicate.GetComponent<Object_collected>());
+            DestroyImmediate(duplicate.GetComponent<Interactable>());
+            DestroyImmediate(duplicate.GetComponent<Object_collected>());
 
-            duplicate.AddComponent<shapeItem_2>();
-            duplicate.GetComponent<shapeItem_2>().original = interactable.gameObject;
+            shapeItem_2 si2 = duplicate.AddComponent<shapeItem_2>();
+            si2.original = interactable;
+            foreach (var outl in si2.GetComponents<cakeslice.Outline>())
+            {
+                if (outl.color == 0)
+                {
+                    si2.interactionOutline = outl;
+                }
+                else
+                {
+                    si2.targetOutline = outl;
+                }
+            }
             duplicate.GetComponent<Rigidbody>().isKinematic = true;
             duplicate.GetComponent<Rigidbody>().useGravity = false;
 
             // --------------------------------For Circumference of the mini map-----------------
 
             GameObject duplicateOFduplicate = Instantiate(duplicate);
-            Destroy(duplicateOFduplicate.GetComponent<shapeItem_2>());
-            Destroy(duplicateOFduplicate.GetComponent<Interactable>());
-            Destroy(duplicateOFduplicate.GetComponent<Object_collected>());
-            duplicateOFduplicate.AddComponent<shapeItem_3>();
-            duplicateOFduplicate.GetComponent<shapeItem_3>().original = original.gameObject;
-            duplicateOFduplicate.GetComponent<shapeItem_3>().shapeItem2_parent = duplicate.GetComponent<shapeItem_2>();
+            DestroyImmediate(duplicateOFduplicate.GetComponent<shapeItem_2>());
+            DestroyImmediate(duplicateOFduplicate.GetComponent<Interactable>());
+            DestroyImmediate(duplicateOFduplicate.GetComponent<Object_collected>());
+
+            shapeItem_3 si3 = duplicateOFduplicate.AddComponent<shapeItem_3>();
+            si3.original = interactable;
+            si3.shapeItem2_parent = si2;
+            foreach (var outl in si3.GetComponents<cakeslice.Outline>())
+            {
+                if (outl.color == 0)
+                {
+                    si3.interactionOutline = outl;
+                }
+                else
+                {
+                    si3.targetOutline = outl;
+                }
+            }
             duplicateOFduplicate.GetComponent<Rigidbody>().isKinematic = true;
             duplicateOFduplicate.GetComponent<Rigidbody>().useGravity = false;
             duplicateOFduplicate.tag = "unclutterDuplicate";
 
-            originalToDuplicate_ForCirCumference.Add(duplicate.GetComponent<shapeItem_2>(), duplicateOFduplicate.GetComponent<shapeItem_3>());
-            // remove them away
+            originalToDuplicate_ForCirCumference.Add(si2, si3);
             duplicateOFduplicate.transform.position = new Vector3(50, 50, 50);
 
             //---------------------------------------------------------------------------------
 
-            originalToDuplicate.Add(interactable, duplicate.GetComponent<shapeItem_2>());
+            originalToDuplicate.Add(interactable, si2);
 
             duplicate.SetActive(false);
         }
@@ -238,38 +304,29 @@ public class MiniMapInteractor : MonoBehaviour
 
         var newScale = factor * maxFlashlightScale;
         newScale.z = 600;
-        //flashlightHighlighter.transform.localScale = newScale;
         transform.localScale = newScale;
-        //print(factor);
-        //print($"distHand: {distHand}");
     }
 
-    // migrated triggers from interactables
     public void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("sphere"))
-            return;
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        if (!other.GetComponent<Interactable>()) return;
         other.gameObject.GetComponent<Interactable>().StartHover();
-
         AddtoHighlighted(other.gameObject);
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("sphere"))
-            return;
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
+        if (!other.GetComponent<Interactable>()) return;
         other.gameObject.GetComponent<Interactable>().EndHover();
-
         RemoveFromHighlighted(other.gameObject);
     }
 
     public void CalculateDuplicateDirections(List<GameObject> objects)
     {
-        //print(objects[0].name);
         duplicateDirections.Clear();
         Vector3 max = Vector3.zero;
+        float minZ = Mathf.Infinity;
+        float maxZ = -1;
         foreach (GameObject o in objects)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
@@ -284,34 +341,44 @@ public class MiniMapInteractor : MonoBehaviour
                 continue;
 
             // highlighted object in flashlight's corrdinate system
-            //var objectPositionInFlashlightCoords = flashlightHighlighter.transform.InverseTransformPoint(o.transform.position);
-            var objectPositionInFlashlightCoords = transform.InverseTransformPoint(o.transform.position);
-            objectPositionInFlashlightCoords.z = 0f;
+            var objectPositionInFlashlightCoords = transformForProjection.InverseTransformPoint(o.transform.position);
+
+            if (ignoreDepth)
+                objectPositionInFlashlightCoords.z = 0f;
 
             if (normalizeOffsets)
                 objectPositionInFlashlightCoords.Normalize();
 
-            //print($"in calculation: {objectPositionInFlashlightCoords.magnitude} - {objectPositionInFlashlightCoords}");
-
             if (objectPositionInFlashlightCoords.magnitude > max.magnitude)
                 max = objectPositionInFlashlightCoords;
+
+            if (objectPositionInFlashlightCoords.z < minZ)
+                minZ = objectPositionInFlashlightCoords.z;
+
+            if (objectPositionInFlashlightCoords.z > maxZ)
+                maxZ = objectPositionInFlashlightCoords.z;
 
             duplicateDirections.Add((duplicate, objectPositionInFlashlightCoords));
         }
 
-        if (normalizeOffsets == false)
+        for (int i = 0; i < duplicateDirections.Count; i++)
         {
-            for (int i = 0; i < duplicateDirections.Count; i++)
-            {
-                //if (duplicateDirections.Count == 1) break; // <- Yes?
-                // TODO need to find a fix here! When there is only 1 element, normalization happens. When more, they sometimes go outside the boundaries
+            //if (duplicateDirections.Count == 1) break; // <- Yes?
+            // TODO need to find a fix here! When there is only 1 element, normalization happens. When more, they sometimes go outside the boundaries
 
-                Vector3 temp = duplicateDirections[i].Item2 / max.magnitude;
-                duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
+            Vector3 temp = duplicateDirections[i].Item2;
 
-                // TODO try dividing by current flashlight scale times some factor
-                // ^^^ Yes, this is correct, because as of right now, if there's only 1 element highlighted, the above code acts as normalization. Added length check.
-            }
+            temp.z -= (maxZ + minZ) / 2f;
+
+            if (scaleByFarthest)
+                temp /= max.magnitude;
+            else
+                temp.Scale(scaleFactor);
+
+            duplicateDirections[i] = (duplicateDirections[i].Item1, temp);
+
+            // TODO try dividing by current flashlight scale times some factor
+            // ^^^ Yes, this is correct, because as of right now, if there's only 1 element highlighted, the above code acts as normalization. Added length check.
         }
     }
 

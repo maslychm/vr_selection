@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Collider))]
 public class GrabbingHand : MonoBehaviour
 {
     [SerializeField] private InputActionReference grabActionReference;
@@ -18,12 +17,31 @@ public class GrabbingHand : MonoBehaviour
     public bool circumferenceDisplayInUse = false;
     [SerializeField] private ClutterHandler_circumferenceDisplay clutterHandler_CircumferenceDisplay;
 
-    public GameObject objectInHand;
+    public RayKebabManager instanceOfRayManager = null;
 
-    private void Start()
+    private Interactable objectInHand;
+    private List<Interactable> grabbedByHandHistory;
+
+    private void Awake()
     {
         objectInHand = null;
         collidingWithHand = new HashSet<shapeItem_2>();
+        grabbedByHandHistory = new List<Interactable>();
+    }
+
+    public void ClearGrabbed()
+    {
+        ReleaseCurrentlyHeldObject();
+
+        ResetItemHistory();
+
+        if (grabbedByHandHistory == null || collidingWithHand == null || grabbedByHandHistory.Count == 0 || collidingWithHand.Count == 0)
+            return;
+
+        if (grabbedByHandHistory.Count > 0)
+            grabbedByHandHistory.Clear();
+        if (collidingWithHand.Count > 0)
+            collidingWithHand.Clear();
     }
 
     private void Update()
@@ -36,11 +54,7 @@ public class GrabbingHand : MonoBehaviour
         isHovering = collidingWithHand.Count != 0;
     }
 
-    private void FixedUpdate()
-    {
-    }
-
-    private void OnTriggerEnter(Collider other)
+    public void _OnTriggerEnter(Collider other)
     {
         if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
@@ -48,7 +62,7 @@ public class GrabbingHand : MonoBehaviour
         collidingWithHand.Add(other.GetComponent<shapeItem_2>());
     }
 
-    private void OnTriggerExit(Collider other)
+    public void _OnTriggerExit(Collider other)
     {
         if (objectInHand || !other.GetComponent<shapeItem_2>())
             return;
@@ -56,16 +70,19 @@ public class GrabbingHand : MonoBehaviour
         collidingWithHand.Remove(other.GetComponent<shapeItem_2>());
     }
 
-    private void OnTriggerStay(Collider col)
+    public void _OnTriggerStay(Collider col)
     {
         if (objectInHand == null
             && grabActionReference.action.WasPressedThisFrame()
-            && (col.GetComponent<shapeItem_2>() || col.GetComponent<shapeItem_3>() || col.GetComponent<Interactable>()))
+            && (col.GetComponent<shapeItem_2>()
+                || col.GetComponent<shapeItem_3>()
+                || col.GetComponent<Interactable>())
+           )
         {
             shapeItem_2 shapeItem2_parent;
             if (col.GetComponent<shapeItem_3>())
             {
-                GameObject original = col.GetComponent<shapeItem_3>().original;
+                Interactable original = col.GetComponent<shapeItem_3>().original;
                 shapeItem2_parent = col.GetComponent<shapeItem_3>().shapeItem2_parent;
                 miniMap.RemoveFromMinimapUponGrab(shapeItem2_parent);
                 PickupObject(original);
@@ -76,7 +93,7 @@ public class GrabbingHand : MonoBehaviour
             shapeItem2_parent = col.GetComponent<shapeItem_2>();
             if (shapeItem2_parent)
             {
-                GameObject original = col.GetComponent<shapeItem_2>().original;
+                Interactable original = col.GetComponent<shapeItem_2>().original;
                 miniMap.RemoveFromMinimapUponGrab(col.GetComponent<shapeItem_2>());
                 PickupObject(original);
                 collidingWithHand.Remove(shapeItem2_parent);
@@ -87,33 +104,54 @@ public class GrabbingHand : MonoBehaviour
                 }
             }
 
-            // in this case we must have  an original 
-            if(col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
+            // in this case we must have an original -> dealing with raycast
+            if (col.GetComponent<shapeItem_2>() == null
+                && col.GetComponent<shapeItem_3>() == null)
             {
-                GameObject original = col.gameObject;
-                RayManager.HoldRayCastHitCollider.Remove(col.gameObject);
+                Interactable original = col.GetComponent<Interactable>();
+                original.GetComponent<Object_collected>().ResetOriginalScale();
                 PickupObject(original);
 
-                RayManager.releaseObjectsBackToOriginalPosition();
+                if (instanceOfRayManager)
+                {
+                    instanceOfRayManager.RemoveOneInteractableFromKebabList(original);
+
+                    if (original.TryGetComponent<TargetInteractable>(out _))
+                    {
+                        instanceOfRayManager.ReleaseInteractablesFromRay();
+                    }
+                }
 
                 if (circumferenceDisplayInUse)
                 {
                     clutterHandler_CircumferenceDisplay.FreeCircularSlots();
                 }
             }
-
-            
         }
     }
 
-
-    public void PickupObject(GameObject o)
+    private void PickupObject(Interactable o)
     {
-        o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
-        o.transform.parent = attachTransform;
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
+
+        o.GetComponent<Object_collected>().ResetOriginalScale();
+        o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
+        o.transform.parent = attachTransform;
         objectInHand = o;
+        grabbedByHandHistory.Add(o);
+        o.OnSelect();
+    }
+
+    public void CallPickUpObject(Interactable o)
+    {
+        PickupObject(o);
+    }
+
+    public void ResetItemHistory()
+    {
+        grabbedByHandHistory.ForEach(x => x.GetComponent<Object_collected>().ResetGameObject());
+        grabbedByHandHistory.Clear();
     }
 
     private void ReleaseCurrentlyHeldObject()

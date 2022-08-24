@@ -160,7 +160,7 @@ public class LenSelectInteractor : MonoBehaviour
             Destroy(temp.GetComponent<Object_collected>());
 
             temp.AddComponent<shapeItem_2>();
-            temp.GetComponent<shapeItem_2>().original = interactable.gameObject;
+            temp.GetComponent<shapeItem_2>().original = interactable;
             temp.GetComponent<Rigidbody>().isKinematic = true;
             temp.GetComponent<Rigidbody>().useGravity = false;
 

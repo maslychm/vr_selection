@@ -4,22 +4,35 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Floor
   - GestureFilter
-  - enemysphere
+  - cube
   - sphere
+  - infinity
+  - star
+  - pyramid
+  - cylinder
+  - enemy
+  - enemycube
+  - enemypyramid
+  - enemystar
+  - enemysphere
+  - clone
+  - unclutterDuplicate
+  - GrabbingHand
   - GridInteractable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - LenSelectInteractables
+  - confirmationCircle
+  - OnlyCollideWithHand
   - 
   - 
   - 

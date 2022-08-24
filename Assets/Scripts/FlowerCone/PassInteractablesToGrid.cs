@@ -2,123 +2,149 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// this script needs to be implemented into the mini-map script (?)
-
-//
-
 public class PassInteractablesToGrid : MonoBehaviour
 {
-    [SerializeField] private InputActionReference controlFreezing;
-    public GameGrid grid; // Add scipt to set position to camera
-    public GridCell gridObjects;
-    public MiniMapInteractor interactor;
+    [SerializeField] private InputActionReference flowerConeActionRef;
+    [SerializeField] private InputActionReference sameAsSelectRef;
 
-    // private float chanceOfAdding = .5f;
+    [SerializeField] private GameObject cone;
+    [SerializeField] private ConeVolumeHighlighter coneVolumeHighlighter;
+    [SerializeField] private GameObject rayGameObject;
 
-    // [Range(0, 100)]
-    // [SerializeField] private int fixedValueToUse = 0;
+    [SerializeField] private GameGrid grid;
+    [SerializeField] private Transform rayStartPoint;
 
-    // public int numOfInteractables = 0;
+    [SerializeField] private GrabbingHand grabbingHand;
 
-    public Material[] materialsOfInteractables = new Material[300];
-    // public int materialCount = 0;
-
-    public GameObject[] oringalInteractables = new GameObject[300];
-
-    private List<Interactable> allHighlightedObjects;
-    private List<GameObject> ogInteractables;
-
-    public Transform rayStartPoint;
-    [SerializeField] private InputActionReference sendRaycast;
-
-    private void Start()
+    public enum FlowerConeMode
     {
-        //CallGridInitialize();
+        Highlighting, SelectingWithRay, None
     }
 
-    private void SelectWithRay()
+    [ReadOnly] private FlowerConeMode mode;
+
+    private void OnEnable()
     {
-        // Creates a Ray from this object, moving forward
-        Ray ray = new Ray(rayStartPoint.position, rayStartPoint.forward);
+        TransitionToHighlighting();
+    }
 
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(rayStartPoint.position, rayStartPoint.forward, out hit, Mathf.Infinity))
+    /// <summary>
+    /// Send a ray and hit a copy of an interactable in a grid. Return true if something was hit, else false;
+    /// </summary>
+    /// <returns></returns>
+    private bool SelectWithRay()
+    {
+        if (Physics.Raycast(rayStartPoint.position, rayStartPoint.forward, out RaycastHit hit, Mathf.Infinity))
         {
-            print(hit.collider.name);
-
             if (hit.collider.CompareTag("GridInteractable"))
             {
-                GameObject og = hit.collider.transform.parent.GetComponent<GridCell>().objectInThisGridSpace;
-                FindObjectOfType<GrabbingHand>().PickupObject(og);
-                grid.DestroyGrid();
+                Interactable og = hit.collider.transform.parent.GetComponent<GridCell>().originalInteractable;
+                grabbingHand.CallPickUpObject(og);
+                //grid.DestroyGrid();
+
+                return true;
             }
         }
-        else
-        {
-            Debug.Log("Did not Hit");
-        }
+
+        return false;
     }
 
-    private void CallGridInitialize()
+    /// <summary>
+    /// Return true when grid was initialized, else return false.
+    /// Initialize grid if more than 1 object is highlighted.
+    /// </summary>
+    /// <returns></returns>
+    private uint CallGridInitialize()
     {
-        // materialCount = 0; // for adding materials to material list
+        List<Interactable> allHighlightedObjects = coneVolumeHighlighter.GetAllInteractables();
 
-        // chanceOfAdding = Random.Range(0f, 1f);
+        if (allHighlightedObjects.Count == 0)
+            return 0;
 
-        allHighlightedObjects = interactor.getList();
-        ogInteractables = interactor.getObjectsList();
-
-        /* List<Interactable> interactables = FindObjectsOfType<Interactable>().ToList();
-         List<Interactable> interactables = new List<Interactable>();
-
-        foreach (var t in temp)
+        if (allHighlightedObjects.Count == 1)
         {
-            interactables.Add(t.GetComponent<Interactable>());
-        }
-        */
+            // TODO pick up directly
 
-        print($"Num interactables in total: {allHighlightedObjects.Count}");
-
-        // List<Interactable> subsetOfInteractables = new List<Interactable>();
-
-        // Gets list of materials
-        for (int i = 0; i < allHighlightedObjects.Count; i++)
-        {
-            Material myMaterial = allHighlightedObjects[i].GetComponent<Renderer>().material;
-            materialsOfInteractables[i] = myMaterial;
-
-            oringalInteractables[i] = ogInteractables[i];
+            return 1;
         }
 
-        print("Destroying the previous grid");
-        // grid.DestroyGrid(subsetOfInteractables.Count, subsetOfInteractables.Count);
+        //print($"Num interactables in total: {allHighlightedObjects.Count}");
+
+        //print("Destroying the previous grid");
         grid.DestroyGrid();
 
-        // print($"Passing {subsetOfInteractables.Count} interactables");
-        print($"Passing {allHighlightedObjects.Count} interactables");
+        //print($"Passing {allHighlightedObjects.Count} interactables");
+        grid.CreateGrid(allHighlightedObjects);
 
-        grid.CreateGrid(allHighlightedObjects, allHighlightedObjects.Count, materialsOfInteractables, oringalInteractables);
+        return 2;
     }
 
-    // Currently runs space
+    private void ProcessInput()
+    {
+        // If dropped object -> go back to highlighting
+        if (sameAsSelectRef.action.WasPressedThisFrame())
+        // && mode != FlowerConeMode.high)
+        {
+            grid.DestroyGrid();
+            TransitionToHighlighting();
+            return;
+        }
+
+        // If did not press Trigger
+        if (!flowerConeActionRef.action.WasPressedThisFrame())
+        {
+            return;
+        }
+
+        switch (mode)
+        {
+            case FlowerConeMode.None:
+                break;
+
+            case FlowerConeMode.Highlighting:
+                uint gridInitCode = CallGridInitialize();
+
+                if (gridInitCode == 0)
+                { }
+                else if (gridInitCode == 1)
+                    TransitionToNone();
+                else
+                    TransitionToSelecting();
+
+                break;
+
+            case FlowerConeMode.SelectingWithRay:
+                if (SelectWithRay())
+                    TransitionToNone();
+                else
+                { }
+                break;
+        }
+    }
+
+    private void TransitionToHighlighting()
+    {
+        cone.SetActive(true);
+        rayGameObject.SetActive(false);
+        mode = FlowerConeMode.Highlighting;
+    }
+
+    private void TransitionToSelecting()
+    {
+        cone.SetActive(false);
+        rayGameObject.SetActive(true);
+        mode = FlowerConeMode.SelectingWithRay;
+    }
+
+    private void TransitionToNone()
+    {
+        cone.SetActive(false);
+        rayGameObject.SetActive(false);
+        mode = FlowerConeMode.None;
+    }
+
     private void Update()
     {
-        if (controlFreezing.action.WasPressedThisFrame())
-        {
-            CallGridInitialize();
-        }
-
-        if (sendRaycast.action.WasPerformedThisFrame())
-        {
-            SelectWithRay();
-        }
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    print("Space was pressed -> CallGridInitialize()");
-        //    // numOfInteractables = 0;
-        //    CallGridInitialize();
-        //}
+        ProcessInput();
     }
 }

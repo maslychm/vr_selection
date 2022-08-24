@@ -29,6 +29,11 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
         isFrozen = false;
     }
 
+    private void OnEnable()
+    {
+        isFrozen = false;
+    }
+
     private void ProcessFreezing()
     {
         if (clickedRightHandController.action.WasPressedThisFrame())

@@ -1,7 +1,0 @@
-subject_id,technique,density,trial_id,randObjIdx,successful_selections,total_attempts,trial_time
-subtestSubject,RayKebab,1,1,30,1,1,4.246297
-subtestSubject,RayKebab,1,2,20,1,1,2.979344
-subtestSubject,RayKebab,2,1,72,1,1,7.20616
-subtestSubject,RayKebab,2,2,65,1,3,23.68162
-subtestSubject,RayKebab,3,1,18,1,1,11.88549
-subtestSubject,RayKebab,3,2,296,1,1,2.672596

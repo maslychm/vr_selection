@@ -1,7 +1,0 @@
-subject_id,technique,density,trial_id,randObjIdx,successful_selections,total_attempts,trial_time
-subDrlAVIOLA,ThreeDMiniMap,1,1,30,1,1,2.024928
-subDrlAVIOLA,ThreeDMiniMap,1,2,20,1,1,1.482244
-subDrlAVIOLA,ThreeDMiniMap,2,1,72,1,1,1.860289
-subDrlAVIOLA,ThreeDMiniMap,2,2,65,1,1,3.346952
-subDrlAVIOLA,ThreeDMiniMap,3,1,18,1,1,29.64088
-subDrlAVIOLA,ThreeDMiniMap,3,2,296,1,1,2.205105

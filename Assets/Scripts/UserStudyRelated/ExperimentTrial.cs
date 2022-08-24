@@ -27,8 +27,9 @@ public class ExperimentTrial
         Debug.Log("-- Trial START --");
 
         replacedInteractable = interactableToReplace;
+
         // this will store the updated transform for every time we assign a new target
-        TargetInteractable.UpdateReferenceTransformOfTarget(replacedInteractable.gameObject.transform);
+        TargetInteractable.SetReferenceTransformForCurrentTrial(replacedInteractable.transform);
 
         targetInteractable.transform.position = replacedInteractable.transform.position;
         targetInteractable.transform.rotation = replacedInteractable.transform.rotation;
@@ -67,12 +68,9 @@ public class ExperimentTrial
         Debug.Log($"Wrote results file: {fname}");
         activeTrial = null;
         Debug.Log("-- Trial END --");
-        replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
-        targetInteractable.GetComponent<Object_collected>().ResetGameObject();
+        //replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
+        //targetInteractable.GetComponent<Object_collected>().ResetGameObject();
         //targetInteractable.transform.position = new Vector3(targetInteractable.transform.position.x + 20.0f, targetInteractable.transform.position.y, targetInteractable.transform.position.z);
-        // at the end of the trial we simply set back the circle as it was
-        //BoundaryCircleManager.wasHoveredOver = false;
-
     }
 
     public bool WasSuccessful()

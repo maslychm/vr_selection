@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class GrabbingHand : MonoBehaviour
 {
     [SerializeField] private InputActionReference grabActionReference;
@@ -100,8 +99,9 @@ public class GrabbingHand : MonoBehaviour
                 }
             }
 
-            // in this case we must have  an original
-            if (col.GetComponent<shapeItem_2>() == null && col.GetComponent<shapeItem_3>() == null)
+            // in this case we must have an original -> dealing with raycast
+            if (col.GetComponent<shapeItem_2>() == null
+                && col.GetComponent<shapeItem_3>() == null)
             {
                 Interactable original = col.GetComponent<Interactable>();
                 original.GetComponent<Object_collected>().ResetOriginalScale();
@@ -109,8 +109,12 @@ public class GrabbingHand : MonoBehaviour
 
                 if (instanceOfRayManager)
                 {
-                    instanceOfRayManager.HoldRayCastHitCollider.Remove(col.gameObject);
-                    instanceOfRayManager.releaseObjectsBackToOriginalPosition();
+                    instanceOfRayManager.RemoveOneInteractableFromKebabList(original);
+
+                    if (original.TryGetComponent<TargetInteractable>(out _))
+                    {
+                        instanceOfRayManager.ReleaseInteractablesFromRay();
+                    }
                 }
 
                 if (circumferenceDisplayInUse)
@@ -123,12 +127,12 @@ public class GrabbingHand : MonoBehaviour
 
     private void PickupObject(Interactable o)
     {
-        Debug.Log(" this is the picked up object -> " + o.gameObject.name);
-        o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
-        o.transform.parent = attachTransform;
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
+
         o.GetComponent<Object_collected>().ResetOriginalScale();
+        o.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
+        o.transform.parent = attachTransform;
         objectInHand = o;
         grabbedByHandHistory.Add(o);
         o.OnSelect();
@@ -136,10 +140,9 @@ public class GrabbingHand : MonoBehaviour
 
     public void callPickUpObject(Interactable o)
     {
-
-        Debug.Log(" this is the picked up object -> " + o.gameObject.name);
         PickupObject(o);
     }
+
     public List<Interactable> GetListOfToBeFlushedItems()
     {
         return grabbedByHandHistory;

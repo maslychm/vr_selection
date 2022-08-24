@@ -3,34 +3,27 @@ using UnityEngine;
 public class TargetInteractable : Interactable
 {
     public cakeslice.Outline targetOutline = null;
-    public static Transform TempTransformForCurrentTrial;
+
+    private static Vector3 originalScale;
+    private static Vector3 originalPosition;
+    private static Quaternion originalRotation;
+
     public static bool updateBack = false;
 
-    private void Start()
+    public void ResetTargetForCurrentTrial()
     {
-        TempTransformForCurrentTrial = this.transform;
-    }
-    private void Update()
-    {
-        if (updateBack == true)
-        {
-            this.gameObject.transform.position = TempTransformForCurrentTrial.position;
-            this.gameObject.transform.rotation = TempTransformForCurrentTrial.rotation;
-            this.gameObject.transform.localScale = TempTransformForCurrentTrial.localScale;
-            this.gameObject.transform.SetParent(TempTransformForCurrentTrial.parent);
-        }
+        print("Resetting target in the current trial");
 
-        updateBack = false;
-    }
-    // save the target current transform 
-    public static void UpdateReferenceTransformOfTarget(Transform currentUpdate)
-    {
-        TempTransformForCurrentTrial = currentUpdate;
+        transform.position = originalPosition;
+        transform.rotation = originalRotation;
+        transform.localScale = originalScale;
+        transform.SetParent(null);
     }
 
-    // reset target object 
-    public static void UpdateTransformOfTarget()
+    public static void SetReferenceTransformForCurrentTrial(Transform _t)
     {
-        updateBack = true;
+        originalPosition = _t.position;
+        originalRotation = _t.rotation;
+        originalScale = _t.localScale;
     }
 }

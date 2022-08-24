@@ -29,13 +29,19 @@ public class ExperimentLevel : MonoBehaviour
     // comparison)
     private GameObject MiddleMarkerEmptyGameObject;
 
+    private BoundaryCircleManager readinessCircleManager;
+
     private int priorRandomIndex = -1;
 
     private void Start()
     {
         MiddleMarkerEmptyGameObject = GameObject.Find("HalfwayMarker");
         if (MiddleMarkerEmptyGameObject == null)
-        { print("HalfwayMarker object was not found!"); }
+        { Debug.LogError("HalfwayMarker object was not found!"); }
+
+        readinessCircleManager = FindObjectOfType<BoundaryCircleManager>();
+        if (readinessCircleManager == null)
+        { Debug.LogError("Did not find boundary circle manager"); };
     }
 
     public void StartLevel(in int randomSeed, in int numTrialsPerLevel)
@@ -46,18 +52,12 @@ public class ExperimentLevel : MonoBehaviour
         // Set level settings
         //
 
-        //if(BoundaryCircleManager.wasHoveredOver == false)
-        //{
-        //    StartLevel(randomSeed, numTrialsPerLevel);
-        //    return;
-        //}
-
         levelName = $"{levelTechnique}_dens{levelDensity}";
 
         GetComponent<LevelManager>().DisableAllLevels();
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
-        
+
         ExperimentLogger.densityLevel = levelDensity;
         ExperimentLogger.selectionTechnique = levelTechnique;
 
@@ -70,9 +70,7 @@ public class ExperimentLevel : MonoBehaviour
             .ToList();
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
         ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
-        ExperimentTrial.targetInteractable.targetOutline.enabled = true ;
-
-        BoundaryCircleManager.circleWasClicked = false;
+        ExperimentTrial.targetInteractable.targetOutline.enabled = true;
 
         Random.InitState(randomSeed);
 
@@ -98,7 +96,6 @@ public class ExperimentLevel : MonoBehaviour
         ComputeLevelStats();
 
         print("-> Level END <-");
-        //BoundaryCircleManager.enableBothRaysNextFrame = false;
 
         GetComponent<LevelManager>().DisableAllLevels();
         GetComponent<SelectionTechniqueManager>().DisableAllTechniques();
@@ -118,13 +115,14 @@ public class ExperimentLevel : MonoBehaviour
 
         currentTrial = remainingTrials.Dequeue();
 
-        BoundaryCircleManager.circleWasClicked = false; 
         currentTrial.StartTrial(randIdx, interactableToReplace);
         state = ExperimentLevelState.RunningTrial;
     }
 
     private void TransitionToBeforeTrial()
     {
+        readinessCircleManager.SetWaitForUserReady();
+
         if (currentTrial != null)
         {
             completedTrials.Add(currentTrial);
@@ -148,7 +146,7 @@ public class ExperimentLevel : MonoBehaviour
                 break;
 
             case ExperimentLevelState.BeforeNextTrial:
-                if (BoundaryCircleManager.circleWasClicked)
+                if (readinessCircleManager.UserConfirmedReadiness())
                     TransitionToNextTrial();
                 break;
 

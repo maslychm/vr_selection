@@ -15,6 +15,7 @@ public class ExperimentManager : MonoBehaviour
 
     [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
     public static string selectionTechniqueName;
+
     [Range(1, 60)]
     [SerializeField] private float pauseBetweenLevelsDuration = 10f;
 
@@ -23,11 +24,11 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private int randomSeed = 1234;
 
     [Header("Current Level Status")]
-    [ReadOnly]  public static ExperimentState state = ExperimentState.Idle;
+    [ReadOnly] public static ExperimentState state = ExperimentState.Idle;
 
-    [ReadOnly] [SerializeField] private int numRemainingLevels = -1;
+    [ReadOnly][SerializeField] private int numRemainingLevels = -1;
 
-    [ReadOnly] [SerializeField] private float pauseTimeRemaining = -1f;
+    [ReadOnly][SerializeField] private float pauseTimeRemaining = -1f;
 
     private Queue<ExperimentLevel> remainingLevels;
     private List<ExperimentLevel> finishedLevels;
@@ -59,7 +60,6 @@ public class ExperimentManager : MonoBehaviour
         ClearExperiment();
 
         ExperimentLogger.subjectId = subjectId;
-        //ExperimentTrial.soundSystemHolder = FindObjectOfType<SoundSystemHolder>();
 
         List<ExperimentLevel> levels = new List<ExperimentLevel>();
 
@@ -125,10 +125,10 @@ public class ExperimentManager : MonoBehaviour
         switch (state)
         {
             case ExperimentState.Idle:
-                //Mimir.ShowTheBarrier();
                 break;
 
             case ExperimentState.RunningLevel:
+
                 if (currentLevel.state == ExperimentLevel.ExperimentLevelState.Finished)
                     TransitionToPause();
 
@@ -137,7 +137,6 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.BetweenLevels:
-                //Mimir.ShowTheBarrier();
 
                 pauseTimeRemaining -= Time.deltaTime;
                 if (pauseTimeRemaining < 0f)

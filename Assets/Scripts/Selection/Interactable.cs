@@ -53,9 +53,10 @@ public class Interactable : MonoBehaviour
             return;
         }
 
-        if (TryGetComponent<TargetInteractable>(out _))
+        if (TryGetComponent(out TargetInteractable _))
         {
             ExperimentTrial.activeTrial.RecordTargetHit();
+            GetComponent<Object_collected>().ResetGameObject();
         }
         else
         {

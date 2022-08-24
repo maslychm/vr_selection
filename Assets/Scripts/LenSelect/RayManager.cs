@@ -5,19 +5,12 @@ using UnityEngine.InputSystem;
 
 public class RayManager : MonoBehaviour
 {
-    private LineRenderer LenSelectRay;
-    private List<Interactable> allObjectsInteractables;
-    public GameObject leftHandController;
-    public HashSet<GameObject> HoldRayCastHitCollider = new HashSet<GameObject>();
+    private List<Interactable> rayCastedInteractables;
     private float startOffsetOFspheres = 0.05f;
 
-    [SerializeField] public InputActionReference BringItemsAligned;
-    [SerializeField] public InputActionReference TakeItemsBack;
+    [SerializeField] private InputActionReference raySelectActionReference;
 
     public static bool turnWhite = false;
-
-    // build a dictionary to map ouyt the transforms back to original
-    //public Dictionary<GameObject, Transform> MapToOriginalPosisition;
 
     public LineRenderer lineRenderer; // stor ethe current puyrpole linerenderer
 
@@ -28,59 +21,45 @@ public class RayManager : MonoBehaviour
 
     private RaycastHit[] hits;
 
-    private Transform currentTransformOfTarget;
+    public GrabbingHand grabbingHand;
 
-    public GrabbingHand theHand;
-
-    // Start is called before the first frame update
     private void Start()
     {
-        //MapToOriginalPosisition = new Dictionary<GameObject, Transform>();
-
-        allObjectsInteractables = new List<Interactable>();
-
-        allObjectsInteractables = FindObjectsOfType<Interactable>().ToList();
-
-        LenSelectRay = this.gameObject.GetComponent<LineRenderer>();
-
-        lineRenderer = this.GetComponent<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
 
         lineRenderer.material = whiteMaterial;
     }
 
     private void OnEnable()
     {
-        theHand = FindObjectOfType<GrabbingHand>();
+        rayCastedInteractables = new List<Interactable>();
+        grabbingHand = FindObjectOfType<GrabbingHand>();
     }
 
     private void Update()
     {
-        // addedthis for later debugging purposes 
-        //if(lineRenderer.material == RedMaterial && HoldRayCastHitCollider.Count == 0)
-        if (turnWhite == true || (lineRenderer.material == RedMaterial && HoldRayCastHitCollider.Count == 0))
+        if (turnWhite == true || (lineRenderer.material == RedMaterial && rayCastedInteractables.Count == 0))
         {
             lineRenderer.material = whiteMaterial;
         }
 
-        // add an input action reference here
-        if (BringItemsAligned.action.WasPerformedThisFrame() && BringOrFlush == 0)
+        if (raySelectActionReference.action.WasPressedThisFrame() && BringOrFlush == 0)
         {
-            currentTransformOfTarget = ExperimentTrial.targetInteractable.transform;
             ProcessInputHere();
         }
-        else if (TakeItemsBack.action.WasPressedThisFrame() && BringOrFlush == 1)
+        else if (raySelectActionReference.action.WasPressedThisFrame() && BringOrFlush == 1)
         {
-            if (HoldRayCastHitCollider.Count() < 2)
+            if (rayCastedInteractables.Count() < 2)
             {
                 lineRenderer.material = whiteMaterial;
                 BringOrFlush = 0;
-                HoldRayCastHitCollider.Clear();
+                rayCastedInteractables.Clear();
                 return;
             }
-            releaseObjectsBackToOriginalPosition();
+            ReleaseInteractablesFromRay();
 
-            if (HoldRayCastHitCollider.Count > 0)
-                HoldRayCastHitCollider.Clear();
+            if (rayCastedInteractables.Count > 0)
+                rayCastedInteractables.Clear();
             lineRenderer.material = whiteMaterial;
             BringOrFlush = 0;
         }
@@ -94,43 +73,35 @@ public class RayManager : MonoBehaviour
     {
         // store the array of colliders hit by the raycast
         hits = Physics.RaycastAll(transform.position, transform.forward, 100.0F);
-        //MapToOriginalPosisition.Clear();
-        HoldRayCastHitCollider.Clear();
-        // iterate throuigh the array of colliders and then basicvally just get the spheres
+        rayCastedInteractables.Clear();
+
         for (int i = 0; i < hits.Length; i++)
         {
-            RaycastHit hit = hits[i];
-
-            if (hit.collider.GetComponent<Interactable>())
-            {
-                HoldRayCastHitCollider.Add(hit.collider.gameObject);
-            }
+            if (hits[i].collider.TryGetComponent(out Interactable interactable))
+                rayCastedInteractables.Add(interactable);
         }
-        if (HoldRayCastHitCollider.Count == 0)
+
+        if (rayCastedInteractables.Count == 0)
             return;
 
-        GameObject priorPlacedInHand;
-
-        if (HoldRayCastHitCollider.Count == 1)
+        if (rayCastedInteractables.Count == 1)
         {
-            theHand.callPickUpObject(HoldRayCastHitCollider.ElementAt(0).GetComponent<Interactable>());
+            grabbingHand.callPickUpObject(rayCastedInteractables.ElementAt(0).GetComponent<Interactable>());
 
             lineRenderer.material = RedMaterial;
             lineRenderer.material = whiteMaterial;
             startOffsetOFspheres = 0.05f;
-            //BringOrFlush = 1;
             BringOrFlush = 0;
 
             return;
         }
-        foreach (GameObject tempGameObjectFromSet in HoldRayCastHitCollider)
+        foreach (Interactable tempGameObjectFromSet in rayCastedInteractables)
         {
-            tempGameObjectFromSet.transform.SetParent(leftHandController.transform);
+            tempGameObjectFromSet.transform.SetParent(transform);
 
-            // for some reason the scale of these is too small
             tempGameObjectFromSet.transform.localScale = new Vector3(0.08f, 0.08f, 0.08f);
-            tempGameObjectFromSet.transform.position = transform.TransformPoint(new Vector3(leftHandController.transform.localPosition.x, leftHandController.transform.localPosition.y, leftHandController.transform.localPosition.z + startOffsetOFspheres));
-            priorPlacedInHand = tempGameObjectFromSet;
+            tempGameObjectFromSet.transform.position = transform.TransformPoint(transform.localPosition + new Vector3(0, 0, startOffsetOFspheres));
+
             startOffsetOFspheres += 0.085f;
         }
 
@@ -140,30 +111,35 @@ public class RayManager : MonoBehaviour
     }
 
     // thios functiuobn should set back the objects to their original transform
-    public void releaseObjectsBackToOriginalPosition()
+    public void ReleaseInteractablesFromRay()
     {
-        foreach (var temp in HoldRayCastHitCollider)
+        foreach (Interactable interactable in rayCastedInteractables)
         {
-
-            if (temp.name != "TargetInteractable")
+            if (ExperimentTrial.activeTrial == null)
             {
-                temp.transform.SetParent(null);
-                temp.GetComponent<Object_collected>().ResetGameObject();
+                interactable.GetComponent<Object_collected>().ResetGameObject();
             }
-            else if (temp.name == "TargetInteractable" && ExperimentTrial.activeTrial != null)
+            else
             {
-                Debug.Log("We have reached a reset state mid trial but it fails ");
-                TargetInteractable.UpdateTransformOfTarget();
+                // If a trial is active and the wrong object was picked up, target
+                // interactable should go to it's last position, not the "reset" one
+                if (interactable.TryGetComponent(out TargetInteractable target))
+                {
+                    print("wrong -> manually resetting target in curr trial");
+                    target.ResetTargetForCurrentTrial();
+                }
+                else
+                {
+                    interactable.GetComponent<Object_collected>().ResetGameObject();
+                }
             }
-            else if (temp.name == "TargetInteractable" && ExperimentTrial.activeTrial == null)
-            {
-                temp.transform.SetParent(null);
-                temp.GetComponent<Object_collected>().ResetGameObject();
-            }
-
-
         }
         lineRenderer.material = whiteMaterial;
         BringOrFlush = 0;
+    }
+
+    public void RemoveOneInteractableFromKebabList(Interactable interactable)
+    {
+        rayCastedInteractables.Remove(interactable);
     }
 }

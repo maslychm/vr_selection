@@ -13,10 +13,8 @@ public class shapeItem_2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>())
-        {
+        if (!other.CompareTag("GrabbingHand"))
             return;
-        }
 
         interactionOutline.enabled = true;
         original.interactionOutline.enabled = true;
@@ -24,7 +22,7 @@ public class shapeItem_2 : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>())
+        if (!other.CompareTag("GrabbingHand"))
             return;
 
         interactionOutline.enabled = false;

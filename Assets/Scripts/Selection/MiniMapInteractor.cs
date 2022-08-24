@@ -67,7 +67,6 @@ public class MiniMapInteractor : MonoBehaviour
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate_ForCirCumference;
     private List<(shapeItem_2, Vector3)> duplicateDirections;
 
-
     public void OnEnable()
     {
         //print($"AWAKE IN MMINTERACTOR IS CALLED in {name}");
@@ -120,15 +119,8 @@ public class MiniMapInteractor : MonoBehaviour
         {
             GameObject original = interactable.gameObject;
 
-
-            // check if it has two then skip assigning a new one 
-
-            // fix this
-
-
             if (interactable.TryGetComponent<TargetInteractable>(out var ti))
             {
-
                 if (interactable.GetComponents<cakeslice.Outline>().ToList().Count < 2)
                 {
                     // If it's a target, the already set outline is the target outline, save it
@@ -234,6 +226,9 @@ public class MiniMapInteractor : MonoBehaviour
             originalToDuplicate.Add(interactable, si2);
 
             duplicate.SetActive(false);
+
+            si2.gameObject.layer = 10;
+            si3.gameObject.layer = 10;
         }
     }
 
@@ -401,7 +396,6 @@ public class MiniMapInteractor : MonoBehaviour
         allHighlightedObjects.Remove(o);
     }
 
-
     // For flower cone
     public List<Interactable> getList()
     {
@@ -409,7 +403,7 @@ public class MiniMapInteractor : MonoBehaviour
 
         print("***" + allHighlightedObjects.Count());
 
-        for ( int i = 0; i < allHighlightedObjects.Count; i++)
+        for (int i = 0; i < allHighlightedObjects.Count; i++)
         {
             interactableHighlighted.Add(allHighlightedObjects[i].GetComponent<Interactable>());
         }

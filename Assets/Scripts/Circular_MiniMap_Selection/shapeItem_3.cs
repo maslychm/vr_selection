@@ -13,7 +13,7 @@ public class shapeItem_3 : MonoBehaviour
 
     private void Start()
     {
-        gameObject.layer = 10;
+        
     }
 
     private void OnTriggerEnter(Collider other)

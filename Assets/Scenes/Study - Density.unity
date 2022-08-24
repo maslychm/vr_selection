@@ -4385,6 +4385,10 @@ PrefabInstance:
       value: FlashlightConeOhMM
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_TagString
       value: GestureFilter
       objectReference: {fileID: 0}
@@ -28023,7 +28027,7 @@ GameObject:
   - component: {fileID: 1309045919}
   - component: {fileID: 1309045921}
   - component: {fileID: 1309045918}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: GrabbingHand
   m_Icon: {fileID: 0}
@@ -28851,6 +28855,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_Name
       value: FlashlightCone3DMM
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_TagString
@@ -34603,6 +34611,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_Name
       value: FlashlightConeSimpleMM
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_TagString

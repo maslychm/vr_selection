@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3041950925296200394}
   - component: {fileID: 6496783376580009791}
   - component: {fileID: -242187440769767142}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TargetInteractable
   m_TagString: sphere
   m_Icon: {fileID: 0}
@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc43102b083e9746b079f7fe3252234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalScale: {x: 0, y: 0, z: 0}
 --- !u!114 &6496783376580009791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMaterial: {fileID: 0}
+  interactionOutline: {fileID: 0}
   debug: 0
+  targetOutline: {fileID: 0}
 --- !u!114 &-242187440769767142
 MonoBehaviour:
   m_ObjectHideFlags: 0

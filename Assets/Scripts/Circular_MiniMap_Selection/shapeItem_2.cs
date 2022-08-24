@@ -8,7 +8,7 @@ public class shapeItem_2 : MonoBehaviour
 
     private void Start()
     {
-        gameObject.layer = 10;
+        
     }
 
     private void OnTriggerEnter(Collider other)

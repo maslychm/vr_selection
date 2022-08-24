@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 145584628470803562}
   - component: {fileID: 3041950925296200394}
   - component: {fileID: 441881580201600368}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SphereInteractable
   m_TagString: sphere
   m_Icon: {fileID: 0}
@@ -139,4 +139,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverMaterial: {fileID: 2100000, guid: 8039ee3d27bb63b4bb66a4c103234343, type: 2}
+  interactionOutline: {fileID: 0}
   debug: 0

@@ -1088,7 +1088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 157595192}
   - component: {fileID: 157595194}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LeftHand Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10026,6 +10026,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_Name
       value: FlashlightConeFlower
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_TagString

@@ -28,6 +28,11 @@ public class PassInteractablesToGrid : MonoBehaviour
         TransitionToHighlighting();
     }
 
+    public void AtTrialStart()
+    {
+        TransitionToHighlighting();
+    }
+
     /// <summary>
     /// Send a ray and hit a copy of an interactable in a grid. Return true if something was hit, else false;
     /// </summary>

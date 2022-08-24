@@ -405,6 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   internalSphereRenderer: {fileID: 5899163891288423313}
   originalInteractable: {fileID: 0}
+  underlyingSphere: {fileID: 2134710310490250845}
 --- !u!1 &5197578988676258145
 GameObject:
   m_ObjectHideFlags: 0

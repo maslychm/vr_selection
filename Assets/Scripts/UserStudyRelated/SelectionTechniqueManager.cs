@@ -11,13 +11,14 @@ using UnityEngine;
 public class SelectionTechniqueManager : MonoBehaviour
 {
     public enum SelectionTechnique
-    { SimpleMiniMap, OhMiniMap, ThreeDMiniMap, RayKebab }
+    { SimpleMiniMap, OhMiniMap, ThreeDMiniMap, RayKebab, Flower }
 
-    [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root, RayKebabGameObjectRoot, ThreeDMiniMapRoot;
+    [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root, RayKebabGameObjectRoot, ThreeDMiniMapRoot, FlowerRoot;
     [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap, ThreeDMiniMap;
     [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor, ThreeDMiniMapInteractor;
     [SerializeField] private RayKebabManager instanceOfRayManager;
     [SerializeField] private GrabbingHand grabbingHand;
+    [SerializeField] private PassInteractablesToGrid flowerCone;
 
     public static bool allowKeySelectionTechniqueSwitching = true;
 
@@ -56,10 +57,12 @@ public class SelectionTechniqueManager : MonoBehaviour
         OhMiniMap_root.SetActive(false);
         RayKebabGameObjectRoot.SetActive(false);
         ThreeDMiniMapRoot.SetActive(false);
+        FlowerRoot.SetActive(false);
         isRayKebab = false;
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
         grabbingHand.instanceOfRayManager = null;
+        grabbingHand.flowerCone = null;
         grabbingHand.circumferenceDisplayInUse = false;
         grabbingHand.ClearGrabbed();
     }
@@ -83,12 +86,23 @@ public class SelectionTechniqueManager : MonoBehaviour
             case SelectionTechnique.RayKebab:
                 ActivateRayKebab();
                 break;
+
+            case SelectionTechnique.Flower:
+                ActivateFlowerCone();
+                break;
         }
     }
 
     private void ActivateFlowerCone()
     {
         DisableAllTechniques();
+        print("Enabling Flower Cone");
+        grabbingHand.miniMap = null;
+        grabbingHand.miniMapIntreractor = null;
+        grabbingHand.circumferenceDisplayInUse = false;
+        grabbingHand.instanceOfRayManager = null;
+        grabbingHand.flowerCone = flowerCone;
+        FlowerRoot.SetActive(true);
     }
 
     private void ActivateRayKebab()

@@ -9,6 +9,7 @@ public class GrabbingHand : MonoBehaviour
 
     public MiniMap miniMap = null;
     public MiniMapInteractor miniMapIntreractor = null;
+    public PassInteractablesToGrid flowerCone = null;
     public bool addForceOnObjectDetach = true;
     public float objPushForce = 20.0f;
 
@@ -34,6 +35,11 @@ public class GrabbingHand : MonoBehaviour
         ReleaseCurrentlyHeldObject();
 
         ResetItemHistory();
+
+        if (flowerCone)
+        {
+            flowerCone.AtTrialStart();
+        }
 
         if (grabbedByHandHistory == null || collidingWithHand == null || grabbedByHandHistory.Count == 0 || collidingWithHand.Count == 0)
             return;

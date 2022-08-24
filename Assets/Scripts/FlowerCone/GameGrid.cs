@@ -61,7 +61,7 @@ public class GameGrid : MonoBehaviour
                 objectIndex++;
             }
         }
-        transform.SetPositionAndRotation(new Vector3(0, 0, -2), Quaternion.identity);
+        transform.SetPositionAndRotation(new Vector3(-.5f, 1, -3), Quaternion.identity);
     }
 
     public void DestroyGrid()

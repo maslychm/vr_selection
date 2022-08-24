@@ -19,6 +19,7 @@ TagManager:
   - enemysphere
   - clone
   - unclutterDuplicate
+  - GrabbingHand
   layers:
   - Default
   - TransparentFX

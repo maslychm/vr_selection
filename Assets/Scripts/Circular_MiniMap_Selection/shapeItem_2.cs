@@ -2,30 +2,30 @@ using UnityEngine;
 
 public class shapeItem_2 : MonoBehaviour
 {
-    public GameObject original;
+    public Interactable original;
+    public cakeslice.Outline interactionOutline = null;
+    public cakeslice.Outline targetOutline = null;
+
+    private void Start()
+    {
+        gameObject.layer = 10;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>())
-        {
+        if (!other.CompareTag("GrabbingHand"))
             return;
-        }
 
-        if (other.GetComponent<GrabbingHand>().objectInHand)
-        {
-            return;
-        }
-
-        GetComponent<cakeslice.Outline>().enabled = true;
-        original.GetComponent<cakeslice.Outline>().enabled = true;
+        interactionOutline.enabled = true;
+        original.interactionOutline.enabled = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>())
+        if (!other.CompareTag("GrabbingHand"))
             return;
 
-        GetComponent<cakeslice.Outline>().enabled = false;
-        original.GetComponent<cakeslice.Outline>().enabled = false;
+        interactionOutline.enabled = false;
+        original.interactionOutline.enabled = false;
     }
 }

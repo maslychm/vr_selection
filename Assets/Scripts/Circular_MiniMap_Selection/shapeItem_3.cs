@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class shapeItem_3 : MonoBehaviour
 {
-    public GameObject original;
+    public Interactable original;
     public shapeItem_2 shapeItem2_parent;
+    public cakeslice.Outline interactionOutline = null;
+    public cakeslice.Outline targetOutline = null;
 
     private void Start()
     {
@@ -16,21 +18,21 @@ public class shapeItem_3 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>() || other.GetComponent<GrabbingHand>().objectInHand)
+        if (!other.CompareTag("GrabbingHand"))
             return;
 
-        GetComponent<cakeslice.Outline>().enabled = true;
-        shapeItem2_parent.GetComponent<cakeslice.Outline>().enabled = true;
-        original.GetComponent<cakeslice.Outline>().enabled = true;
+        interactionOutline.enabled = true;
+        shapeItem2_parent.interactionOutline.enabled = true;
+        original.interactionOutline.enabled = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<GrabbingHand>() || other.GetComponent<GrabbingHand>().objectInHand)
+        if (!other.CompareTag("GrabbingHand"))
             return;
 
-        GetComponent<cakeslice.Outline>().enabled = false;
-        shapeItem2_parent.GetComponent<cakeslice.Outline>().enabled = false;
-        original.GetComponent<cakeslice.Outline>().enabled = false;
+        interactionOutline.enabled = false;
+        shapeItem2_parent.interactionOutline.enabled = false;
+        original.interactionOutline.enabled = false;
     }
 }

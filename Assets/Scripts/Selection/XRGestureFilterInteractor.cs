@@ -82,10 +82,10 @@ public class XRGestureFilterInteractor : MonoBehaviour
     {
         ProcessInput();
     }
+
     // migrated triggers from interactables
     public void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
         if (!other.CompareTag("sphere"))
             return;
 
@@ -96,8 +96,6 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        other.gameObject.GetComponent<Interactable>().dprint(other.tag);
-
         if (!other.CompareTag("sphere"))
             return;
 
@@ -105,6 +103,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
 
         RemoveFromHighlighted(other.gameObject);
     }
+
     private void ProcessInput()
     {
         if (flaslightActionReference.action.WasPressedThisFrame())

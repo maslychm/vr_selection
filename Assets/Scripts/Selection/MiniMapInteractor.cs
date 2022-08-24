@@ -32,7 +32,7 @@ public class MiniMapInteractor : MonoBehaviour
     [Header("Debugging and UI")]
     [SerializeField] private TabletUI tabletUI;
 
-    private List<GameObject> allHighlightedObjects;
+    private HashSet<Interactable> allHighlightedObjects;
 
     [Header("Flashlight Scaling")]
     [SerializeField] private Vector3 defaultFlashlightScale = Vector3.zero;
@@ -73,7 +73,7 @@ public class MiniMapInteractor : MonoBehaviour
         originalToDuplicate = new Dictionary<Interactable, shapeItem_2>();
         duplicateDirections = new List<(shapeItem_2, Vector3)>();
 
-        allHighlightedObjects = new List<GameObject>();
+        allHighlightedObjects = new HashSet<Interactable>();
         originalToDuplicate_ForCirCumference = new Dictionary<shapeItem_2, shapeItem_3>();
 
         if (defaultFlashlightScale == Vector3.zero)
@@ -304,39 +304,43 @@ public class MiniMapInteractor : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<Interactable>()) return;
-        other.gameObject.GetComponent<Interactable>().StartHover();
-        AddtoHighlighted(other.gameObject);
+        if (!other.TryGetComponent(out Interactable interactable))
+            return;
+
+        interactable.StartHover();
+        allHighlightedObjects.Add(interactable);
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<Interactable>()) return;
-        other.gameObject.GetComponent<Interactable>().EndHover();
-        RemoveFromHighlighted(other.gameObject);
+        if (!other.TryGetComponent(out Interactable interactable))
+            return;
+        interactable.EndHover();
+
+        allHighlightedObjects.Remove(interactable);
     }
 
-    public void CalculateDuplicateDirections(List<GameObject> objects)
+    public void CalculateDuplicateDirections(HashSet<Interactable> interactables)
     {
         duplicateDirections.Clear();
         Vector3 max = Vector3.zero;
         float minZ = Mathf.Infinity;
         float maxZ = -1;
-        foreach (GameObject o in objects)
+        foreach (Interactable interactable in interactables)
         {
             // -----------------------Get the Distance here and then store it in the dictionary--------------------------
 
-            if (!originalToDuplicate.ContainsKey(o.GetComponent<Interactable>()))
+            if (!originalToDuplicate.ContainsKey(interactable))
             {
                 continue;
             }
 
-            shapeItem_2 duplicate = originalToDuplicate[o.GetComponent<Interactable>()];
+            shapeItem_2 duplicate = originalToDuplicate[interactable];
             if (duplicate == null)
                 continue;
 
             // highlighted object in flashlight's corrdinate system
-            var objectPositionInFlashlightCoords = transformForProjection.InverseTransformPoint(o.transform.position);
+            var objectPositionInFlashlightCoords = transformForProjection.InverseTransformPoint(interactable.transform.position);
 
             if (ignoreDepth)
                 objectPositionInFlashlightCoords.z = 0f;
@@ -382,39 +386,4 @@ public class MiniMapInteractor : MonoBehaviour
         //print($"sizeof duplicates dirs {duplicateDirections.Count}");
         return duplicateDirections;
     }
-
-    #region CALLABLE BY INTERACTABLES
-
-    public void AddtoHighlighted(GameObject o)
-    {
-        //print($"{o.name}");
-        allHighlightedObjects.Add(o);
-    }
-
-    public void RemoveFromHighlighted(GameObject o)
-    {
-        allHighlightedObjects.Remove(o);
-    }
-
-    // For flower cone
-    public List<Interactable> getList()
-    {
-        List<Interactable> interactableHighlighted = new List<Interactable>();
-
-        print("***" + allHighlightedObjects.Count());
-
-        for (int i = 0; i < allHighlightedObjects.Count; i++)
-        {
-            interactableHighlighted.Add(allHighlightedObjects[i].GetComponent<Interactable>());
-        }
-
-        return interactableHighlighted;
-    }
-
-    public List<GameObject> getObjectsList()
-    {
-        return allHighlightedObjects;
-    }
-
-    #endregion CALLABLE BY INTERACTABLES
 }

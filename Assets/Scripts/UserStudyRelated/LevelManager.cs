@@ -55,8 +55,6 @@ public class LevelManager : MonoBehaviour
 
     private void ResetSceneInteractables()
     {
-        List<Interactable> toFlush = grabbingHand.GetListOfToBeFlushedItems();
-        toFlush.ForEach(x => x.GetComponent<Object_collected>().ResetGameObject());
-        toFlush.Clear();
+        grabbingHand.ClearGrabbed();
     }
 }

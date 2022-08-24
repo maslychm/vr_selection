@@ -15523,8 +15523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: -1
-  selectionTechnique: 3
+  subjectId: mykola
+  selectionTechnique: 1
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 2
   randomSeed: 1234
@@ -47519,7 +47519,6 @@ MonoBehaviour:
   circumferenceDisplayInUse: 0
   clutterHandler_CircumferenceDisplay: {fileID: 441624304}
   instanceOfRayManager: {fileID: 1026403703}
-  objectInHand: {fileID: 0}
 --- !u!114 &2103060860
 MonoBehaviour:
   m_ObjectHideFlags: 0

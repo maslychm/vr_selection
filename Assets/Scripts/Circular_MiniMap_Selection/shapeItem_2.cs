@@ -18,11 +18,6 @@ public class shapeItem_2 : MonoBehaviour
             return;
         }
 
-        if (other.GetComponent<GrabbingHand>().objectInHand)
-        {
-            return;
-        }
-
         interactionOutline.enabled = true;
         original.interactionOutline.enabled = true;
     }

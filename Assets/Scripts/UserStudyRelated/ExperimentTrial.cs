@@ -68,7 +68,7 @@ public class ExperimentTrial
         Debug.Log($"Wrote results file: {fname}");
         activeTrial = null;
         Debug.Log("-- Trial END --");
-        //replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
+        replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
         //targetInteractable.GetComponent<Object_collected>().ResetGameObject();
         //targetInteractable.transform.position = new Vector3(targetInteractable.transform.position.x + 20.0f, targetInteractable.transform.position.y, targetInteractable.transform.position.z);
     }

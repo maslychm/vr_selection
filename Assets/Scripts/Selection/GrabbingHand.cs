@@ -19,10 +19,10 @@ public class GrabbingHand : MonoBehaviour
 
     public RayKebabManager instanceOfRayManager = null;
 
-    public Interactable objectInHand;
+    private Interactable objectInHand;
     private List<Interactable> grabbedByHandHistory;
 
-    private void Start()
+    private void Awake()
     {
         objectInHand = null;
         collidingWithHand = new HashSet<shapeItem_2>();
@@ -31,8 +31,13 @@ public class GrabbingHand : MonoBehaviour
 
     public void ClearGrabbed()
     {
+        ReleaseCurrentlyHeldObject();
+
+        ResetItemHistory();
+
         if (grabbedByHandHistory == null || collidingWithHand == null || grabbedByHandHistory.Count == 0 || collidingWithHand.Count == 0)
             return;
+
         if (grabbedByHandHistory.Count > 0)
             grabbedByHandHistory.Clear();
         if (collidingWithHand.Count > 0)
@@ -143,9 +148,10 @@ public class GrabbingHand : MonoBehaviour
         PickupObject(o);
     }
 
-    public List<Interactable> GetListOfToBeFlushedItems()
+    public void ResetItemHistory()
     {
-        return grabbedByHandHistory;
+        grabbedByHandHistory.ForEach(x => x.GetComponent<Object_collected>().ResetGameObject());
+        grabbedByHandHistory.Clear();
     }
 
     private void ReleaseCurrentlyHeldObject()

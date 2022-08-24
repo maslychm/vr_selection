@@ -103,6 +103,8 @@ public class ExperimentLevel : MonoBehaviour
 
     private void TransitionToNextTrial()
     {
+        FindObjectOfType<GrabbingHand>().ClearGrabbed();
+
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
         while (priorRandomIndex == randIdx)
         {

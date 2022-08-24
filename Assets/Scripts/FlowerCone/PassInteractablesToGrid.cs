@@ -40,13 +40,18 @@ public class PassInteractablesToGrid : MonoBehaviour
             {
                 Interactable og = hit.collider.transform.parent.GetComponent<GridCell>().originalInteractable;
                 grabbingHand.CallPickUpObject(og);
-                //grid.DestroyGrid();
+                grid.DestroyGrid();
 
                 return true;
             }
         }
 
         return false;
+    }
+
+    private void EndInteractablesHover(List<Interactable> interactables)
+    {
+        interactables.ForEach(x => x.EndHover());
     }
 
     /// <summary>
@@ -57,13 +62,14 @@ public class PassInteractablesToGrid : MonoBehaviour
     private uint CallGridInitialize()
     {
         List<Interactable> allHighlightedObjects = coneVolumeHighlighter.GetAllInteractables();
+        EndInteractablesHover(allHighlightedObjects);
 
         if (allHighlightedObjects.Count == 0)
             return 0;
 
         if (allHighlightedObjects.Count == 1)
         {
-            // TODO pick up directly
+            grabbingHand.CallPickUpObject(allHighlightedObjects[0]);
 
             return 1;
         }

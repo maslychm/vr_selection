@@ -56,7 +56,7 @@ public class GameGrid : MonoBehaviour
                 gameGrid[x, y].name = "Grid Space (X: " + x.ToString() + " , Y: " + y.ToString() + ")";
 
                 GridCell gridCell = gameGrid[x, y].GetComponent<GridCell>();
-                gridCell.SetReference(interactables[objectIndex]);
+                gridCell.FillCellValues(interactables[objectIndex]);
 
                 objectIndex++;
             }

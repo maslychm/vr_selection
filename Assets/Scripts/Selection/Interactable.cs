@@ -12,9 +12,12 @@ public class Interactable : MonoBehaviour
 
     public bool debug = false;
 
-    //private string m_Scene;
-
     public static Component currentInteractor = null;
+
+    public Material GetDefaultMaterial()
+    {
+        return defaultMaterial;
+    }
 
     private void Awake()
     {

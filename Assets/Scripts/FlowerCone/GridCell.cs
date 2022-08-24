@@ -6,9 +6,9 @@ public class GridCell : MonoBehaviour
 
     public Interactable originalInteractable;
 
-    public void SetReference(Interactable interactable)
+    public void FillCellValues(Interactable interactable)
     {
         originalInteractable = interactable;
-        internalSphereRenderer.material = interactable.GetComponent<MeshRenderer>().material;
+        internalSphereRenderer.material = interactable.GetDefaultMaterial();
     }
 }

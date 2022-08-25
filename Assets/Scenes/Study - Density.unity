@@ -29105,7 +29105,7 @@ MonoBehaviour:
   normalizeOffsets: 0
   scaleByFarthest: 0
   ignoreDepth: 0
-  scaleFactor: {x: 1.9, y: 1.9, z: 0.8}
+  scaleFactor: {x: 1.5, y: 1.5, z: 0.13}
 --- !u!64 &1316593420
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31476,7 +31476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1403336806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32883,7 +32883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerOfMiniMap: {fileID: 1509228098}
   writeFileActionReference: {fileID: -9090533087593982513, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  radius: 0.15
+  radius: 0.24
   miniMapInteractor: {fileID: 1316593419}
 --- !u!1001 &1460606966
 PrefabInstance:

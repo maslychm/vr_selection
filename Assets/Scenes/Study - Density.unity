@@ -9746,36 +9746,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
   m_PrefabInstance: {fileID: 438517278}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &439099457
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 439099458}
-  m_Layer: 0
-  m_Name: ResetTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &439099458
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439099457}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.465, y: -2.67, z: -7.621}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 805750577}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &441624301
 GameObject:
   m_ObjectHideFlags: 0
@@ -15561,7 +15531,7 @@ MonoBehaviour:
   subjectId: mykola
   selectionTechnique: 0
   pauseBetweenLevelsDuration: 1
-  numTrialsPerLevel: 2
+  numTrialsPerLevel: 1
   randomSeed: 1234
   numRemainingLevels: -1
   pauseTimeRemaining: 1
@@ -15604,7 +15574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a83b4f2bde0924ba04978a240288f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetTransform: {fileID: 439099458}
+  resetTransform: {fileID: 115226007}
   player: {fileID: 1177616497}
   playerHead: {fileID: 1640029584}
 --- !u!1001 &711044813
@@ -18417,7 +18387,6 @@ Transform:
   - {fileID: 25070814}
   - {fileID: 1197426586}
   - {fileID: 1325096988}
-  - {fileID: 439099458}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

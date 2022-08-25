@@ -4073,11 +4073,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
@@ -12978,11 +12978,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
@@ -15528,8 +15528,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: ryan
-  selectionTechnique: 4
+  subjectId: myk
+  selectionTechnique: 2
   pauseBetweenLevelsDuration: 1
   numTrialsPerLevel: 5
   randomSeed: 1234
@@ -15756,11 +15756,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
@@ -23225,7 +23225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1061272509
 Transform:
   m_ObjectHideFlags: 0
@@ -29105,7 +29105,7 @@ MonoBehaviour:
   normalizeOffsets: 0
   scaleByFarthest: 0
   ignoreDepth: 0
-  scaleFactor: {x: 1.9, y: 1.9, z: 0.8}
+  scaleFactor: {x: 1.9, y: 1.9, z: 0.22}
 --- !u!64 &1316593420
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -31468,7 +31468,6 @@ GameObject:
   - component: {fileID: 1403336809}
   - component: {fileID: 1403336808}
   - component: {fileID: 1403336807}
-  - component: {fileID: 1403336806}
   - component: {fileID: 1403336810}
   m_Layer: 0
   m_Name: BlurVisionDoor
@@ -31476,20 +31475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1403336806
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1403336805}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_IsActive: 0
 --- !u!23 &1403336807
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -31547,8 +31533,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403336805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1475, y: 2.5, z: -6}
-  m_LocalScale: {x: 11.110357, y: 5, z: 1}
+  m_LocalPosition: {x: -0.45, y: 2.5, z: -6}
+  m_LocalScale: {x: 12, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -32883,7 +32869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerOfMiniMap: {fileID: 1509228098}
   writeFileActionReference: {fileID: -9090533087593982513, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  radius: 0.15
+  radius: 0.24
   miniMapInteractor: {fileID: 1316593419}
 --- !u!1001 &1460606966
 PrefabInstance:
@@ -34754,11 +34740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
@@ -34852,7 +34838,7 @@ MonoBehaviour:
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 1640029587}
   tabletUI: {fileID: 0}
-  defaultFlashlightScale: {x: 30, y: 30, z: 1000}
+  defaultFlashlightScale: {x: 45, y: 45, z: 1000}
   scaleWithDistance: 0
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   shoulderOffset: {x: 0, y: 0, z: 0}

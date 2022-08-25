@@ -129,10 +129,9 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     public void InsertToSlots(HashSet<shapeItem_2> toInsert)
     {
-        GameObject slotToFill = null;
-
         foreach (shapeItem_2 sa2 in toInsert)
         {
+            GameObject slotToFill = null;
             // get the next available slot
             foreach (GameObject slot in slotsAroundMiniMap.Keys)
             {

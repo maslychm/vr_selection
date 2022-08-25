@@ -15,7 +15,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     [SerializeField] private GrabbingHand grabbingHand;
     [SerializeField] private InputActionReference clickedRightHandController;
 
-    private Dictionary<GameObject, shapeItem_3> slotsAroundMiniMap;
+    private Dictionary<Transform, shapeItem_3> slotsAroundMiniMap;
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
 
     public bool isFrozen = false;
@@ -23,7 +23,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     private void Start()
     {
-        slotsAroundMiniMap = new Dictionary<GameObject, shapeItem_3>();
+        slotsAroundMiniMap = new Dictionary<Transform, shapeItem_3>();
 
         PrepareSlots();
         isFrozen = false;
@@ -123,7 +123,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             placeHolder.transform.SetParent(MiniMap.transform);
             placeHolder.transform.localPosition = extendedPosition;
 
-            slotsAroundMiniMap.Add(placeHolder, null);
+            slotsAroundMiniMap.Add(placeHolder.transform, null);
         }
     }
 
@@ -131,9 +131,9 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     {
         foreach (shapeItem_2 sa2 in toInsert)
         {
-            GameObject slotToFill = null;
+            Transform slotToFill = null;
             // get the next available slot
-            foreach (GameObject slot in slotsAroundMiniMap.Keys)
+            foreach (Transform slot in slotsAroundMiniMap.Keys)
             {
                 if (slotsAroundMiniMap[slot] == null)
                 {

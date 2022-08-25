@@ -1,0 +1,15 @@
+subject_id,technique,density,trial_id,randObjIdx,successful_selections,total_attempts,trial_time
+subryan,RayKebab,1,1,2,1,3,4.687675
+subryan,RayKebab,1,2,3,1,1,1.982483
+subryan,RayKebab,2,1,27,1,2,3.062828
+subryan,RayKebab,2,2,87,1,1,1.115135
+subryan,RayKebab,3,1,12,1,1,3.653084
+subryan,RayKebab,3,2,20,1,1,2.423996
+subryan,RayKebab,1,1,2,1,2,1.670845
+subryan,RayKebab,1,2,3,1,1,2.172432
+subryan,RayKebab,1,3,5,1,1,1.310234
+subryan,RayKebab,2,1,27,1,1,2.341003
+subryan,RayKebab,2,2,87,1,1,1.891945
+subryan,RayKebab,2,3,63,1,1,1.282684
+subryan,RayKebab,3,1,12,1,5,8.767311
+subryan,RayKebab,3,2,20,1,1,2.703125

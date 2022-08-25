@@ -17,6 +17,7 @@ public class SphereGrabbingTool : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
+        handHelper._OnTriggerEnter(col);
         handHelper._OnTriggerStay(col);
     }
 }

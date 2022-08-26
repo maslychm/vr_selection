@@ -31,6 +31,8 @@ public class ExperimentLevel : MonoBehaviour
 
     private BoundaryCircleManager readinessCircleManager;
 
+    private SelectionTechniqueManager selectyionTechniqueDistributer;
+
     private int priorRandomIndex = -1;
 
     private void Start()
@@ -42,6 +44,8 @@ public class ExperimentLevel : MonoBehaviour
         readinessCircleManager = FindObjectOfType<BoundaryCircleManager>();
         if (readinessCircleManager == null)
         { Debug.LogError("Did not find boundary circle manager"); };
+
+        selectyionTechniqueDistributer = FindObjectOfType<SelectionTechniqueManager>();
     }
 
     public void StartLevel(in int randomSeed, in int numTrialsPerLevel)
@@ -104,6 +108,9 @@ public class ExperimentLevel : MonoBehaviour
     private void TransitionToNextTrial()
     {
         FindObjectOfType<GrabbingHand>().ClearGrabbed();
+
+        // clear the current held components in the technique before the next triel 
+        selectyionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
 
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
         while (priorRandomIndex == randIdx)

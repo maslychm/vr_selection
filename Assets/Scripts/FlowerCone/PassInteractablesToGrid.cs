@@ -152,6 +152,9 @@ public class PassInteractablesToGrid : MonoBehaviour
         cone.SetActive(false);
         rayGameObject.SetActive(false);
         mode = FlowerConeMode.None;
+
+        // added for debugging purpose 
+        TransitionToHighlighting();
     }
 
     private void Update()

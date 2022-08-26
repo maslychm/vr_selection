@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -34,6 +35,7 @@ public class ExperimentManager : MonoBehaviour
     private List<ExperimentLevel> finishedLevels;
     private ExperimentLevel currentLevel;
 
+    [SerializeField] private TMP_Text experimentText;
     public HideViewOfSpheresController Mimir;
 
     private void Start()
@@ -98,7 +100,6 @@ public class ExperimentManager : MonoBehaviour
             currentLevel = null;
             state = ExperimentState.Idle;
             print("===> Experiment END <===");
-            Mimir.ShowTheBarrier();
             return;
         }
 
@@ -137,6 +138,8 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.BetweenLevels:
+
+                experimentText.text = $"Level ready in:\n{pauseTimeRemaining:0.#} s.";
 
                 pauseTimeRemaining -= Time.deltaTime;
                 if (pauseTimeRemaining < 0f)

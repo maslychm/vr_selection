@@ -154,4 +154,33 @@ public class SelectionTechniqueManager : MonoBehaviour
 
         SimpleMiniMap_root.SetActive(true);
     }
+
+    public void clearCurrentTechnique(SelectionTechnique currentLevelTechnique)
+    {
+
+        switch (currentLevelTechnique)
+        {
+            case SelectionTechnique.SimpleMiniMap:
+                // add function here
+                break;
+
+            case SelectionTechnique.OhMiniMap:
+                // add function call here
+                break;
+
+            case SelectionTechnique.ThreeDMiniMap:
+                // add a function call here
+                break;
+
+            case SelectionTechnique.RayKebab:
+                // add a function call here
+                break;
+
+            case SelectionTechnique.Flower:
+                // add a function call here 
+                break;
+        }
+
+
+    }
 }

@@ -15530,7 +15530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subjectId: _pilot_patrick
   selectionTechnique: 4
-  pauseBetweenLevelsDuration: 1
+  pauseBetweenLevelsDuration: 4
   numTrialsPerLevel: 8
   randomSeed: 1234
   numRemainingLevels: -1
@@ -28998,11 +28998,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 30
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 30
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
@@ -29105,7 +29105,7 @@ MonoBehaviour:
   normalizeOffsets: 0
   scaleByFarthest: 0
   ignoreDepth: 0
-  scaleFactor: {x: 1.5, y: 1.5, z: 0.13}
+  scaleFactor: {x: 1.5, y: 1.5, z: 0.12}
 --- !u!64 &1316593420
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -34754,11 +34754,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 30
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce540304778ef45489f30585d3f0369e, type: 3}
       propertyPath: m_LocalScale.z
@@ -34852,7 +34852,7 @@ MonoBehaviour:
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 1640029587}
   tabletUI: {fileID: 0}
-  defaultFlashlightScale: {x: 30, y: 30, z: 1000}
+  defaultFlashlightScale: {x: 45, y: 45, z: 1000}
   scaleWithDistance: 0
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   shoulderOffset: {x: 0, y: 0, z: 0}

@@ -36,10 +36,10 @@ public class GrabbingHand : MonoBehaviour
 
         ResetItemHistory();
 
-        if (flowerCone)
-        {
-            flowerCone.AtTrialStart();
-        }
+        //if (flowerCone)
+        //{
+        //    flowerCone.AtTrialStart();
+        //}
 
         if (grabbedByHandHistory == null || collidingWithHand == null || grabbedByHandHistory.Count == 0 || collidingWithHand.Count == 0)
             return;

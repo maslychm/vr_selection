@@ -157,30 +157,31 @@ public class SelectionTechniqueManager : MonoBehaviour
 
     public void clearCurrentTechnique(SelectionTechnique currentLevelTechnique)
     {
-
         switch (currentLevelTechnique)
         {
             case SelectionTechnique.SimpleMiniMap:
-                // add function here
+                SimpleMiniMap.ClearObjectCopies();
+                SimpleMiniMapInteractor.FlushDuplicateDirections();
                 break;
 
             case SelectionTechnique.OhMiniMap:
-                // add function call here
+                OhMiniMap.ClearObjectCopies();
+                OhMiniMapInteractor.FlushDuplicateDirections();
+                FindObjectOfType<ClutterHandler_circumferenceDisplay>().FreeCircularSlots();
                 break;
 
             case SelectionTechnique.ThreeDMiniMap:
-                // add a function call here
+                ThreeDMiniMapInteractor.FlushDuplicateDirections();
+                ThreeDMiniMap.ClearObjectCopies();
                 break;
 
             case SelectionTechnique.RayKebab:
-                // add a function call here
+                instanceOfRayManager.ReleaseInteractablesFromRay();
                 break;
 
             case SelectionTechnique.Flower:
-                // add a function call here 
+                flowerCone.AtTrialStart();
                 break;
         }
-
-
     }
 }

@@ -110,7 +110,8 @@ public class ExperimentManager : MonoBehaviour
 
     private void TransitionToPause()
     {
-        Mimir.ShowTheBarrier();
+        if (remainingLevels.Count != 0)
+            Mimir.ShowTheBarrier();
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }

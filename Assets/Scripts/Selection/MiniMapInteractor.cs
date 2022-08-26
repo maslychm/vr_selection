@@ -381,6 +381,11 @@ public class MiniMapInteractor : MonoBehaviour
         }
     }
 
+    public void FlushDuplicateDirections()
+    {
+        duplicateDirections.Clear();
+    }
+
     public List<(shapeItem_2, Vector3)> GetDuplicatesAndDirections()
     {
         //print($"sizeof duplicates dirs {duplicateDirections.Count}");

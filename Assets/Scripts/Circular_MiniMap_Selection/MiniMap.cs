@@ -89,7 +89,7 @@ public class MiniMap : MonoBehaviour
         yield return null;
     }
 
-    private void ClearObjectCopies()
+    public void ClearObjectCopies()
     {
         foreach (shapeItem_2 o in listInCircle)
         {

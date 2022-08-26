@@ -123,8 +123,6 @@ public class ExperimentLevel : MonoBehaviour
 
     private void TransitionToBeforeTrial()
     {
-        readinessCircleManager.SetWaitForUserReady();
-
         if (currentTrial != null)
         {
             completedTrials.Add(currentTrial);
@@ -136,6 +134,7 @@ public class ExperimentLevel : MonoBehaviour
             return;
         }
 
+        readinessCircleManager.SetWaitForUserReady();
         state = ExperimentLevelState.BeforeNextTrial;
     }
 

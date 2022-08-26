@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 
 public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 {
+    [SerializeField] private bool overrideLocations = false;
     private int totalObjectsCount = 8;
+    private float spacingOutOffset = Mathf.PI / 8f;
     [SerializeField] public float radius = 0.015f;
     [SerializeField] public float offset;
 
@@ -100,10 +102,27 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     /// </summary>
     private void PrepareSlots()
     {
+        List<float> predetLocations = new List<float> 
+        {
+            spacingOutOffset,
+            spacingOutOffset * 2,
+            spacingOutOffset * 3,
+            spacingOutOffset * 4,
+            0f,
+            spacingOutOffset * 5,
+            -spacingOutOffset,
+            spacingOutOffset * 6
+        };
+
         for (int i = 0; i < totalObjectsCount; i++)
         {
             // get the distance that is around the circle
-            float angle = i * Mathf.PI * 2f / totalObjectsCount;
+            //float angle = i * Mathf.PI * 2f / totalObjectsCount;
+            float angle = i * Mathf.PI / totalObjectsCount;
+            angle -= spacingOutOffset;
+
+            if (overrideLocations)
+                angle = predetLocations[i];
 
             // let's try and get the vertical placement and horizental before combining them
             float vertical_placement = Mathf.Sin(angle);

@@ -20,7 +20,7 @@ public class GameGrid : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(0, 0, 6);
+        transform.position = new Vector3(0, 1, 6);
     }
 
     public void CreateGrid(List<Interactable> interactables)
@@ -61,7 +61,7 @@ public class GameGrid : MonoBehaviour
                 objectIndex++;
             }
         }
-        transform.SetPositionAndRotation(new Vector3(-.5f, 1, -3), Quaternion.identity);
+        transform.SetPositionAndRotation(new Vector3(-.5f, 1.5f, -3), Quaternion.identity);
     }
 
     public void DestroyGrid()

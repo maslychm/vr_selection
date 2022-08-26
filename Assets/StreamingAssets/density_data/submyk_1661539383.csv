@@ -1,0 +1,9 @@
+subject_id,technique,density,trial_id,randObjIdx,successful_selections,total_attempts,trial_time
+submyk,RayKebab,1,1,30,1,1,25.67433
+submyk,RayKebab,1,2,2,1,1,1.125282
+submyk,RayKebab,1,3,10,1,1,1.225235
+submyk,RayKebab,1,4,33,1,1,0.8887787
+submyk,RayKebab,1,5,48,1,1,1.860191
+submyk,RayKebab,1,6,35,1,1,1.058174
+submyk,RayKebab,1,7,6,1,2,2.227646
+submyk,RayKebab,1,8,36,1,1,1.044029

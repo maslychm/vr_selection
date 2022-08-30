@@ -44,10 +44,8 @@ public static class ExperimentLogger
         var fname = $"sub{subjectId}_{runTime}.csv";
         fname = Path.Combine(logDir, fname);
 
-        bool writeHeader = !File.Exists(fname);
-
         using StreamWriter writer = new StreamWriter(fname, true);
-        if (writeHeader)
+        if (!File.Exists(fname))
             writer.Write(string.Join(",", trialValues.Select(x => x.Item1)) + "\n");
         writer.Write(string.Join(",", trialValues.Select(x => x.Item2)) + "\n");
 

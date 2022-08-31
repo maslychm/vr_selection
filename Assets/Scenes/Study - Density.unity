@@ -45988,7 +45988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd4d090eceab9c49a5c0f12e3618a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridSpaceSize: 0.2
+  GridSpaceSize: 0.15
   gridCellPrefab: {fileID: 4229078040349587407, guid: b391b8df4653d6049ba28922add81910, type: 3}
 --- !u!4 &2020172852
 Transform:

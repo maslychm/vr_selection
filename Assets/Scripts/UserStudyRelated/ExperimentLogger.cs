@@ -39,6 +39,13 @@ public static class ExperimentLogger
             ( "successful_selections", $"{trial.GenNumSuccessful()}" ),
             ( "total_attempts", $"{trial.GetNumAttempts()}" ),
             ( "trial_time", $"{trial.ComputeTrialTime()}" ),
+            ( "Left_Hand_Distance_Travelled", $"{handPositionTracking.getDistanceTravelledByLeftHand()}"),
+            ( "Right_Hand_Distance_Travelled", $"{rightHandPositionTracking.getDistanceTravelledByRightHand()}"),
+            ( "LeftTriggerBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.leftTriggerButton_Count}"),
+            ( "RightTriggerBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.rightTriggerButton_Count}"),
+            ( "LeftGripBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.leftGripButton_Count}"),
+            ( "RightGripBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.rightGripButton_Count}")
+
         };
 
         var fname = $"sub{subjectId}_{runTime}.csv";

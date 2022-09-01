@@ -21671,6 +21671,8 @@ GameObject:
   - component: {fileID: 992347895}
   - component: {fileID: 992347897}
   - component: {fileID: 992347896}
+  - component: {fileID: 992347898}
+  - component: {fileID: 992347899}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -21956,6 +21958,34 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!114 &992347898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992347894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68d40f680279da4fa232af6791b5e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &992347899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992347894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255dde2e7f3cb04438c35b83e3206ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftTriggerButton: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  rightTriggerButton: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  leftGripButton: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  rightGripButton: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1001 &994175137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48218,6 +48248,7 @@ GameObject:
   - component: {fileID: 2103060860}
   - component: {fileID: 2103060859}
   - component: {fileID: 2103060857}
+  - component: {fileID: 2103060858}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -48340,6 +48371,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!114 &2103060858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103060855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397a8a26ca9d7aa44918b4301c0d0134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2103060859
 MonoBehaviour:
   m_ObjectHideFlags: 0

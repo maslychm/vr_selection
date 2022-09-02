@@ -10,6 +10,10 @@ public class ResetXROriginCenter : MonoBehaviour
     [SerializeField] private XROrigin player;
     [SerializeField] private Camera playerHead;
 
+    [SerializeField] private float ReferenceHeight_M = 1.70f;
+
+    private Vector3 currentHMDPosition;
+
     [ContextMenu("Reset Position")]
     public void ResetPosition()
     {
@@ -23,5 +27,11 @@ public class ResetXROriginCenter : MonoBehaviour
         distanceDiff.y = 0;
 
         player.transform.position += distanceDiff;
+
+        // adjust the height of the player based on the reference height
+        currentHMDPosition = playerHead.transform.position;
+        float deltaY = currentHMDPosition.y - ReferenceHeight_M;
+
+        player.transform.position -= new Vector3(0, deltaY, 0);
     }
 }

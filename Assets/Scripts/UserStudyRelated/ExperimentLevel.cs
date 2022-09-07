@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// For replicable randomness: https://docs.unity3d.com/ScriptReference/Random-state.html
@@ -50,6 +51,8 @@ public class ExperimentLevel : MonoBehaviour
 
     public void StartLevel(in int randomSeed, in int numTrialsPerLevel)
     {
+
+        Scene scene = SceneManager.GetActiveScene();
         print("-> Level START <-");
 
         //
@@ -73,9 +76,12 @@ public class ExperimentLevel : MonoBehaviour
             && (x.gameObject.transform.position.z > MiddleMarkerEmptyGameObject.transform.position.z))
             .ToList();
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
-        ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
-        ExperimentTrial.targetInteractable.targetOutline.enabled = true;
 
+       // if (!scene.name.Contains("SearchTask"))
+        {
+            ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
+            ExperimentTrial.targetInteractable.targetOutline.enabled = true;
+        }
         Random.InitState(randomSeed);
 
         //

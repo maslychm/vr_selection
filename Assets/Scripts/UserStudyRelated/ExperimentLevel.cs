@@ -62,6 +62,7 @@ public class ExperimentLevel : MonoBehaviour
         levelName = $"{levelTechnique}_dens{levelDensity}";
 
         GetComponent<LevelManager>().DisableAllLevels();
+
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
 

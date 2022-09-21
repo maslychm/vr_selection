@@ -15689,6 +15689,7 @@ MonoBehaviour:
   resetTransform: {fileID: 1649777725}
   player: {fileID: 1177616497}
   playerHead: {fileID: 1640029584}
+  ReferenceHeight_M: 1.7
 --- !u!1001 &711044813
 PrefabInstance:
   m_ObjectHideFlags: 0

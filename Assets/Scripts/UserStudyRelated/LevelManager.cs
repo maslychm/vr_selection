@@ -21,7 +21,9 @@ public class LevelManager : MonoBehaviour
     {
         if (allowKeyLevelSwitching && Input.GetKeyDown(KeyCode.Space))
         {
+
             densityLevel = (densityLevel + 1) % 4;
+
             EnableDensityLevel(densityLevel);
         }
     }
@@ -42,10 +44,21 @@ public class LevelManager : MonoBehaviour
             throw new System.Exception($"Only density levels of {densityLevelIntegers}");
         }
 
-        for (int i = 0; i < lvl; i++)
-        {
-            densityLevels[i].SetActive(true);
+       
+        // adding a change to accomodate having only lvl 2 and 0
+        {    
+            densityLevels[0].SetActive(true);
+            densityLevels[1].SetActive(true);
         }
+        // -----------------------------------------------------
+
+        // backup reference that allows having all the levels
+        //for (int i = 0; i < lvl; i++)
+        //{
+
+        //    densityLevels[i].SetActive(true);
+        //}
+
     }
 
     public void DisableAllLevels()

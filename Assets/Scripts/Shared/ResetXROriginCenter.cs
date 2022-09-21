@@ -32,6 +32,6 @@ public class ResetXROriginCenter : MonoBehaviour
         currentHMDPosition = playerHead.transform.position;
         float deltaY = currentHMDPosition.y - ReferenceHeight_M;
 
-        player.transform.position -= new Vector3(0, deltaY, 0);
+        player.transform.position -= new Vector3(0, deltaY - 0.5f, 0);
     }
 }

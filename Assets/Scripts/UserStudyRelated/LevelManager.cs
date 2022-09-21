@@ -46,18 +46,18 @@ public class LevelManager : MonoBehaviour
 
        
         // adding a change to accomodate having only lvl 2 and 0
-        {    
-            densityLevels[0].SetActive(true);
-            densityLevels[1].SetActive(true);
-        }
+        //{    
+        //    densityLevels[0].SetActive(true);
+        //    densityLevels[1].SetActive(true);
+        //}
         // -----------------------------------------------------
 
         // backup reference that allows having all the levels
-        //for (int i = 0; i < lvl; i++)
-        //{
+        for (int i = 0; i < lvl; i++)
+        {
 
-        //    densityLevels[i].SetActive(true);
-        //}
+            densityLevels[i].SetActive(true);
+        }
 
     }
 

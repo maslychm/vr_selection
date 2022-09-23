@@ -2141,7 +2141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &76005695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2224,8 +2224,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76005694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1475, y: 2.5, z: -6.169}
-  m_LocalScale: {x: 11, y: 5, z: 1}
+  m_LocalPosition: {x: -0.1475, y: 2.5, z: -6.556}
+  m_LocalScale: {x: 11, y: 5, z: 0.33090594}
   m_Children:
   - {fileID: 1206248247}
   m_Father: {fileID: 0}
@@ -15617,7 +15617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705400348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6675466, y: 1.0923707, z: 8.049997}
+  m_LocalPosition: {x: -0.6675466, y: 1.0923707, z: 7.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 758949533}
@@ -15642,7 +15642,7 @@ MonoBehaviour:
   subjectId: myk
   selectionTechnique: 1
   pauseBetweenLevelsDuration: 2
-  numTrialsPerLevel: 2
+  numTrialsPerLevel: 10
   randomSeed: 1234
   numRemainingLevels: -1
   pauseTimeRemaining: 1
@@ -15689,6 +15689,7 @@ MonoBehaviour:
   resetTransform: {fileID: 1649777725}
   player: {fileID: 1177616497}
   playerHead: {fileID: 1640029584}
+  ReferenceHeight_M: 1.7
 --- !u!1001 &711044813
 PrefabInstance:
   m_ObjectHideFlags: 0

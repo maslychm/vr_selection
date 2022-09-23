@@ -114,7 +114,7 @@ public class MiniMap : MonoBehaviour
         shapeItemObject.transform.position = centerOfMiniMap.transform.position;
         shapeItemObject.transform.position += transform.TransformDirection(dir);
 
-        shapeItemObject.transform.rotation = transform.rotation;
+        //shapeItemObject.transform.rotation = transform.rotation;
 
         if (shapeItemObject.tag == "infinity")
         {

@@ -162,9 +162,13 @@ public class MiniMapInteractor : MonoBehaviour
             {
                 duplicate.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
             }
-            if (duplicate.CompareTag("cube") || duplicate.CompareTag("sphere") || duplicate.CompareTag("cylinder"))
+            if (duplicate.CompareTag("sphere") || duplicate.CompareTag("cylinder"))
             {
                 duplicate.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
+            }
+            if (duplicate.CompareTag("cube"))
+            {
+                duplicate.transform.localScale = new Vector3(0.04f, 0.04f, 0.04f);
             }
 
             // Interactable prefabs used to have 2 colliders: trigger and non-trigger

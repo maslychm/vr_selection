@@ -117,7 +117,6 @@ public class ExperimentLevel : MonoBehaviour
         FindObjectOfType<GrabbingHand>().ClearGrabbed();
 
         // clear the current held components in the technique before the next triel 
-        selectyionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
 
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
         while (priorRandomIndex == randIdx)
@@ -132,6 +131,7 @@ public class ExperimentLevel : MonoBehaviour
         currentTrial = remainingTrials.Dequeue();
 
         currentTrial.StartTrial(randIdx, interactableToReplace);
+        selectyionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
         state = ExperimentLevelState.RunningTrial;
     }
 

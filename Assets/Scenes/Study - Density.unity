@@ -2265,7 +2265,7 @@ Transform:
   m_Children:
   - {fileID: 1206248247}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &76880172
 PrefabInstance:
@@ -3636,7 +3636,7 @@ Transform:
   m_LocalScale: {x: 0.6, y: 0.01, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
 --- !u!114 &115226008
 MonoBehaviour:
@@ -4599,7 +4599,7 @@ MonoBehaviour:
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 1640029587}
   tabletUI: {fileID: 0}
-  defaultFlashlightScale: {x: 45, y: 45, z: 1000}
+  defaultFlashlightScale: {x: 75, y: 75, z: 1000}
   scaleWithDistance: 0
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   shoulderOffset: {x: 0, y: 0, z: 0}
@@ -15739,35 +15739,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 705400350}
-  - component: {fileID: 705400352}
-  - component: {fileID: 705400349}
-  - component: {fileID: 705400353}
-  - component: {fileID: 705400351}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: BallHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &705400349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705400348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d4667a704cf162489c61c8eb2b9a428, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  densityLevels:
-  - {fileID: 758949532}
-  - {fileID: 168397685}
-  - {fileID: 1464251796}
-  techniqueDistributer: {fileID: 705400352}
-  grabbingHand: {fileID: 2103060859}
 --- !u!4 &705400350
 Transform:
   m_ObjectHideFlags: 0
@@ -15784,71 +15762,8 @@ Transform:
   - {fileID: 1464251798}
   - {fileID: 1767720730}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &705400351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705400348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  subjectId: myk
-  selectionTechnique: 0
-  pauseBetweenLevelsDuration: 2
-  numTrialsPerLevel: 10
-  randomSeed: 1234
-  numRemainingLevels: -1
-  pauseTimeRemaining: 1
-  experimentText: {fileID: 1007850536}
-  Mimir: {fileID: 76005695}
---- !u!114 &705400352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705400348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64b0166f6877d34c9b91d3c2d7f218c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SimpleMiniMap_root: {fileID: 2099844788}
-  OhMiniMap_root: {fileID: 958048660}
-  RayKebabGameObjectRoot: {fileID: 1026403698}
-  ThreeDMiniMapRoot: {fileID: 949268213}
-  FlowerRoot: {fileID: 1061272508}
-  SimpleMiniMap: {fileID: 1742748541}
-  OhMiniMap: {fileID: 441624303}
-  ThreeDMiniMap: {fileID: 1460134090}
-  SimpleMiniMapInteractor: {fileID: 1543534842}
-  OhMiniMapInteractor: {fileID: 153800341}
-  ThreeDMiniMapInteractor: {fileID: 1316593419}
-  instanceOfRayManager: {fileID: 1026403703}
-  grabbingHand: {fileID: 2103060859}
-  flowerCone: {fileID: 1061272510}
---- !u!114 &705400353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705400348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3a83b4f2bde0924ba04978a240288f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resetTransform: {fileID: 1649777725}
-  player: {fileID: 1177616497}
-  playerHead: {fileID: 1640029584}
-  ReferenceHeight_M: 1.7
 --- !u!1001 &711044813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18692,7 +18607,7 @@ Transform:
   - {fileID: 1197426586}
   - {fileID: 1325096988}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &818698042
 PrefabInstance:
@@ -19401,7 +19316,7 @@ Transform:
   - {fileID: 949268214}
   - {fileID: 958048661}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &864568990
 MonoBehaviour:
@@ -19416,7 +19331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handToFollow: {fileID: 992347895}
-  newValConfidence: 0.6
+  newValConfidence: 0.5
   applyFilter: 1
 --- !u!114 &864568991
 MonoBehaviour:
@@ -23473,7 +23388,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1035739291
 PrefabInstance:
@@ -25979,7 +25894,7 @@ Transform:
   m_Children:
   - {fileID: 349897844}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1177616497
 MonoBehaviour:
@@ -26089,7 +26004,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1177814327
 PrefabInstance:
@@ -35856,7 +35771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: d067781bf11179c48b07d12a16fa2b38, type: 3}
       propertyPath: m_LocalScale.x
@@ -37714,7 +37629,7 @@ Transform:
   m_LocalScale: {x: 0.90000004, y: 0.0025, z: 0.90000004}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1652754621
 PrefabInstance:
@@ -38564,7 +38479,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1683405007
 PrefabInstance:
@@ -39536,7 +39451,7 @@ Transform:
   m_Children:
   - {fileID: 1686415481}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1722888113
 PrefabInstance:
@@ -43149,7 +43064,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1854865446
 PrefabInstance:
@@ -44610,7 +44525,7 @@ Transform:
   m_Children:
   - {fileID: 1061272509}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1945297136
 MonoBehaviour:
@@ -44625,7 +44540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handToFollow: {fileID: 2103060856}
-  newValConfidence: 0.6
+  newValConfidence: 0.5
   applyFilter: 1
 --- !u!1001 &1946332643
 PrefabInstance:
@@ -46331,7 +46246,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2020233593
 PrefabInstance:
@@ -48106,6 +48021,121 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
   m_PrefabInstance: {fileID: 2088238904}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2088272187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2088272188}
+  - component: {fileID: 2088272192}
+  - component: {fileID: 2088272191}
+  - component: {fileID: 2088272190}
+  - component: {fileID: 2088272189}
+  m_Layer: 0
+  m_Name: StudyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2088272188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088272187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.28504634, y: 2.1388125, z: -1.7175007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2088272189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088272187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75af1de9b67625e429fa448a21a60712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subjectId: myk
+  selectionTechnique: 0
+  pauseBetweenLevelsDuration: 2
+  numTrialsPerLevel: 5
+  randomSeed: 1234
+  numRemainingLevels: -1
+  pauseTimeRemaining: 1
+  experimentText: {fileID: 1007850536}
+  Mimir: {fileID: 76005695}
+--- !u!114 &2088272190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088272187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a83b4f2bde0924ba04978a240288f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetTransform: {fileID: 1649777725}
+  player: {fileID: 1177616497}
+  playerHead: {fileID: 1640029584}
+  ReferenceHeight_M: 1.7
+--- !u!114 &2088272191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088272187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d4667a704cf162489c61c8eb2b9a428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  densityLevels:
+  - {fileID: 758949532}
+  - {fileID: 168397685}
+  - {fileID: 1464251796}
+  techniqueDistributer: {fileID: 2088272192}
+  grabbingHand: {fileID: 2103060859}
+--- !u!114 &2088272192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088272187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64b0166f6877d34c9b91d3c2d7f218c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SimpleMiniMap_root: {fileID: 2099844788}
+  OhMiniMap_root: {fileID: 958048660}
+  RayKebabGameObjectRoot: {fileID: 1026403698}
+  ThreeDMiniMapRoot: {fileID: 949268213}
+  FlowerRoot: {fileID: 1061272508}
+  SimpleMiniMap: {fileID: 1742748541}
+  OhMiniMap: {fileID: 441624303}
+  ThreeDMiniMap: {fileID: 1460134090}
+  SimpleMiniMapInteractor: {fileID: 1543534842}
+  OhMiniMapInteractor: {fileID: 153800341}
+  ThreeDMiniMapInteractor: {fileID: 1316593419}
+  instanceOfRayManager: {fileID: 1026403703}
+  grabbingHand: {fileID: 2103060859}
+  flowerCone: {fileID: 1061272510}
 --- !u!1001 &2088662347
 PrefabInstance:
   m_ObjectHideFlags: 0

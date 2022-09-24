@@ -18,7 +18,7 @@ public class GameGrid : MonoBehaviour
 
     private int objectIndex;
 
-    [SerializeField] private Vector3 gridPosition;
+    [SerializeField] private Vector3 gridPosition = new Vector3(-.25f, 1.622f, -8.3f);
 
     private void Start()
     {
@@ -66,7 +66,6 @@ public class GameGrid : MonoBehaviour
             }
         }
 
-        //transform.SetPositionAndRotation(new Vector3(-.5f, 1.5f, -3), Quaternion.identity);
         transform.SetPositionAndRotation(gridPosition, Quaternion.identity);
     }
 

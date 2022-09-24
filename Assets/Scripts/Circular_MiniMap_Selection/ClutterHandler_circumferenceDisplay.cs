@@ -102,7 +102,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     /// </summary>
     private void PrepareSlots()
     {
-        List<float> predetLocations = new List<float> 
+        List<float> predetLocations = new List<float>
         {
             spacingOutOffset,
             spacingOutOffset * 2,

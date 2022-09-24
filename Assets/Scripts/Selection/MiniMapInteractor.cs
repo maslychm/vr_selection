@@ -259,6 +259,7 @@ public class MiniMapInteractor : MonoBehaviour
         {
             ExtendFlashlight();
             miniMap.ShowMiniMap();
+            FindObjectOfType<ClutterHandler_circumferenceDisplay>()?.FreeCircularSlots();
         }
 
         if (flaslightActionReference.action.IsPressed())

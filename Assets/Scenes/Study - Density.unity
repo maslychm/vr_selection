@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -299,6 +303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (114)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -381,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (87)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -808,6 +820,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -838,7 +854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.49
+      value: 11.097
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1220,6 +1236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (128)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1302,6 +1322,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1635,6 +1659,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (74)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1801,6 +1829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (129)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1884,6 +1916,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (91)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1914,7 +1950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.088677
+      value: 14.791
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2141,7 +2177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &76005695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2224,7 +2260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76005694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1475, y: 2.5, z: -6.556}
+  m_LocalPosition: {x: -0.1475, y: 2.5, z: -8.116}
   m_LocalScale: {x: 11, y: 5, z: 0.33090594}
   m_Children:
   - {fileID: 1206248247}
@@ -2490,6 +2526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2738,6 +2778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (73)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2768,7 +2812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.11332
+      value: 15.23
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3099,7 +3143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.2084675
+      value: 7.094468
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3265,7 +3309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.552675
+      value: 7.438676
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3348,7 +3392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.464
+      value: 8.35
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3400,6 +3444,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (102)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3584,10 +3632,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115226006}
   m_LocalRotation: {x: -0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0.017999649, y: 0.635, z: -7.526}
-  m_LocalScale: {x: 0.90000004, y: 0.0025, z: 0.90000004}
-  m_Children:
-  - {fileID: 1724103792}
+  m_LocalPosition: {x: 0.017999649, y: 1.03, z: -8.452}
+  m_LocalScale: {x: 0.6, y: 0.01, z: 0.6}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
@@ -4098,6 +4145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (61)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -4298,7 +4349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.752677
+      value: 7.6386776
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4615,6 +4666,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5509,6 +5564,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (54)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5539,7 +5598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.552998
+      value: 13.849677
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5697,15 +5756,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.0039997
+      value: -2.658
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.8529997
+      value: -7.638
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1803222
+      value: 2.98
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5756,6 +5815,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6419,6 +6482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (115)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -6585,6 +6652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (126)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -6615,7 +6686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.135319
+      value: 13.7699995
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7440,7 +7511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.444146
+      value: -4.286
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7504,6 +7575,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7752,6 +7827,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (75)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -7867,6 +7946,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (86)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8365,6 +8448,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (123)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9147,7 +9234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25
+      value: -2.24
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9455,6 +9542,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (62)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -10022,6 +10113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -10437,6 +10532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -10685,6 +10784,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11205,7 +11308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.92
+      value: -5.733
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11213,7 +11316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.848678
+      value: -4.422
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11596,6 +11699,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -11784,7 +11891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8370001
+      value: -4.46
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12010,6 +12117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -12093,6 +12204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (92)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -12123,7 +12238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.988677
+      value: 14.691
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12341,6 +12456,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (66)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -12422,6 +12541,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12864,7 +12987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.4861727
+      value: -6.73
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13173,6 +13296,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (65)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -13588,6 +13715,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (63)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -13753,6 +13884,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -13834,6 +13969,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (100)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -13918,6 +14057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (56)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -14000,6 +14143,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (113)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -14526,11 +14673,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.65
+      value: -3.811
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.403001
+      value: -6.779
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14669,6 +14816,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (103)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -14836,6 +14987,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (58)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -14866,7 +15021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.839
+      value: 11.385468
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14918,6 +15073,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (57)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -15446,7 +15605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.229958
+      value: 7.115958
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15617,7 +15776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705400348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6675466, y: 1.0923707, z: 7.21}
+  m_LocalPosition: {x: -0.6675466, y: 1.0923707, z: 4.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 758949533}
@@ -15640,7 +15799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subjectId: myk
-  selectionTechnique: 3
+  selectionTechnique: 0
   pauseBetweenLevelsDuration: 2
   numTrialsPerLevel: 10
   randomSeed: 1234
@@ -15954,6 +16113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (70)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -15984,7 +16147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.0416765
+      value: 14.7439995
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16036,6 +16199,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -16451,6 +16618,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17188,6 +17359,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -17437,6 +17612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -17520,6 +17699,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -17602,6 +17785,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (127)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17980,6 +18167,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -18680,6 +18871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (124)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -18710,7 +18905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.500998
+      value: 13.94
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18762,6 +18957,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (99)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -19092,6 +19291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -19241,6 +19444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -19324,6 +19531,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (110)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -19346,15 +19557,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.74
+      value: -5.501
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.609
+      value: -7.888
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.614001
+      value: 10.931
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19572,6 +19783,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -20717,7 +20932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.38600016
+      value: -1.04
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21140,6 +21355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (85)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -21339,6 +21558,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (60)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -22164,6 +22387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -22246,6 +22473,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (81)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -22276,7 +22507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.884678
+      value: 14.587001
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22328,6 +22559,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -23416,6 +23651,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (51)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -23747,7 +23986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.693999
+      value: 7.58
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24546,6 +24785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (104)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -24711,6 +24954,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -25319,15 +25566,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.6
+      value: -2.69
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.452
+      value: -7.955
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.233
+      value: 2.431
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25544,6 +25791,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (111)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -26017,6 +26268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (45)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -26043,7 +26298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.58
+      value: -6.327
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27429,6 +27684,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -27594,6 +27853,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -27849,6 +28112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -28043,7 +28310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.4535327
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28118,7 +28385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.6395538
+      value: -2.809
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -28733,7 +29000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.254
+      value: 8.14
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28869,6 +29136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -28973,11 +29244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1139998
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.865
+      value: -5.98
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29199,6 +29470,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (64)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -29546,7 +29821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.8070865
+      value: 0.403
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29973,6 +30248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (82)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -30174,6 +30453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -30257,6 +30540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -30279,7 +30566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.54
+      value: -6.16
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30287,7 +30574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.589
+      value: 9.07
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30759,6 +31046,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (69)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -31090,6 +31381,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (88)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -31423,6 +31718,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -31670,6 +31969,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -32113,6 +32416,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (106)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -33189,6 +33496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -33271,6 +33582,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (130)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -33520,6 +33835,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (83)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -33858,6 +34177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -34022,6 +34345,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -34460,7 +34787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.4600005
+      value: -6.679
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34516,6 +34843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (101)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -34538,7 +34869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.5099998
+      value: -4.6
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -34546,7 +34877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.051998
+      value: 8.72
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -35081,6 +35412,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -35247,6 +35582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -35328,6 +35667,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (107)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -35587,6 +35930,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -35919,6 +36266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -36084,6 +36435,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -36251,6 +36606,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (108)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -36334,6 +36693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -36416,6 +36779,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (68)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -36769,7 +37136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.3777876
+      value: -4.182
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -37105,6 +37472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (93)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -37127,11 +37498,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.16
+      value: -6.773
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.42
+      value: -6.055
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37378,7 +37749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08300042
+      value: -0.87
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -37461,15 +37832,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.033124
+      value: -3.042
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.54
+      value: -6.783
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.362855
+      value: -1.355
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -37685,6 +38056,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -37932,6 +38307,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (55)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -38676,6 +39055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (94)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -38842,6 +39225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (76)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -38924,6 +39311,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (95)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -39230,87 +39621,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
   m_PrefabInstance: {fileID: 1722888113}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1724103791
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1724103792}
-  - component: {fileID: 1724103794}
-  - component: {fileID: 1724103793}
-  m_Layer: 9
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1724103792
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724103791}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0069, y: -148, z: -0.522}
-  m_LocalScale: {x: 108.4082, y: 13000, z: 75.593}
-  m_Children: []
-  m_Father: {fileID: 115226007}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &1724103793
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724103791}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: d3aa943d14d48a1438d45bbea8a59394, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1724103794
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724103791}
-  m_Mesh: {fileID: -5495902117074765545, guid: d262f7a753979924a99c60404956fe02, type: 3}
 --- !u!1001 &1725673426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40116,6 +40426,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (120)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -40430,6 +40744,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (71)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -40452,15 +40770,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.345
+      value: -5.4
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.969
+      value: -6.908
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.8099995
+      value: 9.95
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -40709,6 +41027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -40875,6 +41197,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (96)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -40905,7 +41231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.033
+      value: 11.579468
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -41039,6 +41365,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (59)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -41287,6 +41617,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (125)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -41703,6 +42037,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (80)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -41729,11 +42067,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.267
+      value: -7.297
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.290999
+      value: 4.729
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -41951,6 +42289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (97)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -42033,6 +42375,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (117)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -42055,7 +42401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.53
+      value: -4.13
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42063,7 +42409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.807958
+      value: 9.931
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42115,6 +42461,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -42282,6 +42632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (52)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -42394,6 +42748,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (77)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -43218,6 +43576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -43300,6 +43662,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (72)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -43633,6 +43999,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -43916,7 +44286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.362
+      value: 5.9084673
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -44050,6 +44420,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (112)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -44347,6 +44721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (119)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -44429,6 +44807,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (90)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -44543,7 +44925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.976
+      value: 7.22
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -44762,6 +45144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (89)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -44784,15 +45170,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.803
+      value: -5.605
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.894
+      value: -7.54
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.4939995
+      value: 8.99
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -45599,6 +45985,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (78)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -45621,7 +46011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.886
+      value: -3.349
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -45928,6 +46318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridSpaceSize: 0.15
   gridCellPrefab: {fileID: 4229078040349587407, guid: b391b8df4653d6049ba28922add81910, type: 3}
+  gridPosition: {x: -0.25, y: 1.622, z: -8.3}
 --- !u!4 &2020172852
 Transform:
   m_ObjectHideFlags: 0
@@ -45936,7 +46327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020172850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.622, z: -8.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -45952,6 +46343,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (79)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -46066,7 +46461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.074
+      value: 7.65
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -46224,7 +46619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.253
+      value: -5.715
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -46232,7 +46627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9800868
+      value: -0.337
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -46869,6 +47264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (121)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -46891,15 +47290,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.8479104
+      value: -5.41
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.4401107
+      value: -6.48
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.81
+      value: 8.46
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -47035,6 +47434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (109)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -47122,6 +47525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (98)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -47152,7 +47559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.82
+      value: 9.15
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -47457,6 +47864,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -47706,6 +48117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (116)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -47788,6 +48203,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (67)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -48672,6 +49091,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -48920,6 +49343,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -49251,6 +49678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (84)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803558, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -49273,7 +49704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.046
+      value: -5.25
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
@@ -49281,7 +49712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.322998
+      value: 9.73
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w
@@ -49356,15 +49787,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6655617
+      value: -2.727
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.935
+      value: -7.394
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5345321
+      value: -1.382
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalRotation.w

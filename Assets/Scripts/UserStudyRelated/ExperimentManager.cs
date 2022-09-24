@@ -64,11 +64,11 @@ public class ExperimentManager : MonoBehaviour
         ExperimentLogger.subjectId = subjectId;
 
         List<ExperimentLevel> levels = new List<ExperimentLevel>();
-       List<int> densityLevelTwo = new List<int> {2};
-        //foreach (int densityLevel in LevelManager.densityLevelIntegers)
+        //List<int> densityLevelTwo = new List<int> { 2 };
+        foreach (int densityLevel in LevelManager.densityLevelIntegers)
 
         // iterate over two levels only 256 spheres
-        foreach (int densityLevel in densityLevelTwo)
+        //foreach (int densityLevel in densityLevelTwo)
         {
             ExperimentLevel level = gameObject.AddComponent<ExperimentLevel>();
 

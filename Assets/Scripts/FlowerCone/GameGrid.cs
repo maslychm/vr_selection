@@ -18,16 +18,18 @@ public class GameGrid : MonoBehaviour
 
     private int objectIndex;
 
+    [SerializeField] private Vector3 gridPosition;
+
     private void Start()
     {
-        transform.position = new Vector3(0, 1, 6);
+        transform.position = gridPosition;
     }
 
     public void CreateGrid(List<Interactable> interactables)
     {
-        int numOfInteractables = interactables.Count;
+        transform.SetPositionAndRotation(gridPosition, Quaternion.identity);
 
-        transform.position = new Vector3(0, 0, 4);
+        int numOfInteractables = interactables.Count;
 
         height = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));
         width = (int)Mathf.Ceil(Mathf.Sqrt(numOfInteractables));
@@ -50,6 +52,8 @@ public class GameGrid : MonoBehaviour
                     break;
 
                 gameGrid[x, y] = Instantiate(gridCellPrefab, new Vector3(x * GridSpaceSize, y * GridSpaceSize), Quaternion.identity);
+
+                gameGrid[x, y].transform.position += gridPosition;
                 gameGrid[x, y].transform.localScale *= .04f;
 
                 gameGrid[x, y].transform.parent = transform;
@@ -61,7 +65,9 @@ public class GameGrid : MonoBehaviour
                 objectIndex++;
             }
         }
-        transform.SetPositionAndRotation(new Vector3(-.5f, 1.5f, -3), Quaternion.identity);
+
+        //transform.SetPositionAndRotation(new Vector3(-.5f, 1.5f, -3), Quaternion.identity);
+        transform.SetPositionAndRotation(gridPosition, Quaternion.identity);
     }
 
     public void DestroyGrid()

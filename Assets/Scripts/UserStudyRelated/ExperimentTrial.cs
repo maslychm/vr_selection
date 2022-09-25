@@ -46,6 +46,8 @@ public class ExperimentTrial
         targetWasClicked = false;
         startTime = Time.unscaledTime;
         numberOfAttempts = 0;
+
+        HandDistancesTraveled.StartRecording();
     }
 
     public void RecordTargetMiss()
@@ -77,6 +79,7 @@ public class ExperimentTrial
         //targetInteractable.transform.position = new Vector3(targetInteractable.transform.position.x + 20.0f, targetInteractable.transform.position.y, targetInteractable.transform.position.z);
 
         isTrialOngoingNow = false;
+        HandDistancesTraveled.FinishRecording();
     }
 
     public bool WasSuccessful()

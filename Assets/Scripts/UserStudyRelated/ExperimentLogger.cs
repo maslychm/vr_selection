@@ -31,7 +31,7 @@ public static class ExperimentLogger
 
         List<(string, string)> trialValues = new List<(string, string)>
         {
-            ( "subject_id", $"sub{subjectId}"),
+            ( "subject_id", $"sub_{subjectId}"),
             ( "technique", $"{selectionTechnique}" ),
             ( "density", $"{densityLevel}" ),
             ( "trial_id", $"{trial.trialIdx}" ),
@@ -39,20 +39,21 @@ public static class ExperimentLogger
             ( "successful_selections", $"{trial.GenNumSuccessful()}" ),
             ( "total_attempts", $"{trial.GetNumAttempts()}" ),
             ( "trial_time", $"{trial.ComputeTrialTime()}" ),
-            ( "Left_Hand_Distance_Travelled", $"{handPositionTracking.getDistanceTravelledByLeftHand()}"),
-            ( "Right_Hand_Distance_Travelled", $"{rightHandPositionTracking.getDistanceTravelledByRightHand()}"),
+            ( "Left_Hand_Distance_Travelled", $"{HandDistancesTraveled.GetRightHandPathLength()}"),
+            ( "Right_Hand_Distance_Travelled", $"{HandDistancesTraveled.GetLeftHandPathLength()}"),
             ( "LeftTriggerBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.leftTriggerButton_Count}"),
             ( "RightTriggerBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.rightTriggerButton_Count}"),
             ( "LeftGripBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.leftGripButton_Count}"),
             ( "RightGripBtn_ClickCount", $"{BothHandsButtonClicksCountTracker.rightGripButton_Count}")
-
         };
 
         var fname = $"sub{subjectId}_{runTime}.csv";
         fname = Path.Combine(logDir, fname);
 
+        var writeHeader = !File.Exists(fname);
+
         using StreamWriter writer = new StreamWriter(fname, true);
-        if (!File.Exists(fname))
+        if (writeHeader)
             writer.Write(string.Join(",", trialValues.Select(x => x.Item1)) + "\n");
         writer.Write(string.Join(",", trialValues.Select(x => x.Item2)) + "\n");
 

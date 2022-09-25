@@ -51,7 +51,6 @@ public class ExperimentLevel : MonoBehaviour
 
     public void StartLevel(in int randomSeed, in int numTrialsPerLevel)
     {
-
         Scene scene = SceneManager.GetActiveScene();
         print("-> Level START <-");
 
@@ -78,7 +77,7 @@ public class ExperimentLevel : MonoBehaviour
             .ToList();
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
 
-       // if (!scene.name.Contains("SearchTask"))
+        // if (!scene.name.Contains("SearchTask"))
         {
             ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
             ExperimentTrial.targetInteractable.targetOutline.enabled = true;
@@ -116,7 +115,7 @@ public class ExperimentLevel : MonoBehaviour
     {
         FindObjectOfType<GrabbingHand>().ClearGrabbed();
 
-        // clear the current held components in the technique before the next triel 
+        // clear the current held components in the technique before the next triel
 
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
         while (priorRandomIndex == randIdx)

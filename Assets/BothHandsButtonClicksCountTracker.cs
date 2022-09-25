@@ -1,35 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BothHandsButtonClicksCountTracker : MonoBehaviour
 {
-
-
-    // let's store all the possible clicks 
+    // let's store all the possible clicks
     public InputActionReference leftTriggerButton, rightTriggerButton, leftGripButton, rightGripButton;
+
     public static int leftTriggerButton_Count, rightTriggerButton_Count, leftGripButton_Count, rightGripButton_Count;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
-        // assign each of the buttons to their physical reference 
+        // assign each of the buttons to their physical reference
         leftTriggerButton_Count = 0;
         rightTriggerButton_Count = 0;
         leftGripButton_Count = 0;
-        rightGripButton_Count=0; 
-        
+        rightGripButton_Count = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        if(ExperimentTrial.isTrialOngoingNow == false)
+        if (ExperimentTrial.isTrialOngoingNow == false)
         {
-            flushAllCounts();
+            FlushAllCounts();
             return;
         }
 
@@ -41,10 +33,9 @@ public class BothHandsButtonClicksCountTracker : MonoBehaviour
             leftTriggerButton_Count++;
         if (rightTriggerButton.action.WasPressedThisFrame())
             rightTriggerButton_Count++;
-        
     }
 
-    private void flushAllCounts()
+    private void FlushAllCounts()
     {
         leftTriggerButton_Count = 0;
         rightTriggerButton_Count = 0;

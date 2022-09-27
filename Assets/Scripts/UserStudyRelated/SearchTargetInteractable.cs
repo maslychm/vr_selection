@@ -10,6 +10,11 @@ public class SearchTargetInteractable : Interactable
 
     public static bool updateBack = false;
 
+    public void OffHighlighting()
+    {
+        interactionOutline.enabled = false;
+    }
+
     public void ResetTargetForCurrentTrial()
     {
         print("Resetting target in the current trial");

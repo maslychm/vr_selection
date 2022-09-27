@@ -48059,7 +48059,7 @@ MonoBehaviour:
   subjectId: myk
   selectionTechnique: 1
   pauseBetweenLevelsDuration: 4
-  numTrialsPerLevel: 10
+  numTrialsPerLevel: 1
   randomSeed: 1234
   numRemainingLevels: -1
   pauseTimeRemaining: -1

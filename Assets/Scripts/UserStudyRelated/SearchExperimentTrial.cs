@@ -39,6 +39,8 @@ public class SearchExperimentTrial
         isTrialOngoingNow = true;
         replacedInteractable = interactableToReplace;
 
+        targetInteractable.OffHighlighting();
+
         SearchTargetInteractable.SetReferenceTransformForCurrentTrial(replacedInteractable.transform);
 
         targetInteractable.transform.position = replacedInteractable.transform.position;

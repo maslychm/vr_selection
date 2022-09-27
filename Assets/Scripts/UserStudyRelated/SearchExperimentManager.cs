@@ -1,47 +1,44 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-public class ExperimentManager : MonoBehaviour
+public class SearchExperimentManager : MonoBehaviour
 {
-    public enum ExperimentState
-    { Idle, BetweenLevels, RunningLevel }
+public enum ExperimentState { Idle, BetweenLevels, RunningLevel}
 
     [Header("Experiment Settings")]
     [SerializeField] private string subjectId = "-1";
 
     [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
-    public static string selectionTechniqueName;
 
-    [Range(1, 15)]
+    [Range(0, 15)]
     [SerializeField] private float pauseBetweenLevelsDuration = 4f;
 
-    [SerializeField] private int numTrialsPerLevel = 5;
+    [SerializeField] private int numTrialsPerLevel = 10;
 
     [SerializeField] private int randomSeed = 1234;
 
-    [Header("Current Level Status")]
+    [Header("Current Experiment Status")]
     [ReadOnly] public static ExperimentState state = ExperimentState.Idle;
 
     [ReadOnly][SerializeField] private int numRemainingLevels = -1;
 
     [ReadOnly][SerializeField] private float pauseTimeRemaining = -1f;
 
-    private Queue<ExperimentLevel> remainingLevels;
-    private List<ExperimentLevel> finishedLevels;
-    private ExperimentLevel currentLevel;
+    private Queue<SearchExperimentLevel> remainingLevels;
+    private List<SearchExperimentLevel> finishedLevels;
+    private SearchExperimentLevel currentLevel;
 
     [SerializeField] private TMP_Text experimentText;
     public HideViewOfSpheresController Mimir;
 
     private void Start()
     {
-        ExperimentLogger.runTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
-        ExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data");
+        SearchExperimentLogger.softwareStartTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
+        SearchExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data");
     }
 
     public void ClearExperiment()
@@ -50,7 +47,7 @@ public class ExperimentManager : MonoBehaviour
         { return; }
 
         // Remove all Experiment Levels that might have stayed from the editor
-        gameObject.GetComponents<ExperimentLevel>().ToList().ForEach(x => DestroyImmediate(x));
+        gameObject.GetComponents<SearchExperimentLevel>().ToList().ForEach(x => DestroyImmediate(x));
 
         // Reset the states and other values that might have been modified through editor
         state = ExperimentState.Idle;
@@ -61,26 +58,22 @@ public class ExperimentManager : MonoBehaviour
         if (state != ExperimentState.Idle) { return; }
         ClearExperiment();
 
-        ExperimentLogger.subjectId = subjectId;
+        SearchExperimentLogger.subjectId = subjectId;
 
-        List<ExperimentLevel> levels = new List<ExperimentLevel>();
-        //List<int> densityLevelTwo = new List<int> { 2 };
-        foreach (int densityLevel in LevelManager.densityLevelIntegers)
-
-        // iterate over two levels only 256 spheres
-        //foreach (int densityLevel in densityLevelTwo)
+        List<SearchExperimentLevel> levels = new List<SearchExperimentLevel>();
+        foreach( int densityLevel in LevelManager.densityLevelIntegers)
         {
-            ExperimentLevel level = gameObject.AddComponent<ExperimentLevel>();
-
+            SearchExperimentLevel level = gameObject.AddComponent<SearchExperimentLevel>();
             level.levelTechnique = selectionTechnique;
-
             level.levelDensity = densityLevel;
-
             levels.Add(level);
         }
 
-        remainingLevels = new Queue<ExperimentLevel>(levels);
-        finishedLevels = new List<ExperimentLevel>();
+        // shuffle the levels using linq
+        levels = levels.OrderBy(a => Guid.NewGuid()).ToList();
+
+        remainingLevels = new Queue<SearchExperimentLevel>(levels);
+        finishedLevels = new List<SearchExperimentLevel>();
 
         print($"===> Experiment START <===");
         print($"Will run {remainingLevels.Count} levels");
@@ -118,7 +111,6 @@ public class ExperimentManager : MonoBehaviour
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }
-
     private void SetAllowSwitching(bool value)
     {
         LevelManager.allowKeyLevelSwitching = value;
@@ -134,7 +126,7 @@ public class ExperimentManager : MonoBehaviour
 
             case ExperimentState.RunningLevel:
 
-                if (currentLevel.state == ExperimentLevel.ExperimentLevelState.Finished)
+                if (currentLevel.state == SearchExperimentLevel.ExperimentLevelState.Finished)
                     TransitionToPause();
 
                 numRemainingLevels = remainingLevels.Count;

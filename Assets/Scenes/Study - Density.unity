@@ -48100,7 +48100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subjectId: myk
-  selectionTechnique: 1
+  selectionTechnique: 2
   pauseBetweenLevelsDuration: 2
   numTrialsPerLevel: 5
   randomSeed: 1234

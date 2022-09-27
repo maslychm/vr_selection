@@ -19,7 +19,8 @@ public class BothHandsButtonClicksCountTracker : MonoBehaviour
 
     private void Update()
     {
-        if (ExperimentTrial.isTrialOngoingNow == false)
+        if (ExperimentTrial.isTrialOngoingNow == false 
+            && SearchExperimentTrial.isTrialOngoingNow == false)
         {
             FlushAllCounts();
             return;

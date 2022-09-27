@@ -68,7 +68,8 @@ public class BoundaryCircleManager : MonoBehaviour
         if (
             clickedCircleForStartOfTrial_Right.action.IsPressed()
             && clickedCircleForStartOfTrial_Left.action.IsPressed()
-            && ExperimentManager.state == ExperimentManager.ExperimentState.RunningLevel
+            && (ExperimentManager.state == ExperimentManager.ExperimentState.RunningLevel
+            || SearchExperimentManager.state == SearchExperimentManager.ExperimentState.RunningLevel)
         )
         {
             RaycastHit[] dominantHits, nonDominantHits;

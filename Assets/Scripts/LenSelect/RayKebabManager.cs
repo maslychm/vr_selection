@@ -114,7 +114,8 @@ public class RayKebabManager : MonoBehaviour
     {
         foreach (Interactable interactable in rayCastedInteractables)
         {
-            if (ExperimentTrial.activeTrial == null)
+            if (ExperimentTrial.activeTrial == null 
+                && SearchExperimentTrial.activeTrial == null)
             {
                 interactable.GetComponent<Object_collected>().ResetGameObject();
             }

@@ -108,6 +108,7 @@ public class SearchExperimentLevel : MonoBehaviour
         Vector3 xrOrigin = FindObjectOfType<XROrigin>().transform.position;
         currentTrial.distToTarget = Vector3.Distance(xrOrigin, targetPositions[currentTargetPositionIdx]);
 
+        SearchExperimentTrial.targetInteractable = FindObjectOfType<SearchTargetInteractable>();
         currentTrial.StartTrial(targetPositions[currentTargetPositionIdx]);
         slectionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
 

@@ -36,7 +36,6 @@ public class SearchExperimentLogger
             
             ( "trial_type", $"{trial.type}" ),
             ( "trial_id", $"{trial.trialIdx}" ),
-            ( "rand_obj_idx", $"{trial.randObjIdx}" ),
             ( "distance_to_obj", $"{trial.distToTarget}" ),
             ( "num_attempts", $"{trial.GetNumAttempts()}" ),
             ( "trial_time", $"{trial.ComputeTrialTime()}" ),

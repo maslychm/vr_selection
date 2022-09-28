@@ -12,6 +12,8 @@ public class SearchTargetInteractable : Interactable
 
     public void OffHighlighting()
     {
+        if (interactionOutline == null)
+            return;
         interactionOutline.enabled = false;
     }
 
@@ -30,5 +32,10 @@ public class SearchTargetInteractable : Interactable
         originalPosition = _t.position;
         originalRotation = _t.rotation;
         originalScale = _t.localScale;
+    }
+
+    public void TeleportToPosition(Vector3 pos)
+    {
+        transform.position = pos;
     }
 }

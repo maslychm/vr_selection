@@ -11,7 +11,6 @@ public class SearchExperimentTrial
     public soundSystemHolder soundSystemHolder = GameObject.FindObjectOfType<soundSystemHolder>();
 
     public int trialIdx = 0;
-    public int randObjIdx = 0;
 
     private bool targetWasClicked = false;
 
@@ -19,8 +18,6 @@ public class SearchExperimentTrial
     private float trialCompleteTime = 0f;
 
     private int numAttempts = 0;
-
-    private Interactable replacedInteractable;
 
     public static bool isTrialOngoingNow = false;
 
@@ -32,22 +29,14 @@ public class SearchExperimentTrial
         this.type = t;
     }
 
-    public void StartTrial(in int randObjIdx, in Interactable interactableToReplace)
+    public void StartTrial(in Vector3 searchTargetPosition)
     {
-        this.randObjIdx = randObjIdx;
         Debug.Log("-- Trial START --");
         isTrialOngoingNow = true;
-        replacedInteractable = interactableToReplace;
 
         targetInteractable.OffHighlighting();
-
-        SearchTargetInteractable.SetReferenceTransformForCurrentTrial(replacedInteractable.transform);
-
-        targetInteractable.transform.position = replacedInteractable.transform.position;
-        targetInteractable.transform.rotation = replacedInteractable.transform.rotation;
-        targetInteractable.transform.localScale = replacedInteractable.transform.localScale;
-
-        replacedInteractable.GetComponent<Object_collected>().MoveOutsideReach();
+        targetInteractable.TeleportToPosition(searchTargetPosition);
+        SearchTargetInteractable.SetReferenceTransformForCurrentTrial(targetInteractable.transform);
 
         activeTrial = this;
         targetWasClicked = false;
@@ -80,14 +69,13 @@ public class SearchExperimentTrial
         Debug.Log($"Wrote results file: {fname}");
         activeTrial = null;
         Debug.Log("-- Trial End --");
-        replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
 
         isTrialOngoingNow = false;
         HandDistancesTraveled.FinishRecording();
     }
 
     public bool SuccessAtFirstAttempt() { return numAttempts == 1; }
-    
+
     public bool WasCompleted() { return targetWasClicked; }
 
     public int GetNumAttempts() { return numAttempts; }

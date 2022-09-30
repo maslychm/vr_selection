@@ -138,6 +138,8 @@ public class GrabbingHand : MonoBehaviour
 
     private void PickupObject(Interactable o)
     {
+        ReleaseCurrentlyHeldObject();
+
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
 

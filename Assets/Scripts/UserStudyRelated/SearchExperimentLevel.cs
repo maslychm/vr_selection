@@ -105,11 +105,15 @@ public class SearchExperimentLevel : MonoBehaviour
             currentTargetPositionIdx++;
         }
 
-        Vector3 xrOrigin = FindObjectOfType<XROrigin>().transform.position;
-        currentTrial.distToTarget = Vector3.Distance(xrOrigin, targetPositions[currentTargetPositionIdx]);
+        Vector3 camPosition = FindObjectOfType<Camera>().transform.position;
+        currentTrial.distToTarget = Vector3.Distance(camPosition, targetPositions[currentTargetPositionIdx]);
 
         SearchExperimentTrial.targetInteractable = FindObjectOfType<SearchTargetInteractable>();
         currentTrial.StartTrial(targetPositions[currentTargetPositionIdx]);
+        TargetAreaOutline.EnableSearchOutlineAroundPosition(
+            camPosition, 
+            targetPositions[currentTargetPositionIdx], 
+            currentTrial.type == SearchExperimentTrial.SearchExperimentTrialType.Search);
         slectionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
 
         state = ExperimentLevelState.RunningTrial;
@@ -117,6 +121,8 @@ public class SearchExperimentLevel : MonoBehaviour
 
     private void TransitionToBeforeTrial()
     {
+        TargetAreaOutline.DisableSearchOutlineAroundPosition();
+
         if (currentTrial != null)
         {
             completedTrials.Add(currentTrial);

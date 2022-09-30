@@ -72,6 +72,7 @@ public class SearchExperimentTrial
 
         isTrialOngoingNow = false;
         HandDistancesTraveled.FinishRecording();
+        //TargetAreaOutline.DisableSearchOutlineAroundPosition();
     }
 
     public bool SuccessAtFirstAttempt() { return numAttempts == 1; }

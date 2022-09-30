@@ -22,41 +22,41 @@ public class Object_collected : MonoBehaviour
 
         // if thje current scene has a search task then in that case we don't want to use an outline
 
-        if (this.gameObject.name.Contains("arget"))
-        {
-            if (scene.name.Contains("SearchTask"))
-            {
-                if (this.gameObject.GetComponent<cakeslice.Outline>())
-                {
-                    this.gameObject.GetComponent<cakeslice.Outline>().enabled = false;
-                }
-            }
+        //if (this.gameObject.name.Contains("arget"))
+        //{
+        //    if (scene.name.Contains("SearchTask"))
+        //    {
+        //        if (this.gameObject.GetComponent<cakeslice.Outline>())
+        //        {
+        //            this.gameObject.GetComponent<cakeslice.Outline>().enabled = false;
+        //        }
+        //    }
 
-            // -- backUp Logic
+        //    // -- backUp Logic
 
-            // just in case it is not existing then we add it
-            //else
-            //{
-            //    if (!this.gameObject.GetComponent<cakeslice.Outline>())
-            //    {
-            //        this.gameObject.AddComponent<cakeslice.Outline>();
-            //    }
-            //}
-        }
+        //    // just in case it is not existing then we add it
+        //    //else
+        //    //{
+        //    //    if (!this.gameObject.GetComponent<cakeslice.Outline>())
+        //    //    {
+        //    //        this.gameObject.AddComponent<cakeslice.Outline>();
+        //    //    }
+        //    //}
+        //}
     }
 
-    private void Update()
-    {
-        // if thje current scene has a search task then in that case we don't want to use an outline
-        if (this.gameObject.name.Contains("arget"))
-            if (scene.name.Contains("SearchTask"))
-            {
-                if (this.gameObject.GetComponent<cakeslice.Outline>())
-                {
-                    this.gameObject.GetComponent<cakeslice.Outline>().enabled = false;
-                }
-            }
-    }
+    //private void Update()
+    //{
+    //    // if thje current scene has a search task then in that case we don't want to use an outline
+    //    if (this.gameObject.name.Contains("arget"))
+    //        if (scene.name.Contains("SearchTask"))
+    //        {
+    //            if (this.gameObject.GetComponent<cakeslice.Outline>())
+    //            {
+    //                this.gameObject.GetComponent<cakeslice.Outline>().enabled = false;
+    //            }
+    //        }
+    //}
 
     //Reset to original position
     public void ResetGameObject()

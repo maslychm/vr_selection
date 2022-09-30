@@ -48,6 +48,22 @@ public class GravityZone : MonoBehaviour
         }
     }
 
+    public void ResetInteractables()
+    {
+        foreach(var i in interactablesToPull)
+        {
+            i.GetComponent<MeshRenderer>().enabled = true;
+            i.GetComponent<Collider>().enabled = true;
+            i.GetComponent<Object_collected>().ResetGameObject();
+        }
+    }
+
+    public void UpdateSearchTargetDirection(SearchTargetInteractable t)
+    {
+        Vector3 dir = t.transform.position - xrOriginFixedPosition;
+        interactablePullDirections[t] = dir;
+    }
+
     private void FixedUpdate()
     {
         float pullY = gravityPullActionReference.action.ReadValue<Vector2>().y * pullSpeed;
@@ -66,12 +82,12 @@ public class GravityZone : MonoBehaviour
             if (Vector3.Distance(interactable.transform.position, xrOriginFixedPosition) < transparencyDistance)
             {
                 interactable.GetComponent<MeshRenderer>().enabled = false;
-                interactable.GetComponent<BoxCollider>().enabled = false;
+                interactable.GetComponent<Collider>().enabled = false;
             }
             else
             {
                 interactable.GetComponent<MeshRenderer>().enabled = true;
-                interactable.GetComponent<BoxCollider>().enabled = true;
+                interactable.GetComponent<Collider>().enabled = true;
             }
         }
     }

@@ -21,8 +21,6 @@ public class SearchExperimentLevel : MonoBehaviour
     [ReadOnly] public SelectionTechniqueManager.SelectionTechnique levelTechnique;
     [ReadOnly] public int levelDensity = -1;
 
-    private Transform MiddleMarkerEmptyGameObject;
-
     private BoundaryCircleManager readinessCircleManager;
 
     private SelectionTechniqueManager slectionTechniqueDistributer;
@@ -34,10 +32,6 @@ public class SearchExperimentLevel : MonoBehaviour
 
     private void Start()
     {
-        MiddleMarkerEmptyGameObject = GameObject.Find("HalfwayMarker").transform;
-        if (MiddleMarkerEmptyGameObject == null)
-        { Debug.LogError("HalfwayMarker object was not found!"); }
-
         readinessCircleManager = FindObjectOfType<BoundaryCircleManager>();
         if (readinessCircleManager == null)
         { Debug.LogError("Did not find boundary circle manager"); };
@@ -92,6 +86,9 @@ public class SearchExperimentLevel : MonoBehaviour
     private void TransitionToNextTrial()
     {
         FindObjectOfType<GrabbingHand>().ClearGrabbed();
+        // Reset because they were probably moved by this technique
+        var gz = FindObjectOfType<GravityZone>();
+        if (gz != null) gz.ResetInteractables();
 
         currentTrial = remainingTrials.Dequeue();
         // check if it's a repeat trial
@@ -115,6 +112,10 @@ public class SearchExperimentLevel : MonoBehaviour
             targetPositions[currentTargetPositionIdx], 
             currentTrial.type == SearchExperimentTrial.SearchExperimentTrialType.Search);
         slectionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
+
+        // Re-calculate direction because the target position was just modified
+        if (gz != null) gz.UpdateSearchTargetDirection(SearchExperimentTrial.targetInteractable);
+        
 
         state = ExperimentLevelState.RunningTrial;
     }
@@ -159,7 +160,13 @@ public class SearchExperimentLevel : MonoBehaviour
 
             case ExperimentLevelState.RunningTrial:
                 if (currentTrial.WasCompleted())
+                {
+                    // Reset because they were probably moved by this technique
+                    var gz = FindObjectOfType<GravityZone>();
+                    if (gz != null) gz.ResetInteractables();
+
                     TransitionToBeforeTrial();
+                }
 
                 break;
         }

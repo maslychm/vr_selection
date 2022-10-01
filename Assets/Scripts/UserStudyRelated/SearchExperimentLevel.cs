@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -108,14 +107,13 @@ public class SearchExperimentLevel : MonoBehaviour
         SearchExperimentTrial.targetInteractable = FindObjectOfType<SearchTargetInteractable>();
         currentTrial.StartTrial(targetPositions[currentTargetPositionIdx]);
         TargetAreaOutline.EnableSearchOutlineAroundPosition(
-            camPosition, 
-            targetPositions[currentTargetPositionIdx], 
+            camPosition,
+            targetPositions[currentTargetPositionIdx],
             currentTrial.type == SearchExperimentTrial.SearchExperimentTrialType.Search);
         slectionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
 
         // Re-calculate direction because the target position was just modified
         if (gz != null) gz.UpdateSearchTargetDirection(SearchExperimentTrial.targetInteractable);
-        
 
         state = ExperimentLevelState.RunningTrial;
     }
@@ -204,7 +202,6 @@ public class SearchExperimentLevel : MonoBehaviour
         print($"> {levelName}: search at first attempt: {firstAttemptSearchPercentage}, search time: {avgSearchTime}");
         print($"> {levelName}: select at first attempt: {firstAttemptSelectPercentage}, select time: {avgSelectTime}");
     }
-
 
     private List<Vector3> GetSearchPositions()
     {

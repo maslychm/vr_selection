@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -7,7 +6,8 @@ using UnityEngine;
 
 public class SearchExperimentManager : MonoBehaviour
 {
-public enum ExperimentState { Idle, BetweenLevels, RunningLevel}
+    public enum ExperimentState
+    { Idle, BetweenLevels, RunningLevel }
 
     [Header("Experiment Settings")]
     [SerializeField] private string subjectId = "-1";
@@ -61,7 +61,7 @@ public enum ExperimentState { Idle, BetweenLevels, RunningLevel}
         SearchExperimentLogger.subjectId = subjectId;
 
         List<SearchExperimentLevel> levels = new List<SearchExperimentLevel>();
-        foreach( int densityLevel in LevelManager.densityLevelIntegers)
+        foreach (int densityLevel in LevelManager.densityLevelIntegers)
         {
             SearchExperimentLevel level = gameObject.AddComponent<SearchExperimentLevel>();
             level.levelTechnique = selectionTechnique;
@@ -111,6 +111,7 @@ public enum ExperimentState { Idle, BetweenLevels, RunningLevel}
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }
+
     private void SetAllowSwitching(bool value)
     {
         LevelManager.allowKeyLevelSwitching = value;

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class SearchExperimentTrial
 {
-    public enum SearchExperimentTrialType { Search, Repeat }
+    public enum SearchExperimentTrialType
+    { Search, Repeat }
 
     public SearchExperimentTrialType type;
 
@@ -75,11 +76,15 @@ public class SearchExperimentTrial
         //TargetAreaOutline.DisableSearchOutlineAroundPosition();
     }
 
-    public bool SuccessAtFirstAttempt() { return numAttempts == 1; }
+    public bool SuccessAtFirstAttempt()
+    { return numAttempts == 1; }
 
-    public bool WasCompleted() { return targetWasClicked; }
+    public bool WasCompleted()
+    { return targetWasClicked; }
 
-    public int GetNumAttempts() { return numAttempts; }
+    public int GetNumAttempts()
+    { return numAttempts; }
 
-    public float ComputeTrialTime() { return trialCompleteTime - trialStartTime; }
+    public float ComputeTrialTime()
+    { return trialCompleteTime - trialStartTime; }
 }

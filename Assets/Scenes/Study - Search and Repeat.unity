@@ -32626,8 +32626,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raySelectActionReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   gravityPullActionReference: {fileID: -531773207218524731, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  xrOriginTranform: {fileID: 1177616496}
-  pullSpeed: 0.0075
+  xrOriginTransform: {fileID: 1177616496}
+  startPointTransform: {fileID: 1649777725}
+  pullSpeed: 0.005
   rayStartPoint: {fileID: 1309045917}
   grabbingHand: {fileID: 2103060859}
   selectionRayObject: {fileID: 2038240036}
@@ -48350,7 +48351,7 @@ MonoBehaviour:
   subjectId: myk
   selectionTechnique: 5
   pauseBetweenLevelsDuration: 3
-  numTrialsPerLevel: 4
+  numTrialsPerLevel: 5
   randomSeed: 1234
   numRemainingLevels: -1
   pauseTimeRemaining: -1

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +7,8 @@ public class GravityZone : MonoBehaviour
 {
     [SerializeField] private InputActionReference raySelectActionReference;
     [SerializeField] private InputActionReference gravityPullActionReference;
-    [SerializeField] private Transform xrOriginTranform;
+    [SerializeField] private Transform xrOriginTransform; // for Y offset
+    [SerializeField] private Transform startPointTransform; // for X and Z offset
     [SerializeField] private float pullSpeed = 0.01f;
     [SerializeField] private Transform rayStartPoint;
     [SerializeField] private GrabbingHand grabbingHand;
@@ -19,9 +19,15 @@ public class GravityZone : MonoBehaviour
     private Dictionary<Interactable, Vector3> interactablePullDirections;
     private Vector3 xrOriginFixedPosition;
 
-    void OnEnable()
+    private void OnEnable()
     {
-        xrOriginFixedPosition = xrOriginTranform.position + new Vector3(0, 1f, 0);
+        // X and Z from the reference object, and Y + height from the XR Origin
+        // This is to make the balls consistently go into participant's mouth
+        xrOriginFixedPosition = new Vector3(
+            startPointTransform.position.x,
+            startPointTransform.position.y + 1.7f,
+            startPointTransform.position.z
+        );
 
         interactablesToPull = FindObjectsOfType<Interactable>()
             .ToList()
@@ -50,7 +56,7 @@ public class GravityZone : MonoBehaviour
 
     public void ResetInteractables()
     {
-        foreach(var i in interactablesToPull)
+        foreach (var i in interactablesToPull)
         {
             i.GetComponent<MeshRenderer>().enabled = true;
             i.GetComponent<Collider>().enabled = true;
@@ -92,7 +98,7 @@ public class GravityZone : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (raySelectActionReference.action.WasPressedThisFrame())
         {

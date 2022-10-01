@@ -55,20 +55,32 @@ public class Interactable : MonoBehaviour
 
     public void OnSelect()
     {
-        if (ExperimentTrial.activeTrial == null)
+        if (ExperimentTrial.activeTrial != null)
         {
-            return;
+            if (TryGetComponent(out TargetInteractable _))
+            {
+                ExperimentTrial.activeTrial.RecordTargetHit();
+                GetComponent<Object_collected>().ResetGameObject();
+            }
+            else
+            {
+                ExperimentTrial.activeTrial.RecordTargetMiss();
+                GetComponent<Object_collected>().ResetGameObject();
+            }
         }
 
-        if (TryGetComponent(out TargetInteractable _))
+        if (SearchExperimentTrial.activeTrial != null)
         {
-            ExperimentTrial.activeTrial.RecordTargetHit();
-            GetComponent<Object_collected>().ResetGameObject();
-        }
-        else
-        {
-            ExperimentTrial.activeTrial.RecordTargetMiss();
-            GetComponent<Object_collected>().ResetGameObject();
+            if (TryGetComponent(out SearchTargetInteractable _))
+            {
+                SearchExperimentTrial.activeTrial.RecordTargetHit();
+                GetComponent<Object_collected>().ResetGameObject();
+            }
+            else
+            {
+                SearchExperimentTrial.activeTrial.RecordTargetMiss();
+                GetComponent<Object_collected>().ResetGameObject();
+            }
         }
     }
 }

@@ -89,7 +89,7 @@ public class MiniMap : MonoBehaviour
         yield return null;
     }
 
-    private void ClearObjectCopies()
+    public void ClearObjectCopies()
     {
         foreach (shapeItem_2 o in listInCircle)
         {
@@ -114,7 +114,7 @@ public class MiniMap : MonoBehaviour
         shapeItemObject.transform.position = centerOfMiniMap.transform.position;
         shapeItemObject.transform.position += transform.TransformDirection(dir);
 
-        shapeItemObject.transform.rotation = transform.rotation;
+        //shapeItemObject.transform.rotation = transform.rotation;
 
         if (shapeItemObject.tag == "infinity")
         {

@@ -15,6 +15,8 @@ public class ExperimentTrial
     private int numberOfAttempts = 0;
     private Interactable replacedInteractable;
 
+    public static bool isTrialOngoingNow = false;
+
     public ExperimentTrial(in int trialIdx)
     {
         this.trialIdx = trialIdx;
@@ -25,6 +27,8 @@ public class ExperimentTrial
         this.randObjIdx = randObjIdx;
 
         Debug.Log("-- Trial START --");
+
+        isTrialOngoingNow = true;
 
         replacedInteractable = interactableToReplace;
 
@@ -42,6 +46,8 @@ public class ExperimentTrial
         targetWasClicked = false;
         startTime = Time.unscaledTime;
         numberOfAttempts = 0;
+
+        HandDistancesTraveled.StartRecording();
     }
 
     public void RecordTargetMiss()
@@ -71,6 +77,9 @@ public class ExperimentTrial
         replacedInteractable.GetComponent<Object_collected>().ResetGameObject();
         //targetInteractable.GetComponent<Object_collected>().ResetGameObject();
         //targetInteractable.transform.position = new Vector3(targetInteractable.transform.position.x + 20.0f, targetInteractable.transform.position.y, targetInteractable.transform.position.z);
+
+        isTrialOngoingNow = false;
+        HandDistancesTraveled.FinishRecording();
     }
 
     public bool WasSuccessful()

@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 
 public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 {
+    [SerializeField] private bool overrideLocations = false;
     private int totalObjectsCount = 8;
+    private float spacingOutOffset = Mathf.PI / 8f;
     [SerializeField] public float radius = 0.015f;
     [SerializeField] public float offset;
 
@@ -15,7 +17,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     [SerializeField] private GrabbingHand grabbingHand;
     [SerializeField] private InputActionReference clickedRightHandController;
 
-    private Dictionary<GameObject, shapeItem_3> slotsAroundMiniMap;
+    private Dictionary<Transform, shapeItem_3> slotsAroundMiniMap;
     public Dictionary<shapeItem_2, shapeItem_3> originalToDuplicate;
 
     public bool isFrozen = false;
@@ -23,7 +25,7 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
 
     private void Start()
     {
-        slotsAroundMiniMap = new Dictionary<GameObject, shapeItem_3>();
+        slotsAroundMiniMap = new Dictionary<Transform, shapeItem_3>();
 
         PrepareSlots();
         isFrozen = false;
@@ -100,10 +102,27 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
     /// </summary>
     private void PrepareSlots()
     {
+        List<float> predetLocations = new List<float>
+        {
+            spacingOutOffset,
+            spacingOutOffset * 2,
+            spacingOutOffset * 3,
+            spacingOutOffset * 4,
+            0f,
+            spacingOutOffset * 5,
+            -spacingOutOffset,
+            spacingOutOffset * 6
+        };
+
         for (int i = 0; i < totalObjectsCount; i++)
         {
             // get the distance that is around the circle
-            float angle = i * Mathf.PI * 2f / totalObjectsCount;
+            //float angle = i * Mathf.PI * 2f / totalObjectsCount;
+            float angle = i * Mathf.PI / totalObjectsCount;
+            angle -= spacingOutOffset;
+
+            if (overrideLocations)
+                angle = predetLocations[i];
 
             // let's try and get the vertical placement and horizental before combining them
             float vertical_placement = Mathf.Sin(angle);
@@ -123,18 +142,17 @@ public class ClutterHandler_circumferenceDisplay : MonoBehaviour
             placeHolder.transform.SetParent(MiniMap.transform);
             placeHolder.transform.localPosition = extendedPosition;
 
-            slotsAroundMiniMap.Add(placeHolder, null);
+            slotsAroundMiniMap.Add(placeHolder.transform, null);
         }
     }
 
     public void InsertToSlots(HashSet<shapeItem_2> toInsert)
     {
-        GameObject slotToFill = null;
-
         foreach (shapeItem_2 sa2 in toInsert)
         {
+            Transform slotToFill = null;
             // get the next available slot
-            foreach (GameObject slot in slotsAroundMiniMap.Keys)
+            foreach (Transform slot in slotsAroundMiniMap.Keys)
             {
                 if (slotsAroundMiniMap[slot] == null)
                 {

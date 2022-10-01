@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,8 +17,8 @@ public class ExperimentManager : MonoBehaviour
     [SerializeField] private SelectionTechniqueManager.SelectionTechnique selectionTechnique;
     public static string selectionTechniqueName;
 
-    [Range(1, 60)]
-    [SerializeField] private float pauseBetweenLevelsDuration = 10f;
+    [Range(1, 15)]
+    [SerializeField] private float pauseBetweenLevelsDuration = 4f;
 
     [SerializeField] private int numTrialsPerLevel = 5;
 
@@ -34,6 +35,7 @@ public class ExperimentManager : MonoBehaviour
     private List<ExperimentLevel> finishedLevels;
     private ExperimentLevel currentLevel;
 
+    [SerializeField] private TMP_Text experimentText;
     public HideViewOfSpheresController Mimir;
 
     private void Start()
@@ -62,8 +64,11 @@ public class ExperimentManager : MonoBehaviour
         ExperimentLogger.subjectId = subjectId;
 
         List<ExperimentLevel> levels = new List<ExperimentLevel>();
-
+        //List<int> densityLevelTwo = new List<int> { 2 };
         foreach (int densityLevel in LevelManager.densityLevelIntegers)
+
+        // iterate over two levels only 256 spheres
+        //foreach (int densityLevel in densityLevelTwo)
         {
             ExperimentLevel level = gameObject.AddComponent<ExperimentLevel>();
 
@@ -98,7 +103,6 @@ public class ExperimentManager : MonoBehaviour
             currentLevel = null;
             state = ExperimentState.Idle;
             print("===> Experiment END <===");
-            Mimir.ShowTheBarrier();
             return;
         }
 
@@ -109,7 +113,8 @@ public class ExperimentManager : MonoBehaviour
 
     private void TransitionToPause()
     {
-        Mimir.ShowTheBarrier();
+        if (remainingLevels.Count != 0)
+            Mimir.ShowTheBarrier();
         pauseTimeRemaining = pauseBetweenLevelsDuration;
         state = ExperimentState.BetweenLevels;
     }
@@ -137,6 +142,8 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case ExperimentState.BetweenLevels:
+
+                experimentText.text = $"Level ready in:\n{pauseTimeRemaining:0.#} s.";
 
                 pauseTimeRemaining -= Time.deltaTime;
                 if (pauseTimeRemaining < 0f)

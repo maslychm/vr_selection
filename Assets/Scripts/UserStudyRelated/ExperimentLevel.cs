@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// For replicable randomness: https://docs.unity3d.com/ScriptReference/Random-state.html
@@ -31,6 +32,8 @@ public class ExperimentLevel : MonoBehaviour
 
     private BoundaryCircleManager readinessCircleManager;
 
+    private SelectionTechniqueManager selectyionTechniqueDistributer;
+
     private int priorRandomIndex = -1;
 
     private void Start()
@@ -42,10 +45,13 @@ public class ExperimentLevel : MonoBehaviour
         readinessCircleManager = FindObjectOfType<BoundaryCircleManager>();
         if (readinessCircleManager == null)
         { Debug.LogError("Did not find boundary circle manager"); };
+
+        selectyionTechniqueDistributer = FindObjectOfType<SelectionTechniqueManager>();
     }
 
     public void StartLevel(in int randomSeed, in int numTrialsPerLevel)
     {
+        Scene scene = SceneManager.GetActiveScene();
         print("-> Level START <-");
 
         //
@@ -55,6 +61,7 @@ public class ExperimentLevel : MonoBehaviour
         levelName = $"{levelTechnique}_dens{levelDensity}";
 
         GetComponent<LevelManager>().DisableAllLevels();
+
         GetComponent<LevelManager>().EnableDensityLevel(levelDensity);
         GetComponent<SelectionTechniqueManager>().ActivateTechnique(levelTechnique);
 
@@ -69,9 +76,12 @@ public class ExperimentLevel : MonoBehaviour
             && (x.gameObject.transform.position.z > MiddleMarkerEmptyGameObject.transform.position.z))
             .ToList();
         ExperimentTrial.targetInteractable = FindObjectOfType<TargetInteractable>();
-        ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
-        ExperimentTrial.targetInteractable.targetOutline.enabled = true;
 
+        // if (!scene.name.Contains("SearchTask"))
+        {
+            ExperimentTrial.targetInteractable.interactionOutline.enabled = false;
+            ExperimentTrial.targetInteractable.targetOutline.enabled = true;
+        }
         Random.InitState(randomSeed);
 
         //
@@ -105,6 +115,8 @@ public class ExperimentLevel : MonoBehaviour
     {
         FindObjectOfType<GrabbingHand>().ClearGrabbed();
 
+        // clear the current held components in the technique before the next triel
+
         int randIdx = Random.Range(0, levelInteractables.Count + 1);
         while (priorRandomIndex == randIdx)
         {
@@ -118,13 +130,12 @@ public class ExperimentLevel : MonoBehaviour
         currentTrial = remainingTrials.Dequeue();
 
         currentTrial.StartTrial(randIdx, interactableToReplace);
+        selectyionTechniqueDistributer.clearCurrentTechnique(levelTechnique);
         state = ExperimentLevelState.RunningTrial;
     }
 
     private void TransitionToBeforeTrial()
     {
-        readinessCircleManager.SetWaitForUserReady();
-
         if (currentTrial != null)
         {
             completedTrials.Add(currentTrial);
@@ -136,6 +147,7 @@ public class ExperimentLevel : MonoBehaviour
             return;
         }
 
+        readinessCircleManager.SetWaitForUserReady();
         state = ExperimentLevelState.BeforeNextTrial;
     }
 

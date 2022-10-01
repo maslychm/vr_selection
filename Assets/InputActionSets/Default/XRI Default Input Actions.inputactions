@@ -843,6 +843,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "GravityZonePull",
+                    "type": "Value",
+                    "id": "fd56db76-4087-4cb0-8852-03dd4abb02d2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -1052,6 +1061,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "debug_write_B",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8122b4de-f7b1-4f34-9f73-15e883f00a01",
+                    "path": "<XRController>{RightHand}/primary2DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "GravityZonePull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -162,9 +162,13 @@ public class MiniMapInteractor : MonoBehaviour
             {
                 duplicate.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
             }
-            if (duplicate.CompareTag("cube") || duplicate.CompareTag("sphere") || duplicate.CompareTag("cylinder"))
+            if (duplicate.CompareTag("sphere") || duplicate.CompareTag("cylinder"))
             {
                 duplicate.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
+            }
+            if (duplicate.CompareTag("cube"))
+            {
+                duplicate.transform.localScale = new Vector3(0.04f, 0.04f, 0.04f);
             }
 
             // Interactable prefabs used to have 2 colliders: trigger and non-trigger
@@ -255,6 +259,7 @@ public class MiniMapInteractor : MonoBehaviour
         {
             ExtendFlashlight();
             miniMap.ShowMiniMap();
+            FindObjectOfType<ClutterHandler_circumferenceDisplay>()?.FreeCircularSlots();
         }
 
         if (flaslightActionReference.action.IsPressed())
@@ -379,6 +384,11 @@ public class MiniMapInteractor : MonoBehaviour
             // TODO try dividing by current flashlight scale times some factor
             // ^^^ Yes, this is correct, because as of right now, if there's only 1 element highlighted, the above code acts as normalization. Added length check.
         }
+    }
+
+    public void FlushDuplicateDirections()
+    {
+        duplicateDirections.Clear();
     }
 
     public List<(shapeItem_2, Vector3)> GetDuplicatesAndDirections()

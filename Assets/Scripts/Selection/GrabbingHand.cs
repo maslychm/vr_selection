@@ -36,11 +36,6 @@ public class GrabbingHand : MonoBehaviour
 
         ResetItemHistory();
 
-        if (flowerCone)
-        {
-            flowerCone.AtTrialStart();
-        }
-
         if (grabbedByHandHistory == null || collidingWithHand == null || grabbedByHandHistory.Count == 0 || collidingWithHand.Count == 0)
             return;
 
@@ -138,6 +133,8 @@ public class GrabbingHand : MonoBehaviour
 
     private void PickupObject(Interactable o)
     {
+        ReleaseCurrentlyHeldObject();
+
         o.GetComponent<Rigidbody>().useGravity = false;
         o.GetComponent<Rigidbody>().isKinematic = true;
 

@@ -11,9 +11,9 @@ using UnityEngine;
 public class SelectionTechniqueManager : MonoBehaviour
 {
     public enum SelectionTechnique
-    { SimpleMiniMap, OhMiniMap, ThreeDMiniMap, RayKebab, Flower }
+    { SimpleMiniMap, OhMiniMap, ThreeDMiniMap, RayKebab, Flower, GravityZone }
 
-    [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root, RayKebabGameObjectRoot, ThreeDMiniMapRoot, FlowerRoot;
+    [SerializeField] private GameObject SimpleMiniMap_root, OhMiniMap_root, RayKebabGameObjectRoot, ThreeDMiniMapRoot, FlowerRoot, GravityZoneRoot;
     [SerializeField] private MiniMap SimpleMiniMap, OhMiniMap, ThreeDMiniMap;
     [SerializeField] private MiniMapInteractor SimpleMiniMapInteractor, OhMiniMapInteractor, ThreeDMiniMapInteractor;
     [SerializeField] private RayKebabManager instanceOfRayManager;
@@ -44,6 +44,8 @@ public class SelectionTechniqueManager : MonoBehaviour
             ActivateRayKebab();
         else if (Input.GetKeyDown(KeyCode.T))
             Activate3DMiniMap();
+        else if (Input.GetKeyDown(KeyCode.G))
+            ActivateGravityZone();
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             DisableAllTechniques();
@@ -58,6 +60,7 @@ public class SelectionTechniqueManager : MonoBehaviour
         RayKebabGameObjectRoot.SetActive(false);
         ThreeDMiniMapRoot.SetActive(false);
         FlowerRoot.SetActive(false);
+        GravityZoneRoot.SetActive(false);
         isRayKebab = false;
         grabbingHand.miniMap = null;
         grabbingHand.miniMapIntreractor = null;
@@ -89,6 +92,10 @@ public class SelectionTechniqueManager : MonoBehaviour
 
             case SelectionTechnique.Flower:
                 ActivateFlowerCone();
+                break;
+
+            case SelectionTechnique.GravityZone:
+                ActivateGravityZone();
                 break;
         }
     }
@@ -153,5 +160,42 @@ public class SelectionTechniqueManager : MonoBehaviour
         grabbingHand.instanceOfRayManager = null;
 
         SimpleMiniMap_root.SetActive(true);
+    }
+
+    private void ActivateGravityZone()
+    {
+        DisableAllTechniques();
+        print("Enabling Gravity Zone");
+        GravityZoneRoot.SetActive(true);
+    }
+
+    public void clearCurrentTechnique(SelectionTechnique currentLevelTechnique)
+    {
+        switch (currentLevelTechnique)
+        {
+            case SelectionTechnique.SimpleMiniMap:
+                SimpleMiniMap.ClearObjectCopies();
+                SimpleMiniMapInteractor.FlushDuplicateDirections();
+                break;
+
+            case SelectionTechnique.OhMiniMap:
+                OhMiniMap.ClearObjectCopies();
+                OhMiniMapInteractor.FlushDuplicateDirections();
+                FindObjectOfType<ClutterHandler_circumferenceDisplay>().FreeCircularSlots();
+                break;
+
+            case SelectionTechnique.ThreeDMiniMap:
+                ThreeDMiniMapInteractor.FlushDuplicateDirections();
+                ThreeDMiniMap.ClearObjectCopies();
+                break;
+
+            case SelectionTechnique.RayKebab:
+                instanceOfRayManager.ReleaseInteractablesFromRay();
+                break;
+
+            case SelectionTechnique.Flower:
+                flowerCone.AtTrialStart();
+                break;
+        }
     }
 }

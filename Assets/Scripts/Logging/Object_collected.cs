@@ -18,7 +18,6 @@ public class Object_collected : MonoBehaviour
         originalParent = transform.parent;
     }
 
-    //Reset to original position
     public void ResetGameObject()
     {
         transform.position = originalPosition;

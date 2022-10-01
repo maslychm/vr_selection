@@ -114,22 +114,40 @@ public class RayKebabManager : MonoBehaviour
     {
         foreach (Interactable interactable in rayCastedInteractables)
         {
-            if (ExperimentTrial.activeTrial == null)
+            if (ExperimentTrial.activeTrial == null
+                && SearchExperimentTrial.activeTrial == null)
             {
                 interactable.GetComponent<Object_collected>().ResetGameObject();
             }
             else
             {
-                // If a trial is active and the wrong object was picked up, target
-                // interactable should go to it's last position, not the "reset" one
-                if (interactable.TryGetComponent(out TargetInteractable target))
+
+                if (ExperimentTrial.activeTrial != null)
                 {
-                    print("wrong -> manually resetting target in curr trial");
-                    target.ResetTargetForCurrentTrial();
+                    // If a trial is active and the wrong object was picked up, target
+                    // interactable should go to it's last position, not the "reset" one
+                    if (interactable.TryGetComponent(out TargetInteractable target))
+                    {
+                        print("wrong -> manually resetting target in curr trial");
+                        target.ResetTargetForCurrentTrial();
+                    }
+                    else
+                    {
+                        interactable.GetComponent<Object_collected>().ResetGameObject();
+                    }
                 }
-                else
+
+                if (SearchExperimentTrial.activeTrial != null)
                 {
-                    interactable.GetComponent<Object_collected>().ResetGameObject();
+                    if (interactable.TryGetComponent(out SearchTargetInteractable target))
+                    {
+                        print("wrong -> manually resetting target in curr trial");
+                        target.ResetTargetForCurrentTrial();
+                    }
+                    else
+                    {
+                        interactable.GetComponent<Object_collected>().ResetGameObject();
+                    }
                 }
             }
         }

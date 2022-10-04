@@ -9,7 +9,7 @@ public class GravityZone : MonoBehaviour
     [SerializeField] private InputActionReference gravityPullActionReference;
     [SerializeField] private Transform xrOriginTransform; // for Y offset
     [SerializeField] private Transform startPointTransform; // for X and Z offset
-    [SerializeField] private float pullSpeed = 0.01f;
+    [SerializeField] private float pullSpeed = 0.0025f;
     [SerializeField] private Transform rayStartPoint;
     [SerializeField] private GrabbingHand grabbingHand;
     [SerializeField] private GameObject selectionRayObject;
@@ -18,6 +18,10 @@ public class GravityZone : MonoBehaviour
     private List<Interactable> interactablesToPull;
     private Dictionary<Interactable, Vector3> interactablePullDirections;
     private Vector3 xrOriginFixedPosition;
+
+
+    [SerializeField] private float uninteruptedAddFactor = 0.01f;
+    private float uninteruptedTime;
 
     private void OnEnable()
     {
@@ -72,9 +76,25 @@ public class GravityZone : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float pullY = gravityPullActionReference.action.ReadValue<Vector2>().y * pullSpeed;
+        float joyYInput = gravityPullActionReference.action.ReadValue<Vector2>().y;
 
-        if (Mathf.Abs(pullY) < float.Epsilon)
+        if (Mathf.Abs(joyYInput) < float.Epsilon)
+        {
+            // reset the uninteruptedTime
+            uninteruptedTime = 1;
+            return;
+        }
+        else
+        {
+            uninteruptedTime += uninteruptedAddFactor;
+            uninteruptedTime = Mathf.Clamp(uninteruptedTime, 1, 3);
+        }
+
+        //float processedJoyYInput = 1.2f * Mathf.Sign(joyYInput) * joyYInput * joyYInput; // 1.2x^2 
+        float processedJoyYInput = Mathf.Sign(joyYInput) * joyYInput * joyYInput * uninteruptedTime; // x^2 * timeFactor 
+        float pullOffset = processedJoyYInput * pullSpeed;
+
+        if (Mathf.Abs(pullOffset) < float.Epsilon)
             return;
 
         foreach (var kv in interactablePullDirections)
@@ -82,7 +102,7 @@ public class GravityZone : MonoBehaviour
             var interactable = kv.Key;
             var direction = kv.Value;
 
-            interactable.transform.position += direction * pullY;
+            interactable.transform.position += direction * pullOffset;
 
             // if distance is too small, disable renderers and colliders on interactable
             if (Vector3.Distance(interactable.transform.position, xrOriginFixedPosition) < transparencyDistance)

@@ -26,13 +26,15 @@ public class TargetAreaOutline : MonoBehaviour
     public static void EnableSearchOutlineAroundPosition(Vector3 camPosition, Vector3 searchPosition, bool useNewOffset)
     {
         if (useNewOffset)
-            searchOffset = Random.insideUnitSphere;
+            searchOffset = Random.insideUnitSphere * 1.5f;
+
+        //print($"offset: {searchOffset}");
 
         // direction of the object from camera
         Vector3 objDir = (searchPosition - camPosition).normalized;
         // 5 meters from the camera position in the direction of search position
         objDir = camPosition + objDir * 10f;
-        // Add randm offset
+        // Add random offset
         objDir += searchOffset;
 
         _transform.position = objDir;

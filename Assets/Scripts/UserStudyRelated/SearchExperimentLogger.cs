@@ -10,6 +10,8 @@ public class SearchExperimentLogger
     public static SelectionTechniqueManager.SelectionTechnique selectionTechnique;
     private static string logDir;
 
+    private static int globalTrialIdx = 0;
+
     public static void CreateLoggingDirectory(string dir, string subdir)
     {
         var path = dir;
@@ -23,6 +25,8 @@ public class SearchExperimentLogger
 
     public static string LogTrial(SearchExperimentTrial trial)
     {
+        globalTrialIdx += 1;
+
         if (subjectId == "-1")
         {
             return "SKIPPING WRITING BECAUSE SUBJECTID = 1";
@@ -33,13 +37,14 @@ public class SearchExperimentLogger
             ( "subject_id", $"sub_{subjectId}"),
             ( "technique", $"{selectionTechnique}" ),
             ( "density", $"{densityLevel}" ),
-            
+
+            ( "global_trial_idx", $"{globalTrialIdx}" ),
             ( "trial_type", $"{trial.type}" ),
             ( "trial_id", $"{trial.trialIdx}" ),
             ( "distance_to_obj", $"{trial.distToTarget}" ),
             ( "num_attempts", $"{trial.GetNumAttempts()}" ),
             ( "trial_time", $"{trial.ComputeTrialTime()}" ),
-            
+
             ( "left_hand_distance_travelled", $"{HandDistancesTraveled.GetRightHandPathLength()}" ),
             ( "right_hand_distance_travelled", $"{HandDistancesTraveled.GetLeftHandPathLength()}" ),
             ( "left_trigger_clicked", $"{BothHandsButtonClicksCountTracker.leftTriggerButton_Count}" ),

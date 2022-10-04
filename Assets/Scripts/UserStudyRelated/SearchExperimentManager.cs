@@ -62,7 +62,7 @@ public class SearchExperimentManager : MonoBehaviour
 
         List<SearchExperimentLevel> levels = new List<SearchExperimentLevel>();
         foreach (int densityLevel in LevelManager.densityLevelIntegers)
-        {
+            {
             SearchExperimentLevel level = gameObject.AddComponent<SearchExperimentLevel>();
             level.levelTechnique = selectionTechnique;
             level.levelDensity = densityLevel;

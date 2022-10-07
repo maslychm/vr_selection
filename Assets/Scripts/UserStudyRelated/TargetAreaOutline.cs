@@ -26,7 +26,7 @@ public class TargetAreaOutline : MonoBehaviour
     public static void EnableSearchOutlineAroundPosition(Vector3 camPosition, Vector3 searchPosition, bool useNewOffset)
     {
         if (useNewOffset)
-            searchOffset = Random.insideUnitSphere * 1.5f;
+            searchOffset = Random.insideUnitSphere * 1f;
 
         //print($"offset: {searchOffset}");
 

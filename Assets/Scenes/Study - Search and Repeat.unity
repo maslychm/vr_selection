@@ -43872,7 +43872,7 @@ Transform:
   m_GameObject: {fileID: 1905529302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.22, y: 1.15, z: -3.492}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -48349,10 +48349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f020084f97efe4189d2d5c3046e4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: myk
+  subjectId: 1
   selectionTechnique: 1
   pauseBetweenLevelsDuration: 3
-  numTrialsPerLevel: 10
+  numTrialsPerLevel: 5
   randomSeed: 1234
   numRemainingLevels: -1
   pauseTimeRemaining: -1

@@ -48349,13 +48349,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f020084f97efe4189d2d5c3046e4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: 9
-  selectionTechnique: 1
+  subjectId: 11
+  selectionTechnique: 5
   pauseBetweenLevelsDuration: 3
   numTrialsPerLevel: 5
   randomSeed: 1234
   numRemainingLevels: -1
-  pauseTimeRemaining: -1
+  pauseTimeRemaining: 3
   experimentText: {fileID: 1007850536}
   Mimir: {fileID: 76005695}
 --- !u!114 &2088272190

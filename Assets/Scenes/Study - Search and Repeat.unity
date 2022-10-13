@@ -48349,8 +48349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f020084f97efe4189d2d5c3046e4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectId: 18
-  selectionTechnique: 4
+  subjectId: 20
+  selectionTechnique: 2
   pauseBetweenLevelsDuration: 3
   numTrialsPerLevel: 5
   randomSeed: 1234

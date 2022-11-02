@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 45
@@ -177,6 +181,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -258,6 +270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -301,6 +317,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -422,9 +446,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -440,6 +476,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -585,6 +625,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (8)
@@ -647,6 +691,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 35
@@ -815,9 +863,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -833,6 +893,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 32
@@ -895,6 +959,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -1019,6 +1087,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (10)
@@ -1717,9 +1789,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -1797,6 +1881,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable
@@ -2403,6 +2491,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (3)
@@ -2674,6 +2766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -2717,6 +2813,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -2831,6 +2935,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 44
@@ -2874,6 +2982,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -3028,9 +3144,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -3598,6 +3726,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -3819,9 +3951,21 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -4052,6 +4196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -4096,6 +4244,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
 --- !u!4 &816479194 stripped
@@ -4113,6 +4269,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
@@ -4157,6 +4317,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -4298,7 +4466,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 891687492}
-  - component: {fileID: 891687494}
   - component: {fileID: 891687493}
   m_Layer: 0
   m_Name: LeftHand Controller
@@ -4491,35 +4658,6 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 7779212132400271959, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_ButtonPressPoint: 0.5
---- !u!114 &891687494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891687491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1868ec0470d0f254897d389bbc61c4c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useGestureDirection: 0
-  flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  flashlightHighlighter: {fileID: 1198977349}
-  attachTransform: {fileID: 746365504}
-  reticle: {fileID: 2051788649}
-  handDebugPlane: {fileID: 341210474}
-  flashlightCenterCone: {fileID: 815965077}
-  debugPlaneOffset: {x: 0, y: 0, z: 0}
-  hmdTransform: {fileID: 338191009}
-  tabletUI: {fileID: 1531887449}
-  defaultFlashlightScale: {x: 150, y: 150, z: 560}
-  scaleWithDistance: 0
-  shoulderOffset: {x: -0.2, y: -0.2, z: -0.05}
-  maxFlashlightScale: {x: 150, y: 150, z: 560}
-  debug: 0
-  addForceOnObjectDetach: 1
-  objPushForce: 20
 --- !u!1001 &905183518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4527,6 +4665,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (7)
@@ -4633,9 +4775,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -4761,9 +4915,21 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -4947,9 +5113,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -5131,9 +5309,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -5278,6 +5468,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (5)
@@ -5344,6 +5538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -5388,6 +5586,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
 --- !u!4 &1082864022 stripped
@@ -5402,6 +5608,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -5464,6 +5674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (4)
@@ -5631,7 +5845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gestureDirectoryPath: 
-  disableActionExecution: 1
+  disableActionExecution: 0
   debugText: {fileID: 0}
   useAsDirection: 0
 --- !u!4 &1142582178
@@ -5656,6 +5870,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (1)
@@ -5812,6 +6030,35 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3613567641014311022, guid: ce540304778ef45489f30585d3f0369e, type: 3}
+--- !u!114 &1198977351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198977349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1868ec0470d0f254897d389bbc61c4c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useGestureDirection: 0
+  flaslightActionReference: {fileID: -6107554913677339643, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  flashlightHighlighter: {fileID: 1198977349}
+  attachTransform: {fileID: 746365504}
+  reticle: {fileID: 2051788649}
+  handDebugPlane: {fileID: 341210474}
+  flashlightCenterCone: {fileID: 815965077}
+  debugPlaneOffset: {x: 0, y: 0, z: 0}
+  hmdTransform: {fileID: 338191009}
+  tabletUI: {fileID: 1531887449}
+  defaultFlashlightScale: {x: 150, y: 150, z: 560}
+  scaleWithDistance: 0
+  shoulderOffset: {x: -0.2, y: -0.2, z: -0.05}
+  maxFlashlightScale: {x: 150, y: 150, z: 560}
+  debug: 0
+  addForceOnObjectDetach: 1
+  objPushForce: 20
 --- !u!1001 &1225120208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5819,6 +6066,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -5925,9 +6176,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -6049,9 +6312,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -6105,6 +6380,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6229,6 +6508,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 34
@@ -6291,6 +6574,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (9)
@@ -6415,6 +6702,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -6543,6 +6834,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -6586,6 +6881,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -6640,6 +6943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -6683,6 +6990,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -6984,6 +7299,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (2)
@@ -7385,6 +7704,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -7429,6 +7752,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
 --- !u!4 &1575429361 stripped
@@ -7446,6 +7777,10 @@ PrefabInstance:
     - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_Name
       value: SphereInteractable (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
@@ -7490,6 +7825,14 @@ PrefabInstance:
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
@@ -8019,9 +8362,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.387
       objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110750, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
       propertyPath: m_Name
       value: CubeInteractable (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241610088319110756, guid: 0e0381acc48648048911537ae2921252, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0381acc48648048911537ae2921252, type: 3}
@@ -8177,6 +8532,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (11)
@@ -8673,6 +9032,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -8735,6 +9098,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 1657778290, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6191250366386949195, guid: e41ff92f005112b49bf299bcc389d8a2, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -9227,6 +9594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SphereInteractable (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803556, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 145584628470803560, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
       propertyPath: m_RootOrder
       value: 42
@@ -9271,6 +9642,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.494
       objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 145584628470803562, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3273645f9f05cea4d8a45b17a65a1425, type: 3}
 --- !u!4 &2067894362 stripped
@@ -9285,6 +9664,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1797289531}
     m_Modifications:
+    - target: {fileID: 926880648, guid: 37347ed209024304fbae309c1861b76e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4697893688813355886, guid: 37347ed209024304fbae309c1861b76e, type: 3}
       propertyPath: m_Name
       value: PyramidInteractable (6)

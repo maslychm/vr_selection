@@ -86,7 +86,7 @@ public class XRGestureFilterInteractor : MonoBehaviour
     // migrated triggers from interactables
     public void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("sphere"))
+        if (!other.GetComponent<Interactable>())
             return;
 
         other.gameObject.GetComponent<Interactable>().StartHover();

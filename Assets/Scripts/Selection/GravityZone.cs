@@ -9,18 +9,18 @@ public class GravityZone : MonoBehaviour
     [SerializeField] private InputActionReference gravityPullActionReference;
     [SerializeField] private Transform xrOriginTransform; // for Y offset
     [SerializeField] private Transform startPointTransform; // for X and Z offset
-    [SerializeField] private float pullSpeed = 0.0025f;
+    [Tooltip("Meters per Second")]
+    [SerializeField] private float pullSpeed = 6f;
     [SerializeField] private Transform rayStartPoint;
     [SerializeField] private GrabbingHand grabbingHand;
     [SerializeField] private GameObject selectionRayObject;
-    [SerializeField] private float transparencyDistance = 1f;
+    [Tooltip("Meters")]
+    [SerializeField] private float transparencyDistance = 1.5f;
 
     private List<Interactable> interactablesToPull;
     private Dictionary<Interactable, Vector3> interactablePullDirections;
     private Vector3 xrOriginFixedPosition;
 
-
-    [SerializeField] private float uninteruptedAddFactor = 0.01f;
     private float uninteruptedTime;
 
     private void OnEnable()
@@ -42,7 +42,7 @@ public class GravityZone : MonoBehaviour
 
         foreach (var interactable in interactablesToPull)
         {
-            Vector3 dir = interactable.transform.position - xrOriginFixedPosition;
+            Vector3 dir = (interactable.transform.position - xrOriginFixedPosition).normalized;
             interactablePullDirections.Add(interactable, dir);
         }
     }
@@ -70,7 +70,7 @@ public class GravityZone : MonoBehaviour
 
     public void UpdateSearchTargetDirection(SearchTargetInteractable t)
     {
-        Vector3 dir = t.transform.position - xrOriginFixedPosition;
+        Vector3 dir = (t.transform.position - xrOriginFixedPosition).normalized;
         interactablePullDirections[t] = dir;
     }
 
@@ -86,13 +86,12 @@ public class GravityZone : MonoBehaviour
         }
         else
         {
-            uninteruptedTime += uninteruptedAddFactor;
+            uninteruptedTime += Time.fixedUnscaledDeltaTime * 2f;
             uninteruptedTime = Mathf.Clamp(uninteruptedTime, 1, 3);
         }
 
-        //float processedJoyYInput = 1.2f * Mathf.Sign(joyYInput) * joyYInput * joyYInput; // 1.2x^2 
-        float processedJoyYInput = Mathf.Sign(joyYInput) * joyYInput * joyYInput * uninteruptedTime; // x^2 * timeFactor 
-        float pullOffset = processedJoyYInput * pullSpeed;
+        float processedJoyYInput = Mathf.Sign(joyYInput) * joyYInput * joyYInput * uninteruptedTime; // x^2 * timeFactor
+        float pullOffset = processedJoyYInput * pullSpeed * Time.fixedUnscaledDeltaTime;
 
         if (Mathf.Abs(pullOffset) < float.Epsilon)
             return;

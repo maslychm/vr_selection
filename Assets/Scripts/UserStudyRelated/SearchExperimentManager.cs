@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using static System.Net.Mime.MediaTypeNames;
 
 public class SearchExperimentManager : MonoBehaviour
 {
@@ -35,10 +38,24 @@ public class SearchExperimentManager : MonoBehaviour
     [SerializeField] private TMP_Text experimentText;
     public HideViewOfSpheresController Mimir;
 
+    /*create some variables to hold the mask RF*/
+    public GameObject maskRF;
+    public bool maskRFon = false;
+
     private void Start()
     {
-        SearchExperimentLogger.softwareStartTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
-        SearchExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data");
+        maskRF = GameObject.Find("BlackMask");
+        maskRFon = maskRF.activeInHierarchy;
+        if (maskRFon == false)
+        {
+            SearchExperimentLogger.softwareStartTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
+            SearchExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data");
+        }
+        else
+        {
+            SearchExperimentLogger.softwareStartTime = (int)DateTimeOffset.Now.ToUnixTimeSeconds();
+            SearchExperimentLogger.CreateLoggingDirectory(Application.streamingAssetsPath, "density_data_WITHRF_BlackMask");
+        }
     }
 
     public void ClearExperiment()
@@ -62,7 +79,7 @@ public class SearchExperimentManager : MonoBehaviour
 
         List<SearchExperimentLevel> levels = new List<SearchExperimentLevel>();
         foreach (int densityLevel in LevelManager.densityLevelIntegers)
-            {
+        {
             SearchExperimentLevel level = gameObject.AddComponent<SearchExperimentLevel>();
             level.levelTechnique = selectionTechnique;
             level.levelDensity = densityLevel;
@@ -74,6 +91,8 @@ public class SearchExperimentManager : MonoBehaviour
 
         remainingLevels = new Queue<SearchExperimentLevel>(levels);
         finishedLevels = new List<SearchExperimentLevel>();
+
+        if (maskRFon) Debug.Log("Mask RF is applied for this participant"); else Debug.Log("Mask RF OFF FOR THIS PARTICIPANT");
 
         print($"===> Experiment START <===");
         print($"Will run {remainingLevels.Count} levels");

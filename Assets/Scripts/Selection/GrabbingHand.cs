@@ -54,7 +54,7 @@ public class GrabbingHand : MonoBehaviour
 
         isHovering = collidingWithHand.Count != 0;
 
-        if (clutterHandler_CircumferenceDisplay is null)
+        if (circumferenceDisplayInUse && clutterHandler_CircumferenceDisplay is null)
             clutterHandler_CircumferenceDisplay = FindObjectOfType<ClutterHandler_circumferenceDisplay>();
     }
 

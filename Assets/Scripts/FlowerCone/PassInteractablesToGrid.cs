@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PassInteractablesToGrid : MonoBehaviour
 {
@@ -83,6 +84,11 @@ public class PassInteractablesToGrid : MonoBehaviour
 
         //print("Destroying the previous grid");
         grid.DestroyGrid();
+
+        if (SceneManager.GetActiveScene().name.Contains("Editor Eco"))
+        {
+            grid.SetGridTransformToCameraForward();     
+        }
 
         //print($"Passing {allHighlightedObjects.Count} interactables");
         grid.CreateGrid(allHighlightedObjects);

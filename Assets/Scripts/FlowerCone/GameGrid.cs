@@ -33,6 +33,12 @@ public class GameGrid : MonoBehaviour
         transform.position = gridPosition;
     }
 
+    public void SetGridTransformToCameraForward()
+    {
+        Camera mainCamera = Camera.main;
+        gridPosition = mainCamera.transform.position + mainCamera.transform.forward * 2;
+    }
+
     public void CreateGrid(List<Interactable> interactables)
     {
         transform.SetPositionAndRotation(gridPosition, Quaternion.identity);

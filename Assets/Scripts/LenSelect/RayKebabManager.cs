@@ -83,11 +83,11 @@ public class RayKebabManager : MonoBehaviour
 
         if (rayCastedInteractables.Count == 0)
             return;
-
+        
         if (rayCastedInteractables.Count == 1)
         {
             grabbingHand.CallPickUpObject(rayCastedInteractables.ElementAt(0).GetComponent<Interactable>());
-            grabbingHand.ClearGrabbed();
+            //grabbingHand.ClearGrabbed();
 
             startOffsetOFspheres = 0.05f;
             BringOrFlush = 0;

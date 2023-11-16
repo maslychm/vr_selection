@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameGrid : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class GameGrid : MonoBehaviour
 
     private void Start()
     {
+        // check if the scene name is low poly
+        if (SceneManager.GetActiveScene().name.Contains("Poly"))
+        {
+            print("setting a new grid position");
+            gridPosition = new Vector3(-0.25f, 1.622f, -2.3f);
+        }
+
         transform.position = gridPosition;
     }
 

@@ -53,6 +53,9 @@ public class GrabbingHand : MonoBehaviour
         }
 
         isHovering = collidingWithHand.Count != 0;
+
+        if (clutterHandler_CircumferenceDisplay is null)
+            clutterHandler_CircumferenceDisplay = FindObjectOfType<ClutterHandler_circumferenceDisplay>();
     }
 
     public void _OnTriggerEnter(Collider other)

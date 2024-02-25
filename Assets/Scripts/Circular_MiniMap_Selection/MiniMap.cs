@@ -45,6 +45,7 @@ public class MiniMap : MonoBehaviour
         if (isFrozen)
             return;
 
+        // TODO I think this is where GC happens and causes a frame drop
         ClearObjectCopies();
         DisplayObjectCopies();
 

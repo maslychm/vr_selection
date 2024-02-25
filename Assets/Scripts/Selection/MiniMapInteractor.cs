@@ -183,6 +183,15 @@ public class MiniMapInteractor : MonoBehaviour
 
             shapeItem_2 si2 = duplicate.AddComponent<shapeItem_2>();
             si2.original = interactable;
+
+            var si2Renderer = si2.GetComponent<MeshRenderer>();
+            si2Renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            si2Renderer.receiveShadows = false;
+            si2Renderer.lightProbeUsage = UnityEngine.Rendering.LightProbeUsage.Off;
+            si2Renderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
+            si2Renderer.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
+            si2Renderer.allowOcclusionWhenDynamic = false;
+
             foreach (var outl in si2.GetComponents<cakeslice.Outline>())
             {
                 if (outl.color == 0)

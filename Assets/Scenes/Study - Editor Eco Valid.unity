@@ -2308,7 +2308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &45133824
 Transform:
   m_ObjectHideFlags: 0
@@ -21158,7 +21158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &472042941
 Transform:
   m_ObjectHideFlags: 0
@@ -26876,7 +26876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &590253233
 Transform:
   m_ObjectHideFlags: 0
@@ -35589,7 +35589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &777112814
 Transform:
   m_ObjectHideFlags: 0
@@ -47158,7 +47158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1020853730
 Transform:
   m_ObjectHideFlags: 0
@@ -67177,7 +67177,7 @@ MonoBehaviour:
   debugPlaneOffset: {x: 0, y: 0, z: 0}
   hmdTransform: {fileID: 620380564}
   tabletUI: {fileID: 0}
-  defaultFlashlightScale: {x: 300, y: 300, z: 1000}
+  defaultFlashlightScale: {x: 400, y: 400, z: 400}
   scaleWithDistance: 0
   maxFlashlightScale: {x: 0, y: 0, z: 0}
   shoulderOffset: {x: 0, y: 0, z: 0}
@@ -71005,7 +71005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1596902595
 Transform:
   m_ObjectHideFlags: 0
@@ -78665,7 +78665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1765835289
 Transform:
   m_ObjectHideFlags: 0

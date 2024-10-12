@@ -50,22 +50,29 @@ Mini-game using an experimental gesture-based selection technique. Use `left fro
 
 ## Links
 
-- Paper at [https://ieeexplore.ieee.org/abstract/document/10108428](https://ieeexplore.ieee.org/abstract/document/10108428)
+- Paper at [https://ieeexplore.ieee.org/document/10108428](https://ieeexplore.ieee.org/document/10108428)
 - Presentation video at [https://www.youtube.com/watch?v=qcPmVJmUIdw](https://www.youtube.com/watch?v=qcPmVJmUIdw)
 - Code at [https://github.com/maslychm/vr_selection](https://github.com/maslychm/vr_selection)
 
 ## Citation
 
-If you use this code for your research, please cite our paper [Toward Intuitive Acquisition of Occluded VR Objects Through an Interactive Disocclusion Mini-map](https://ieeexplore.ieee.org/abstract/document/10108428):
+If you use this code for your research, please cite our paper [Toward Intuitive Acquisition of Occluded VR Objects Through an Interactive Disocclusion Mini-map](https://ieeexplore.ieee.org/document/10108428):
 
 ```bibtex
-@article{maslychVR23toward,
-  author={Maslych, Mykola and Hmaiti, Yahya and Ghamandi, Ryan and Leber, Paige and Kattoju, Ravi Kiran and Belga, Jacob and LaViola, Joseph J.},
-  booktitle={2023 IEEE Conference Virtual Reality and 3D User Interfaces (VR)}, 
-  title={Toward Intuitive Acquisition of Occluded VR Objects Through an Interactive Disocclusion Mini-map}, 
-  year={2023},
-  pages={460-470},
-  doi={10.1109/VR55154.2023.00061}}
+@inproceedings{maslychVR23toward,
+  author = {Maslych, Mykola and Hmaiti, Yahya and Ghamandi, Ryan and Leber, Paige and Kattoju, Ravi Kiran and Belga, Jacob and LaViola, Joseph J.},
+  booktitle = {2023 IEEE Conference Virtual Reality and 3D User Interfaces (VR)}, 
+  title = {Toward Intuitive Acquisition of Occluded VR Objects Through an Interactive Disocclusion Mini-map}, 
+  year = {2023},
+  month = {March},
+  series = {VR '23},
+  location = {Shanghai, China},
+  pages = {460--470},
+  numpages = {10},
+  publisher = {IEEE},
+  address = {Piscataway, NJ, USA},
+  doi = {10.1109/VR55154.2023.00061},
+}
 ```
 
 ## Contributions
